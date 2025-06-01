@@ -1,0 +1,53 @@
+/* ========================================================================= */
+/* TABLET STYLES (641px - 1023px) */
+/* ========================================================================= */
+
+@media (min-width: 641px) and (max-width: 1023px) {
+  /* Tablet: use mobile-style stacked layout */
+  header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  /* Tablet-specific menu styling */
+  .lg\:hidden .bg-white {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+  
+  /* Show desktop nav on tablet */
+  .desktop-nav {
+    display: flex !important;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  
+  /* Tablet social links - icon only with gaps */
+  .desktop-nav .flex.items-center {
+    gap: 1rem !important; /* Gap between social buttons */
+  }
+  
+  /* Hide text on tablet - target all spans */
+  .desktop-nav a span {
+    display: none !important;
+  }
+  
+  /* Icon-only button styling for tablet */
+  .desktop-nav a {
+    padding: 0.75rem !important;
+    min-width: 2.75rem;
+    justify-content: center;
+    gap: 0 !important;
+  }
+  
+  /* Tablet grid: use 3 columns instead of 2 */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .grid.grid-cols-2 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .col-span-2 {
+      grid-column: span 3;
+    }
+  }
+}

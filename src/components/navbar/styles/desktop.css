@@ -1,0 +1,48 @@
+/* ========================================================================= */
+/* DESKTOP STYLES (1024px+) */
+/* ========================================================================= */
+
+@media (min-width: 1024px) {
+  header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Desktop social links gap */
+  .desktop-nav .flex.items-center {
+    gap: 0.75rem; /* Gap between social buttons on desktop */
+  }
+  
+  /* Force desktop navigation to be visible */
+  .desktop-nav,
+  nav.hidden.lg\:flex,
+  nav.desktop-nav {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  /* Force hide mobile menu on desktop */
+  .lg\:hidden,
+  [astro-navbar] .lg\:hidden {
+    display: none !important;
+  }
+}
+
+/* ========================================================================= */
+/* FORCE DESKTOP NAVIGATION VISIBILITY */
+/* ========================================================================= */
+
+/* Override any JavaScript hiding */
+@media (min-width: 1024px) {
+  .desktop-nav {
+    display: flex !important;
+  }
+  
+  /* Ensure all desktop nav children are visible */
+  .desktop-nav > * {
+    display: block !important;
+    visibility: visible !important;
+  }
+}

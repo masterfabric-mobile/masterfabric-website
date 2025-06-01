@@ -1,0 +1,29 @@
+---
+/**
+ * Timeline Header Component
+ * Manages the title, subtitle and description section of the timeline
+ * Displays header information using props from the main timeline component
+ */
+
+import type { TimelineData } from './types';
+
+interface Props {
+  timeline: TimelineData;
+}
+
+const { timeline } = Astro.props;
+---
+
+<!-- Timeline header section -->
+<div class="timeline-header">
+  <div class="container mx-auto px-4 text-center">
+    <!-- Main title -->
+    <h2 class="timeline-main-title">{timeline.title}</h2>
+    
+    <!-- Subtitle -->
+    <p class="timeline-subtitle">{timeline.subtitle}</p>
+    
+    <!-- Description text -->
+    <p class="timeline-description">{timeline.description}</p>
+  </div>
+</div>

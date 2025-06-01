@@ -1,0 +1,64 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/layout/container.astro";
+import Sectionhead from "@components/layout/sectionhead.astro";
+import AboutHeader from "@components/about/AboutHeader.astro";
+import Globe from "@components/about/Globe.astro";
+import Timeline from "@components/about/Timeline.astro";
+import DynamicText from "@components/about/DynamicText.astro";
+import ProcessSteps from "@components/about/ProcessSteps.astro";
+import Statistics from "@components/about/Statistics.astro";
+import fs from "fs";
+import path from "path";
+
+// Load about data from JSON file
+const aboutDataPath = path.join(process.cwd(), "src/data/about.json");
+const aboutDataContent = fs.readFileSync(aboutDataPath, "utf-8");
+const aboutData = JSON.parse(aboutDataContent);
+
+// Filter team entries with 'draft: false' & date before current date
+const publishedTeamMembers = await getCollection("team", ({ data }) => {
+  return !data.draft && data.publishDate < new Date();
+});
+---
+
+<Layout title="About">
+  <Container>
+    <Sectionhead>
+      <Fragment slot="title">{aboutData.sectionHeader.title}</Fragment>
+      <Fragment slot="desc">
+        <div class="max-w-4xl mx-auto text-center space-y-4">
+          {aboutData.sectionHeader.description.map((item) => (
+            <p set:html={item.paragraph}></p>
+          ))}
+        </div>
+      </Fragment>
+    </Sectionhead>
+
+    <AboutHeader 
+      title={aboutData.hero.title}
+      subtitle={aboutData.hero.subtitle}
+      description={aboutData.hero.description}
+    />
+    
+    <Globe activities={aboutData.activities} />
+
+    <Timeline timeline={aboutData.timeline} />
+
+    <DynamicText dynamicText={aboutData.dynamicText} />
+    
+    <ProcessSteps processSteps={aboutData.processSteps} />
+
+    <div class="flex flex-col gap-3 mx-auto max-w-4xl mt-16 text-center px-4">
+      <h2 class="font-bold text-3xl text-gray-800 sm:text-2xl">
+        {aboutData.passion.title}
+      </h2>
+      <p class="text-lg leading-relaxed text-slate-500 sm:text-base">
+        {aboutData.passion.description}
+      </p>
+    </div>
+    
+    <Statistics statistics={aboutData.statistics} />
+  </Container>
+</Layout>

@@ -1,0 +1,108 @@
+/* ========================================================================= */
+/* NAVBAR THEMES */
+/* ========================================================================= */
+
+/* Default Theme (Light) */
+.navbar-theme-light {
+  --navbar-bg-primary: #ffffff;
+  --navbar-bg-secondary: #f9fafb;
+  --navbar-text-primary: #374151;
+  --navbar-text-secondary: #6b7280;
+  --navbar-border-normal: #e5e7eb;
+}
+
+/* Dark Theme */
+.navbar-theme-dark {
+  --navbar-bg-primary: #1f2937;         /* gray-800 */
+  --navbar-bg-secondary: #374151;       /* gray-700 */
+  --navbar-bg-hover: #4b5563;          /* gray-600 */
+  --navbar-text-primary: #f9fafb;       /* gray-50 */
+  --navbar-text-secondary: #d1d5db;     /* gray-300 */
+  --navbar-text-muted: #9ca3af;        /* gray-400 */
+  --navbar-border-normal: #4b5563;      /* gray-600 */
+  --navbar-border-light: #374151;       /* gray-700 */
+}
+
+/* Transparent Theme (for overlays) */
+.navbar-theme-transparent {
+  --navbar-bg-primary: rgba(255, 255, 255, 0.95);
+  --navbar-bg-secondary: rgba(249, 250, 251, 0.95);
+  --navbar-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Minimal Theme */
+.navbar-theme-minimal {
+  --navbar-bg-primary: transparent;
+  --navbar-bg-secondary: transparent;
+  --navbar-border-normal: transparent;
+  --navbar-shadow-md: none;
+  --navbar-padding-lg: 0.5rem;
+}
+
+/* Colorful Theme */
+.navbar-theme-colorful {
+  --navbar-bg-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --navbar-text-primary: #ffffff;
+  --navbar-text-secondary: #e5e7eb;
+  --navbar-social-blue: #60a5fa;
+  --navbar-social-blue-hover: #3b82f6;
+}
+
+/* High Contrast Theme (Accessibility) */
+.navbar-theme-high-contrast {
+  --navbar-bg-primary: #000000;
+  --navbar-bg-secondary: #1a1a1a;
+  --navbar-text-primary: #ffffff;
+  --navbar-text-secondary: #ffffff;
+  --navbar-border-normal: #ffffff;
+  --navbar-social-blue: #ffffff;
+  --navbar-social-blue-hover: #cccccc;
+}
+
+/* ========================================================================= */
+/* THEME UTILITIES */
+/* ========================================================================= */
+
+/* Auto theme based on system preference */
+@media (prefers-color-scheme: dark) {
+  .navbar-theme-auto {
+    --navbar-bg-primary: #1f2937;
+    --navbar-bg-secondary: #374151;
+    --navbar-text-primary: #f9fafb;
+    --navbar-text-secondary: #d1d5db;
+    --navbar-border-normal: #4b5563;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .navbar-theme-auto {
+    --navbar-bg-primary: #ffffff;
+    --navbar-bg-secondary: #f9fafb;
+    --navbar-text-primary: #374151;
+    --navbar-text-secondary: #6b7280;
+    --navbar-border-normal: #e5e7eb;
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .navbar-wrapper * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast preference */
+@media (prefers-contrast: high) {
+  .navbar-wrapper {
+    --navbar-border-normal: currentColor;
+    --navbar-shadow-md: none;
+  }
+  
+  .navbar-wrapper * {
+    border-width: 2px;
+  }
+}

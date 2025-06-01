@@ -1,0 +1,149 @@
+---
+export interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+  placeholder?: string;
+}
+
+const { 
+  src, 
+  alt, 
+  width, 
+  height, 
+  class: className = '',
+  loading = 'lazy',
+  placeholder = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect width="400" height="300" fill="%23f3f4f6"/%3E%3C/svg%3E'
+} = Astro.props;
+---
+
+<div class={`lazy-image-container ${className}`}>
+  <img 
+    src={placeholder}
+    data-src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    loading={loading}
+    class="lazy-image"
+    decoding="async"
+  />
+  <div class="image-loader" aria-hidden="true">
+    <div class="loader-spinner"></div>
+  </div>
+</div>
+
+<style>
+  .lazy-image-container {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+  }
+
+  .lazy-image {
+    width: 100%;
+    height: auto;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+  }
+
+  .lazy-image.loaded {
+    opacity: 1;
+  }
+
+  .image-loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  .image-loader.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .loader-spinner {
+    width: 24px;
+    height: 24px;
+    border: 2px solid #f3f4f6;
+    border-top: 2px solid #3b82f6;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lazy-image,
+    .image-loader {
+      transition: none;
+    }
+    
+    .loader-spinner {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  import { lazyLoadOptions } from '@utils/performance';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const imageContainers = document.querySelectorAll('.lazy-image-container');
+    
+    if ('IntersectionObserver' in window) {
+      const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const container = entry.target as HTMLElement;
+            const img = container.querySelector('.lazy-image') as HTMLImageElement;
+            const loader = container.querySelector('.image-loader') as HTMLElement;
+            
+            if (img && img.dataset.src) {
+              img.src = img.dataset.src;
+              img.removeAttribute('data-src');
+              
+              img.onload = () => {
+                img.classList.add('loaded');
+                if (loader) loader.classList.add('hidden');
+              };
+              
+              img.onerror = () => {
+                if (loader) loader.classList.add('hidden');
+                img.classList.add('loaded');
+              };
+              
+              imageObserver.unobserve(container);
+            }
+          }
+        });
+      }, lazyLoadOptions);
+      
+      imageContainers.forEach(container => {
+        imageObserver.observe(container);
+      });
+    } else {
+      // Fallback for browsers without IntersectionObserver
+      imageContainers.forEach(container => {
+        const img = container.querySelector('.lazy-image') as HTMLImageElement;
+        const loader = container.querySelector('.image-loader') as HTMLElement;
+        
+        if (img && img.dataset.src) {
+          img.src = img.dataset.src;
+          img.removeAttribute('data-src');
+          img.classList.add('loaded');
+          if (loader) loader.classList.add('hidden');
+        }
+      });
+    }
+  });
+</script>

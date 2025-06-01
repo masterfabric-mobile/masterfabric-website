@@ -1,0 +1,86 @@
+---
+/**
+ * Timeline Status Bar Component
+ * Dynamic status bar that appears at the bottom of the timeline
+ * Contains current phase status, progress and control buttons
+ */
+
+interface Props {
+  // This component is dynamically populated by JavaScript
+}
+---
+
+<!-- Dynamic status bar -->
+<div class="dynamic-status-messages" id="dynamic-status-messages">
+  <!-- Button to toggle the bar -->
+  <button class="status-toggle-btn" id="status-toggle-btn" title="Toggle Status Bar" aria-label="Toggle Status Bar" aria-expanded="true">
+    <!-- Up chevron icon -->
+    <span class="chevron chevron-up">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 15 12 9 18 15"></polyline>
+      </svg>
+    </span>
+    
+    <!-- Down chevron icon -->
+    <span class="chevron chevron-down hidden">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="18 9 12 15 6 9"></polyline>
+      </svg>
+    </span>
+  </button>
+  
+  <!-- Status message content -->
+  <div class="status-message-content" id="status-message-content">
+    <!-- Status icon -->
+    <div class="status-icon" id="status-icon">🎯</div>
+    
+    <!-- Status text -->
+    <div class="status-text">
+      <div class="status-title" id="status-title">Initializing Timeline...</div>
+      <div class="status-description" id="status-description">Preparing project phases and milestones</div>
+      
+      <!-- Progress information -->
+      <div class="status-progress">
+        <div class="progress-text">
+          Day <span id="current-day">1</span> of <span id="total-days">35</span>
+        </div>
+        
+        <!-- Mini progress bar -->
+        <div class="progress-bar-mini">
+          <div class="progress-fill-mini" id="progress-fill-mini" style="width: 0%"></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Control buttons -->
+    <div class="status-buttons">
+      <!-- Pause/Resume button -->
+      <button class="pause-btn" id="pause-btn" title="Pause/Resume Timeline">
+        <!-- Pause icon -->
+        <span class="pause-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <rect x="6" y="4" width="4" height="16"></rect>
+            <rect x="14" y="4" width="4" height="16"></rect>
+          </svg>
+        </span>
+        
+        <!-- Play icon -->
+        <span class="play-icon hidden">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="5,3 19,12 5,21"></polygon>
+          </svg>
+        </span>
+      </button>
+      
+      <!-- Restart button -->
+      <button class="refresh-btn" id="refresh-btn" title="Restart Timeline">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+          <path d="M21 3v5h-5"/>
+          <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
+          <path d="M3 21v-5h5"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>

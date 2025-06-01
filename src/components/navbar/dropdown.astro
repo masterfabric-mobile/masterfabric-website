@@ -1,0 +1,145 @@
+---
+// =============================================================================
+// IMPORTS
+// =============================================================================
+import Icon from "@components/ui/icon.astro";
+
+// =============================================================================
+// TYPE DEFINITIONS
+// =============================================================================
+export interface Props {
+  items: Array<{
+    title: string;
+    path: string;
+    description?: string;
+  }>;
+  trigger: string;
+  isMobile?: boolean;
+}
+
+// =============================================================================
+// COMPONENT PROPS & SETUP
+// =============================================================================
+const { items, trigger, isMobile = false } = Astro.props;
+
+// Generate unique dropdown ID based on trigger text
+const dropdownId = `dropdown-${trigger.toLowerCase().replace(/\s+/g, '-')}`;
+---
+
+<!-- ======================================================================= -->
+<!-- DROPDOWN CONTAINER -->
+<!-- ======================================================================= -->
+<div class={`relative group ${isMobile ? 'w-full' : ''}`}>
+  <!-- Dropdown trigger button -->
+  <button
+    type="button"
+    class={`
+      inline-flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-lg
+      transition-colors duration-200
+      ${isMobile 
+        ? 'w-full justify-between text-gray-700 hover:text-gray-900 hover:bg-gray-50 bg-gray-50' 
+        : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'
+      }
+    `}
+    data-dropdown-toggle={dropdownId}
+  >
+    <!-- Button text -->
+    <span>{trigger}</span>
+    
+    <!-- Chevron icon with rotation animation -->
+    <Icon 
+      name="chevron" 
+      size="sm" 
+      class="transition-transform duration-200 group-hover:rotate-180" 
+    />
+  </button>
+
+  <!-- ===================================================================== -->
+  <!-- DROPDOWN MENU CONTENT -->
+  <!-- ===================================================================== -->
+  <div
+    id={dropdownId}
+    class={`
+      absolute z-50 bg-white rounded-lg shadow-lg border border-gray-200
+      opacity-0 invisible group-hover:opacity-100 group-hover:visible
+      transition-all duration-200 transform
+      ${isMobile 
+        ? 'top-full left-0 right-0 mt-1 w-full max-w-xs mx-auto' 
+        : 'top-full left-0 mt-1 w-64'
+      }
+    `}
+  >
+    <!-- Dropdown items container -->
+    <div class="py-2">
+      {items.map((item) => (
+        <!-- Individual dropdown item -->
+        <a
+          href={item.path}
+          class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors duration-150"
+        >
+          <!-- Item title -->
+          <div class="font-medium">{item.title}</div>
+          
+          <!-- Optional item description -->
+          {item.description && (
+            <div class="text-xs text-gray-500 mt-1">{item.description}</div>
+          )}
+        </a>
+      ))}
+    </div>
+  </div>
+</div>
+
+<script>
+  // ==========================================================================
+  // DROPDOWN FUNCTIONALITY
+  // ==========================================================================
+  
+  /**
+   * Initialize dropdown toggle functionality when DOM is ready
+   */
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get all dropdown toggle buttons
+    const dropdownButtons = document.querySelectorAll('[data-dropdown-toggle]');
+    
+    // Initialize each dropdown
+    dropdownButtons.forEach(button => {
+      const dropdownId = button.getAttribute('data-dropdown-toggle');
+      const dropdown = document.getElementById(dropdownId);
+      
+      // Ensure dropdown element exists
+      if (dropdown) {
+        // Handle button click to toggle dropdown
+        button.addEventListener('click', (e) => {
+          e.preventDefault();
+          toggleDropdown(dropdown);
+        });
+        
+        // Handle click outside to close dropdown
+        document.addEventListener('click', (e) => {
+          if (!button.contains(e.target) && !dropdown.contains(e.target)) {
+            closeDropdown(dropdown);
+          }
+        });
+      }
+    });
+  });
+
+  /**
+   * Toggle dropdown visibility
+   * @param {HTMLElement} dropdown - The dropdown element to toggle
+   */
+  function toggleDropdown(dropdown) {
+    dropdown.classList.toggle('opacity-0');
+    dropdown.classList.toggle('invisible');
+  }
+
+  /**
+   * Close dropdown by adding hidden classes
+   * @param {HTMLElement} dropdown - The dropdown element to close
+   */
+  function closeDropdown(dropdown) {
+    dropdown.classList.add('opacity-0');
+    dropdown.classList.add('invisible');
+  }
+</script>

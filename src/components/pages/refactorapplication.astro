@@ -1,0 +1,66 @@
+---
+import { Picture } from "astro:assets";
+import designIllustration from "assets/app-redesign-illustrator.svg";   
+import Link from "@components/ui/link.astro";
+import CircleIcon from "@components/ui/circleIcon.astro";
+import { Icon } from "astro-icon/components";
+---
+
+<main
+  class="grid lg:grid-cols-2 place-items-center pt-10 pb-8 md:pt-8 md:pb-12">
+ 
+  <div>
+    <h2
+    class="text-xl lg:text-2xl xl:text-3xl font-bold lg:tracking-tight xl:tracking-tighter">
+    App Design, Optimization and Growth
+</h2>
+    <p class="text-lg mt-4 text-slate-600 max-w-xl">
+        Already have an app? We can help refresh its look and enhance its performance. We focus on improving user experience and applying the latest technologies.
+    </p>
+    <ul class="mt-4 max-w-xl">
+      <li class="text-lg mt-4 text-slate-600 max-w-xl flex items-start">
+   <CircleIcon />Events 
+      </li>
+      <li class="text-lg mt-4 text-slate-600 max-w-xl flex items-start">
+        <CircleIcon />
+        App Crash and Crash-Free Reports 
+      </li>
+      <li class="text-lg mt-4 text-slate-600 max-w-xl flex items-start">
+        <CircleIcon />
+        Analytic Reports
+      </li>
+      <li class="text-lg mt-4 text-slate-600 max-w-xl flex items-start">
+        <CircleIcon />
+        Release Monitoring
+      </li>
+      <li class="text-lg mt-4 text-slate-600 max-w-xl flex items-start">
+        <CircleIcon />
+        BigData Managment and Analysis
+      </li>
+      <li class="text-lg mt-4 text-slate-600 max-w-xl flex items-start">
+        <CircleIcon />
+        User Growth and Retention
+      </li>
+    </ul>
+    <p class="text-lg mt-4 text-slate-600 max-w-xl">
+      Maximize your app's potential with <b>third-party</b> integrations that drive development and <b>growth</b>. Enhance your product and streamline your operations with strategic <b>integrations</b> that accelerate processes and elevate user experiences.
+  </p>
+
+  
+    <div class="mt-4">
+      <div class="flex  gap-8 md:gap-20 items-center  mt-10 flex-wrap justify-start">
+    
+        <Icon class="size-8 md:size-12 hover:text-blue-700 "  name="simple-icons:firebase" />
+        <Icon class="size-8 md:size-12 hover:text-blue-700  " name="simple-icons:meta" />
+        <Icon class="size-8 md:size-12 hover:text-blue-700 " name="simple-icons:mixpanel" />
+        <!-- <Icon class="size-8 md:size-12" name="simple-icons:appsflyer" />
+        <Icon class="size-8 md:size-16" name="simple-icons:react" /> -->
+      
+    
+      </div>
+    </div>
+    <p class="text-sm mt-4 text-slate-400 max-w-sm">
+      * Third-party integrations regarding your products can be assessed within the scope of the collaboration you conducted with us, based on the analyses you provided.
+   </p>
+  </div>
+</main>

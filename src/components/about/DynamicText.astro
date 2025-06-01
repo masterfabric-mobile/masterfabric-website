@@ -1,0 +1,75 @@
+---
+interface Props {
+  dynamicText: {
+    prefix: string;
+    words: string[];
+    colors: string[];
+    interval: number;
+  };
+}
+
+const { dynamicText } = Astro.props;
+---
+
+<div class="mb-8">
+  <div class="text-4xl font-bold text-gray-800 h-16 flex items-center justify-center flex-wrap text-center">
+    <span class="mr-2">{dynamicText.prefix}</span>
+    <span id="dynamic-text" class="text-blue-600 transition-all duration-500 ease-in-out">
+      {dynamicText.words[0]}
+    </span>
+  </div>
+</div>
+
+<script define:vars={{ dynamicText }}>
+  let currentIndex = 0;
+  const dynamicTextElement = document.getElementById('dynamic-text');
+
+  function changeWord() {
+    if (dynamicTextElement) {
+      dynamicTextElement.style.opacity = '0';
+      dynamicTextElement.style.transform = 'translateY(20px)';
+      
+      setTimeout(() => {
+        currentIndex = (currentIndex + 1) % dynamicText.words.length;
+        
+        // Remove all color classes
+        dynamicText.colors.forEach(color => dynamicTextElement.classList.remove(color));
+        // Add new color class
+        dynamicTextElement.classList.add(dynamicText.colors[currentIndex]);
+        
+        dynamicTextElement.textContent = dynamicText.words[currentIndex];
+        dynamicTextElement.style.opacity = '1';
+        dynamicTextElement.style.transform = 'translateY(0)';
+        
+        // Add shake effect
+        dynamicTextElement.style.animation = 'shake 0.3s ease-in-out';
+        
+        setTimeout(() => {
+          dynamicTextElement.style.animation = '';
+        }, 300);
+      }, 250);
+    }
+  }
+
+  setInterval(changeWord, dynamicText.interval);
+</script>
+
+<style>
+  @media (max-width: 640px) {
+    .text-4xl {
+      font-size: 1.8rem;
+    }
+    
+    .h-16 {
+      height: auto;
+      min-height: 4rem;
+    }
+  }
+  
+  @keyframes shake {
+    0%, 100% { transform: translateX(0) translateY(0); }
+    25% { transform: translateX(-2px) translateY(-1px); }
+    50% { transform: translateX(2px) translateY(1px); }
+    75% { transform: translateX(-1px) translateY(2px); }
+  }
+</style>

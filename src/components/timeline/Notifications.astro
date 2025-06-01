@@ -1,0 +1,135 @@
+---
+/**
+ * Timeline Notifications Component
+ * Component containing toast notifications and modal dialogs
+ * Congratulation messages and contact form shown when phases are completed
+ */
+
+interface Props {
+  // This component is dynamically populated by JavaScript
+}
+---
+
+<!-- Congratulations Toast Notification -->
+<div class="congratulations-toast" id="congratulations-toast">
+  <div class="toast-content">
+    <!-- Toast icon -->
+    <div class="toast-icon" id="toast-icon">🎉</div>
+    
+    <!-- Toast text -->
+    <div class="toast-text">
+      <div class="toast-title" id="toast-title">Phase Completed!</div>
+      <div class="toast-message" id="toast-message">Great progress on your project timeline.</div>
+    </div>
+  </div>
+</div>
+
+<!-- Congratulations Modal Dialog -->
+<div class="congratulations-dialog-overlay" id="congratulations-dialog-overlay">
+  <div class="congratulations-dialog" id="congratulations-dialog">
+    
+    <!-- Dialog header -->
+    <div class="dialog-header">
+      <!-- Dialog icon -->
+      <div class="dialog-icon" id="dialog-icon">🎉</div>
+      
+      <!-- Close button -->
+      <button class="dialog-close" id="dialog-close" title="Close">×</button>
+    </div>
+    
+    <!-- Dialog content -->
+    <div class="dialog-content">
+      <!-- Main title -->
+      <h3 class="dialog-title" id="dialog-title">Congratulations!</h3>
+      
+      <!-- Description message -->
+      <p class="dialog-message" id="dialog-message">You've successfully completed the Discovery phase!</p>
+      
+      <!-- Progress indicator -->
+      <div class="dialog-progress">
+        <!-- Circular progress bar -->
+        <div class="progress-ring">
+          <svg class="progress-circle" id="progress-circle" width="100" height="100">
+            <!-- Background circle -->
+            <circle
+              cx="50"
+              cy="50"
+              r="45"
+              fill="none"
+              stroke="#f1f5f9"
+              stroke-width="8"
+            />
+            
+            <!-- Progress circle -->
+            <circle
+              cx="50"
+              cy="50"
+              r="45"
+              fill="none"
+              stroke="#10b981"
+              stroke-width="8"
+              stroke-linecap="round"
+              stroke-dasharray="283"
+              stroke-dashoffset="283"
+              transform="rotate(-90 50 50)"
+              class="progress-stroke"
+            />
+          </svg>
+          
+          <!-- Percentage indicator -->
+          <span class="progress-percentage" id="progress-percentage">20%</span>
+        </div>
+        
+        <!-- Progress details -->
+        <div class="progress-details">
+          <p class="progress-text">
+            Phase <span id="completed-phase">1</span> of <span id="total-phases">6</span> completed
+          </p>
+          <p class="next-phase-text">
+            Next: <span id="next-phase-name">Design Phase</span>
+          </p>
+        </div>
+      </div>
+      
+      <!-- Dialog actions -->
+      <div class="dialog-actions">
+        <button class="dialog-continue-btn" id="dialog-continue-btn">Continue Timeline</button>
+      </div>
+      
+      <!-- Contact section - Only shown when final phase is completed -->
+      <div class="dialog-contact-section hidden" id="dialog-contact-section">
+        <!-- Divider line -->
+        <div class="contact-divider">
+          <div class="divider-line"></div>
+          <span class="divider-text">Ready to start your project?</span>
+          <div class="divider-line"></div>
+        </div>
+        
+        <!-- Contact content -->
+        <div class="contact-content">
+          <h4 class="contact-title">Enjoyed this experience?</h4>
+          <p class="contact-description">
+            If you're satisfied with what you've seen, let's discuss how we can bring your mobile app idea to life.
+          </p>
+          
+          <!-- Contact buttons -->
+          <div class="contact-buttons">
+            <!-- Main contact button -->
+            <a href="/contact" class="contact-btn primary">
+              <!-- Email icon -->
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+              </svg>
+              Contact Us
+            </a>
+            
+            <!-- Maybe later button -->
+            <button class="contact-btn secondary" id="contact-maybe-later">
+              Maybe Later
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

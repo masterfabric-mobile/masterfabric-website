@@ -1,0 +1,111 @@
+---
+/**
+ * Timeline Card Component
+ * Component that displays timeline phases in visual card format
+ * Each card contains phase information, tools, milestones and deliverables
+ */
+
+import type { TimelinePhase, Tool } from './types';
+import fs from "fs";
+import path from "path";
+
+interface Props {
+  phase: TimelinePhase;
+}
+
+const { phase } = Astro.props;
+
+// Load timeline data from JSON file
+const timelineDataPath = path.join(process.cwd(), "src/data/timeline-data.json");
+const timelineDataContent = fs.readFileSync(timelineDataPath, "utf-8");
+const timelineData = JSON.parse(timelineDataContent);
+
+// Helper function to get tools by phase
+function getPhaseTools(phaseId: string): Tool[] {
+  return timelineData.phaseTools[phaseId as keyof typeof timelineData.phaseTools] || [];
+}
+
+const tools = getPhaseTools(phase.id);
+---
+
+<!-- Timeline card -->
+<div class={`timeline-card flex flex-col justify-between bg-white rounded-xl shadow-lg p-3 md:p-4 min-w-[200px] sm:min-w-[220px] md:min-w-[240px] lg:min-w-[260px] status-border-${phase.status}`}>
+  <div>
+    <!-- Card header -->
+    <div class="card-header flex items-start mb-2">
+      <!-- Phase icon -->
+      <span class="card-icon text-xl mr-2 pt-1">{phase.icon}</span>
+      
+      <div class="flex-grow min-w-0">
+        <!-- Phase title -->
+        <h3 class="card-title text-xs md:text-sm font-semibold text-slate-800 mb-1 truncate">
+          {phase.shortTitle}
+        </h3>
+        
+        <!-- Status badge -->
+        <span class={`card-status-badge text-xs font-medium px-2 py-0.5 rounded-full status-bg-${phase.status} status-text-${phase.status}`}>
+          {phase.status.charAt(0).toUpperCase() + phase.status.slice(1).replace('-', ' ')}
+        </span>
+      </div>
+    </div>
+
+    <!-- Phase description -->
+    <p class="card-description text-xs text-slate-600 mb-2 leading-tight line-clamp-2">
+      {phase.description}
+    </p>
+
+    <!-- Tools section -->
+    {tools && tools.length > 0 && (
+      <div class="tools-section mb-2">
+        <p class="text-xs text-slate-500 mb-1">Tools:</p>
+        <div class="tools-chips flex flex-wrap gap-1">
+          {tools.slice(0, 3).map((tool) => (
+            <div class="tool-chip flex items-center px-1.5 py-0.5 rounded-md text-xs">
+              <span class="tool-icon mr-1 text-xs">{tool.icon}</span>
+              <span class="tool-name text-xs">{tool.name}</span>
+            </div>
+          ))}
+          {tools.length > 3 && (
+            <div class="tool-chip-more flex items-center px-1.5 py-0.5 rounded-md text-xs">
+              <span>+{tools.length - 3}</span>
+            </div>
+          )}
+        </div>
+      </div>
+    )}
+
+    <!-- Duration info -->
+    <div class="duration-info flex items-center mb-2">
+      <span class="duration-icon text-xs mr-1">⏱️</span>
+      <span class="font-medium text-xs truncate ml-1">{phase.duration}</span>
+    </div>
+    
+    <!-- Milestones preview -->
+    {phase.milestones && phase.milestones.length > 0 && (
+      <div class="milestones-preview mb-2">
+        <p class="text-xs text-slate-500 mb-1">Milestones:</p>
+        <div class="space-y-0.5">
+          {phase.milestones.slice(0, 1).map((milestone) => (
+            <div class="flex items-center text-xs text-slate-700">
+              <span class={`milestone-indicator-dot w-1.5 h-1.5 rounded-full mr-1.5 status-bg-${milestone.status}`}></span>
+              <span class="truncate text-xs">{milestone.name}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- Deliverables preview -->
+    <div class="deliverables-preview">
+      <p class="text-xs text-slate-500 mb-1">Deliverables:</p>
+      <div class="text-xs text-slate-600 leading-tight">
+        {phase.details.deliverables.slice(0, 1).map((deliverable) => (
+          <span class="block truncate text-xs">{deliverable}</span>
+        ))}
+        {phase.details.deliverables.length > 1 && (
+          <span class="text-xs text-slate-400">+{phase.details.deliverables.length - 1} more...</span>
+        )}
+      </div>
+    </div>
+  </div>
+</div>

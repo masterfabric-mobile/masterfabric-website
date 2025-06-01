@@ -1,0 +1,164 @@
+<footer class="py-20 px-5 sm:px-6 lg:px-8 bg-white border-t border-slate-200">
+  <p class="text-center text-sm text-slate-500">
+    Copyright © {new Date().getFullYear()} MasterFabric Information Technology Inc.
+    All rights reserved.
+  </p>
+
+  <div class="footer">
+    <div class="footer-content">
+      <div class="astro-credit">
+        <span class="built-with">Built with</span>
+        <a 
+          href="https://astro.build" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="astro-link"
+        >
+          <svg class="astro-icon" viewBox="0 0 256 366" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="astroGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#FF5D01"/>
+                <stop offset="100%" style="stop-color:#FF1639"/>
+              </linearGradient>
+            </defs>
+            <path fill="url(#astroGradient)" d="M182.022 9.147c2.982 3.702 4.502 8.697 7.543 18.687L256 246.074a276.467 276.467 0 0 0-79.426-26.891L133.318 73.008a5.63 5.63 0 0 0-10.802.017L79.784 219.11A276.453 276.453 0 0 0 0 246.04L66.76 27.783c3.051-9.972 4.577-14.959 7.559-18.654a24.541 24.541 0 0 1 9.946-7.358C88.67 0 93.885 0 104.314 0h47.683c10.443 0 15.664 0 20.074 1.774a24.545 24.545 0 0 1 9.95 7.373Z"/>
+            <path fill="#FF5D01" d="M189.972 256.46c-10.952 9.364-32.812 15.751-57.992 15.751-30.904 0-56.807-9.621-63.68-22.56-2.458 7.415-3.009 15.903 0 21.8 7.681 15.138 36.32 23.75 63.68 23.75 27.557 0 56.817-8.695 63.992-23.75 2.628-5.512 2.628-12.944 0-18.234a58.12 58.12 0 0 1-6.0 3.243Z"/>
+          </svg>
+          <span class="astro-text">Astro</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <span class="flex flex-row justify-center gap-2">
+    <p class="text-center text-xs text-slate-500 mt-1">
+      <a
+        href="/terms-of-use"
+        class="hover:underline hover:text-slate-700 transition-colors duration-200">
+        Terms of Use
+      </a>
+    </p>
+    <span class="text-xs text-slate-500 mt-1">|</span>
+    <p class="text-center text-xs text-slate-500 mt-1">
+      <a
+        href="/privacy-policy"
+        class="hover:underline hover:text-slate-700 transition-colors duration-200">
+        Privacy Policy
+      </a>
+    </p>
+    <span class="text-xs text-slate-500 mt-1">|</span>
+    <p class="text-center text-xs text-slate-500 mt-1">
+      <button
+        id="footer-cookie-settings"
+        class="hover:underline hover:text-slate-700 transition-colors duration-200 cursor-pointer bg-transparent border-none p-0">
+        Cookie Settings
+      </button>
+    </p>
+    <span class="text-xs text-slate-500 mt-1">|</span>
+    <p class="text-center text-xs text-slate-500 mt-1">
+      <a
+        href="https://github.com/masterfabric/masterfabric-website"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hover:underline hover:text-slate-700 transition-colors duration-200">
+        Source Code
+      </a>
+    </p>
+  </span>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const footerCookieBtn = document.getElementById('footer-cookie-settings');
+    if (footerCookieBtn) {
+      footerCookieBtn.addEventListener('click', () => {
+        // Trigger cookie settings modal
+        const event = new CustomEvent('show-cookie-settings');
+        window.dispatchEvent(event);
+      });
+    }
+  });
+</script>
+
+<style>
+  .footer {
+    background: transparent;
+    border: none;
+    padding: 0.5rem 1rem;
+    
+    margin-top: auto;
+  }
+
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .astro-credit {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--color-text-muted, #6b7280);
+  }
+
+  .built-with {
+    font-weight: 400;
+  }
+
+  .astro-link {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    text-decoration: none;
+    color: var(--color-text, #1f2937);
+    font-weight: 500;
+    transition: all 0.2s ease;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.375rem;
+  }
+
+  .astro-link:hover {
+    color: #FF5D01;
+    background-color: var(--color-background-hover, #f9fafb);
+    transform: translateY(-1px);
+  }
+
+  .astro-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    transition: transform 0.2s ease;
+  }
+
+  .astro-link:hover .astro-icon {
+    transform: scale(1.1);
+  }
+
+  .astro-text {
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+
+  @media (max-width: 640px) {
+    .footer {
+      padding: 0.5rem 1rem;
+    }
+    
+    .footer-content {
+      padding: 10 0.5rem;
+    }
+    
+    .astro-credit {
+      font-size: 0.8rem;
+    }
+    
+    .astro-icon {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+</style>

@@ -1034,7 +1034,7 @@ Other approaches that were considered
 
 ### 📋 License Information
 
-**© 2024 MasterFabric Information Technology Inc. All rights reserved.**
+**© 2025 MasterFabric Information Technology Inc. All rights reserved.**
 
 This project is proprietary software owned by MasterFabric Inc. Unauthorized copying, distribution, or modification is prohibited.
 

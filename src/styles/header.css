@@ -18,3 +18,30 @@
     margin: 0;
   }
 }
+
+/* Header styles to ensure proper layering with cookie components */
+header {
+  position: relative;
+  z-index: 50; /* Lower than cookie modal but higher than content */
+}
+
+/* Ensure header doesn't interfere with cookie modal */
+.cookie-modal {
+  z-index: 10000 !important; /* Highest priority */
+}
+
+/* Prevent header from causing modal positioning issues */
+header.fixed,
+header.sticky {
+  z-index: 50; /* Keep below modal */
+}
+
+/* Navigation dropdown z-index management */
+.navbar-dropdown {
+  z-index: 100; /* Higher than header but lower than cookie modal */
+}
+
+/* Mobile menu z-index */
+.mobile-menu {
+  z-index: 75; /* Between header and cookie modal */
+}

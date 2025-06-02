@@ -7,7 +7,7 @@ import {
   acceptAllCookies, 
   acceptEssentialOnly,
   markBannerAsShown 
-} from '@/utils/cookies';
+} from '../../utils/cookies';
 import CookieSettingsDialog from './CookieSettingsDialog';
 
 export default function CookieBanner() {

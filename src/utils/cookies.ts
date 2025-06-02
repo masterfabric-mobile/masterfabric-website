@@ -14,8 +14,22 @@ export interface CookieConsentSave {
   marketing: boolean;
 }
 
+export interface CookieSettings {
+  essential: boolean;
+  analytics: boolean;
+  marketing: boolean;
+  preferences: boolean;
+}
+
 const COOKIE_CONSENT_KEY = 'masterfabric_cookie_consent';
 const COOKIE_BANNER_SHOWN_KEY = 'masterfabric_banner_shown';
+
+export const defaultCookieSettings: CookieSettings = {
+  essential: true,
+  analytics: false,
+  marketing: false,
+  preferences: false,
+};
 
 export function getCookie(name: string): string | null {
   if (typeof document === 'undefined') return null;
@@ -93,4 +107,27 @@ export function acceptEssentialOnly(): void {
     marketing: false
   });
   markBannerAsShown();
+}
+
+export function getCookieSettings(): CookieSettings {
+  if (typeof window === 'undefined') return defaultCookieSettings;
+  
+  try {
+    const settings = localStorage.getItem('cookieSettings');
+    return settings ? JSON.parse(settings) : defaultCookieSettings;
+  } catch {
+    return defaultCookieSettings;
+  }
+}
+
+export function setCookieSettings(settings: CookieSettings): void {
+  if (typeof window === 'undefined') return;
+  
+  localStorage.setItem('cookieSettings', JSON.stringify(settings));
+}
+
+export function hasUserSetCookiePreferences(): boolean {
+  if (typeof window === 'undefined') return false;
+  
+  return localStorage.getItem('cookieSettings') !== null;
 }

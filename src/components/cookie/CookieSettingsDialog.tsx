@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { X, Shield, BarChart3, Target, Info } from 'lucide-react';
-import { getCookieConsent, saveCookieConsent, markBannerAsShown } from '@/utils/cookies';
+import { getCookieConsent, saveCookieConsent, markBannerAsShown } from '../../utils/cookies';
 
 interface CookieSettingsDialogProps {
   isOpen: boolean;

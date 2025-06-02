@@ -85,93 +85,94 @@ const cookiePolicy = siteData?.footer?.cookiePolicy || {
       </button>
     </div>
   </div>
+</div>
 
-  <!-- Cookie Settings Modal -->
-  <div id="cookie-settings-modal" class="cookie-modal">
-    <div class="cookie-modal-content">
-      <div class="cookie-modal-header">
-        <h3>Cookie Settings</h3>
-        <button id="cookie-modal-close" class="cookie-close-btn">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
-      </div>
+<!-- Cookie Settings Modal - Fixed positioning and sizing -->
+<div id="cookie-settings-modal" class="cookie-modal">
+  <div class="cookie-modal-backdrop"></div>
+  <div class="cookie-modal-content">
+    <div class="cookie-modal-header">
+      <h3>Cookie Settings</h3>
+      <button id="cookie-modal-close" class="cookie-close-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
 
-      <div class="cookie-modal-body">
-        <p class="cookie-modal-description">
-          Choose which cookies you want to allow. You can change these settings at any time.
-        </p>
+    <div class="cookie-modal-body">
+      <p class="cookie-modal-description">
+        Choose which cookies you want to allow. You can change these settings at any time.
+      </p>
 
-        <!-- Cookie categories -->
-        <div class="cookie-categories">
-          <!-- Essential cookies -->
-          <div class="cookie-category">
-            <div class="cookie-category-header">
-              <div class="cookie-category-info">
-                <h4>{cookiePolicy.types.essential.name}</h4>
-                <p>{cookiePolicy.types.essential.description}</p>
-              </div>
-              <div class="cookie-toggle">
-                <input 
-                  type="checkbox" 
-                  id="essential-toggle" 
-                  checked 
-                  disabled
-                  class="cookie-checkbox"
-                />
-                <label for="essential-toggle" class="cookie-toggle-label always-active">Always Active</label>
-              </div>
+      <!-- Cookie categories -->
+      <div class="cookie-categories">
+        <!-- Essential cookies -->
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <div class="cookie-category-info">
+              <h4>{cookiePolicy.types.essential.name}</h4>
+              <p>{cookiePolicy.types.essential.description}</p>
+            </div>
+            <div class="cookie-toggle">
+              <input 
+                type="checkbox" 
+                id="essential-toggle" 
+                checked 
+                disabled
+                class="cookie-checkbox"
+              />
+              <label for="essential-toggle" class="cookie-toggle-label always-active">Always Active</label>
             </div>
           </div>
+        </div>
 
-          <!-- Analytics cookies -->
-          <div class="cookie-category">
-            <div class="cookie-category-header">
-              <div class="cookie-category-info">
-                <h4>{cookiePolicy.types.analytics.name}</h4>
-                <p>{cookiePolicy.types.analytics.description}</p>
-              </div>
-              <div class="cookie-toggle">
-                <input 
-                  type="checkbox" 
-                  id="analytics-toggle"
-                  class="cookie-checkbox"
-                />
-                <label for="analytics-toggle" class="cookie-toggle-label"></label>
-              </div>
+        <!-- Analytics cookies -->
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <div class="cookie-category-info">
+              <h4>{cookiePolicy.types.analytics.name}</h4>
+              <p>{cookiePolicy.types.analytics.description}</p>
+            </div>
+            <div class="cookie-toggle">
+              <input 
+                type="checkbox" 
+                id="analytics-toggle"
+                class="cookie-checkbox"
+              />
+              <label for="analytics-toggle" class="cookie-toggle-label"></label>
             </div>
           </div>
+        </div>
 
-          <!-- Marketing cookies -->
-          <div class="cookie-category">
-            <div class="cookie-category-header">
-              <div class="cookie-category-info">
-                <h4>{cookiePolicy.types.marketing.name}</h4>
-                <p>{cookiePolicy.types.marketing.description}</p>
-              </div>
-              <div class="cookie-toggle">
-                <input 
-                  type="checkbox" 
-                  id="marketing-toggle"
-                  class="cookie-checkbox"
-                />
-                <label for="marketing-toggle" class="cookie-toggle-label"></label>
-              </div>
+        <!-- Marketing cookies -->
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <div class="cookie-category-info">
+              <h4>{cookiePolicy.types.marketing.name}</h4>
+              <p>{cookiePolicy.types.marketing.description}</p>
+            </div>
+            <div class="cookie-toggle">
+              <input 
+                type="checkbox" 
+                id="marketing-toggle"
+                class="cookie-checkbox"
+              />
+              <label for="marketing-toggle" class="cookie-toggle-label"></label>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="cookie-modal-footer">
-        <button id="save-settings" class="cookie-btn cookie-btn-primary">
-          Save Settings
-        </button>
-        <button id="accept-all-modal" class="cookie-btn cookie-btn-outline">
-          Accept All
-        </button>
-      </div>
+    <div class="cookie-modal-footer">
+      <button id="save-settings" class="cookie-btn cookie-btn-primary">
+        Save Settings
+      </button>
+      <button id="accept-all-modal" class="cookie-btn cookie-btn-outline">
+        Accept All
+      </button>
     </div>
   </div>
 </div>
@@ -379,34 +380,52 @@ const cookiePolicy = siteData?.footer?.cookiePolicy || {
     color: #374151;
   }
 
-  /* Cookie Settings Modal */
+  /* Cookie Settings Modal - FIXED IMPLEMENTATION */
   .cookie-modal {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(4px);
-    z-index: 9999;
+    z-index: 10000; /* Higher than banner */
     display: none;
     align-items: center;
     justify-content: center;
     padding: 20px;
+    overflow-y: auto; /* Allow scrolling on small screens */
   }
 
   .cookie-modal.show {
     display: flex;
   }
 
+  /* Modal backdrop - separate element for better control */
+  .cookie-modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  /* Modal content - properly sized and positioned */
   .cookie-modal-content {
+    position: relative;
     background: white;
     border-radius: 16px;
-    max-width: 600px;
     width: 100%;
-    max-height: 80vh;
-    overflow-y: auto;
+    max-width: 600px; /* Consistent with banner width */
+    min-width: 320px;
+    max-height: calc(100vh - 40px); /* Leave space for padding */
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    border: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
     animation: modalSlideIn 0.3s ease-out;
+    margin: auto; /* Center in viewport */
   }
 
   @keyframes modalSlideIn {
@@ -424,8 +443,9 @@ const cookiePolicy = siteData?.footer?.cookiePolicy || {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 24px 24px 16px 24px;
+    padding: 24px 24px 20px 24px;
     border-bottom: 1px solid #e5e7eb;
+    flex-shrink: 0; /* Prevent header from shrinking */
   }
 
   .cookie-modal-header h3 {
@@ -434,15 +454,38 @@ const cookiePolicy = siteData?.footer?.cookiePolicy || {
     color: #111827;
     margin: 0;
   }
+  
+  .cookie-modal-header .cookie-close-btn {
+    position: static;
+    margin-left: 16px;
+    flex-shrink: 0;
+  }
 
   .cookie-modal-body {
     padding: 24px;
+    overflow-y: auto;
+    flex: 1; /* Take remaining space */
+    min-height: 0; /* Allow flexbox to work properly */
+  }
+  
+  .cookie-modal-body::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .cookie-modal-body::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+  }
+  
+  .cookie-modal-body::-webkit-scrollbar-track {
+    background: #f1f5f9;
   }
 
   .cookie-modal-description {
     color: #6b7280;
     margin-bottom: 24px;
-    line-height: 1.5;
+    line-height: 1.6;
+    font-size: 14px;
   }
 
   .cookie-categories {
@@ -455,6 +498,7 @@ const cookiePolicy = siteData?.footer?.cookiePolicy || {
     border: 1px solid #e5e7eb;
     border-radius: 12px;
     padding: 20px;
+    background: #fafafa;
   }
 
   .cookie-category-header {
@@ -466,6 +510,7 @@ const cookiePolicy = siteData?.footer?.cookiePolicy || {
 
   .cookie-category-info {
     flex: 1;
+    min-width: 0; /* Allow text to wrap */
   }
 
   .cookie-category-info h4 {
@@ -541,34 +586,39 @@ const cookiePolicy = siteData?.footer?.cookiePolicy || {
   }
 
   .cookie-modal-footer {
-    padding: 24px;
+    padding: 20px 24px 24px 24px;
     border-top: 1px solid #e5e7eb;
     display: flex;
     gap: 12px;
     justify-content: flex-end;
+    flex-shrink: 0; /* Prevent footer from shrinking */
+    background: white;
+    border-radius: 0 0 16px 16px;
   }
 
-  /* Mobile responsiveness */
+  /* Mobile responsiveness for modal */
   @media (max-width: 640px) {
-    .cookie-banner {
-      left: 16px;
-      right: 16px;
-      bottom: 16px;
+    .cookie-modal {
+      padding: 16px;
     }
 
-    .cookie-main-content {
-      flex-direction: column;
-      gap: 12px;
-      padding-right: 24px;
-    }
-
-    .cookie-actions {
-      flex-direction: column;
-    }
-
-    .cookie-btn {
+    .cookie-modal-content {
+      max-width: none;
       width: 100%;
-      justify-content: center;
+      max-height: calc(100vh - 32px);
+    }
+
+    .cookie-modal-header {
+      padding: 20px 20px 16px 20px;
+    }
+
+    .cookie-modal-body {
+      padding: 20px;
+    }
+
+    .cookie-modal-footer {
+      padding: 16px 20px 20px 20px;
+      flex-direction: column;
     }
 
     .cookie-category-header {
@@ -578,10 +628,6 @@ const cookiePolicy = siteData?.footer?.cookiePolicy || {
 
     .cookie-toggle {
       align-items: flex-start;
-    }
-
-    .cookie-modal-footer {
-      flex-direction: column;
     }
 
     .persistent-cookie-icon {
@@ -631,7 +677,7 @@ const cookiePolicy = siteData?.footer?.cookiePolicy || {
         this.hidePersistentIcon();
         setTimeout(() => {
           this.banner.classList.add('show');
-        }, 1000);
+        }, 100);
       }
     }
 
@@ -660,9 +706,18 @@ const cookiePolicy = siteData?.footer?.cookiePolicy || {
 
     showModal() {
       if (this.modal) {
+        // Ensure modal is properly displayed
         this.modal.classList.add('show');
         document.body.style.overflow = 'hidden';
+        
+        // Load existing consent preferences
         this.loadExistingConsent();
+        
+        // Focus management for accessibility
+        const firstFocusable = this.modal.querySelector('button, input, textarea, select, a[href]');
+        if (firstFocusable) {
+          setTimeout(() => firstFocusable.focus(), 100);
+        }
       }
     }
 
@@ -719,7 +774,7 @@ const cookiePolicy = siteData?.footer?.cookiePolicy || {
 
       // Persistent icon click
       document.getElementById('persistent-cookie-btn')?.addEventListener('click', () => {
-        this.showModal();
+        this.showBanner();
       });
 
       // Modal close
@@ -740,9 +795,16 @@ const cookiePolicy = siteData?.footer?.cookiePolicy || {
         this.hideModal();
       });
 
-      // Close modal when clicking outside
+      // Close modal when clicking backdrop
       this.modal?.addEventListener('click', (e) => {
-        if (e.target === this.modal) {
+        if (e.target === this.modal || e.target.classList.contains('cookie-modal-backdrop')) {
+          this.hideModal();
+        }
+      });
+
+      // Escape key to close modal
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && this.modal?.classList.contains('show')) {
           this.hideModal();
         }
       });

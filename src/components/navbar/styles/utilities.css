@@ -75,3 +75,31 @@
 .navbar-text-blue-600 {
   color: #2563eb;
 }
+
+/* ========================================================================= */
+/* SOCIAL LINKS SPACING UTILITIES */
+/* ========================================================================= */
+
+/* Force spacing between social links */
+.social-links-spacing {
+  gap: 1.5rem !important;
+}
+
+.social-links-spacing > * + * {
+  margin-left: 1rem !important;
+}
+
+/* Desktop specific social link spacing */
+@media (min-width: 1024px) {
+  .navbar-social-links {
+    gap: 1.5rem !important;
+  }
+  
+  .navbar-social-links > a {
+    margin-right: 1rem;
+  }
+  
+  .navbar-social-links > a:last-child {
+    margin-right: 0;
+  }
+}

@@ -1,0 +1,20 @@
+/* Tablet screen sizes - transform social buttons to icon-only */
+@media (max-width: 991px) and (min-width: 768px) {
+  .social-button {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%; 
+  }
+  
+  .social-button .social-text {
+    display: none;
+  }
+  
+  .social-button .social-icon {
+    margin: 0;
+  }
+}

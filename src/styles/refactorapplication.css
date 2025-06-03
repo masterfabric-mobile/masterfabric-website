@@ -1,0 +1,821 @@
+/* Import optimized styles for enhanced performance */
+@import url('./refactorapplication-optimized.css');
+
+/* Floating ring animations */
+.floating-ring {
+  animation: ringFloat 6s ease-in-out infinite;
+}
+
+.floating-ring.delay-1 {
+  animation-delay: 2s;
+}
+
+.floating-ring.delay-2 {
+  animation-delay: 4s;
+}
+
+@keyframes ringFloat {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg) scale(1);
+    opacity: 0.3;
+  }
+  50% { 
+    transform: translateY(-20px) rotate(180deg) scale(1.1);
+    opacity: 0.6;
+  }
+}
+
+/* Phone Interface Styles */
+.phone-frame {
+  background: linear-gradient(145deg, #1f2937, #111827);
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.phone-frame:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 35px 60px -12px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.phone-screen {
+  background: linear-gradient(145deg, #f8fafc, #e2e8f0);
+}
+
+/* Modern Toggle Switch */
+.toggle-switch {
+  position: relative;
+  width: 2.75rem;
+  height: 1.5rem;
+  border-radius: 9999px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+}
+
+.toggle-switch:hover {
+  transform: scale(1.05);
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+.toggle-switch.active {
+  box-shadow: 
+    inset 0 2px 4px 0 rgba(0, 0, 0, 0.06),
+    0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.toggle-circle {
+  position: absolute;
+  top: 0.125rem;
+  left: 0.125rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  background: white;
+  border-radius: 50%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+.toggle-switch.active .toggle-circle {
+  transform: translateX(1.25rem);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15);
+}
+
+/* Feature Toggle Cards */
+.feature-toggle {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.feature-toggle:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.feature-toggle.active {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(99, 102, 241, 0.05));
+  border-color: rgba(59, 130, 246, 0.2);
+}
+
+/* App Bar */
+.app-bar {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Bottom Navigation */
+.bottom-nav-item {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.bottom-nav-item:hover {
+  background-color: rgba(59, 130, 246, 0.05);
+}
+
+.bottom-nav-item.active {
+  background-color: rgba(59, 130, 246, 0.1);
+}
+
+/* Performance Metrics Animation */
+@keyframes progressFill {
+  from { width: 0%; }
+  to { width: var(--progress-width, 100%); }
+}
+
+.progress-animate {
+  animation: progressFill 2s ease-out forwards;
+}
+
+/* Chart Bars Animation */
+@keyframes chartGrow {
+  from { 
+    height: 0.25rem;
+    opacity: 0.5;
+  }
+  to { 
+    height: var(--bar-height);
+    opacity: 1;
+  }
+}
+
+.chart-bar {
+  animation: chartGrow 0.8s ease-out forwards;
+}
+
+.chart-bar.delay-1 { animation-delay: 0.2s; }
+.chart-bar.delay-2 { animation-delay: 0.4s; }
+.chart-bar.delay-3 { animation-delay: 0.6s; }
+
+/* Clickable Elements */
+.clickable {
+  transition: all 0.2s ease;
+}
+
+.clickable:active {
+  transform: scale(0.98);
+}
+
+/* Rocket Animation */
+.rocket-container {
+  animation: rocketFloat 3s ease-in-out infinite;
+}
+
+@keyframes rocketFloat {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% { 
+    transform: translateY(-10px) rotate(5deg);
+  }
+}
+
+.rocket-trail, .rocket-trail-inner {
+  animation: trailPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes trailPulse {
+  0%, 100% { 
+    opacity: 0.3;
+    transform: scaleY(0.8);
+  }
+  50% { 
+    opacity: 0.7;
+    transform: scaleY(1.2);
+  }
+}
+
+/* Floating Dot */
+.floating-dot {
+  animation: dotFloat 4s ease-in-out infinite;
+}
+
+@keyframes dotFloat {
+  0%, 100% { 
+    transform: translateY(0px) scale(1);
+    opacity: 0.6;
+  }
+  50% { 
+    transform: translateY(-15px) scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+/* Success Popup */
+#successPopup {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.8);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex; /* Ensure it's using flexbox for proper centering */
+  z-index: 9999; /* Make sure it appears on top of everything */
+}
+
+/* Force-show class that overrides all other styles */
+#successPopup.force-show {
+  opacity: 1 !important;
+  pointer-events: all !important;
+  transform: scale(1) !important;
+  display: flex !important;
+  visibility: visible !important;
+}
+
+#successPopup.show {
+  opacity: 1;
+  pointer-events: all;
+  transform: scale(1);
+}
+
+/* Make sure popup is visible initially if needed on page load without animations */
+#successPopup.immediate-show {
+  opacity: 1;
+  pointer-events: all;
+  transform: scale(1);
+  display: flex;
+  transition: none; /* Skip the transition for immediate display */
+}
+
+/* Improved popup visibility - no animations initially */
+.popup-no-animation {
+  transition: none !important;
+}
+
+/* Enhanced Success Popup Animations */
+#successPopup .bg-white {
+  animation: popupBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Stepper Popup Animation - Fixed Version */
+#optimizationPopup {
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 9999 !important; /* Ensure highest z-index */
+  isolation: isolate; /* Create stacking context */
+}
+
+/* Force popup to be visible when needed */
+#optimizationPopup.show,
+#optimizationPopup.force-show,
+#optimizationPopup[style*="display: flex"] {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: scale(1) !important;
+  visibility: visible !important;
+  display: flex !important;
+}
+
+/* Ensure backdrop is visible */
+#optimizationPopup .absolute.inset-0 {
+  opacity: 0.7 !important;
+}
+
+/* Utility class to force visibility */
+.show-popup {
+  opacity: 1 !important;
+  pointer-events: all !important;
+  transform: scale(1) !important;
+  display: flex !important;
+  visibility: visible !important;
+}
+
+/* Override any conflicting styles */
+.popup-content {
+  opacity: 1 !important; 
+  transform: scale(1) !important;
+  visibility: visible !important;
+}
+
+/* Add subtle pulse effect for progress bar */
+#progressBar.pulse-effect {
+  animation: progressPulse 0.3s ease-in-out;
+}
+
+@keyframes progressPulse {
+  0%, 100% { 
+    opacity: 1;
+    transform: scaleY(1);
+  }
+  50% { 
+    opacity: 0.8;
+    transform: scaleY(1.3);
+  }
+}
+
+/* Success icon entrance animation */
+.success-icon {
+  animation: successIconEntry 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  transform-origin: center;
+  transform: scale(0) rotate(-15deg);
+}
+
+@keyframes successIconEntry {
+  0% {
+    transform: scale(0) rotate(-45deg);
+  }
+  60% {
+    transform: scale(1.2) rotate(10deg);
+  }
+  100% {
+    transform: scale(1) rotate(0);
+  }
+}
+
+/* Animated titles in success popup */
+.shine-text {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-text::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.8) 50%,
+    rgba(255,255,255,0) 100%);
+  animation: shine 1s forwards 0.5s;
+}
+
+@keyframes shine {
+  to { left: 100%; }
+}
+
+/* Safe Area Bottom */
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 640px) {
+  .phone-frame {
+    width: min(280px, calc(100vw - 2rem)) !important;
+  }
+}
+
+.service-indigo:hover {
+  border-color: #6366f1;
+  box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.1), 0 10px 10px -5px rgba(99, 102, 241, 0.04);
+}
+
+.service-cyan:hover {
+  border-color: #06b6d4;
+  box-shadow: 0 20px 25px -5px rgba(6, 182, 212, 0.1), 0 10px 10px -5px rgba(6, 182, 212, 0.04);
+}
+
+.service-slate:hover {
+  border-color: #64748b;
+  box-shadow: 0 20px 25px -5px rgba(100, 116, 139, 0.1), 0 10px 10px -5px rgba(100, 116, 139, 0.04);
+}
+
+.service-teal:hover {
+  border-color: #14b8a6;
+  box-shadow: 0 20px 25px -5px rgba(20, 184, 166, 0.1), 0 10px 10px -5px rgba(20, 184, 166, 0.04);
+}
+
+/* Integration partner tooltips */
+.integration-partner {
+  position: relative;
+}
+
+.integration-tooltip {
+  position: absolute;
+  bottom: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1f2937;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  z-index: 10;
+}
+
+.integration-tooltip::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 4px solid #1f2937;
+}
+
+.integration-partner:hover .integration-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-5px);
+}
+
+/* Phone mockup animations */
+.stats-card {
+  transition: all 0.3s ease;
+}
+
+.stats-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.progress-animate {
+  animation: progressGrow 2s ease-out forwards;
+  width: 0%;
+}
+
+@keyframes progressGrow {
+  to { width: 98%; }
+}
+
+.chart-bar {
+  animation: barGrow 0.8s ease-out forwards;
+  transform: scaleY(0);
+  transform-origin: bottom;
+}
+
+.chart-bar.delay-1 { animation-delay: 0.2s; }
+.chart-bar.delay-2 { animation-delay: 0.4s; }
+.chart-bar.delay-3 { animation-delay: 0.6s; }
+
+@keyframes barGrow {
+  to { transform: scaleY(1); }
+}
+
+.toggle-switch {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.clickable-switch:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.feature-toggle {
+  transition: all 0.2s ease;
+}
+
+/* Rocket Animation */
+.rocket-container {
+  animation: rocketFloat 3s ease-in-out infinite;
+}
+
+.rocket {
+  animation: rocketBob 2s ease-in-out infinite;
+}
+
+.rocket-trail {
+  animation: trailFlicker 0.5s ease-in-out infinite alternate;
+}
+
+.rocket-trail-inner {
+  animation: trailFlicker 0.3s ease-in-out infinite alternate;
+  animation-delay: 0.1s;
+}
+
+@keyframes rocketFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-8px) rotate(5deg); }
+  50% { transform: translateY(-4px) rotate(0deg); }
+  75% { transform: translateY(-12px) rotate(-5deg); }
+}
+
+@keyframes rocketBob {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-3px) scale(1.05); }
+}
+
+@keyframes trailFlicker {
+  0% { opacity: 0.8; transform: scaleY(1); }
+  100% { opacity: 0.4; transform: scaleY(0.8); }
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(-20px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(400px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.feature-toggle:hover {
+  transform: translateX(4px);
+  background: #f8fafc;
+}
+
+/* Metric animations */
+.metric-item {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.metric-item:hover {
+  transform: translateY(-2px);
+}
+
+.metric-value {
+  transition: all 0.5s ease;
+}
+
+/* Floating background elements */
+.floating-bg {
+  animation: bgFloat 8s ease-in-out infinite;
+}
+
+.floating-bg.delay-1 {
+  animation-delay: 4s;
+}
+
+@keyframes bgFloat {
+  0%, 100% { 
+    transform: translateY(0px) scale(1);
+    opacity: 0.4;
+  }
+  50% { 
+    transform: translateY(-30px) scale(1.05);
+    opacity: 0.6;
+  }
+}
+
+.floating-dot {
+  animation: dotFloat 3s ease-in-out infinite;
+}
+
+@keyframes dotFloat {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% { 
+    transform: translateY(-15px) rotate(180deg);
+  }
+}
+
+/* Entrance animations */
+.service-card {
+  animation: slideUp 0.6s ease-out forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.service-card:nth-child(1) { animation-delay: 0.1s; }
+.service-card:nth-child(2) { animation-delay: 0.2s; }
+.service-card:nth-child(3) { animation-delay: 0.3s; }
+.service-card:nth-child(4) { animation-delay: 0.4s; }
+.service-card:nth-child(5) { animation-delay: 0.5s; }
+.service-card:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes slideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Enhanced Mobile Card Styling */
+.mobile-card-enter {
+  animation: mobileCardEnter 0.6s ease-out forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.mobile-card-enter.delay-1 { animation-delay: 0.2s; }
+.mobile-card-enter.delay-2 { animation-delay: 0.4s; }
+.mobile-card-enter.delay-3 { animation-delay: 0.6s; }
+
+@keyframes mobileCardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Enhanced Performance Card Animations */
+.performance-card-analyzing {
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe) !important;
+  animation: cardAnalyzing 0.8s ease-in-out;
+  border-color: #93c5fd !important;
+}
+
+.performance-card-optimizing {
+  background: linear-gradient(135deg, #bfdbfe, #93c5fd) !important;
+  animation: cardOptimizing 1.2s ease-in-out;
+  border-color: #3b82f6 !important;
+}
+
+.performance-card-applying {
+  background: linear-gradient(135deg, #93c5fd, #60a5fa) !important;
+  animation: cardApplying 0.6s ease-in-out;
+  border-color: #2563eb !important;
+}
+
+@keyframes cardAnalyzing {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes cardOptimizing {
+  0% { transform: rotateY(0deg); }
+  50% { transform: rotateY(180deg); }
+  100% { transform: rotateY(360deg); }
+}
+
+@keyframes cardApplying {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-10px) scale(1.03); }
+}
+
+/* Performance Value Animation */
+.performance-value {
+  font-variant-numeric: tabular-nums;
+  transition: all 0.3s ease;
+}
+
+.performance-value.updating {
+  color: #2563eb;
+  text-shadow: 0 0 10px rgba(37, 99, 235, 0.3);
+  animation: numberPulse 0.3s ease-in-out;
+}
+
+@keyframes numberPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* Success Popup Enhanced */
+.popup-bounce-in {
+  animation: popupBounceIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.popup-fade-out {
+  animation: popupFadeOut 0.3s ease-out forwards;
+}
+
+@keyframes popupBounceIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes popupFadeOut {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+}
+
+/* Step Indicator Styles */
+.step-indicator {
+  transition: all 0.3s ease;
+  opacity: 0.6;
+}
+
+.step-indicator.step-active {
+  opacity: 1;
+  transform: scale(1.02);
+}
+
+.step-indicator.step-completed {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.step-icon {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.step-active .step-icon {
+  animation: stepPulse 2s ease-in-out infinite;
+}
+
+@keyframes stepPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(59, 130, 246, 0);
+  }
+}
+
+/* Loading Animation */
+.loading-dot {
+  animation: loadingBounce 1.4s ease-in-out infinite both;
+}
+
+@keyframes loadingBounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+/* Success Icon Animation */
+.success-icon {
+  animation: successIconEntry 0.6s ease-out forwards;
+  transform: scale(0);
+  transition: all 0.3s ease;
+}
+
+@keyframes successIconEntry {
+  0% {
+    transform: scale(0) rotate(-180deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2) rotate(0deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+/* Optimized Analytics Animation Layers */
+.analytics-card {
+  transition: all 0.3s ease;
+}
+
+.analytics-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.analytics-bar {
+  animation: analyticsGrow 1.2s ease-out forwards;
+  transform-origin: left;
+  transform: scaleX(0);
+}
+
+@keyframes analyticsGrow {
+  to { transform: scaleX(1); }
+}
+
+/* Enhanced centered layout styling */
+.centered-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+/* Rest of existing code */

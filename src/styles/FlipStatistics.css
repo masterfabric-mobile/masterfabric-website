@@ -30,7 +30,6 @@
   place-items: center;
 }
 
-/* Floating animation elements around cards - koyu mavi tonlarıyla güncellendi */
 .statistics-grid::before,
 .statistics-grid::after {
   content: '';
@@ -38,7 +37,7 @@
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%); /* Koyu mavi ile güncellendi */
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%); 
   pointer-events: none;
   z-index: -1;
   animation: floatAround 8s ease-in-out infinite;
@@ -54,7 +53,7 @@
   bottom: -60px;
   right: -60px;
   animation-delay: 4s;
-  background: radial-gradient(circle, rgba(29, 78, 216, 0.08) 0%, transparent 70%); /* Daha koyu mavi */
+  background: radial-gradient(circle, rgba(29, 78, 216, 0.08) 0%, transparent 70%); /* Darker blue */
 }
 
 .stat-card {
@@ -63,7 +62,7 @@
     rgba(255, 255, 255, 0.95) 0%, 
     rgba(248, 250, 252, 0.9) 100%);
   backdrop-filter: blur(15px);
-  border: 1px solid rgba(59, 130, 246, 0.15); /* Koyu mavi ile güncellendi */
+  border: 1px solid rgba(59, 130, 246, 0.15);
   border-radius: 20px;
   padding: 0.5rem;
   text-align: center;
@@ -95,7 +94,7 @@
   background: linear-gradient(90deg, 
     rgba(59, 130, 246, 0.1) 0%, 
     rgba(37, 99, 235, 0.05) 50%,
-    rgba(29, 78, 216, 0.1) 100%); /* Koyu mavi gradient */
+    rgba(29, 78, 216, 0.1) 100%); 
   border-radius: 18px;
   opacity: 0;
   transition: all 0.5s ease;
@@ -125,7 +124,7 @@
   background: linear-gradient(90deg, 
     rgba(59, 130, 246, 0.08) 0%, 
     rgba(37, 99, 235, 0.06) 50%,
-    rgba(29, 78, 216, 0.08) 100%); /* Koyu mavi gradient */
+    rgba(29, 78, 216, 0.08) 100%); 
   border-radius: 20px;
   opacity: 0;
   transition: all 0.5s ease;
@@ -169,7 +168,7 @@
   right: 12%;
   width: 4px;
   height: 4px;
-  background: linear-gradient(90deg, #3b82f6, #2563eb); /* Koyu mavi gradient */
+  background: linear-gradient(90deg, #3b82f6, #2563eb); 
   border-radius: 50%;
   opacity: 0.5;
   animation: dotFloat 5s ease-in-out infinite;
@@ -181,7 +180,7 @@
   position: absolute;
   width: 3px;
   height: 3px;
-  background: linear-gradient(90deg, #2563eb, #1d4ed8); /* Koyu mavi gradient */
+  background: linear-gradient(90deg, #2563eb, #1d4ed8); 
   border-radius: 50%;
 }
 
@@ -204,7 +203,7 @@
   margin: 0;
   width: 24px;
   height: 24px;
-  background: linear-gradient(90deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%); /* Koyu mavi gradient */
+  background: linear-gradient(90deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%); 
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -244,7 +243,7 @@
   left: -3px;
   right: -3px;
   bottom: -3px;
-  background: linear-gradient(90deg, rgba(59, 130, 246, 0.25), rgba(96, 165, 250, 0.25)); /* Koyu mavi tonu */
+  background: linear-gradient(90deg, rgba(59, 130, 246, 0.25), rgba(96, 165, 250, 0.25));
   border-radius: 17px;
   opacity: 0;
   transition: all 0.4s ease;
@@ -278,7 +277,7 @@
   color: #0f172a;
   margin: 0;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: linear-gradient(90deg, #1e293b 0%, #3b82f6 100%); /* Koyu mavi gradient */
+  background: linear-gradient(90deg, #1e293b 0%, #3b82f6 100%); 
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -340,7 +339,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%); /* Koyu mavi gradient */
+  background: linear-gradient(90deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%);
   border-radius: 16px 16px 0 0;
   transform: scaleX(0);
   transform-origin: center;
@@ -563,11 +562,11 @@
 
 /* Focus states for accessibility */
 .stat-card:focus {
-  outline: 2px solid #3b82f6; /* Koyu mavi */
+  outline: 2px solid #3b82f6; 
   outline-offset: 2px;
 }
 
 .stat-card:focus-visible {
-  outline: 2px solid #3b82f6; /* Koyu mavi */
+  outline: 2px solid #3b82f6;
   outline-offset: 2px;
 }

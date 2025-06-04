@@ -2,7 +2,7 @@
 import aboutData from '../../data/about.json';
 
 interface Props {
-  // Props artık opsiyonel - JSON'dan varsayılan değerler gelecek
+  // Props are now optional - default values will come from JSON
   statistics?: Array<{
     value: number | string;
     label: string;
@@ -15,7 +15,7 @@ interface Props {
 
 const { statistics, title, description } = Astro.props;
 
-// JSON'dan verileri al, props varsa onları kullan
+// Get data from JSON, use props if provided
 const statsData = statistics || aboutData.statistics.items;
 const statsTitle = title || aboutData.statistics.title;
 const statsDescription = description || aboutData.statistics.description;

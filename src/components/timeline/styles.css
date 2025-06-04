@@ -4,7 +4,7 @@
  * Supports responsive design and animations
  */
 
-/* Ana timeline konteyner stilleri */
+/* Main timeline container styles */
 .project-flow-timeline {
   padding: 4rem 0;
   background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
@@ -12,7 +12,7 @@
   overflow: hidden;
 }
 
-/* Timeline başlık bölümü stilleri */
+/* Timeline header section styles */
 .timeline-header {
   margin-bottom: 3rem;
   opacity: 0;
@@ -50,7 +50,7 @@
   line-height: 1.6;
 }
 
-/* Timeline ana konteyner ve track stilleri */
+/* Timeline main container and track styles */
 .timeline-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -67,7 +67,7 @@
   -webkit-overflow-scrolling: touch;
 }
 
-/* Timeline kartları stilleri */
+/* Timeline cards styles */
 .timeline-card {
   scroll-snap-align: start;
   flex-shrink: 0;
@@ -102,33 +102,33 @@
   box-shadow: 0 15px 30px rgba(0,0,0,0.1), 0 5px 10px rgba(0,0,0,0.08);
 }
 
-/* Durum özel stilleri - tamamlanmış */
+/* Status specific styles - completed */
 .status-border-completed { border-left: 5px solid #22c55e; }
 .status-bg-completed { background-color: #dcfce7; }
 .status-text-completed { color: #166534; }
 
-/* Durum özel stilleri - devam eden */
+/* Status specific styles - in progress */
 .status-border-in-progress { border-left: 5px solid #eab308; }
 .status-bg-in-progress { background-color: #fef9c3; }
 .status-text-in-progress { color: #854d0e; }
 
-/* Durum özel stilleri - aktif */
+/* Status specific styles - active */
 .status-border-active { border-left: 5px solid #06b6d4; }
 .status-bg-active { background-color: #cffafe; }
 .status-text-active { color: #0e7490; }
 
-/* Durum özel stilleri - beklemede */
+/* Status specific styles - pending */
 .status-border-pending { border-left: 5px solid #64748b; }
 .status-bg-pending { background-color: #e2e8f0; }
 .status-text-pending { color: #334155; }
 
-/* Kilometre taşı gösterge stilleri */
+/* Milestone indicator dot styles */
 .milestone-indicator-dot.status-bg-completed { background-color: #22c55e; }
 .milestone-indicator-dot.status-bg-in-progress { background-color: #eab308; }
 .milestone-indicator-dot.status-bg-active { background-color: #06b6d4; }
 .milestone-indicator-dot.status-bg-pending { background-color: #64748b; }
 
-/* Scrollbar özelleştirme */
+/* Scrollbar customization */
 .timeline-track::-webkit-scrollbar {
   height: 10px;
   background-color: transparent;
@@ -150,7 +150,7 @@
   background-color: #64748b;
 }
 
-/* Araçlar bölümü stilleri */
+/* Tools section styles */
 .tools-section {
   border-top: 1px solid #f1f5f9;
   padding-top: 0.375rem;
@@ -203,7 +203,7 @@
   flex-shrink: 0;
 }
 
-/* Dinamik durum çubuğu stilleri */
+/* Dynamic status bar styles */
 .dynamic-status-messages {
   position: fixed;
   bottom: 20px;
@@ -236,7 +236,7 @@
   transform: translateX(-50%) translateY(calc(100% - 36px));
 }
 
-/* Durum çubuğu toggle düğmesi */
+/* Status bar toggle button */
 .status-toggle-btn {
   position: absolute;
   top: 0;
@@ -260,7 +260,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
 }
 
-/* Chevron ok stilleri */
+/* Chevron arrow styles */
 .chevron {
   display: flex;
   align-items: center;
@@ -274,7 +274,7 @@
   display: none;
 }
 
-/* Durum mesajı içeriği */
+/* Status message content */
 .status-message-content {
   display: flex;
   align-items: center;
@@ -315,7 +315,7 @@
   line-height: 1.4;
 }
 
-/* İlerleme çubuğu stilleri */
+/* Progress bar styles */
 .status-progress {
   display: flex;
   flex-direction: column;
@@ -346,7 +346,7 @@
   transition: width 0.5s ease-out;
 }
 
-/* Kontrol düğmeleri */
+/* Control buttons */
 .status-buttons {
   display: flex;
   gap: 0.6rem;
@@ -376,7 +376,7 @@
   color: #000;
 }
 
-/* Tebrikler toast stilleri */
+/* Congratulations toast styles */
 .congratulations-toast {
   position: fixed;
   top: 20px;
@@ -428,7 +428,7 @@
   line-height: 1.3;
 }
 
-/* Tebrikler dialog stilleri */
+/* Congratulations dialog styles */
 .congratulations-dialog-overlay {
   position: fixed;
   top: 0;
@@ -467,7 +467,7 @@
   transform: scale(1) translateY(0);
 }
 
-/* Dialog başlık stilleri */
+/* Dialog header styles */
 .dialog-header {
   display: flex;
   align-items: center;
@@ -500,7 +500,7 @@
   color: #1e293b;
 }
 
-/* Dialog içerik stilleri */
+/* Dialog content styles */
 .dialog-content {
   text-align: center;
 }
@@ -519,7 +519,7 @@
   margin-bottom: 2rem;
 }
 
-/* Dialog ilerleme bölümü */
+/* Dialog progress section */
 .dialog-progress {
   display: flex;
   align-items: center;
@@ -572,7 +572,7 @@
   font-weight: 600;
 }
 
-/* Dialog devam düğmesi */
+/* Dialog continue button */
 .dialog-continue-btn {
   background: linear-gradient(135deg, #10b981 0%, #059669 100%);
   color: white;
@@ -591,7 +591,7 @@
   box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
 }
 
-/* İletişim bölümü stilleri */
+/* Contact section styles */
 .dialog-contact-section {
   margin-top: 1.5rem;
 }
@@ -682,7 +682,7 @@
   border-color: #cbd5e1;
 }
 
-/* Animasyon tanımları */
+/* Animation definitions */
 @keyframes bounce {
   0%, 20%, 50%, 80%, 100% {
     transform: translateY(0);
@@ -695,7 +695,7 @@
   }
 }
 
-/* Responsive tasarım - Tablet */
+/* Responsive design - Tablet */
 @media (max-width: 768px) {
   .congratulations-dialog {
     padding: 1.5rem;
@@ -744,7 +744,7 @@
   }
 }
 
-/* Responsive tasarım - Mobil */
+/* Responsive design - Mobile */
 @media (max-width: 480px) {
   .timeline-card {
     min-width: 160px;

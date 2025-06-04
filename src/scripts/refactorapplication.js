@@ -9,6 +9,9 @@ class EnhancedPhoneInterface {
   constructor() {
     this.isOptimizing = false;
     this.currentStep = 0;
+    this.initialPerformanceValue = 0;
+    this.beforeOptimizationValue = 0; // Track value before optimization
+    this.afterOptimizationValue = 0;  // Track value after optimization
     this.optimizationSteps = [
       { 
         id: 'step1', 
@@ -43,16 +46,20 @@ class EnhancedPhoneInterface {
     this.setRandomPerformanceValue();
     this.setupInteractions();
     this.initializeAnimations();
+    this.updateOptimizeButton(); // Update button based on initial performance
     console.log('✅ Enhanced Phone Interface initialized successfully');
   }
 
   setRandomPerformanceValue() {
     // Set initial random value between 80-90%
-    const initialValue = Math.floor(Math.random() * 11) + 80; // 80-90 range
+    this.initialPerformanceValue = Math.floor(Math.random() * 11) + 80; // 80-90 range
+    this.beforeOptimizationValue = this.initialPerformanceValue; // Initialize tracking
+    this.afterOptimizationValue = this.initialPerformanceValue;
+    
     const performanceElement = document.getElementById('performanceValue');
     if (performanceElement) {
-      performanceElement.textContent = `${initialValue}%`;
-      console.log(`📊 Initial performance value set to: ${initialValue}%`);
+      performanceElement.textContent = `${this.initialPerformanceValue}%`;
+      console.log(`📊 Initial performance value set to: ${this.initialPerformanceValue}%`);
     }
   }
 
@@ -68,6 +75,18 @@ class EnhancedPhoneInterface {
       optimizeBtn.addEventListener('click', (e) => {
         e.preventDefault();
         console.log('🎯 Optimize button clicked!');
+        
+        // Check current performance value
+        const performanceElement = document.getElementById('performanceValue');
+        const currentPerformance = performanceElement ? parseInt(performanceElement.textContent) : 0;
+        
+        if (currentPerformance >= 98) {
+          // Already at maximum, show perfection popup directly
+          console.log('🎯 Already at maximum performance, showing perfection popup');
+          this.showPerfectionPopup();
+          return;
+        }
+        
         if (!this.isOptimizing) {
           this.startStepperOptimization();
         } else {
@@ -95,6 +114,16 @@ class EnhancedPhoneInterface {
       closePopup.addEventListener('click', (e) => {
         e.preventDefault();
         this.hideSuccessPopup();
+      });
+    }
+
+    // Setup perfection popup close handlers
+    const closePerfectionPopup = document.getElementById('closePerfectionPopup');
+    
+    if (closePerfectionPopup) {
+      closePerfectionPopup.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.hidePerfectionPopup();
       });
     }
   }
@@ -153,6 +182,11 @@ class EnhancedPhoneInterface {
     this.isOptimizing = true;
     this.currentStep = 0;
     
+    // Store the current performance value before optimization
+    const performanceElement = document.getElementById('performanceValue');
+    this.beforeOptimizationValue = performanceElement ? parseInt(performanceElement.textContent) : 0;
+    console.log(`📊 Starting optimization from: ${this.beforeOptimizationValue}%`);
+    
     try {
       // Show stepper popup
       await this.showStepperPopup();
@@ -186,6 +220,11 @@ class EnhancedPhoneInterface {
       // Update performance value to improved value (93-98%)
       await this.updatePerformanceValue();
       
+      // Store the final performance value after optimization
+      const performanceElement = document.getElementById('performanceValue');
+      this.afterOptimizationValue = performanceElement ? parseInt(performanceElement.textContent) : 0;
+      console.log(`📊 Optimization completed: ${this.beforeOptimizationValue}% → ${this.afterOptimizationValue}%`);
+      
       // Show success popup
       await this.showSuccessPopup();
       
@@ -202,6 +241,10 @@ class EnhancedPhoneInterface {
     if (!popup) return;
 
     console.log('✅ showStepperPopup() triggered');
+    
+    // Add optimization-active class for enhanced animations
+    popup.classList.add('optimization-active');
+    
     popup.style.display = 'flex';
     popup.offsetHeight; // force reflow
     popup.style.opacity = '1';
@@ -228,6 +271,14 @@ class EnhancedPhoneInterface {
     const popup = document.getElementById('optimizationPopup');
     if (!popup) return;
     
+    console.log('🔄 Hiding stepper popup...');
+    
+    // Add animation-stopped class to immediately stop all animations
+    popup.classList.add('animation-stopped');
+    
+    // Remove optimization-active class to stop animations
+    popup.classList.remove('optimization-active');
+    
     const content = popup.querySelector('.popup-content');
     if (content) {
       content.style.transition = 'all 0.2s ease-in';
@@ -235,10 +286,18 @@ class EnhancedPhoneInterface {
       content.style.opacity = '0';
     }
     
+    // Apply common exit animation class
+    popup.classList.add('popup-exit-animation');
+    
     await this.wait(200);
     
-    popup.classList.add('opacity-0', 'pointer-events-none');
-    popup.classList.remove('opacity-100');
+    // Hide completely
+    popup.style.display = 'none';
+    
+    // Clean up classes after animation
+    popup.classList.remove('popup-exit-animation', 'animation-stopped');
+    
+    console.log('✅ Stepper popup hidden');
   }
 
   resetStepperState() {
@@ -413,6 +472,13 @@ class EnhancedPhoneInterface {
     if (!this.isOptimizing) return;
     
     this.isOptimizing = false;
+    
+    // Remove optimization-active class to stop animations
+    const popup = document.getElementById('optimizationPopup');
+    if (popup) {
+      popup.classList.remove('optimization-active');
+    }
+    
     this.hideStepperPopup();
   }
 
@@ -420,9 +486,9 @@ class EnhancedPhoneInterface {
     const performanceElement = document.getElementById('performanceValue');
     if (!performanceElement) return;
     
-    // Generate new value between 93-98%
-    const newValue = Math.floor(Math.random() * 6) + 93; // 93-98 range
+    // Always set to exactly 98% to match the mockup
     const currentValue = parseInt(performanceElement.textContent);
+    const newValue = 98; // Fixed value to match mockup
     
     // Animate the number change with custom counter animation
     performanceElement.classList.add('performance-value', 'updating');
@@ -447,6 +513,17 @@ class EnhancedPhoneInterface {
         } else {
           performanceElement.classList.remove('updating');
           console.log(`📊 Performance updated to: ${newValue}%`);
+          
+          // Store the new value for boost calculation
+          this.afterOptimizationValue = newValue;
+          
+          // Update optimize button based on new performance value
+          this.updateOptimizeButton();
+          
+          // DO NOT automatically show perfection popup
+          // User must click the button again to see it
+          console.log('🎯 98% reached - perfection popup available on next click');
+          
           resolve();
         }
       };
@@ -460,7 +537,19 @@ class EnhancedPhoneInterface {
     if (!successPopup) return;
 
     console.log('✅ showSuccessPopup() triggered');
-    successPopup.classList.add('force-show');
+    
+    // Add success-active class for enhanced animations
+    successPopup.classList.add('success-active');
+    
+    // Remove animation-stopped class if it exists to ensure animations run
+    successPopup.classList.remove('animation-stopped', 'show-checkmark');
+    
+    // Show popup with direct styles
+    successPopup.style.display = 'flex';
+    successPopup.style.opacity = '1';
+    successPopup.style.pointerEvents = 'auto';
+    successPopup.style.transform = 'scale(1)';
+    successPopup.style.visibility = 'visible';
 
     // Calculate and show performance improvement
     this.updatePerformanceImprovement();
@@ -481,15 +570,134 @@ class EnhancedPhoneInterface {
       if (successIcon) {
         successIcon.classList.add('popup-bounce-in');
       }
+      
+      // REMOVED: Don't automatically switch to checkmark after 3 seconds
+      // Keep gear animation running until popup is closed
     }
+    
+    console.log('✅ Success popup shown with continuous gear animation');
+  }
+
+  async showPerfectionPopup() {
+    // Hide any existing popups first
+    const successPopup = document.getElementById('successPopup');
+    if (successPopup) {
+      this.hideSuccessPopup();
+      await this.wait(300);
+    }
+
+    const perfectionPopup = document.getElementById('perfectionPopup');
+    if (!perfectionPopup) return;
+
+    console.log('🎯 showPerfectionPopup() triggered - 98% achieved!');
+    
+    // Update popup content to match mockup exactly
+    const perfectionTitle = perfectionPopup.querySelector('.perfection-title');
+    const perfectionSubtitle = perfectionPopup.querySelector('.perfection-subtitle');
+    const perfectionDescription = perfectionPopup.querySelector('.perfection-description');
+    const performanceDisplay = perfectionPopup.querySelector('.perfection-performance');
+    const performanceLabel = perfectionPopup.querySelector('.perfection-label');
+    const statusBadge = perfectionPopup.querySelector('.perfection-status');
+    
+    if (perfectionTitle) perfectionTitle.textContent = '🏆 PERFECTION!';
+    if (performanceDisplay) performanceDisplay.textContent = '98%';
+    if (performanceLabel) performanceLabel.textContent = 'MAX PERFORMANCE';
+    if (statusBadge) statusBadge.textContent = '✨ Complete ✨';
+    if (perfectionSubtitle) perfectionSubtitle.textContent = '🏆 Amazing!';
+    if (perfectionDescription) {
+      perfectionDescription.innerHTML = 'Your app reached <span class="text-orange-500 font-semibold">maximum</span> performance possible.';
+    }
+    
+    // Show popup with full coverage
+    perfectionPopup.style.display = 'flex';
+    perfectionPopup.style.position = 'absolute';
+    perfectionPopup.style.top = '0';
+    perfectionPopup.style.left = '0';
+    perfectionPopup.style.width = '100%';
+    perfectionPopup.style.height = '100%';
+    perfectionPopup.style.borderRadius = '2.25rem';
+    perfectionPopup.style.opacity = '0';
+    perfectionPopup.style.pointerEvents = 'none';
+
+    // Force reflow
+    void perfectionPopup.offsetWidth;
+
+    // Make it visible with animation
+    perfectionPopup.style.opacity = '1';
+    perfectionPopup.style.pointerEvents = 'auto';
+
+    // Animate the popup content with special effects
+    const popupContent = perfectionPopup.querySelector('.popup-content, .relative, .bg-white, .bg-gradient-to-br');
+    if (popupContent) {
+      popupContent.style.transform = 'scale(0.7) translateY(30px)';
+      popupContent.style.opacity = '0';
+
+      await this.wait(100);
+
+      popupContent.style.transition = 'all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+      popupContent.style.transform = 'scale(1) translateY(0)';
+      popupContent.style.opacity = '1';
+
+      // Add special glow effect
+      const perfectIcon = popupContent.querySelector('.perfect-icon, .perfection-icon');
+      if (perfectIcon) {
+        perfectIcon.classList.add('perfect-glow');
+      }
+
+      // Add sparkle animation to title
+      const title = popupContent.querySelector('h3, .perfection-title');
+      if (title) {
+        title.classList.add('perfect-shine');
+      }
+    }
+  }
+
+  hidePerfectionPopup() {
+    const perfectionPopup = document.getElementById('perfectionPopup');
+    if (!perfectionPopup) return;
+    
+    // Add animation-stopped class to immediately stop all animations
+    perfectionPopup.classList.add('animation-stopped');
+    
+    // Apply common exit animation class
+    perfectionPopup.classList.add('popup-exit-animation');
+    
+    // Animate out
+    const popupContent = perfectionPopup.querySelector('.bg-gradient-to-br');
+    if (popupContent) {
+      popupContent.style.transition = 'all 0.3s ease-in';
+      popupContent.style.transform = 'scale(0.8) translateY(20px)';
+      popupContent.style.opacity = '0';
+    }
+    
+    setTimeout(() => {
+      // Hide completely
+      perfectionPopup.style.display = 'none';
+      
+      // Clean up classes after animation
+      perfectionPopup.classList.remove('popup-exit-animation', 'animation-stopped');
+      
+    }, 300);
   }
 
   updatePerformanceImprovement() {
     const improvementElement = document.getElementById('performanceImprovement');
-    if (improvementElement) {
-      const improvements = ['+8%', '+12%', '+15%', '+18%', '+22%'];
-      const randomImprovement = improvements[Math.floor(Math.random() * improvements.length)];
-      improvementElement.textContent = randomImprovement;
+    if (improvementElement && this.beforeOptimizationValue && this.afterOptimizationValue) {
+      // Calculate the actual improvement
+      const actualImprovement = this.afterOptimizationValue - this.beforeOptimizationValue;
+      
+      if (actualImprovement > 0) {
+        improvementElement.textContent = `+${actualImprovement}%`;
+        console.log(`📈 Performance boost: +${actualImprovement}% (${this.beforeOptimizationValue}% → ${this.afterOptimizationValue}%)`);
+      } else {
+        // Fallback if calculation fails
+        improvementElement.textContent = '+0%';
+        console.log('⚠️ No performance improvement detected');
+      }
+    } else {
+      // Fallback for missing data
+      console.log('⚠️ Missing performance data, using fallback');
+      improvementElement.textContent = '+5%';
     }
   }
 
@@ -497,18 +705,64 @@ class EnhancedPhoneInterface {
     const successPopup = document.getElementById('successPopup');
     if (!successPopup) return;
     
+    console.log('🔄 Hiding success popup...');
+    
+    // Add animation-stopped class to immediately stop all animations
+    successPopup.classList.add('animation-stopped');
+    
+    // Remove success-active class to stop animations
+    successPopup.classList.remove('success-active', 'show-checkmark');
+    
+    // Apply common exit animation class
+    successPopup.classList.add('popup-exit-animation');
+    
     // Animate out
     const popupContent = successPopup.querySelector('.bg-white');
     if (popupContent) {
       popupContent.style.transition = 'all 0.2s ease-in';
       popupContent.style.transform = 'scale(0.9) translateY(10px)';
       popupContent.style.opacity = '0';
-      
-      setTimeout(() => {
-        successPopup.classList.add('opacity-0', 'pointer-events-none');
-        successPopup.classList.remove('opacity-100');
-      }, 200);
     }
+    
+    setTimeout(() => {
+      // Hide completely
+      successPopup.style.display = 'none';
+      
+      // Clean up classes after animation
+      successPopup.classList.remove('popup-exit-animation', 'animation-stopped');
+      
+      console.log('✅ Success popup hidden');
+    }, 300);
+  }
+
+  // Method to update optimize button text based on current performance
+  updateOptimizeButton() {
+    const optimizeBtn = document.getElementById('optimizeBtn');
+    const performanceElement = document.getElementById('performanceValue');
+    
+    if (!optimizeBtn || !performanceElement) return;
+    
+    const currentPerformance = parseInt(performanceElement.textContent);
+    
+    if (currentPerformance >= 98) {
+      optimizeBtn.textContent = 'Perfect! 🎯';
+      optimizeBtn.classList.add('bg-green-600', 'hover:bg-green-700');
+      optimizeBtn.classList.remove('bg-blue-600', 'hover:bg-blue-700', 'bg-purple-600', 'hover:bg-purple-700', 'bg-orange-600', 'hover:bg-orange-700');
+    } else if (currentPerformance >= 95) {
+      optimizeBtn.textContent = 'Fine-tune ⚡';
+      optimizeBtn.classList.add('bg-purple-600', 'hover:bg-purple-700');
+      optimizeBtn.classList.remove('bg-blue-600', 'hover:bg-blue-700', 'bg-green-600', 'hover:bg-green-700', 'bg-orange-600', 'hover:bg-orange-700');
+    } else if (currentPerformance >= 90) {
+      optimizeBtn.textContent = 'Optimize More';
+      optimizeBtn.classList.add('bg-orange-600', 'hover:bg-orange-700');
+      optimizeBtn.classList.remove('bg-green-600', 'hover:bg-green-700', 'bg-purple-600', 'hover:bg-purple-700', 'bg-blue-600', 'hover:bg-blue-700');
+    } else {
+      optimizeBtn.textContent = 'Optimize Now';
+      optimizeBtn.classList.remove('bg-green-600', 'hover:bg-green-700', 'bg-purple-600', 'hover:bg-purple-700', 'bg-orange-600', 'hover:bg-orange-700');
+      optimizeBtn.classList.add('bg-blue-600', 'hover:bg-blue-700');
+    }
+    
+    console.log(`🔧 Button updated for ${currentPerformance}% performance: "${optimizeBtn.textContent}"`);
   }
 
   wait(ms) {

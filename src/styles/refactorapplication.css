@@ -310,54 +310,24 @@
   transition: none !important;
 }
 
-#successPopup .bg-white {
-  animation: popupBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+/* Remove any icon-specific animations */
+#successPopup .success-icon,
+#successPopup .success-gear-icon,
+#successPopup .success-checkmark {
+  animation: none;
 }
 
-.popup-bounce-in {
-  animation: popupBounceIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+.success-icon {
+  animation: none !important;
 }
 
-.popup-fade-out {
-  animation: popupFadeOut 0.3s ease-out forwards;
+.success-gear-icon svg {
+  animation: none !important;
 }
 
-@keyframes popupBounce {
-  0% {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  60% {
-    transform: scale(1.2) rotate(10deg);
-  }
-  100% {
-    transform: scale(1) rotate(0);
-  }
-}
-
-@keyframes popupBounceIn {
-  0% {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes popupFadeOut {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(0.9);
-    opacity: 0;
-  }
+.success-checkmark {
+  animation: none !important;
+  opacity: 1 !important;
 }
 
 /* ========================================
@@ -390,6 +360,244 @@
 }
 
 /* ========================================
+   OPTIMIZATION POPUP ICON ANIMATIONS
+======================================== */
+.optimization-gear-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.optimization-gear-icon svg {
+  animation: optimizationSpin 2s linear infinite;
+  filter: drop-shadow(0 2px 4px rgba(59, 130, 246, 0.3));
+}
+
+#optimizationPopup .optimization-gear-icon svg {
+  animation: optimizationSpin 2s linear infinite;
+}
+
+/* Keep the gear spinning as long as the popup is visible */
+#optimizationPopup:not([style*="display: none"]) .optimization-gear-icon svg {
+  animation: optimizationSpin 2s linear infinite;
+}
+
+#optimizationPopup[style*="opacity: 1"] .optimization-gear-icon svg {
+  animation: optimizationSpin 2s linear infinite;
+}
+
+@keyframes optimizationSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Pulsing effect for the optimization icon */
+.optimization-gear-icon + .animate-ping {
+  animation: optimizationPing 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes optimizationPing {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* Enhanced optimization popup visibility */
+#optimizationPopup.optimization-active .optimization-gear-icon svg {
+  animation: optimizationSpin 1.5s linear infinite;
+  color: #2563eb;
+}
+
+#optimizationPopup.optimization-active .animate-ping {
+  animation: optimizationPing 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+  background-color: rgba(37, 99, 235, 0.3);
+}
+
+/* ========================================
+   PERFECTION POPUP ANIMATIONS (98% Achievement)
+======================================== */
+#perfectionPopup {
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 10000 !important;
+  isolation: isolate;
+  position: absolute !important;
+  inset: 0 !important;
+  border-radius: 2.25rem !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 100% !important;
+  min-height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+}
+
+/* Background gradient layers */
+#perfectionPopup > div:first-child,
+#perfectionPopup > div:nth-child(2),
+#perfectionPopup > div:nth-child(3) {
+  position: absolute !important;
+  inset: 0 !important;
+  border-radius: 2.25rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-size: 300% 300% !important;
+  background-position: center !important;
+}
+
+/* Enhanced glow effect */
+#perfectionPopup > div:first-child {
+  background: radial-gradient(circle at center, 
+    rgba(251, 191, 36, 0.95) 0%, 
+    rgba(245, 158, 11, 0.85) 20%, 
+    rgba(217, 119, 6, 0.65) 40%, 
+    rgba(180, 83, 9, 0.45) 60%, 
+    rgba(120, 53, 15, 0.25) 80%, 
+    rgba(245, 158, 11, 0.05) 100%) !important;
+  backdrop-filter: blur(3px) !important;
+  -webkit-backdrop-filter: blur(3px) !important;
+  box-shadow: inset 0 0 100px rgba(251, 191, 36, 0.7), 
+              inset 0 0 200px rgba(245, 158, 11, 0.6) !important;
+}
+
+/* Make sure the popup is always visible when shown */
+#perfectionPopup[style*="display: flex"],
+#perfectionPopup.show {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transform: scale(1) !important;
+  display: flex !important;
+}
+
+/* Ensure popup content fits in phone mockup */
+#perfectionPopup .relative {
+  max-height: calc(100vh - 8rem);
+  overflow-y: auto;
+  box-sizing: border-box;
+  z-index: 2;
+  position: relative;
+}
+
+.perfect-icon {
+  position: relative;
+  overflow: hidden;
+}
+
+.perfect-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(251, 191, 36, 0.15) 0%, rgba(251, 191, 36, 0) 80%);
+  animation: perfectGlow 2s ease-in-out infinite alternate;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@keyframes perfectGlow {
+  0% {
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.6), 0 0 40px rgba(251, 191, 36, 0.3);
+    transform: scale(1);
+  }
+  100% {
+    box-shadow: 0 0 30px rgba(251, 191, 36, 0.8), 0 0 60px rgba(251, 191, 36, 0.5);
+    transform: scale(1.02);
+  }
+}
+
+.perfect-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.perfect-shine::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.8),
+    transparent
+  );
+  animation: perfectShine 3s ease-in-out infinite;
+}
+
+@keyframes perfectShine {
+  0% {
+    left: -100%;
+  }
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Celebration particles animation */
+.celebration-particles {
+  pointer-events: none;
+}
+
+.celebration-particles::before,
+.celebration-particles::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle, #fbbf24 0%, #f59e0b 100%);
+  border-radius: 50%;
+  animation: celebrationFloat 4s ease-in-out infinite;
+}
+
+.celebration-particles::before {
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.celebration-particles::after {
+  top: 70%;
+  right: 15%;
+  animation-delay: 2s;
+}
+
+@keyframes celebrationFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.7;
+  }
+  25% {
+    transform: translateY(-20px) rotate(90deg);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-10px) rotate(180deg);
+    opacity: 0.8;
+  }
+  75% {
+    transform: translateY(-30px) rotate(270deg);
+    opacity: 1;
+  }
+}
+
+/* ========================================
    PROGRESS INDICATORS
 ======================================== */
 #progressBar {
@@ -417,23 +625,16 @@
    SUCCESS ICON ANIMATIONS
 ======================================== */
 .success-icon {
-  animation: successIconEntry 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-  transform-origin: center;
-  transform: scale(0) rotate(-15deg);
+  animation: none !important;
 }
 
-@keyframes successIconEntry {
-  0% {
-    transform: scale(0) rotate(-45deg);
-    opacity: 0;
-  }
-  60% {
-    transform: scale(1.2) rotate(10deg);
-  }
-  100% {
-    transform: scale(1) rotate(0);
-    opacity: 1;
-  }
+.success-gear-icon svg {
+  animation: none !important;
+}
+
+.success-checkmark {
+  animation: none !important;
+  opacity: 1 !important;
 }
 
 /* ========================================
@@ -895,71 +1096,70 @@ button:focus-visible {
 }
 
 /* ========================================
-   ACCESSIBILITY & PERFORMANCE
+   POPUP ANIMATION COORDINATION - IMPROVED
 ======================================== */
-@media (prefers-reduced-motion: reduce) {
-  .floating-ring,
-  .optimization-pulse,
-  .service-card,
-  .mobile-card-enter {
-    animation: none;
-  }
-  
-  .service-card {
-    opacity: 1;
-    transform: none;
-  }
-  
-  * {
-    transition-duration: 0.01ms !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-  }
-}
-
-@media (prefers-contrast: high) {
-  .service-card {
-    border-width: 3px;
-  }
-}
-
-/* Optimize for smooth performance */
-@media (prefers-reduced-motion: no-preference) {
-  .service-card,
-  .integration-partner,
-  .floating-ring,
-  .phone-frame {
-    will-change: transform;
-  }
-}
-
-/* ========================================
-   LEGACY SUPPORT - MINIMAL FALLBACKS
-======================================== */
-.no-animations .service-card,
-.no-animations .mobile-card-enter,
-.no-animations .floating-ring {
+/* Global popup animation control */
+.popup-animation-reset,
+.popup-animation-reset * {
   animation: none !important;
-  opacity: 1 !important;
-  transform: none !important;
+  transition: none !important;
 }
 
-/* ========================================
-   MOBILE LAYOUT OPTIMIZATIONS
-======================================== */
-.centered-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
+/* Enhanced optimization popup visibility with animation stopping */
+#optimizationPopup.optimization-active .optimization-gear-icon svg {
+  animation: optimizationSpin 1.5s linear infinite;
+  color: #2563eb;
 }
 
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  gap: 0.5rem;
-  width: 100%;
-  max-width: 200px;
-  margin: 0 auto;
+#optimizationPopup.optimization-active .animate-ping {
+  animation: optimizationPing 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+  background-color: rgba(37, 99, 235, 0.3);
+}
+
+/* Animation stopping for optimization popup */
+#optimizationPopup:not(.optimization-active) .optimization-gear-icon svg,
+#optimizationPopup.animation-stopped .optimization-gear-icon svg {
+  animation: none !important;
+  transform: rotate(0deg) !important;
+}
+
+#optimizationPopup:not(.optimization-active) .animate-ping,
+#optimizationPopup.animation-stopped .animate-ping {
+  animation: none !important;
+  opacity: 0 !important;
+  transform: scale(1) !important;
+}
+
+/* Animation stopping for success popup */
+#successPopup:not(.success-active) .success-gear-icon svg,
+#successPopup.animation-stopped .success-gear-icon svg {
+  animation: none !important;
+  transform: rotate(0deg) !important;
+}
+
+#successPopup:not(.success-active) .success-ping,
+#successPopup.animation-stopped .success-ping {
+  animation: none !important;
+  opacity: 0 !important;
+  transform: scale(1) !important;
+}
+
+/* Animation stopping for perfection popup */
+#perfectionPopup:not(.show) .perfect-icon,
+#perfectionPopup.animation-stopped .perfect-icon {
+  animation: none !important;
+}
+
+#perfectionPopup:not(.show) .perfect-shine::before,
+#perfectionPopup.animation-stopped .perfect-shine::before {
+  animation: none !important;
+  left: -100% !important;
+}
+
+/* Common popup exit animation */
+.popup-exit-animation {
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out !important;
+  opacity: 0 !important;
+  transform: scale(0.9) !important;
+  pointer-events: none !important;
 }

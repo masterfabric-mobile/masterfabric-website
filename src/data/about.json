@@ -71,19 +71,22 @@
   },
   "statistics": [
     {
-      "value": 0,
+      "value": 12,
       "label": "Active Projects",
-      "tooltip": "Currently ongoing mobile and web application projects in development phase across various industries."
+      "tooltip": "Currently ongoing mobile and web application projects in development phase across various industries.",
+      "icon": "trending-up"
     },
     {
-      "value": 0,
+      "value": 18,
       "label": "Completed Projects", 
-      "tooltip": "Successfully delivered and deployed applications that are live in production and serving users worldwide."
+      "tooltip": "Successfully delivered and deployed applications that are live in production and serving users worldwide.",
+      "icon": "trophy"
     },
     {
-      "value": 0,
+      "value": 64,
       "label": "Hybrid & Touched Developers",
-      "tooltip": "Total network of hybrid developers and touched professionals including our partner companies working together."
+      "tooltip": "Total network of hybrid developers and touched professionals including our partner companies working together.",
+      "icon": "users"
     }
   ]
 }

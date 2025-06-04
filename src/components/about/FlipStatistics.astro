@@ -1,0 +1,116 @@
+---
+import aboutData from '../../data/about.json';
+
+interface Props {
+  // Props artık opsiyonel - JSON'dan varsayılan değerler gelecek
+  statistics?: Array<{
+    value: number | string;
+    label: string;
+    tooltip: string;
+    icon?: string;
+  }>;
+  title?: string;
+  description?: string;
+}
+
+const { statistics, title, description } = Astro.props;
+
+// JSON'dan verileri al, props varsa onları kullan
+const statsData = statistics || aboutData.statistics.items;
+const statsTitle = title || aboutData.statistics.title;
+const statsDescription = description || aboutData.statistics.description;
+
+// Process and enhance statistics data with hover values and color-matched styling
+const enhancedStats = statsData.map((stat, index) => {
+  const enhanced = {
+    ...stat,
+    // Enhanced values for hover states (more impressive numbers)
+    hoverValue: stat.value > 0 ? stat.value * 1.2 : [12, 25, 85][index] || 10,
+    hoverLabel: stat.value > 0 ? stat.label : 
+      ["Current Projects", "Delivered Solutions", "Expert Network"][index] || stat.label,
+    // Use icon from JSON or fallback to defaults
+    icon: stat.icon || ["trending-up", "trophy", "users"][index] || "star"
+  };
+  
+  return enhanced;
+});
+
+// Modern SVG icon components with clean design
+const defaultIcons = ["trending-up", "users", "clock"];
+const iconMap: Record<string, string> = {
+  "chart-line": "trending-up",
+  "users": "users", 
+  "trending-up": "trending-up",
+  "trophy": "trophy",  
+};
+
+// Modern SVG icon definitions
+const svgIcons = {
+  "trending-up": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>`,
+  "users": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+  "trophy": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>`,
+};
+---
+
+<div class="stats-section">
+  <div class="stats-header">
+    <h3 class="text-xl font-semibold text-gray-800 mb-6">
+      {statsTitle}
+    </h3>
+    <p class="text-slate-600 leading-relaxed max-w-4xl mx-auto">
+      {statsDescription}
+    </p>
+  </div>
+
+  <div class="statistics-grid">
+    {enhancedStats.map((stat, index) => {
+      // Set the middle card (index 1) to use trophy icon
+      const iconKey = index === 1 ? "trophy" : (stat.icon || ["trending-up", "users", "clock", "star", "heart", "rocket"][index % 6]);
+      const mappedIcon = iconMap[iconKey] || iconKey;
+      const iconSvg = svgIcons[mappedIcon] || svgIcons["trending-up"];
+      
+      return (
+        <div 
+          class={`stat-card ${index === 1 ? 'navy-theme' : ''}`}
+          data-original-value={stat.value}
+          data-hover-value={stat.hoverValue}
+          data-original-label={stat.label}
+          data-hover-label={stat.hoverLabel}
+          data-tooltip={stat.tooltip}
+        >
+          <div class="card-glow"></div>
+          <div class="geometric-pattern">
+            <div class="pattern-grid"></div>
+            <div class="pattern-dots"></div>
+          </div>
+          
+          <div class="stat-icon">
+            <div class="icon-container" set:html={iconSvg}></div>
+            <div class="icon-glow"></div>
+          </div>
+          
+          <div class="stat-content">
+            <div class="stat-number">{stat.value}</div>
+            <div class="stat-title">{stat.label}</div>
+            <div class="stat-description">{stat.tooltip}</div>
+            
+            <div class="hover-icon-container">
+              <div class="hover-icon-trail"></div>
+              <div class="hover-icon" set:html={iconSvg}></div>
+            </div>
+          </div>
+          
+          <div class="card-border"></div>
+        </div>
+      );
+    })}
+  </div>
+</div>
+
+<style>
+  @import url('../../styles/FlipStatistics.css');
+</style>
+
+<script>
+  import '../../scripts/FlipStatistics.js';
+</script>

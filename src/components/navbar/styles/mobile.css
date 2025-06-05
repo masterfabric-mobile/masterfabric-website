@@ -33,7 +33,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   }
   
-  /* Mobile icon styling */
+  /* Mobile icon colors and hover effects */
   .grid.grid-cols-2 > a svg {
     color: #6b7280;
   }

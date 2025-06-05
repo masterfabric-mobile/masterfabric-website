@@ -1,162 +1,162 @@
 # Navbar Development Guide
 
-## Geliştirme Ortamı Kurulumu
+## Development Environment Setup
 
-### Dosya Yapısının Anlaşılması
+### Understanding the File Structure
 
 ```
 navbar/
-├── navbar.astro          # Ana bileşen
-├── dropdown.astro        # Dropdown menü
-├── index.ts             # Export dosyası  
-├── types.ts             # Tip tanımları
-├── utils.ts             # Yardımcı fonksiyonlar
-├── config.ts            # Konfigürasyon
-├── README.md            # Ana dokümantasyon
-├── DEVELOPMENT.md       # Bu geliştirme rehberi
+├── navbar.astro          # Main component
+├── dropdown.astro        # Dropdown menu
+├── index.ts             # Export file  
+├── types.ts             # Type definitions
+├── utils.ts             # Helper functions
+├── config.ts            # Configuration
+├── README.md            # Main documentation
+├── DEVELOPMENT.md       # This development guide
 └── styles/              
-    ├── variables.css    # CSS değişkenleri
-    ├── themes.css       # Tema stilleri
-    ├── navbar.css       # Ana stil dosyası
-    ├── mobile.css       # Mobil stiller
-    ├── tablet.css       # Tablet stiller
-    ├── desktop.css      # Desktop stiller
-    ├── animations.css   # Animasyonlar
-    └── utilities.css    # Yardımcı sınıflar
+    ├── variables.css    # CSS variables
+    ├── themes.css       # Theme styles
+    ├── navbar.css       # Main style file
+    ├── mobile.css       # Mobile styles
+    ├── tablet.css       # Tablet styles
+    ├── desktop.css      # Desktop styles
+    ├── animations.css   # Animations
+    └── utilities.css    # Helper classes
 ```
 
-## Stil Sisteminin Anlaşılması
+## Understanding the Style System
 
-### CSS Değişkenler Sistemi
-- `variables.css`: Tüm CSS özel özellikleri (custom properties)
-- Renk paleti, boyutlar, aralıklar, tipografi
-- Responsive değişken geçersiz kılmaları
+### CSS Variables System
+- `variables.css`: All CSS custom properties
+- Color palette, sizes, spacings, typography
+- Responsive variable overrides
 
-### Tema Sistemi
-- `themes.css`: Farklı navbar temaları
+### Theme System
+- `themes.css`: Different navbar themes
 - Light, dark, transparent, minimal, colorful, high-contrast
-- Sistem tercihi (prefers-color-scheme) desteği
-- Erişilebilirlik temaları
+- System preference support (prefers-color-scheme)
+- Accessibility themes
 
-### Responsive Tasarım
+### Responsive Design
 - **Mobile**: 0-640px
 - **Tablet**: 641-1023px  
 - **Desktop**: 1024px+
 
-## Geliştirme İş Akışı
+## Development Workflow
 
-### Yeni Stil Ekleme
+### Adding New Styles
 
-1. **Değişken Ekleme**
+1. **Adding Variables**
    ```css
-   /* variables.css içinde */
+   /* In variables.css */
    :root {
-     --navbar-yeni-ozellik: değer;
+     --navbar-new-property: value;
    }
    ```
 
-2. **Responsive Stil Ekleme**
+2. **Adding Responsive Styles**
    ```css
-   /* İlgili dosyada (mobile.css, tablet.css, desktop.css) */
+   /* In the relevant file (mobile.css, tablet.css, desktop.css) */
    @media (max-width: 640px) {
-     .yeni-sinif {
-       property: var(--navbar-yeni-ozellik);
+     .new-class {
+       property: var(--navbar-new-property);
      }
    }
    ```
 
-3. **Tema Desteği Ekleme**
+3. **Adding Theme Support**
    ```css
-   /* themes.css içinde */
+   /* In themes.css */
    .navbar-theme-dark {
-     --navbar-yeni-ozellik: farklı-değer;
+     --navbar-new-property: different-value;
    }
    ```
 
-### Yeni Fonksiyon Ekleme
+### Adding New Functions
 
-1. **Tip Tanımı** (`types.ts`)
+1. **Type Definition** (`types.ts`)
    ```typescript
-   export interface YeniTip {
+   export interface NewType {
      property: string;
    }
    ```
 
-2. **Yardımcı Fonksiyon** (`utils.ts`)
+2. **Helper Function** (`utils.ts`)
    ```typescript
-   export function yeniFonksiyon(param: YeniTip): string {
+   export function newFunction(param: NewType): string {
      return param.property;
    }
    ```
 
-3. **Konfigürasyon** (`config.ts`)
+3. **Configuration** (`config.ts`)
    ```typescript
-   export const YENI_CONFIG = {
+   export const NEW_CONFIG = {
      option: 'value'
    } as const;
    ```
 
-### Yeni Tema Ekleme
+### Adding New Theme
 
-1. **CSS Değişkenleri Tanımlama**
+1. **Define CSS Variables**
    ```css
    /* themes.css */
-   .navbar-theme-yeni {
-     --navbar-bg-primary: #renkler;
-     --navbar-text-primary: #renkler;
-     /* diğer değişkenler */
+   .navbar-theme-new {
+     --navbar-bg-primary: #colors;
+     --navbar-text-primary: #colors;
+     /* other variables */
    }
    ```
 
-2. **Konfigürasyona Ekleme**
+2. **Add to Configuration**
    ```typescript
    /* config.ts */
    export const NAVBAR_THEME_CLASSES = {
-     // mevcut temalar...
-     'yeni': 'navbar-theme-yeni'
+     // existing themes...
+     'new': 'navbar-theme-new'
    } as const;
    ```
 
-## Test ve Doğrulama
+## Testing and Validation
 
-### Browser Testi
+### Browser Testing
 ```bash
-# Geliştirme sunucusunu başlat
+# Start development server
 npm run dev
 
-# Farklı viewport boyutlarını test et:
+# Test different viewport sizes:
 # - 375px (iPhone)
 # - 768px (iPad) 
 # - 1024px (Desktop)
 # - 1440px (Large Desktop)
 ```
 
-### CSS Doğrulama
+### CSS Validation
 ```bash
-# CSS syntax kontrolü
+# CSS syntax check
 npx stylelint "src/components/navbar/styles/*.css"
 
-# CSS optimizasyon kontrolü
+# CSS optimization check
 npx cssnano src/components/navbar/styles/navbar.css
 ```
 
-### Accessibility Testi
-- Klavye navigasyonu
-- Screen reader uyumluluğu
-- Color contrast kontrolü
-- Focus indicator görünürlüğü
+### Accessibility Testing
+- Keyboard navigation
+- Screen reader compatibility
+- Color contrast check
+- Focus indicator visibility
 
 ## Debugging
 
-### CSS Debug Modları
+### CSS Debug Modes
 
 ```css
-/* Debug: tüm elementlerin sınırlarını göster */
+/* Debug: show all element boundaries */
 .navbar-debug * {
   outline: 1px solid red !important;
 }
 
-/* Debug: grid alanlarını göster */
+/* Debug: show grid areas */
 .navbar-debug .grid {
   background: repeating-linear-gradient(
     45deg,
@@ -171,18 +171,18 @@ npx cssnano src/components/navbar/styles/navbar.css
 ### JavaScript Debug
 
 ```javascript
-// Browser console'da navbar durumunu kontrol et
+// Check navbar state in browser console
 console.log('Navbar Config:', window.navbarConfig);
 console.log('Active Theme:', document.querySelector('.navbar-wrapper').className);
 ```
 
-## Performance Optimizasyonu
+## Performance Optimization
 
-### CSS Optimizasyonları
-- Critical CSS inline yapma
+### CSS Optimizations
+- Inline critical CSS
 - Unused CSS removal
 - CSS minification
-- CSS custom properties kullanımı
+- CSS custom properties usage
 
 ### Loading Strategies
 ```astro
@@ -195,38 +195,38 @@ console.log('Active Theme:', document.querySelector('.navbar-wrapper').className
 <link rel="preload" href="/navbar-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 ```
 
-## Yaygın Sorunlar ve Çözümleri
+## Common Problems and Solutions
 
-### Problem: Mobile menü görünmüyor
+### Problem: Mobile menu not visible
 ```css
-/* Çözüm: Z-index kontrolü */
+/* Solution: Z-index control */
 .navbar-mobile-menu {
   z-index: var(--navbar-z-mobile-menu);
   position: relative;
 }
 ```
 
-### Problem: Responsive breakpoint çalışmıyor
+### Problem: Responsive breakpoint not working
 ```css
-/* Çözüm: Media query sırasını kontrol et */
-/* Mobile first yaklaşımı kullan */
+/* Solution: Check media query order */
+/* Use mobile first approach */
 @media (min-width: 641px) { /* tablet */ }
 @media (min-width: 1024px) { /* desktop */ }
 ```
 
-### Problem: CSS değişkenleri çalışmıyor
+### Problem: CSS variables not working
 ```css
-/* Çözüm: Fallback değerler ekle */
+/* Solution: Add fallback values */
 .element {
   color: var(--navbar-text-primary, #374151);
 }
 ```
 
-## En İyi Pratikler
+## Best Practices
 
 ### CSS Organization
 - Mobile-first responsive design
-- CSS custom properties kullanımı
+- CSS custom properties usage
 - Semantic class naming (BEM methodology)
 - Logical property grouping
 

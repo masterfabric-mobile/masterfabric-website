@@ -8,7 +8,7 @@ import Globe from "@components/about/Globe.astro";
 import Timeline from "@components/about/Timeline.astro";
 import DynamicText from "@components/about/DynamicText.astro";
 import ProcessSteps from "@components/about/ProcessSteps.astro";
-import Statistics from "@components/about/Statistics.astro";
+import FlipStatistics from "@components/about/FlipStatistics.astro";
 import fs from "fs";
 import path from "path";
 
@@ -50,15 +50,11 @@ const publishedTeamMembers = await getCollection("team", ({ data }) => {
     
     <ProcessSteps processSteps={aboutData.processSteps} />
 
-    <div class="flex flex-col gap-3 mx-auto max-w-4xl mt-16 text-center px-4">
-      <h2 class="font-bold text-3xl text-gray-800 sm:text-2xl">
-        {aboutData.passion.title}
-      </h2>
-      <p class="text-lg leading-relaxed text-slate-500 sm:text-base">
-        {aboutData.passion.description}
-      </p>
-    </div>
-    
-    <Statistics statistics={aboutData.statistics} />
+    <!-- Replace the old statistics section with our new FlipStatistics component -->
+    <FlipStatistics 
+      statistics={aboutData.statistics} 
+      title={aboutData.passion.title} 
+      description={aboutData.passion.description} 
+    />
   </Container>
 </Layout>

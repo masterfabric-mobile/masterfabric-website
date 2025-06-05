@@ -83,7 +83,7 @@ export default function CookieSettingsDialog({ isOpen, onClose, onSave }: Cookie
           {/* Header */}
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-medium text-gray-900" id="modal-title">
-              Çerez Ayarları
+              Cookie Settings
             </h3>
             <button
               onClick={onClose}

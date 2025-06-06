@@ -3,44 +3,35 @@
 /* ========================================================================= */
 
 @media (min-width: 641px) and (max-width: 1023px) {
-  /* Tablet: use mobile-style stacked layout */
+  /* Tablet: use mobile-style layout but keep header structure */
   header {
     flex-direction: column;
     align-items: stretch;
   }
   
-  /* Tablet-specific menu styling */
-  .lg\:hidden .bg-white {
-    margin-left: 1rem;
-    margin-right: 1rem;
+  /* Show hamburger menu button on tablet (like mobile) */
+  .block.lg\:hidden {
+    display: block !important;
   }
   
-  /* Show desktop nav on tablet */
+  /* Hide desktop navigation on tablet */
   .desktop-nav {
-    display: flex !important;
-    justify-content: center;
-    margin-top: 1rem;
-  }
-  
-  /* Tablet social links - icon only with gaps */
-  .desktop-nav .flex.items-center {
-    gap: 1rem !important; /* Gap between social buttons */
-  }
-  
-  /* Hide text on tablet - target all spans */
-  .desktop-nav a span {
     display: none !important;
   }
   
-  /* Icon-only button styling for tablet */
-  .desktop-nav a {
-    padding: 0.75rem !important;
-    min-width: 2.75rem;
-    justify-content: center;
-    gap: 0 !important;
+  /* Ensure mobile menu is hidden by default (only show when toggled) */
+  .hidden.lg\:hidden {
+    display: none !important;
   }
   
-  /* Tablet grid: use 3 columns instead of 2 */
+  /* Mobile menu styling for tablet */
+  .lg\:hidden .bg-white {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: 0.5rem;
+  }
+  
+  /* Tablet grid: use 3 columns instead of 2 for larger screens */
   @media (min-width: 768px) and (max-width: 1023px) {
     .grid.grid-cols-2 {
       grid-template-columns: repeat(3, 1fr);
@@ -49,5 +40,38 @@
     .col-span-2 {
       grid-column: span 3;
     }
+    
+    /* Adjust grid item sizes for tablet */
+    .grid.grid-cols-2 > a {
+      min-height: 80px;
+      padding: 0.75rem;
+    }
+  }
+  
+  /* Tablet button hover effects (same as mobile) */
+  .grid.grid-cols-2 > a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .grid.grid-cols-2 > a:hover {
+    background-color: #f3f4f6;
+    border-color: #d1d5db;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Tablet icon styling */
+  .grid.grid-cols-2 > a svg {
+    color: #6b7280;
+  }
+  
+  .grid.grid-cols-2 > a:hover svg {
+    color: #374151;
   }
 }

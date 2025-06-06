@@ -1,9 +1,9 @@
 ---
 import { getCollection } from "astro:content";
 import { Picture } from "astro:assets";
-import Layout from "@layouts/Layout.astro";
+import Layout from "@layouts/layout.astro";
 import Container from "@components/layout/container.astro";
-import Sectionhead from "@components/layout/sectionhead.astro";
+import Sectionhead from "@components/layout/section-head.astro";
 
 // Filter blog entries with 'draft: false' & date before current date
 const publishedBlogEntries = await getCollection("blog", ({ data }) => {

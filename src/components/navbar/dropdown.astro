@@ -2,7 +2,7 @@
 // =============================================================================
 // IMPORTS
 // =============================================================================
-import Icon from "@components/ui/icon.astro";
+import { Icon } from "astro-icon/components";
 
 // =============================================================================
 // TYPE DEFINITIONS
@@ -48,9 +48,8 @@ const dropdownId = `dropdown-${trigger.toLowerCase().replace(/\s+/g, '-')}`;
     
     <!-- Chevron icon with rotation animation -->
     <Icon 
-      name="chevron" 
-      size="sm" 
-      class="transition-transform duration-200 group-hover:rotate-180" 
+      name="bx:chevron-down" 
+      class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" 
     />
   </button>
 

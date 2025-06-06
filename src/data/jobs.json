@@ -1,0 +1,199 @@
+{
+  "sectionHeader": {
+    "title": "Careers",
+    "description": [
+      "Join our dynamic team of innovators and creators who are passionate about building the future of mobile applications. At MasterFabric, we believe in fostering talent, embracing challenges, and creating solutions that matter."
+    ]
+  },
+  "hero": {
+    "title": "Build Your Career With Us",
+    "subtitle": "Join the MasterFabric Family",
+    "description": "We are a <strong>growing team</strong> of passionate developers, designers, and strategists who love creating <strong>mobile applications</strong>. Our company culture is built on <strong>continuous learning</strong>, <strong>innovation</strong>, and <strong>collaboration</strong>. We don't just hire employees – we welcome <strong>new family members</strong> who share our vision of transforming ideas into impactful digital solutions."
+  },
+  "companyStructure": {
+    "title": "How We Work",
+    "description": "Our company structure is designed to foster creativity, collaboration, and professional growth. We believe in flat hierarchies, open communication, and empowering every team member.",
+    "departments": [
+      {
+        "icon": "💻",
+        "name": "Development Team",
+        "description": "Full-stack developers, mobile specialists, and DevOps engineers",
+        "size": "12+ professionals",
+        "technologies": ["Flutter", "React Native", "Node.js", "Python", "Swift", "Kotlin"]
+      },
+      {
+        "icon": "🎨",
+        "name": "Design & UX",
+        "description": "UI/UX designers, product designers, and visual artists",
+        "size": "6+ creatives",
+        "technologies": ["Figma", "Adobe Creative Suite", "Sketch", "Principle", "Framer"]
+      },
+      {
+        "icon": "📊",
+        "name": "Strategy & Management",
+        "description": "Project managers, business analysts, and strategic planners",
+        "size": "8+ professionals",
+        "technologies": ["JIRA", "Notion", "Slack", "Miro", "Analytics Tools"]
+      },
+      {
+        "icon": "🔬",
+        "name": "Quality Assurance",
+        "description": "QA engineers, testers, and automation specialists",
+        "size": "4+ specialists",
+        "technologies": ["Selenium", "Appium", "Jest", "Cypress", "TestFlight"]
+      }
+    ]
+  },
+  "employeeCare": {
+    "title": "How We Care for Our Team",
+    "description": "We believe that happy employees create amazing products. Our comprehensive benefits and supportive work environment reflect our commitment to your well-being and professional growth.",
+    "benefits": [
+      {
+        "icon": "🏠",
+        "title": "Flexible Work Environment",
+        "description": "Hybrid work model with comfortable office space and remote work options"
+      },
+      {
+        "icon": "🎓",
+        "title": "Learning & Development",
+        "description": "Annual learning budget, conference attendance, and skill development programs"
+      },
+      {
+        "icon": "⚕️",
+        "title": "Health & Wellness",
+        "description": "Comprehensive health insurance, mental health support, and wellness programs"
+      },
+      {
+        "icon": "💰",
+        "title": "Competitive Compensation",
+        "description": "Market-competitive salaries, performance bonuses, and equity participation"
+      },
+      {
+        "icon": "🏖️",
+        "title": "Work-Life Balance",
+        "description": "Generous vacation policy, flexible hours, and sabbatical opportunities"
+      },
+      {
+        "icon": "🎯",
+        "title": "Career Growth",
+        "description": "Clear career progression paths, mentorship programs, and leadership opportunities"
+      }
+    ]
+  },
+  "hiringProcess": {
+    "title": "Our 4-Step Hiring Process",
+    "description": "We've designed our hiring process to be transparent, efficient, and meaningful for both candidates and our team.",
+    "steps": [
+      {
+        "number": "01",
+        "title": "Application Review",
+        "duration": "2-3 days",
+        "description": "Our hiring team carefully reviews your application, portfolio, and experience to ensure alignment with our values and requirements.",
+        "icon": "📋",
+        "details": [
+          "Portfolio and resume review",
+          "Initial compatibility assessment",
+          "Skills and experience evaluation",
+          "Cultural fit preliminary screening"
+        ]
+      },
+      {
+        "number": "02",
+        "title": "Initial Interview",
+        "duration": "45-60 minutes",
+        "description": "A conversational interview with our HR team and hiring manager to get to know you better and discuss your background, motivations, and career goals.",
+        "icon": "🤝",
+        "details": [
+          "Background and experience discussion",
+          "Motivation and career goals",
+          "Company culture introduction",
+          "Role expectations overview"
+        ]
+      },
+      {
+        "number": "03",
+        "title": "Technical Assessment",
+        "duration": "2-3 hours",
+        "description": "Depending on the role, this may include coding challenges, design tasks, or strategic case studies that reflect real work scenarios.",
+        "icon": "⚡",
+        "details": [
+          "Role-specific technical evaluation",
+          "Problem-solving assessment",
+          "Practical skills demonstration",
+          "Creative thinking evaluation"
+        ]
+      },
+      {
+        "number": "04",
+        "title": "Final Interview",
+        "duration": "60-90 minutes",
+        "description": "Meet with team leads and potential colleagues to discuss collaboration, answer questions, and finalize the mutual fit assessment.",
+        "icon": "🎯",
+        "details": [
+          "Team integration assessment",
+          "Final technical discussion",
+          "Compensation and benefits review",
+          "Onboarding and start date planning"
+        ]
+      }
+    ]
+  },
+
+  "applicationForm": {
+    "title": "Interested in Working With Us?",
+    "subtitle": "Don't see the perfect role? We're always looking for talented individuals to join our team.",
+    "description": "Even if there isn't a current opening that matches your skills, we'd love to hear from you. Send us your information and we'll reach out when opportunities arise that align with your expertise.",
+    "fields": {
+      "name": {
+        "label": "Full Name",
+        "placeholder": "Enter your full name",
+        "required": true
+      },
+      "email": {
+        "label": "Email Address",
+        "placeholder": "Enter your email address",
+        "required": true
+      },
+      "phone": {
+        "label": "Phone Number",
+        "placeholder": "Enter your phone number",
+        "required": false
+      },
+      "position": {
+        "label": "Position of Interest",
+        "placeholder": "What role are you interested in?",
+        "required": true
+      },
+      "experience": {
+        "label": "Years of Experience",
+        "placeholder": "How many years of experience do you have?",
+        "required": true
+      },
+      "portfolio": {
+        "label": "Portfolio/LinkedIn URL",
+        "placeholder": "Share your portfolio or LinkedIn profile",
+        "required": false
+      },
+      "resume": {
+        "label": "Resume/CV",
+        "placeholder": "Upload your resume (PDF format preferred)",
+        "required": true,
+        "type": "file"
+      },
+      "message": {
+        "label": "Why MasterFabric?",
+        "placeholder": "Tell us why you want to work with MasterFabric and what makes you a great fit for our team...",
+        "required": true
+      }
+    }
+  },
+  "quote": {
+    "text": "At MasterFabric, we don't just build applications – we build careers, relationships, and the future of mobile technology. Every team member contributes to our mission of transforming innovative ideas into impactful digital solutions.",
+    "author": "MasterFabric Team",
+    "position": "Our Commitment to Excellence"
+  },
+  "api": {
+    "endpoint": "https://api.web3forms.com/submit",
+    "accessKey": "3e15a306-d815-4638-8b6d-e2318dc7bc57"
+  }
+}

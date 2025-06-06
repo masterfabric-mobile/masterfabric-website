@@ -22,20 +22,27 @@
       "style": "inverted"
     },
     {
-      "id": "about",
-      "title": "About",
-      "path": "/about",
-      "order": 5,
-      "icon": "about",
-      "style": "inverted"
-    },
-
-    {
       "id": "contact",
       "title": "Contact",
       "path": "/contact",
       "order": 2,
       "icon": "contact",
+      "style": "inverted"
+    },
+    {
+      "id": "jobs",
+      "title": "Jobs",
+      "path": "/jobs",
+      "order": 3,
+      "icon": "Job",
+      "style": "inverted"
+    },
+    {
+      "id": "about",
+      "title": "About",
+      "path": "/about",
+      "order": 4,
+      "icon": "about",
       "style": "inverted"
     }
 

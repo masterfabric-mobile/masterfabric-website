@@ -110,10 +110,10 @@ footer::before {
   color: #6b7280;
 }
 
-/* Responsive design improvements */
-@media (max-width: 768px) {
+/* Responsive design improvements - Mobile and Tablet (up to 1023px) */
+@media (max-width: 1023px) {
   footer {
-    margin-top: 4rem; /* Good spacing on mobile */
+    margin-top: 4rem; /* Good spacing on mobile and tablet */
   }
   
   .footer-divider {
@@ -133,6 +133,21 @@ footer::before {
   .astro-icon {
     width: 0.75rem;
     height: 0.75rem;
+  }
+  
+  /* Ensure consistent layout for mobile and tablet */
+  .flex.flex-col.md\:flex-row {
+    flex-direction: column !important;
+    text-align: center;
+  }
+  
+  .text-center.md\:text-left {
+    text-align: center !important;
+  }
+  
+  /* Keep navigation links centered on tablet as well */
+  .flex.flex-wrap.justify-center {
+    justify-content: center !important;
   }
 }
 

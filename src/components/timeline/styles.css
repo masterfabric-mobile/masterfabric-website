@@ -252,12 +252,18 @@
   justify-content: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
   border: 1px solid rgba(148, 163, 184, 0.3);
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease-in-out;
   z-index: 110;
 }
 
 .status-toggle-btn:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  transform: translateX(-50%) translateY(-50%) scale(1.05);
+}
+
+.status-toggle-btn:active {
+  transform: translateX(-50%) translateY(-50%) scale(0.95);
+  transition: transform 0.1s ease;
 }
 
 /* Chevron arrow styles */
@@ -266,12 +272,35 @@
   align-items: center;
   justify-content: center;
   color: #555;
-  transition: transform 0.3s ease;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
 }
 
-.hidden {
+.chevron.hidden {
   opacity: 0;
-  display: none;
+  visibility: hidden;
+}
+
+.chevron-up {
+  z-index: 2;
+}
+
+.chevron-down {
+  z-index: 1;
+}
+
+/* General hidden class */
+.hidden {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Status message content */

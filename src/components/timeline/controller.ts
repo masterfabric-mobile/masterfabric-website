@@ -253,20 +253,49 @@ export class ProjectFlowTimeline {
    * Hide/show bar and change chevron direction
    */
   toggleStatusBar(): void {
+    if (!this.statusBar || !this.statusToggleBtn || !this.statusContent) {
+      console.warn('StatusBar elements not found');
+      return;
+    }
+
     this.isStatusBarHidden = !this.isStatusBarHidden;
-    const chevronUp = this.statusToggleBtn?.querySelector('.chevron-up');
-    const chevronDown = this.statusToggleBtn?.querySelector('.chevron-down');
+    const chevronUp = this.statusToggleBtn.querySelector('.chevron-up') as HTMLElement;
+    const chevronDown = this.statusToggleBtn.querySelector('.chevron-down') as HTMLElement;
+
+    console.log('Toggling status bar. Hidden:', this.isStatusBarHidden);
 
     if (this.isStatusBarHidden) {
-      this.statusBar?.classList.add('minimized');
-      this.statusContent?.classList.add('status-content-hidden');
-      chevronUp?.classList.add('hidden');
-      chevronDown?.classList.remove('hidden');
+      // Hide the status bar
+      this.statusBar.classList.add('minimized');
+      this.statusContent.classList.add('status-content-hidden');
+      
+      // Switch arrows
+      if (chevronUp) {
+        chevronUp.classList.add('hidden');
+      }
+      if (chevronDown) {
+        chevronDown.classList.remove('hidden');
+      }
+      
+      // Update aria-expanded for accessibility
+      this.statusToggleBtn.setAttribute('aria-expanded', 'false');
+      console.log('Status bar minimized');
     } else {
-      this.statusBar?.classList.remove('minimized');
-      this.statusContent?.classList.remove('status-content-hidden');
-      chevronUp?.classList.remove('hidden');
-      chevronDown?.classList.add('hidden');
+      // Show the status bar
+      this.statusBar.classList.remove('minimized');
+      this.statusContent.classList.remove('status-content-hidden');
+      
+      // Switch arrows
+      if (chevronUp) {
+        chevronUp.classList.remove('hidden');
+      }
+      if (chevronDown) {
+        chevronDown.classList.add('hidden');
+      }
+      
+      // Update aria-expanded for accessibility
+      this.statusToggleBtn.setAttribute('aria-expanded', 'true');
+      console.log('Status bar expanded');
     }
   }
 

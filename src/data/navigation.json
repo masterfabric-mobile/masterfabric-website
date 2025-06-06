@@ -27,7 +27,7 @@
       "path": "/about",
       "order": 5,
       "icon": "about",
-      "style": "muted"
+      "style": "inverted"
     },
 
     {

@@ -16,17 +16,18 @@ interface Props {
 const { statistics, title, description } = Astro.props;
 
 // Get data from JSON, use props if provided
-const statsData = statistics || aboutData.statistics.items;
-const statsTitle = title || aboutData.statistics.title;
-const statsDescription = description || aboutData.statistics.description;
+const statsData = statistics || aboutData.statistics;
+const statsTitle = title || "Our Impact in Numbers";
+const statsDescription = description || "Real metrics that showcase our commitment to excellence";
 
 // Process and enhance statistics data with hover values and color-matched styling
 const enhancedStats = statsData.map((stat, index) => {
+  const numericValue = typeof stat.value === 'number' ? stat.value : 0;
   const enhanced = {
     ...stat,
     // Enhanced values for hover states (more impressive numbers)
-    hoverValue: stat.value > 0 ? stat.value * 1.2 : [12, 25, 85][index] || 10,
-    hoverLabel: stat.value > 0 ? stat.label : 
+    hoverValue: numericValue > 0 ? numericValue * 1.2 : [12, 25, 85][index] || 10,
+    hoverLabel: numericValue > 0 ? stat.label : 
       ["Current Projects", "Delivered Solutions", "Expert Network"][index] || stat.label,
     // Use icon from JSON or fallback to defaults
     icon: stat.icon || ["trending-up", "trophy", "users"][index] || "star"
@@ -108,9 +109,9 @@ const svgIcons = {
 </div>
 
 <style>
-  @import url('../../styles/flip-tatistics.css');
+  @import url('../../styles/flip-statistics.css');
 </style>
 
 <script>
-  import '../../scripts/flip-tatistics.js';
+  import '../../scripts/flip-statistics.js';
 </script>

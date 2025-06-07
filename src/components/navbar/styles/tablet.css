@@ -9,6 +9,16 @@
     align-items: stretch;
   }
   
+  /* Improve brand section layout for tablet */
+  .flex.w-full.lg\:w-auto {
+    align-items: flex-start;
+  }
+  
+  /* Better spacing for brand text on tablet */
+  .font-mono {
+    line-height: 1.2;
+  }
+  
   /* Show hamburger menu button on tablet (like mobile) */
   .block.lg\:hidden {
     display: block !important;

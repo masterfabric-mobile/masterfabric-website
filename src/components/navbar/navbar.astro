@@ -30,53 +30,55 @@ const sortedSocialLinks = socialLinks.sort((a, b) => a.order - b.order);
 ---
 
 <Container>
-  <header class="flex flex-col lg:flex-row justify-between items-center my-2 lg:my-5">
+  <header class="flex flex-col lg:flex-row justify-between items-start lg:items-center my-2 lg:my-5">
     <Astronav>
       <!-- =================================================================== -->
       <!-- BRAND SECTION - Logo and Company Info -->
       <!-- =================================================================== -->
-      <div class="flex w-full lg:w-auto items-center justify-between py-2 lg:py-0">
+      <div class="flex w-full lg:w-auto items-start lg:items-center justify-between py-2 lg:py-0">
         <!-- Brand Link with Logo and Text -->
-        <a href="/" class="flex items-center group flex-shrink-0">
+        <a href="/" class="flex items-start lg:items-center group flex-1 min-w-0 mr-3">
           <!-- Logo with hover animation -->
-          <span class="inline-block mr-3 transition-transform duration-200 group-hover:scale-110">
+          <span class="inline-block mr-2 sm:mr-3 transition-transform duration-200 group-hover:scale-110 flex-shrink-0">
             <Picture
               src={masterFabricPicture}
               alt={brand.alt}
               width={50}
-              sizes="(max-width: 640px) 40px, (max-width: 1024px) 45px, 50px"
+              sizes="(max-width: 640px) 32px, (max-width: 1024px) 40px, 50px"
               loading="eager"
               format="avif"
-              class="w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12"
+              class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12"
             />
           </span>
           
           <!-- Brand text and description -->
-          <div class="flex flex-col">
+          <div class="flex flex-col min-w-0 flex-1">
             <!-- Company name with gradient effect -->
-            <div class="flex items-baseline">
-              <span class="font-bold font-mono text-xl sm:text-2xl lg:text-4xl text-slate-800">
+            <div class="flex items-baseline flex-wrap">
+              <span class="font-bold font-mono text-lg sm:text-xl lg:text-4xl text-slate-800">
                 {brand.text.main}
               </span>
-              <span class="font-mono text-slate-500 text-xl sm:text-2xl lg:text-3xl">
+              <span class="font-mono text-slate-500 text-lg sm:text-xl lg:text-3xl">
                 {brand.text.secondary}
               </span>
-              <span class="font-mono text-slate-300 text-xl sm:text-2xl lg:text-3xl">
+              <span class="font-mono text-slate-300 text-lg sm:text-xl lg:text-3xl">
                 {brand.text.tertiary}
               </span>
             </div>
             
             <!-- Company tagline -->
-            <div class="font-mono text-xs sm:text-sm text-slate-400 mt-1">
-              <span>{brand.description.platform} </span>
-              <span class="font-bold text-slate-500">{brand.description.studio}</span>
+            <div class="font-mono text-xs sm:text-sm text-slate-400 mt-1 leading-tight">
+              <div class="flex flex-col sm:flex-row sm:gap-1">
+                <span class="whitespace-nowrap">{brand.description.platform}</span>
+                <span class="font-bold text-slate-500 whitespace-nowrap">{brand.description.studio}</span>
+              </div>
             </div>
           </div>
         </a>
         
         <!-- Mobile menu toggle button -->
-        <div class="block lg:hidden flex-shrink-0 ml-4">
-          <MenuIcon class="w-6 h-6 text-gray-800 cursor-pointer hover:text-gray-600 transition-colors" />
+        <div class="flex lg:hidden flex-shrink-0 items-start pt-1">
+          <MenuIcon class="w-7 h-7 text-gray-800 cursor-pointer hover:text-gray-600 transition-colors" />
         </div>
       </div>
       

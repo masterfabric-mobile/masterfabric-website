@@ -8,6 +8,19 @@
     overflow-x: hidden;
   }
   
+  /* Mobile brand section improvements */
+  .navbar-brand {
+    flex: 1;
+    min-width: 0;
+    margin-right: 0.75rem;
+  }
+  
+  /* Ensure brand text doesn't overflow */
+  .font-mono {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+  
   /* Mobile menu visibility */
   .lg\:hidden .bg-white {
     margin-left: 0;
@@ -40,5 +53,11 @@
   
   .grid.grid-cols-2 > a:hover svg {
     color: #374151;
+  }
+  
+  /* Ensure menu icon is always visible and properly sized */
+  .lg\:hidden [class*="MenuIcon"] {
+    min-width: 1.75rem;
+    min-height: 1.75rem;
   }
 }

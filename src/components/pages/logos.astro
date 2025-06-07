@@ -3,7 +3,10 @@
 import { Icon } from "astro-icon/components";
 ---
 
-<link rel="stylesheet" href="/src/styles/logos.css">
+<style>
+  /* Use proper CSS Module import */
+  @import '../../styles/logos.module.css';
+</style>
 
 <section class="py-16 lg:pb-8 lg:pt-16 relative overflow-hidden">
   <!-- Animated background elements with emojis -->
@@ -70,4 +73,4 @@ import { Icon } from "astro-icon/components";
   </div>
 </section>
 
-<script src="/src/scripts/logos.js"></script>
+<script src="../../scripts/logos.js"></script>

@@ -12,35 +12,57 @@
   },
   "companyStructure": {
     "title": "How We Work",
-    "description": "Our company structure is designed to foster creativity, collaboration, and professional growth. We believe in flat hierarchies, open communication, and empowering every team member.",
+    "description": "We build exceptional mobile applications through collaborative teams, modern workflows, and cutting-edge technology.",
     "departments": [
       {
-        "icon": "💻",
-        "name": "Development Team",
-        "description": "Full-stack developers, mobile specialists, and DevOps engineers",
-        "size": "12+ professionals",
-        "technologies": ["Flutter", "React Native", "Node.js", "Python", "Swift", "Kotlin"]
+        "name": "Engineering",
+        "description": "Our development team creates robust, scalable mobile applications using modern frameworks and best practices.",
+        "size": "12 Engineers",
+        "technologies": ["Flutter", "React Native", "Swift", "Kotlin", "Firebase", "Node.js", "AWS"],
+        "icon": {
+          "paths": [
+            "M16 18l6-6-6-6",
+            "M8 6l-6 6 6 6",
+            "M10 20l4-16"
+          ],
+          "color": "#3b82f6"
+        }
       },
       {
-        "icon": "🎨",
-        "name": "Design & UX",
-        "description": "UI/UX designers, product designers, and visual artists",
-        "size": "6+ creatives",
-        "technologies": ["Figma", "Adobe Creative Suite", "Sketch", "Principle", "Framer"]
+        "name": "Design",
+        "description": "Our design team crafts intuitive user experiences and beautiful interfaces that users love.",
+        "size": "4 Designers",
+        "technologies": ["Figma", "Adobe XD", "Sketch", "After Effects", "Illustrator"],
+        "icon": {
+          "paths": [
+            "M3 17.25V21h3.75l11.06-11.06a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0L3 17.25z"
+          ],
+          "color": "#f59e42"
+        }
       },
       {
-        "icon": "📊",
-        "name": "Strategy & Management",
-        "description": "Project managers, business analysts, and strategic planners",
-        "size": "8+ professionals",
-        "technologies": ["JIRA", "Notion", "Slack", "Miro", "Analytics Tools"]
+        "name": "Product",
+        "description": "Our product team ensures every feature delivers value and aligns with business objectives.",
+        "size": "3 Product Managers",
+        "technologies": ["Analytics", "User Research", "Roadmapping", "Agile", "Scrum"],
+        "icon": {
+          "paths": [
+            "M7 2C5.9 2 5 2.9 5 4v16c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2H7zm0 2h10v16H7V4zm5 16c-.55 0-1-.45-1-1h2c0 .55-.45 1-1 1z"
+          ],
+          "color": "#1d4ed8"
+        }
       },
       {
-        "icon": "🔬",
-        "name": "Quality Assurance",
-        "description": "QA engineers, testers, and automation specialists",
-        "size": "4+ specialists",
-        "technologies": ["Selenium", "Appium", "Jest", "Cypress", "TestFlight"]
+        "name": "DevOps",
+        "description": "Our DevOps team maintains reliable infrastructure and streamlined deployment processes.",
+        "size": "2 DevOps Engineers",
+        "technologies": ["AWS", "Docker", "CI/CD", "Kubernetes", "Monitoring", "Security"],
+        "icon": {
+          "paths": [
+            "M12 2C8 2 4.5 4.5 3.5 8 1.5 8.5 0 10.5 0 13c0 3 2.5 5.5 5.5 5.5h13c3 0 5.5-2.5 5.5-5.5 0-2.5-1.5-4.5-3.5-5C19.5 4.5 16 2 12 2z"
+          ],
+          "color": "#2563eb"
+        }
       }
     ]
   },

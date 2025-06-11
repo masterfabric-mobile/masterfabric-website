@@ -1,0 +1,821 @@
+---
+interface Props {
+  department: {
+    name: string;
+    description: string;
+    size: string;
+    technologies?: string[];
+    icon?: {
+      paths: string[];
+      color: string;
+      animation: string;
+    };
+  };
+  index: number;
+}
+
+const { department, index } = Astro.props;
+
+// Modern blue tones for consistent styling
+const blueThemes = [
+  { primary: "#3b82f6", accent: "#dbeafe" },
+  { primary: "#2563eb", accent: "#bfdbfe" },
+  { primary: "#1d4ed8", accent: "#dbeafe" },
+  { primary: "#2563eb", accent: "#eff6ff" }
+];
+
+const theme = blueThemes[index % blueThemes.length];
+
+// Generate a unique ID for the accent line gradient
+const accentId = `accent-${index}`;
+
+// Get icon data from department or use default color
+const iconColor = department.icon?.color || theme.primary;
+const animationClass = department.icon?.animation || "";
+---
+
+<div class="dept-card">
+  <!-- Card Content -->
+  <div class="card-content">
+    <!-- Department Header -->
+    <div class="dept-header">
+      <!-- Department Icon -->
+      <div class="dept-icon" style={`--primary: ${theme.primary}; --icon-color: ${iconColor};`}>
+        {department.icon?.emoji ? (
+          <span style="font-size:2rem;line-height:1">{department.icon.emoji}</span>
+        ) : (
+          <svg
+            width="26"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class={`animated-icon ${animationClass}`}
+            style={department.icon?.scale ? `transform: scale(${department.icon.scale});` : ""}
+          >
+            {department.icon?.paths?.map((path, i) => (
+              <path d={path} key={i} />
+            ))}
+          </svg>
+        )}
+      </div>
+      
+      <div class="dept-info">
+        <h3 class="dept-name">{department.name}</h3>
+        <span class="dept-size" style={`--primary: ${theme.primary};`}>{department.size}</span>
+      </div>
+    </div>
+    
+    <!-- Accent Line -->
+    <div class="accent-line-container">
+      <svg width="0" height="0" aria-hidden="true">
+        <defs>
+          <linearGradient id={accentId} x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color={theme.primary} stop-opacity="1" />
+            <stop offset="100%" stop-color={theme.primary} stop-opacity="0.3" />
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="accent-line" style={`background-image: url(#${accentId});`}></div>
+    </div>
+    
+    <!-- Department Content -->
+    <p class="dept-description">{department.description}</p>
+    
+    <!-- Tech Stack -->
+    {department.technologies && department.technologies.length > 0 && (
+      <div class="tech-section">
+        <h4 class="tech-title">
+          <svg class="tech-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+          Technologies
+        </h4>
+        <div class="tech-list">
+          {department.technologies.map(tech => (
+            <span class="tech-chip" style={`--primary: ${theme.primary}; --accent: ${theme.accent};`}>
+              <span class="tech-text">{tech}</span>
+            </span>
+          ))}
+        </div>
+      </div>
+    )}
+  </div>
+</div>
+
+<style>
+  .dept-card {
+    position: relative;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+    transform: translateY(20px);
+    opacity: 0;
+    animation: fadeInUp 0.6s ease forwards;
+    transition: all 0.3s ease;
+  }
+  
+  .dept-card:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
+  }
+  
+  .card-content {
+    padding: 1.5rem;
+  }
+  
+  /* Department Header */
+  .dept-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .dept-icon {
+    background: linear-gradient(135deg, var(--primary), rgba(59, 130, 246, 0.7));
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 3px 6px rgba(59, 130, 246, 0.25);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: visible;
+    cursor: pointer;
+  }
+  
+  .dept-card:hover .dept-icon {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 8px 15px rgba(59, 130, 246, 0.35);
+  }
+  
+  /* Animation classes for icons */
+  .animated-icon {
+    transition: transform 0.3s ease;
+    will-change: transform;
+    stroke-width: 2.5;
+    stroke: white;
+    transform-origin: center;
+  }
+  
+  .dept-card:hover .animated-icon {
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.6));
+  }
+  
+  .animated-path {
+    stroke-dasharray: 150;
+    stroke-dashoffset: 0;
+    stroke-width: 2;
+    stroke: white;
+    fill: transparent;
+  }
+  
+  /* Animation classes from jobs.json */
+  .code-blink .animated-path {
+    animation: code-animation 3s ease-in-out infinite;
+  }
+  
+  .pulse-glow .animated-path {
+    animation: pulse-animation 2s ease-in-out infinite;
+  }
+  
+  .float-bounce .animated-path {
+    animation: float-animation 3s ease-in-out infinite;
+  }
+  
+  .rotate-pulse .animated-path {
+    animation: rotate-animation 4s ease-in-out infinite;
+  }
+  
+  /* Hover animations */
+  .dept-card:hover .code-blink .animated-path {
+    animation: code-animation-hover 1s ease-in-out infinite;
+  }
+  
+  .dept-card:hover .pulse-glow .animated-path {
+    animation: pulse-animation-hover 1s ease-in-out infinite;
+  }
+  
+  .dept-card:hover .float-bounce .animated-path {
+    animation: bounce-animation 1s ease-in-out infinite;
+  }
+  
+  .dept-card:hover .rotate-pulse .animated-path {
+    animation: rotate-animation-hover 1.5s ease-in-out infinite;
+  }
+  
+  /* Department-specific animation classes */
+  .code-blink .animated-path {
+    animation: code-animation 3s ease-in-out infinite;
+  }
+  
+  .pulse-glow .animated-path {
+    animation: pulse-animation 2s ease-in-out infinite;
+  }
+  
+  .float-bounce .animated-path {
+    animation: float-animation 3s ease-in-out infinite;
+  }
+  
+  .rotate-pulse .animated-path {
+    animation: rotate-animation 4s ease-in-out infinite;
+  }
+  
+  .dept-info {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .dept-name {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0 0 0.25rem;
+    color: #111827;
+  }
+  
+  .dept-size {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--primary);
+    border: 1px solid currentColor;
+    padding: 0.125rem 0.5rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+  }
+  
+  .dept-card:hover .dept-size {
+    background-color: var(--primary);
+    color: white;
+  }
+  
+  /* Accent Line */
+  .accent-line-container {
+    position: relative;
+    overflow: hidden;
+    height: 2px;
+    width: 60px;
+    margin: 1rem 0;
+  }
+  
+  .accent-line {
+    height: 100%;
+    width: 100%;
+    transform: translateX(-100%);
+    animation: lineReveal 0.8s ease-out forwards 0.3s;
+  }
+  
+  @keyframes lineReveal {
+    to {
+      transform: translateX(0);
+    }
+  }
+  
+  /* Department Content */
+  .dept-description {
+    margin-bottom: 1.25rem;
+    color: #4b5563;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+  
+  /* Tech Section */
+  .tech-section {
+    border-top: 1px solid #f3f4f6;
+    padding-top: 1rem;
+    margin-top: 1.25rem;
+  }
+  
+  .tech-title {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #6b7280;
+    margin-bottom: 0.75rem;
+  }
+  
+  .tech-icon {
+    color: #6b7280;
+  }
+  
+  .tech-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .tech-chip {
+    background-color: var(--accent);
+    border-radius: 4px;
+    padding: 0.375rem 0.625rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--primary);
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+    transform: translateY(10px);
+    opacity: 0;
+    animation: techFadeIn 0.5s forwards;
+    animation-delay: calc(var(--i, 0) * 0.1s + 0.5s);
+  }
+  
+  .tech-text {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .tech-chip::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--primary);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 0;
+  }
+  
+  .tech-chip:hover {
+    transform: translateY(-2px);
+  }
+  
+  .tech-chip:hover::before {
+    opacity: 0.1;
+  }
+  
+  /* Staggered animation for tech tags */
+  .tech-list > :nth-child(1) { --i: 1; }
+  .tech-list > :nth-child(2) { --i: 2; }
+  .tech-list > :nth-child(3) { --i: 3; }
+  .tech-list > :nth-child(4) { --i: 4; }
+  .tech-list > :nth-child(5) { --i: 5; }
+  .tech-list > :nth-child(6) { --i: 6; }
+  
+  /* Animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes techFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 640px) {
+    .card-content {
+      padding: 1.25rem;
+    }
+    
+    .dept-header {
+      align-items: flex-start;
+    }
+    
+    .dept-icon {
+      width: 42px;
+      height: 42px;
+    }
+    
+    .animated-icon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  
+  /* Icon Animation Keyframes */
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+  
+  @keyframes ping {
+    0% { transform: scale(1); opacity: 1; }
+    75%, 100% { transform: scale(1.2); opacity: 0.5; }
+  }
+  
+  @keyframes dash {
+    0%, 100% { stroke-dashoffset: 100; }
+    50% { stroke-dashoffset: 0; }
+  }
+  
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+  }
+  
+  @keyframes morph {
+    0%, 100% { d: path('M12 4v4m0 0a4 4 0 1 0 0 8 4 4 0 0 0 0-8z'); }
+    50% { d: path('M8 8 h8 v8 h-8 z'); }
+  }
+  
+  @keyframes stroke {
+    0% { stroke-width: 1; opacity: 1; }
+    50% { stroke-width: 3; opacity: 0.8; }
+    100% { stroke-width: 1; opacity: 1; }
+  }
+  
+  @keyframes draw {
+    0% { stroke-dashoffset: 100; }
+    100% { stroke-dashoffset: 0; }
+  }
+  
+  @keyframes reveal {
+    0%, 100% { stroke-dashoffset: 100; }
+    50% { stroke-dashoffset: 0; }
+  }
+  
+  @keyframes scale {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(0.8); }
+  }
+  
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-4px); }
+    60% { transform: translateY(2px); }
+  }
+  
+  @keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  @keyframes grow {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+  }
+  
+  @keyframes shimmer {
+    0% {
+      box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.3);
+      filter: brightness(1);
+    }
+    50% {
+      box-shadow: 0 0 12px 5px rgba(255, 255, 255, 0.6);
+      filter: brightness(1.3);
+    }
+    100% {
+      box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.3);
+      filter: brightness(1);
+    }
+  }
+  
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(0); }
+    25% { transform: rotate(-10deg); }
+    75% { transform: rotate(10deg); }
+  }
+  
+  @keyframes highlight {
+    0%, 100% { filter: contrast(100%) brightness(100%); }
+    50% { filter: contrast(130%) brightness(130%); }
+  }
+  
+  /* Department-specific animations */
+  @keyframes code-animation {
+    0% { 
+      stroke-dashoffset: 0; 
+      opacity: 1;
+      stroke-width: 2;
+      filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.2));
+    }
+    25% {
+      stroke-width: 2.25;
+      opacity: 0.95;
+      filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.3));
+    }
+    50% { 
+      stroke-dashoffset: 20; 
+      opacity: 0.9;
+      stroke-width: 2;
+      filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.4));
+    }
+    75% {
+      stroke-width: 2.25;
+      opacity: 0.95;
+      filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.3));
+    }
+    100% {
+      stroke-dashoffset: 0;
+      opacity: 1;
+      stroke-width: 2;
+      filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.2));
+    }
+  }
+  
+  @keyframes code-animation-hover {
+    0% { 
+      stroke-dashoffset: 0;
+      stroke-width: 2.5;
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% { 
+      stroke-dashoffset: 150;
+      stroke-width: 3;
+      opacity: 0.9;
+      transform: scale(1.1);
+      filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.8));
+    }
+    100% {
+      stroke-dashoffset: 0;
+      stroke-width: 2.5;
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes pulse-animation {
+    0% { 
+      transform: scale(1);
+      filter: brightness(1);
+    }
+    50% { 
+      transform: scale(1.05);
+      filter: brightness(1.2) drop-shadow(0 0 1px rgba(255, 255, 255, 0.4));
+    }
+    100% {
+      transform: scale(1);
+      filter: brightness(1);
+    }
+  }
+  
+  @keyframes pulse-animation-hover {
+    0% { 
+      transform: scale(1);
+      filter: brightness(1.2) drop-shadow(0 0 3px rgba(255, 255, 255, 0.8));
+    }
+    25% {
+      transform: scale(1.15) rotate(-5deg);
+    }
+    50% { 
+      transform: scale(1.2);
+      filter: brightness(1.5) drop-shadow(0 0 5px rgba(255, 255, 255, 0.9));
+    }
+    75% {
+      transform: scale(1.15) rotate(5deg);
+    }
+    100% {
+      transform: scale(1);
+      filter: brightness(1.2) drop-shadow(0 0 3px rgba(255, 255, 255, 0.8));
+    }
+  }
+  
+  @keyframes float-animation {
+    0%, 100% { 
+      transform: translateY(0);
+      opacity: 1;
+      stroke-width: 2;
+    }
+    50% { 
+      transform: translateY(-2px);
+      opacity: 0.9;
+      stroke-width: 2.25;
+      filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.3));
+    }
+  }
+  
+  @keyframes bounce-animation {
+    0% { 
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+    20% {
+      transform: translateY(-2px) scale(1.05);
+      opacity: 0.9;
+    }
+    40% { 
+      transform: translateY(-4px) scale(1.1);
+      opacity: 1;
+      filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.7));
+    }
+    60% { 
+      transform: translateY(2px) scale(0.95);
+      opacity: 0.9;
+    }
+    80% {
+      transform: translateY(1px) scale(1.02);
+      opacity: 0.95;
+    }
+    100% {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes rotate-animation {
+    0% { 
+      transform: rotate(0deg) scale(1);
+      stroke-width: 2;
+    }
+    25% {
+      stroke-width: 2.25;
+    }
+    50% { 
+      transform: rotate(180deg) scale(1.05);
+      stroke-width: 2.5;
+      filter: brightness(1.2);
+    }
+    75% {
+      stroke-width: 2.25;
+    }
+    100% { 
+      transform: rotate(360deg) scale(1);
+      stroke-width: 2;
+    }
+  }
+  
+  @keyframes rotate-animation-hover {
+    0% { 
+      transform: rotate(0deg) scale(1);
+      stroke-width: 2.5;
+      filter: brightness(1);
+    }
+    25% {
+      transform: rotate(90deg) scale(1.05);
+      filter: brightness(1.1) drop-shadow(0 0 2px rgba(255, 255, 255, 0.6));
+    }
+    50% { 
+      transform: rotate(180deg) scale(1.1);
+      stroke-width: 3;
+      filter: brightness(1.3) drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
+    }
+    75% {
+      transform: rotate(270deg) scale(1.05);
+      filter: brightness(1.1) drop-shadow(0 0 2px rgba(255, 255, 255, 0.6));
+    }
+    100% { 
+      transform: rotate(360deg) scale(1);
+      stroke-width: 2.5;
+      filter: brightness(1);
+    }
+  }
+  
+  .dept-card:hover .dept-icon {
+    animation: shimmer 1.5s ease-in-out;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Apply custom animations based on animation class
+    const applyPathAnimations = (card) => {
+      const icon = card.querySelector('.animated-icon');
+      const paths = card.querySelectorAll('.animated-path');
+      
+      if (icon && paths.length > 0) {
+        paths.forEach(path => {
+          // Calculate path length for drawing animations
+          if (path.getTotalLength) {
+            const length = path.getTotalLength();
+            if (length) {
+              path.style.strokeDasharray = length;
+            }
+          }
+          
+          // Add staggered delay for multiple paths
+          if (paths.length > 1) {
+            const index = Array.from(paths).indexOf(path);
+            path.style.animationDelay = `${index * 0.15}s`;
+          }
+        });
+      }
+    };
+
+    // Add intersection observer for animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const card = entry.target;
+          
+          // Reset and restart card animation 
+          card.style.animation = 'none';
+          card.offsetHeight; // Trigger reflow
+          card.style.animation = 'fadeInUp 0.6s ease forwards';
+          
+          // Add delay for cascading animation effect
+          const index = Array.from(document.querySelectorAll('.dept-card')).indexOf(card);
+          card.style.animationDelay = `${index * 0.1}s`;
+          
+          // Animate tech chips with staggered delay
+          const techChips = card.querySelectorAll('.tech-chip');
+          techChips.forEach((chip, i) => {
+            chip.style.animation = 'techFadeIn 0.5s forwards';
+            chip.style.animationDelay = `${(index * 0.1) + (i * 0.1) + 0.5}s`;
+          });
+          
+          // Apply animations to SVG paths
+          applyPathAnimations(card);
+          
+          // Add interactive animations for icon hover
+          const iconContainer = card.querySelector('.dept-icon');
+          const icon = card.querySelector('.animated-icon');
+          if (icon && iconContainer) {
+            iconContainer.addEventListener('mouseenter', () => {
+              // Add hover effect class to the icon container
+              iconContainer.classList.add('icon-hover');
+              
+              // Add special highlight effect to the SVG paths
+              const paths = icon.querySelectorAll('.animated-path');
+              
+              // Create a ripple effect animation on the icon background
+              const ripple = document.createElement('div');
+              ripple.classList.add('icon-ripple');
+              iconContainer.appendChild(ripple);
+              
+              // Animate paths with enhanced effect
+              paths.forEach((path, i) => {
+                path.style.strokeWidth = '3';
+                path.style.filter = 'drop-shadow(0 0 2px rgba(255, 255, 255, 0.8))';
+                
+                // Create a subtle hover effect
+                path.animate([
+                  { strokeWidth: '2.2', opacity: 0.95, transform: 'scale(1)' },
+                  { strokeWidth: '2.8', opacity: 1, transform: 'scale(1.05)' },
+                  { strokeWidth: '2.2', opacity: 0.95, transform: 'scale(1)' }
+                ], {
+                  duration: 600,
+                  delay: i * 80,
+                  iterations: 1,
+                  easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+                });
+              });
+              
+              // Remove ripple after animation completes
+              setTimeout(() => {
+                if (ripple && ripple.parentNode) {
+                  ripple.parentNode.removeChild(ripple);
+                }
+              }, 1000);
+            });
+            
+            iconContainer.addEventListener('mouseleave', () => {
+              // Remove hover effect class
+              iconContainer.classList.remove('icon-hover');
+              
+              // Reset SVG path styling
+              const paths = icon.querySelectorAll('.animated-path');
+              paths.forEach(path => {
+                path.style.strokeWidth = '2.5';
+                path.style.filter = 'none';
+              });
+              
+              // Remove any remaining ripples
+              const ripples = iconContainer.querySelectorAll('.icon-ripple');
+              ripples.forEach(r => {
+                if (r.parentNode) {
+                  r.parentNode.removeChild(r);
+                }
+              });
+            });
+          }
+          
+          // Unobserve after animating
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.2
+    });
+    
+    // Observe all department cards
+    document.querySelectorAll('.dept-card').forEach(card => {
+      observer.observe(card);
+    });
+  });
+</script>

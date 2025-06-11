@@ -237,14 +237,14 @@ class EnhancedPhoneInterface {
   }
 
   async showStepperPopup() {
+    // Diğer popup'ları kapat
+    const perfectionPopupContainer = document.getElementById('perfectionPopupContainer');
+    if (perfectionPopupContainer) perfectionPopupContainer.style.display = 'none';
+    const successPopup = document.getElementById('successPopup');
+    if (successPopup) successPopup.style.display = 'none';
+    // Optimize popup'ı aç
     const popup = document.getElementById('optimizationPopup');
     if (!popup) return;
-
-    console.log('✅ showStepperPopup() triggered');
-    
-    // Add optimization-active class for enhanced animations
-    popup.classList.add('optimization-active');
-    
     popup.style.display = 'flex';
     popup.offsetHeight; // force reflow
     popup.style.opacity = '1';
@@ -533,18 +533,14 @@ class EnhancedPhoneInterface {
   }
 
   async showSuccessPopup() {
+    // Diğer popup'ları kapat
+    const perfectionPopupContainer = document.getElementById('perfectionPopupContainer');
+    if (perfectionPopupContainer) perfectionPopupContainer.style.display = 'none';
+    const optimizationPopup = document.getElementById('optimizationPopup');
+    if (optimizationPopup) optimizationPopup.style.display = 'none';
+    // Success popup'ı aç
     const successPopup = document.getElementById('successPopup');
     if (!successPopup) return;
-
-    console.log('✅ showSuccessPopup() triggered');
-    
-    // Add success-active class for enhanced animations
-    successPopup.classList.add('success-active');
-    
-    // Remove animation-stopped class if it exists to ensure animations run
-    successPopup.classList.remove('animation-stopped', 'show-checkmark');
-    
-    // Show popup with direct styles
     successPopup.style.display = 'flex';
     successPopup.style.opacity = '1';
     successPopup.style.pointerEvents = 'auto';
@@ -579,12 +575,14 @@ class EnhancedPhoneInterface {
   }
 
   async showPerfectionPopup() {
-    // Hide any existing popups first
+    // Diğer popup'ları kapat
+    const optimizationPopup = document.getElementById('optimizationPopup');
+    if (optimizationPopup) optimizationPopup.style.display = 'none';
     const successPopup = document.getElementById('successPopup');
-    if (successPopup) {
-      this.hideSuccessPopup();
-      await this.wait(300);
-    }
+    if (successPopup) successPopup.style.display = 'none';
+    // Perfection popup'ı aç
+    const perfectionPopupContainer = document.getElementById('perfectionPopupContainer');
+    if (perfectionPopupContainer) perfectionPopupContainer.style.display = 'flex';
 
     const perfectionPopup = document.getElementById('perfectionPopup');
     if (!perfectionPopup) return;
@@ -653,6 +651,9 @@ class EnhancedPhoneInterface {
   }
 
   hidePerfectionPopup() {
+    // Sadece perfection popup'ı kapat
+    const perfectionPopupContainer = document.getElementById('perfectionPopupContainer');
+    if (perfectionPopupContainer) perfectionPopupContainer.style.display = 'none';
     const perfectionPopup = document.getElementById('perfectionPopup');
     if (!perfectionPopup) return;
     

@@ -1,0 +1,133 @@
+.service-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: slideUp 0.6s ease-out forwards;
+  opacity: 1 !important;
+  transform: translateY(20px);
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card:nth-child(1) { animation-delay: 0.1s; }
+.service-card:nth-child(2) { animation-delay: 0.2s; }
+.service-card:nth-child(3) { animation-delay: 0.3s; }
+.service-card:nth-child(4) { animation-delay: 0.4s; }
+.service-card:nth-child(5) { animation-delay: 0.5s; }
+.service-card:nth-child(6) { animation-delay: 0.6s; }
+
+.service-card:hover {
+  background: #fff !important;
+  border-color: inherit !important;
+}
+
+.service-indigo:hover {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(99, 102, 241, 0.1));
+  border-color: #6366f1 !important;
+  box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.1), 0 10px 10px -5px rgba(99, 102, 241, 0.04);
+}
+
+.service-cyan:hover {
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.05), rgba(6, 182, 212, 0.1));
+  border-color: #06b6d4 !important;
+  box-shadow: 0 20px 25px -5px rgba(6, 182, 212, 0.1), 0 10px 10px -5px rgba(6, 182, 212, 0.04);
+}
+
+.service-slate:hover {
+  background: linear-gradient(135deg, rgba(100, 116, 139, 0.05), rgba(100, 116, 139, 0.1));
+  border-color: #64748b !important;
+  box-shadow: 0 20px 25px -5px rgba(100, 116, 139, 0.1), 0 10px 10px -5px rgba(100, 116, 139, 0.04);
+}
+
+.service-teal:hover {
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.05), rgba(20, 184, 166, 0.1));
+  border-color: #14b8a6 !important;
+  box-shadow: 0 20px 25px -5px rgba(20, 184, 166, 0.1), 0 10px 10px -5px rgba(20, 184, 166, 0.04);
+}
+
+.service-blue:hover {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(59, 130, 246, 0.1));
+  border-color: #3b82f6 !important;
+  box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.1), 0 10px 10px -5px rgba(59, 130, 246, 0.04);
+}
+
+.service-purple:hover {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(139, 92, 246, 0.1));
+  border-color: #8b5cf6 !important;
+  box-shadow: 0 20px 25px -5px rgba(139, 92, 246, 0.1), 0 10px 10px -5px rgba(139, 92, 246, 0.04);
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  z-index: 2;
+  pointer-events: none;
+  background: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+  box-shadow: none;
+}
+
+.service-card:hover::before {
+  opacity: 1;
+}
+
+@keyframes cardGlowPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 2px VARRENK, 0 0 16px 4px VARRENK, 0 0 32px 8px KOYURENK;
+  }
+  50% {
+    box-shadow: 0 0 0 4px VARRENK, 0 0 32px 8px VARRENK, 0 0 48px 16px KOYURENK;
+  }
+}
+
+.service-indigo:hover::before {
+  animation: cardGlowPulse 1.2s ease-in-out infinite;
+  box-shadow: 0 0 0 2px #6366f1, 0 0 16px 4px #6366f1, 0 0 32px 8px #3730a3;
+}
+
+.service-blue:hover::before {
+  animation: cardGlowPulse 1.2s ease-in-out infinite;
+  box-shadow: 0 0 0 2px #3b82f6, 0 0 16px 4px #3b82f6, 0 0 32px 8px #1e40af;
+}
+
+.service-cyan:hover::before {
+  animation: cardGlowPulse 1.2s ease-in-out infinite;
+  box-shadow: 0 0 0 2px #06b6d4, 0 0 16px 4px #06b6d4, 0 0 32px 8px #0891b2;
+}
+
+.service-teal:hover::before {
+  animation: cardGlowPulse 1.2s ease-in-out infinite;
+  box-shadow: 0 0 0 2px #14b8a6, 0 0 16px 4px #14b8a6, 0 0 32px 8px #0f766e;
+}
+
+.service-purple:hover::before {
+  animation: cardGlowPulse 1.2s ease-in-out infinite;
+  box-shadow: 0 0 0 2px #8b5cf6, 0 0 16px 4px #8b5cf6, 0 0 32px 8px #6d28d9;
+}
+
+.service-slate:hover::before {
+  animation: cardGlowPulse 1.2s ease-in-out infinite;
+  box-shadow: 0 0 0 2px #64748b, 0 0 16px 4px #64748b, 0 0 32px 8px #334155;
+}
+
+.service-cards-bg {
+  position: relative;
+  z-index: 1;
+}
+.service-cards-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: url("data:image/svg+xml;utf8,<svg width='600' height='600' fill='none' xmlns='http://www.w3.org/2000/svg'><circle cx='100' cy='100' r='60' fill='rgba(59,130,246,0.04)'/><rect x='400' y='80' width='120' height='120' rx='32' fill='rgba(139,92,246,0.04)'/><polygon points='200,400 300,500 100,500' fill='rgba(16,185,129,0.04)'/></svg>");
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-size: cover;
+  opacity: 1;
+}
+.service-cards-bg > * {
+  position: relative;
+  z-index: 1;
+} 

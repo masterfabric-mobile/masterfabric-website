@@ -9,6 +9,7 @@ import Timeline from "@components/about/timeline.astro";
 import DynamicText from "@components/about/dynamic-text.astro";
 import ProcessSteps from "@components/about/process-steps.astro";
 import FlipStatistics from "@components/about/flip-statistics.astro";
+import GitHubProjects from "@components/about/github-projects.astro";
 import fs from "fs";
 import path from "path";
 
@@ -56,5 +57,8 @@ const publishedTeamMembers = await getCollection("team", ({ data }) => {
       title={aboutData.passion.title} 
       description={aboutData.passion.description} 
     />
+
+    <!-- GitHub Projects Section -->
+    <GitHubProjects />
   </Container>
 </Layout>

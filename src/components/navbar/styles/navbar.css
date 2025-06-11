@@ -168,3 +168,65 @@
   background-color: #f9fafb;
   color: #111827;
 }
+
+/* ========================================================================= */
+/* RESPONSIVE FIXES FOR BRAND SECTION */
+/* ========================================================================= */
+
+/* Extra small screens (max-width: 480px) */
+@media (max-width: 480px) {
+  /* Force brand description to stack vertically on very small screens */
+  .flex.flex-col.sm\:flex-row {
+    flex-direction: column !important;
+  }
+  
+  /* Reduce font sizes for better fit */
+  .font-mono.text-lg {
+    font-size: 1rem !important;
+  }
+  
+  .font-mono.text-xs {
+    font-size: 0.6rem !important;
+  }
+  
+  /* Ensure menu icon is always visible */
+  .flex.lg\:hidden {
+    min-width: 2rem;
+  }
+}
+
+/* Small screens (max-width: 640px) */
+@media (max-width: 640px) {
+  /* Prevent text overflow */
+  .min-w-0 {
+    overflow: hidden;
+  }
+  
+  /* Better line height for mobile */
+  .leading-tight {
+    line-height: 1.1 !important;
+  }
+  
+  /* Ensure proper spacing between brand elements */
+  .mr-2 {
+    margin-right: 0.5rem !important;
+  }
+  
+  /* Make sure the menu icon container doesn't shrink */
+  .flex-shrink-0 {
+    flex-shrink: 0 !important;
+  }
+}
+
+/* Fix for astro-navbar menu icon positioning */
+.astronav .flex.lg\:hidden {
+  position: relative;
+  z-index: 10;
+}
+
+/* Ensure menu icon is clickable and visible */
+[class*="MenuIcon"] {
+  display: block !important;
+  cursor: pointer;
+  touch-action: manipulation;
+}

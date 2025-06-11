@@ -1,0 +1,69 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  job: {
+    id: string;
+    title: string;
+    department: string;
+    type: string;
+    location: string;
+    experience: string;
+    salary: string;
+    posted: string;
+    description: string;
+    tags: string[];
+  };
+  today: string;
+}
+
+const { job, today } = Astro.props;
+---
+
+<div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+  <div class="flex items-start justify-between mb-4">
+    <div class="flex-1">
+      <h3 class="text-lg font-bold text-gray-900 mb-1">{job.title}</h3>
+      <div class="flex items-center space-x-3 text-sm text-gray-600">
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+          {job.department}
+        </span>
+        <span>{job.type}</span>
+      </div>
+    </div>
+    <button 
+      class="job-apply-btn px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200"
+      data-job-id={job.id}
+      onclick="selectPosition(this)"
+    >
+      Apply
+    </button>
+  </div>
+  
+  <div class="space-y-3 mb-4">
+    <div class="flex items-center text-sm text-gray-600">
+      <Icon name="bx:map" class="w-4 h-4 mr-2" />
+      <span>{job.location}</span>
+    </div>
+    <div class="flex items-center text-sm text-gray-600">
+      <Icon name="bx:time" class="w-4 h-4 mr-2" />
+      <span>{job.experience}</span>
+    </div>
+    <div class="flex items-center text-sm text-gray-600">
+      <Icon name="bx:money" class="w-4 h-4 mr-2" />
+      <span>{job.salary}</span>
+    </div>
+    <div class="flex items-center text-sm text-gray-500">
+      <Icon name="bx:calendar" class="w-4 h-4 mr-2" />
+      <span>Posted {job.posted === 'today' ? today : job.posted}</span>
+    </div>
+  </div>
+  
+  <p class="text-sm text-gray-600 mb-4">{job.description}</p>
+  
+  <div class="flex flex-wrap gap-2">
+    {job.tags.map((tag) => (
+      <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">{tag}</span>
+    ))}
+  </div>
+</div>

@@ -1,0 +1,120 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  step: {
+    number: number;
+    title: string;
+    duration: string;
+    description: string;
+    details: string[];
+    iconName?: string;
+  };
+  isLast?: boolean;
+}
+
+const { step, isLast = false } = Astro.props;
+---
+
+<div class="text-center px-2">
+  <!-- Step Circle -->
+  <div class="relative mb-6">
+    <div class="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto relative z-10 border-3 border-white shadow-lg shadow-blue-200/50">
+      {step.number}
+    </div>
+  </div>
+  
+  <!-- Step Content -->
+  <div class="bg-white rounded-2xl shadow-lg border border-blue-100 hover:shadow-xl transition-all duration-300 overflow-hidden hiring-step-card cursor-pointer">
+    <!-- Collapsed View -->
+    <div class="p-6 card-content">
+      <!-- Icon (Clickable) -->
+      <div 
+        class="w-16 h-16 bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100 rounded-xl flex items-center justify-center mx-auto mb-4 border border-blue-100 shadow-sm hover:shadow-md hover:scale-105 transition-all duration-300"
+      >
+        {step.iconName ? (
+          <Icon name={step.iconName} class="w-8 h-8 text-blue-600 hover:text-blue-700 transition-colors duration-300" />
+        ) : step.title.toLowerCase().includes('application') || step.title.toLowerCase().includes('apply') ? (
+          <Icon name="bx:file-blank" class="w-8 h-8 text-blue-600 hover:text-blue-700 transition-colors duration-300" />
+        ) : step.title.toLowerCase().includes('phone') || step.title.toLowerCase().includes('call') ? (
+          <Icon name="bx:phone-call" class="w-8 h-8 text-blue-600 hover:text-blue-700 transition-colors duration-300" />
+        ) : step.title.toLowerCase().includes('interview') || step.title.toLowerCase().includes('meeting') ? (
+          <Icon name="bx:video" class="w-8 h-8 text-blue-600 hover:text-blue-700 transition-colors duration-300" />
+        ) : step.title.toLowerCase().includes('technical') || step.title.toLowerCase().includes('test') ? (
+          <Icon name="bx:code-curly" class="w-8 h-8 text-blue-600 hover:text-blue-700 transition-colors duration-300" />
+        ) : step.title.toLowerCase().includes('decision') || step.title.toLowerCase().includes('final') ? (
+          <Icon name="bx:check-double" class="w-8 h-8 text-blue-600 hover:text-blue-700 transition-colors duration-300" />
+        ) : (
+          <Icon name="bx:user-check" class="w-8 h-8 text-blue-600 hover:text-blue-700 transition-colors duration-300" />
+        )}
+      </div>
+      
+      <!-- Title -->
+      <h3 class="text-lg font-bold text-gray-900 mb-2">{step.title}</h3>
+      
+      <!-- Duration Badge -->
+      <div class="inline-flex items-center px-3 py-1 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-full border border-blue-100 mb-4">
+        <Icon name="bx:time-five" class="w-3 h-3 text-blue-500 mr-1" />
+        <span class="text-xs text-blue-700 font-medium">{step.duration}</span>
+      </div>
+    </div>
+    
+    <!-- Expanded Content -->
+    <div class="expanded-content px-6 pb-6 max-h-0 overflow-hidden transition-all duration-500 ease-in-out opacity-0">
+      <div class="border-t border-gray-100 pt-4 space-y-4">
+        <p class="text-gray-600 text-sm leading-relaxed">{step.description}</p>
+        
+        <div class="space-y-2">
+          {step.details.map((detail) => (
+            <div class="flex items-start text-xs text-gray-600 bg-gray-50 rounded-lg p-3 border border-gray-100">
+              <Icon name="bx:check-circle" class="w-3 h-3 text-blue-500 mr-2 flex-shrink-0 mt-0.5" />
+              <span class="leading-relaxed">{detail}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+    
+    <!-- Expand/Collapse Indicator -->
+    <div class="px-6 pb-4">
+      <button class="expand-btn w-full flex items-center justify-center py-2 text-blue-600 hover:text-blue-700 transition-colors duration-200">
+        <Icon name="bx:chevron-down" class="w-4 h-4 transition-transform duration-300 chevron-icon" />
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const cards = document.querySelectorAll('.hiring-step-card');
+    
+    cards.forEach(card => {
+      const cardContent = card.querySelector('.card-content');
+      const expandBtn = card.querySelector('.expand-btn');
+      const expandedContent = card.querySelector('.expanded-content');
+      const chevronIcon = card.querySelector('.chevron-icon');
+      let isExpanded = false;
+      
+      function toggleCard(e) {
+        e.stopPropagation();
+        
+        if (isExpanded) {
+          // Collapse
+          expandedContent.style.maxHeight = '0px';
+          expandedContent.style.opacity = '0';
+          chevronIcon.style.transform = 'rotate(0deg)';
+          isExpanded = false;
+        } else {
+          // Expand
+          expandedContent.style.maxHeight = expandedContent.scrollHeight + 20 + 'px';
+          expandedContent.style.opacity = '1';
+          chevronIcon.style.transform = 'rotate(180deg)';
+          isExpanded = true;
+        }
+      }
+      
+      cardContent.addEventListener('click', toggleCard);
+      expandBtn.addEventListener('click', toggleCard);
+    });
+  });
+</script>

@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/src/styles/footer.css">
+<link rel="stylesheet" href="/src/styles/footer.module.css">
 
 <footer class="bg-white">
   <!-- Modern Top Divider -->
@@ -21,16 +21,16 @@
           </p>
           
           <!-- Compact Tech Credit -->
-          <div class="astro-credit mt-3">
-            <span class="built-with">Built with</span>
+          <div class="astro-credit mt-3 flex items-center text-sm">
+            <span class="built-with mr-1">Built with</span>
             <a 
               href="https://astro.build" 
               target="_blank" 
               rel="noopener noreferrer"
-              class="astro-link"
+              class="astro-link flex items-center"
             >
-              <!-- Use inline SVG instead of icon component for Astro logo -->
-              <svg class="astro-icon" viewBox="0 0 256 366" xmlns="http://www.w3.org/2000/svg">
+              <!-- SVG with explicitly controlled size -->
+              <svg class="astro-icon mx-1" width="24" height="24" viewBox="0 0 256 366" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                   <linearGradient id="astroGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                     <stop offset="0%" style="stop-color:#FF5D01"/>

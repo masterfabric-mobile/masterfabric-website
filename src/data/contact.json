@@ -27,7 +27,14 @@
       "description": "Quick turnaround times"
     },
     {
-      "emoji": "🛠️",
+      "icon": {
+        "viewBox": "0 0 24 24",
+        "paths": [
+          "M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z",
+          "M12 8a4 4 0 1 0 4 4 4 4 0 0 0-4-4zm0 6a2 2 0 1 1 2-2 2 2 0 0 1-2 2z",
+          "M6 10h2v4H6zM16 10h2v4h-2zM10 6h4v2h-4zM10 16h4v2h-4z"
+        ]
+      },
       "bgColor": "bg-green-500",
       "gradientColor": "from-green-400 to-green-600",
       "hoverGradient": "from-green-500 to-green-700",

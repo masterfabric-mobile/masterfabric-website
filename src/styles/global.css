@@ -1,0 +1,14 @@
+/* Add these rules to your global CSS */
+svg[astro-icon] {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  vertical-align: -0.125em;
+}
+
+/* Make sure icons always respect their parent's font-size */
+.size-8, .size-12, .size-16 {
+  width: 1em;
+  height: 1em;
+  font-size: inherit;
+}

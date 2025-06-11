@@ -287,6 +287,7 @@ navbar/
 - **`Globe.astro`** - Interactive globe visualization
 - **`Timeline.astro`** - Company timeline component
 - **`Statistics.astro`** - Achievement metrics display
+- **`GitHubProjects.astro`** - Open source projects showcase
 
 #### UI Components (`src/components/ui/`)
 - **`Button.astro`** - Consistent button styling with variants
@@ -633,9 +634,8 @@ pnpm run build
 #### Build Optimizations
 - **Tree Shaking** - Remove unused code
 - **Code Splitting** - Lazy load components
-- **Image Optimization** - Multiple formats and sizes
-- **CSS Purging** - Remove unused CSS classes
-- **Minification** - HTML, CSS, and JS compression
+- **Critical CSS** - Inline above-the-fold styles
+- **Resource Hints** - Preload critical resources
 
 ### ▲ Vercel Deployment
 
@@ -1060,4 +1060,4 @@ This project uses open-source software under various licenses:
 ---
 
 *Last updated: December 2024*
-*Version: 1.0.0* 
+*Version: 1.0.0*

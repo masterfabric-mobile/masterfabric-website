@@ -81,17 +81,5 @@ export const socialIcons: SocialIcons = {
 };
 
 export default {
-  socialIcons,
-  type: {
-    BrandText,
-    BrandDescription,
-    Brand,
-    DropdownItem,
-    Dropdown,
-    MenuItem,
-    SocialLink,
-    ResponsiveConfig,
-    NavigationData,
-    SocialIcons
-  }
+  socialIcons
 };

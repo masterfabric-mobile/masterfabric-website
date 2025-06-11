@@ -34,7 +34,7 @@
       "title": "Jobs",
       "path": "/jobs",
       "order": 3,
-      "icon": "briefcase",
+      "icon": "work",
       "style": "outline"
     },
     {

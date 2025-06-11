@@ -354,5 +354,13 @@ const today = new Date().toLocaleDateString('en-US', {
       </div>
     </section>
   </Container>
+
+  <!-- Include jobs data and script -->
+  <script define:vars={{ jobsData, positionsData }}>
+    window.jobsData = jobsData;
+    window.positionsData = positionsData;
+  </script>
+  
+  <script src="/src/scripts/jobs.js"></script>
 </Layout>
 

@@ -46,7 +46,48 @@ const contactData = JSON.parse(contactDataContent);
                     'rgb(196, 181, 253), rgb(147, 51, 234)'
                   })`}
                 >
-                  <span class="relative z-20 transition-transform duration-300 group-hover:scale-110">{benefit.emoji}</span>
+                  <span class="relative z-20 transition-transform duration-300 group-hover:scale-110">
+                    {index === 0 && (
+                      <!-- Mobile/Phone Icon -->
+                      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a1 1 0 001-1V4a1 1 0 00-1-1H8a1 1 0 00-1 1v16a1 1 0 001 1z"></path>
+                      </svg>
+                    )}
+                    {index === 1 && (
+                      <!-- Lightning/Speed Icon -->
+                      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                      </svg>
+                    )}
+                    {index === 2 && (
+                      <!-- Toolbox Support Icon -->
+                      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <!-- Toolbox main body -->
+                        <rect x="4" y="8" width="16" height="10" rx="2" stroke-width="2"/>
+                        <!-- Toolbox handle -->
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 8V6a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                        <!-- Tool compartment line -->
+                        <line x1="4" y1="12" x2="20" y2="12" stroke-width="2"/>
+                        <!-- Tools inside - screwdriver and wrench representation -->
+                        <circle cx="9" cy="15" r="1" fill="currentColor"/>
+                        <circle cx="15" cy="15" r="1" fill="currentColor"/>
+                      </svg>
+                    )}
+                    {index === 3 && (
+                      <!-- Chart/Graph Icon for Scalable Solutions -->
+                      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <!-- X and Y axis -->
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 20h16M4 20V4"/>
+                        <!-- Growth line/trend -->
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 16l3-4 3 2 6-6"/>
+                        <!-- Data points -->
+                        <circle cx="6" cy="16" r="1.5" fill="currentColor"/>
+                        <circle cx="9" cy="12" r="1.5" fill="currentColor"/>
+                        <circle cx="12" cy="14" r="1.5" fill="currentColor"/>
+                        <circle cx="18" cy="8" r="1.5" fill="currentColor"/>
+                      </svg>
+                    )}
+                  </span>
                   
                   <!-- Ripple effects with dynamic colors -->
                   <div 

@@ -15,15 +15,24 @@ export interface Props {
   }>;
   trigger: string;
   isMobile?: boolean;
+  isActive?: boolean;
+  currentPath?: string;
 }
 
 // =============================================================================
 // COMPONENT PROPS & SETUP
 // =============================================================================
-const { items, trigger, isMobile = false } = Astro.props;
+const { items, trigger, isMobile = false, isActive = false, currentPath = '' } = Astro.props;
 
 // Generate unique dropdown ID based on trigger text
 const dropdownId = `dropdown-${trigger.toLowerCase().replace(/\s+/g, '-')}`;
+
+// Helper function to check if item is current page
+const isCurrentPage = (itemPath: string) => {
+  const normalizeCurrentPath = currentPath === '/' ? '/' : currentPath.replace(/\/$/, '');
+  const normalizeItemPath = itemPath === '/' ? '/' : itemPath.replace(/\/$/, '');
+  return normalizeCurrentPath === normalizeItemPath;
+};
 ---
 
 <!-- ======================================================================= -->
@@ -35,16 +44,25 @@ const dropdownId = `dropdown-${trigger.toLowerCase().replace(/\s+/g, '-')}`;
     type="button"
     class={`
       inline-flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-lg
-      transition-colors duration-200
+      transition-colors duration-200 relative
       ${isMobile 
-        ? 'w-full justify-between text-gray-700 hover:text-gray-900 hover:bg-gray-50 bg-gray-50' 
-        : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'
+        ? 'w-full justify-between hover:bg-gray-50 bg-gray-50' 
+        : 'hover:bg-gray-50'
+      }
+      ${isActive 
+        ? 'text-blue-600 bg-blue-50 border border-blue-200' 
+        : 'text-gray-700 hover:text-gray-900'
       }
     `}
     data-dropdown-toggle={dropdownId}
   >
     <!-- Button text -->
     <span>{trigger}</span>
+    
+    <!-- Active indicator -->
+    {isActive && (
+      <span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
+    )}
     
     <!-- Chevron icon with rotation animation -->
     <Icon 
@@ -70,21 +88,43 @@ const dropdownId = `dropdown-${trigger.toLowerCase().replace(/\s+/g, '-')}`;
   >
     <!-- Dropdown items container -->
     <div class="py-2">
-      {items.map((item) => (
-        <!-- Individual dropdown item -->
-        <a
-          href={item.path}
-          class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors duration-150"
-        >
-          <!-- Item title -->
-          <div class="font-medium">{item.title}</div>
-          
-          <!-- Optional item description -->
-          {item.description && (
-            <div class="text-xs text-gray-500 mt-1">{item.description}</div>
-          )}
-        </a>
-      ))}
+      {items.map((item) => {
+        const isItemActive = isCurrentPage(item.path);
+        return (
+          <!-- Individual dropdown item -->
+          <a
+            href={isItemActive ? undefined : item.path}
+            class={`
+              block px-4 py-3 text-sm transition-colors duration-150 relative
+              ${isItemActive 
+                ? 'bg-blue-50 text-blue-600 cursor-default border-l-4 border-blue-500 font-semibold' 
+                : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900 cursor-pointer'
+              }
+            `}
+            {...(isItemActive && { 'aria-current': 'page' })}
+          >
+            <!-- Item title -->
+            <div class="font-medium flex items-center justify-between">
+              {item.title}
+              {isItemActive && (
+                <span class="ml-2 w-2 h-2 bg-blue-500 rounded-full"></span>
+              )}
+            </div>
+            
+            <!-- Optional item description -->
+            {item.description && (
+              <div class={`text-xs mt-1 ${isItemActive ? 'text-blue-500' : 'text-gray-500'}`}>
+                {item.description}
+              </div>
+            )}
+            
+            <!-- Current page indicator -->
+            {isItemActive && (
+              <div class="text-xs text-blue-500 mt-1 font-medium">• Current Page</div>
+            )}
+          </a>
+        );
+      })}
     </div>
   </div>
 </div>

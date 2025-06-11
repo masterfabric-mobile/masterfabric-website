@@ -50,7 +50,7 @@ const isCurrentPage = (itemPath: string) => {
         : 'hover:bg-gray-50'
       }
       ${isActive 
-        ? 'text-blue-600 bg-blue-50 border border-blue-200' 
+        ? 'text-blue-600 bg-blue-50 border border-blue-200 navbar-active-dropdown' 
         : 'text-gray-700 hover:text-gray-900'
       }
     `}
@@ -97,7 +97,7 @@ const isCurrentPage = (itemPath: string) => {
             class={`
               block px-4 py-3 text-sm transition-colors duration-150 relative
               ${isItemActive 
-                ? 'bg-blue-50 text-blue-600 cursor-default border-l-4 border-blue-500 font-semibold' 
+                ? 'bg-blue-50 text-blue-600 cursor-default border-l-4 border-blue-500 font-semibold active-dropdown-item' 
                 : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900 cursor-pointer'
               }
             `}

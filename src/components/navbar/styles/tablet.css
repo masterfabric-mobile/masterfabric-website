@@ -9,12 +9,12 @@
     align-items: stretch;
   }
   
-  /* Improve brand section layout for tablet */
+  /* Brand section alignment for tablet */
   .flex.w-full.lg\:w-auto {
     align-items: flex-start;
   }
   
-  /* Better spacing for brand text on tablet */
+  /* Brand text line height for tablet */
   .font-mono {
     line-height: 1.2;
   }
@@ -29,37 +29,32 @@
     display: none !important;
   }
   
-  /* Ensure mobile menu is hidden by default (only show when toggled) */
+  /* Hide mobile menu by default on tablet (only show when toggled) */
   .hidden.lg\:hidden {
     display: none !important;
   }
   
-  /* Mobile menu styling for tablet */
+  /* Tablet: mobile menu container margin adjustments */
   .lg\:hidden .bg-white {
     margin-left: 1rem;
     margin-right: 1rem;
     margin-top: 0.5rem;
   }
   
-  /* Tablet grid: use 3 columns instead of 2 for larger screens */
-  @media (min-width: 768px) and (max-width: 1023px) {
-    .grid.grid-cols-2 {
-      grid-template-columns: repeat(3, 1fr);
-    }
-    
-    .col-span-2 {
-      grid-column: span 3;
-    }
-    
-    /* Adjust grid item sizes for tablet */
-    .grid.grid-cols-2 > a {
-      min-height: 80px;
-      padding: 0.75rem;
-    }
+  /* --- Dropdown/Mobile grid: always 2 columns on tablet --- */
+  .grid.grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr) !important;
   }
-  
-  /* Tablet button hover effects (same as mobile) */
+
+  /* Ensure full row span for dropdowns that need it */
+  .col-span-2 {
+    grid-column: span 2 !important;
+  }
+
+  /* --- Grid item (button) styles for tablet --- */
   .grid.grid-cols-2 > a {
+    min-height: 80px;
+    padding: 0.75rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -68,19 +63,21 @@
     border: 1px solid #e5e7eb;
     transition: all 0.2s ease-in-out;
   }
-  
+
+  /* --- Grid item hover effect for tablet --- */
   .grid.grid-cols-2 > a:hover {
     background-color: #f3f4f6;
     border-color: #d1d5db;
     transform: translateY(-1px);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   }
-  
-  /* Tablet icon styling */
+
+  /* --- Icon color for tablet grid items --- */
   .grid.grid-cols-2 > a svg {
     color: #6b7280;
   }
-  
+
+  /* --- Icon hover color for tablet grid items --- */
   .grid.grid-cols-2 > a:hover svg {
     color: #374151;
   }

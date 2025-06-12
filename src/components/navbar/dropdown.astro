@@ -3,6 +3,7 @@
 // IMPORTS
 // =============================================================================
 import { Icon } from "astro-icon/components";
+import './styles/dropdown.css'; 
 
 // =============================================================================
 // TYPE DEFINITIONS
@@ -15,15 +16,24 @@ export interface Props {
   }>;
   trigger: string;
   isMobile?: boolean;
+  isActive?: boolean;
+  currentPath?: string;
 }
 
 // =============================================================================
 // COMPONENT PROPS & SETUP
 // =============================================================================
-const { items, trigger, isMobile = false } = Astro.props;
+const { items, trigger, isMobile = false, isActive = false, currentPath = '' } = Astro.props;
 
 // Generate unique dropdown ID based on trigger text
 const dropdownId = `dropdown-${trigger.toLowerCase().replace(/\s+/g, '-')}`;
+
+// Helper function to check if item is current page
+const isCurrentPage = (itemPath: string) => {
+  const normalizeCurrentPath = currentPath === '/' ? '/' : currentPath.replace(/\/$/, '');
+  const normalizeItemPath = itemPath === '/' ? '/' : itemPath.replace(/\/$/, '');
+  return normalizeCurrentPath === normalizeItemPath;
+};
 ---
 
 <!-- ======================================================================= -->
@@ -35,16 +45,25 @@ const dropdownId = `dropdown-${trigger.toLowerCase().replace(/\s+/g, '-')}`;
     type="button"
     class={`
       inline-flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-lg
-      transition-colors duration-200
+      transition-colors duration-200 relative
       ${isMobile 
-        ? 'w-full justify-between text-gray-700 hover:text-gray-900 hover:bg-gray-50 bg-gray-50' 
-        : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'
+        ? 'w-full justify-between hover:bg-gray-50 bg-gray-50' 
+        : 'hover:bg-gray-50'
+      }
+      ${isActive 
+        ? 'text-blue-600 bg-blue-50 border border-blue-200 navbar-active-dropdown' 
+        : 'text-gray-700 hover:text-gray-900'
       }
     `}
     data-dropdown-toggle={dropdownId}
   >
     <!-- Button text -->
     <span>{trigger}</span>
+    
+    <!-- Active indicator -->
+    {isActive && (
+      <span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
+    )}
     
     <!-- Chevron icon with rotation animation -->
     <Icon 
@@ -58,33 +77,29 @@ const dropdownId = `dropdown-${trigger.toLowerCase().replace(/\s+/g, '-')}`;
   <!-- ===================================================================== -->
   <div
     id={dropdownId}
-    class={`
-      absolute z-50 bg-white rounded-lg shadow-lg border border-gray-200
-      opacity-0 invisible group-hover:opacity-100 group-hover:visible
-      transition-all duration-200 transform
-      ${isMobile 
-        ? 'top-full left-0 right-0 mt-1 w-full max-w-xs mx-auto' 
-        : 'top-full left-0 mt-1 w-64'
-      }
-    `}
+    class="absolute z-50 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform right-0"
   >
-    <!-- Dropdown items container -->
-    <div class="py-2">
-      {items.map((item) => (
-        <!-- Individual dropdown item -->
-        <a
-          href={item.path}
-          class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors duration-150"
-        >
-          <!-- Item title -->
-          <div class="font-medium">{item.title}</div>
-          
-          <!-- Optional item description -->
-          {item.description && (
-            <div class="text-xs text-gray-500 mt-1">{item.description}</div>
-          )}
-        </a>
-      ))}
+    <div class="dropdown-grid">
+      {items.map((item) => {
+        const isItemActive = isCurrentPage(item.path);
+        return (
+          <a
+            href={isItemActive ? undefined : item.path}
+            class={`
+              dropdown-item
+              ${isItemActive 
+                ? 'bg-blue-50 text-blue-600 border-blue-200 font-medium' 
+                : 'text-gray-600'
+              }
+            `}
+          >
+            {item.title}
+            {isItemActive && (
+              <span class="ml-2 w-2 h-2 bg-blue-500 rounded-full"></span>
+            )}
+          </a>
+        );
+      })}
     </div>
   </div>
 </div>

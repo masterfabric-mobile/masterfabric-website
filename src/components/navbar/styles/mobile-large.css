@@ -143,6 +143,7 @@
       -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1) !important;
       -webkit-touch-callout: none !important;
       -webkit-user-select: none !important;
+      user-select: none !important;
       touch-action: manipulation !important;
     }
   }

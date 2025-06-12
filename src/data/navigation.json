@@ -34,8 +34,8 @@
       "title": "Jobs",
       "path": "/jobs",
       "order": 3,
-      "icon": "Job",
-      "style": "inverted"
+      "icon": "work",
+      "style": "outline"
     },
     {
       "id": "about",

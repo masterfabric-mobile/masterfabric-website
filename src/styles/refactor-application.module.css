@@ -130,4 +130,14 @@
 .service-cards-bg > * {
   position: relative;
   z-index: 1;
-} 
+}
+
+/* Active page indicator animation */
+@keyframes activeButtonPulse {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+.active-page-indicator {
+  animation: activeButtonPulse 2s infinite ease-in-out;
+}

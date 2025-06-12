@@ -27,6 +27,18 @@ const { brand, menuItems, socialLinks, responsive } = navigationData;
 // Sort menu items and social links by order
 const sortedMenuItems = menuItems.sort((a, b) => a.order - b.order);
 const sortedSocialLinks = socialLinks.sort((a, b) => a.order - b.order);
+
+// Get current page path - needed to determine active menu item
+const { pathname } = Astro.url;
+const currentPath = pathname.endsWith('/') && pathname !== '/' 
+  ? pathname.slice(0, -1) 
+  : pathname;
+
+// Helper function to check if a menu item corresponds to current page
+const isCurrentPage = (itemPath) => {
+  const normalizeItemPath = itemPath === '/' ? '/' : itemPath.endsWith('/') ? itemPath.slice(0, -1) : itemPath;
+  return normalizeItemPath === currentPath;
+};
 ---
 
 <Container>
@@ -96,9 +108,13 @@ const sortedSocialLinks = socialLinks.sort((a, b) => a.order - b.order);
                     <!-- Dropdown menu item -->
                     <div class="col-span-2">
                       <details class="group">
-                        <summary class="flex items-center justify-between w-full px-4 py-3 text-gray-700 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors">
+                        <summary class={`flex items-center justify-between w-full px-4 py-3 rounded-lg cursor-pointer transition-colors ${
+                          isCurrentPage(item.path) 
+                            ? 'bg-blue-50 text-blue-600 mobile-active-item' 
+                            : 'text-gray-700 bg-gray-50 hover:bg-gray-100'
+                        }`}>
                           <div class="flex items-center gap-3">
-                            <Icon name={item.icon} size="sm" class="w-5 h-5 text-gray-600" />
+                            <Icon name={item.icon} size="sm" class={`w-5 h-5 ${isCurrentPage(item.path) ? 'text-blue-600' : 'text-gray-600'}`} />
                             <span class="font-medium text-sm">{item.title}</span>
                           </div>
                           <Icon name="chevron" size="sm" class="w-4 h-4 transition-transform duration-200 group-open:rotate-180" />
@@ -107,23 +123,39 @@ const sortedSocialLinks = socialLinks.sort((a, b) => a.order - b.order);
                         <div class="mt-2 space-y-1 pl-8">
                           {item.dropdown.items.map((dropdownItem) => (
                             <a
-                              href={dropdownItem.path}
-                              class="block px-3 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded transition-colors"
+                              href={isCurrentPage(dropdownItem.path) ? undefined : dropdownItem.path}
+                              class={`block px-3 py-2 text-sm rounded transition-colors ${
+                                isCurrentPage(dropdownItem.path) 
+                                  ? 'bg-blue-50 text-blue-600 cursor-default border-l-2 border-blue-500' 
+                                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                              }`}
+                              aria-current={isCurrentPage(dropdownItem.path) ? 'page' : undefined}
                             >
                               {dropdownItem.title}
+                              {isCurrentPage(dropdownItem.path) && (
+                                <span class="ml-2 w-2 h-2 bg-blue-500 rounded-full inline-block"></span>
+                              )}
                             </a>
                           ))}
                         </div>
                       </details>
                     </div>
                   ) : (
-                    <!-- Regular menu item -->
+                    <!-- Regular menu item with active state -->
                     <a
-                      href={item.path}
-                      class="flex flex-col items-center gap-3 p-4 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-all duration-200 min-h-[90px] justify-center border border-gray-100 hover:border-gray-200"
+                      href={isCurrentPage(item.path) ? undefined : item.path}
+                      class={`flex flex-col items-center gap-3 p-4 rounded-lg transition-all duration-200 min-h-[90px] justify-center ${
+                        isCurrentPage(item.path) 
+                          ? 'bg-blue-50 text-blue-700 cursor-default mobile-active-item' 
+                          : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'
+                      }`}
+                      aria-current={isCurrentPage(item.path) ? 'page' : undefined}
                     >
-                      <Icon name={item.icon} size="md" class="w-6 h-6 text-gray-600" />
+                      <Icon name={item.icon} size="md" class={`w-6 h-6 ${isCurrentPage(item.path) ? 'text-blue-600' : 'text-gray-600'}`} />
                       <span class="text-xs font-medium text-center leading-tight">{item.title}</span>
+                      {isCurrentPage(item.path) && (
+                        <span class="active-indicator-dot"></span>
+                      )}
                     </a>
                   )
                 ))}
@@ -160,18 +192,31 @@ const sortedSocialLinks = socialLinks.sort((a, b) => a.order - b.order);
     <!-- DESKTOP NAVIGATION MENU -->
     <!-- ===================================================================== -->
     <nav class="hidden lg:flex items-center gap-2 desktop-nav">
-      <!-- Main navigation items -->
+      <!-- Main navigation items with active state -->
       {sortedMenuItems.map((item) => (
         item.dropdown ? (
-          <Dropdown items={item.dropdown.items} trigger={item.title} />
+          <Dropdown 
+            items={item.dropdown.items} 
+            trigger={item.title}
+            currentPath={currentPath}
+            isActive={isCurrentPage(item.path)}
+          />
         ) : (
           <Link 
-            style={item.style} 
-            href={item.path} 
+            style={isCurrentPage(item.path) ? "active" : (item.title === "Jobs" ? "default" : item.style)} 
+            href={isCurrentPage(item.path) ? undefined : item.path} 
             size="md"
-            class="transition-all duration-200 hover:scale-105"
+            class={`transition-all duration-200 ${
+              isCurrentPage(item.path) 
+                ? 'desktop-active-item pointer-events-none active-page-glow' 
+                : 'hover:scale-105'
+            } ${item.title === "Jobs" ? "!border-none !shadow-none" : ""}`}
+            aria-current={isCurrentPage(item.path) ? 'page' : undefined}
           >
             {item.title}
+            {isCurrentPage(item.path) && (
+              <span class="ml-1 w-2 h-2 bg-blue-500 rounded-full inline-block active-page-indicator"></span>
+            )}
           </Link>
         )
       ))}
@@ -184,18 +229,20 @@ const sortedSocialLinks = socialLinks.sort((a, b) => a.order - b.order);
             target="_blank"
             rel="noopener noreferrer"
             class={`
-              inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg
+              inline-flex items-center gap-2 rounded-lg
               transition-all duration-200 shadow-sm hover:shadow-md transform hover:scale-105
-              ${index > 0 ? 'lg:ml-3 xl:ml-3' : ''}
+              ${index > 0 ? 'lg:ml-2 xl:ml-3' : ''}
               ${social.color === 'blue'
                 ? 'text-white bg-blue-600 border border-blue-600 hover:bg-blue-700 hover:border-blue-700'
                 : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 hover:text-gray-900'
               }
-              lg:px-2 lg:py-2 xl:px-4 xl:py-2
+              px-4 py-2 text-sm font-medium
+              lg:px-2 lg:py-2 lg:aspect-square
+              xl:px-4 xl:py-2 xl:aspect-auto
             `}
           >
             <SocialIcon name={social.icon} class="w-4 h-4" />
-            <span class="inline">{social.title}</span>
+            <span class="inline lg:hidden xl:inline">{social.title}</span>
           </a>
         ))}
       </div>
@@ -205,5 +252,41 @@ const sortedSocialLinks = socialLinks.sort((a, b) => a.order - b.order);
 
 <style>
   @import url('./styles/navbar.css');
+  
+  /* Additional active state styles */
+  .mobile-active-item {
+    position: relative;
+    box-shadow: 0 2px 5px rgba(37, 99, 235, 0.1);
+  }
+
+  /* Sağ üstte küçük mavi nokta */
+  .active-indicator-dot {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 8px;
+    height: 8px;
+    background: #3b82f6;
+    border-radius: 9999px;
+    box-shadow: 0 0 4px #3b82f6aa;
+    z-index: 2;
+    animation: pulse 2s infinite ease-in-out;
+  }
+
+  .mobile-active-item .active-indicator-dot {
+    /* Mobilde de doğru konumda olsun */
+    top: 10px;
+    right: 10px;
+  }
+  
+  .mobile-active-item .active-indicator {
+    /* Eski stil, artık kullanılmıyor */
+    display: none;
+  }
+  
+  @keyframes pulse {
+    0%, 100% { opacity: 0.6; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+  }
 </style>
 

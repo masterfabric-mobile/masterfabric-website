@@ -3,6 +3,7 @@
 // IMPORTS
 // =============================================================================
 import { Icon } from "astro-icon/components";
+import './styles/dropdown.css'; 
 
 // =============================================================================
 // TYPE DEFINITIONS
@@ -76,51 +77,25 @@ const isCurrentPage = (itemPath: string) => {
   <!-- ===================================================================== -->
   <div
     id={dropdownId}
-    class={`
-      absolute z-50 bg-white rounded-lg shadow-lg border border-gray-200
-      opacity-0 invisible group-hover:opacity-100 group-hover:visible
-      transition-all duration-200 transform
-      ${isMobile 
-        ? 'top-full left-0 right-0 mt-1 w-full max-w-xs mx-auto' 
-        : 'top-full left-0 mt-1 w-64'
-      }
-    `}
+    class="absolute z-50 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform right-0"
   >
-    <!-- Dropdown items container -->
-    <div class="py-2">
+    <div class="dropdown-grid">
       {items.map((item) => {
         const isItemActive = isCurrentPage(item.path);
         return (
-          <!-- Individual dropdown item -->
           <a
             href={isItemActive ? undefined : item.path}
             class={`
-              block px-4 py-3 text-sm transition-colors duration-150 relative
+              dropdown-item
               ${isItemActive 
-                ? 'bg-blue-50 text-blue-600 cursor-default border-l-4 border-blue-500 font-semibold active-dropdown-item' 
-                : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900 cursor-pointer'
+                ? 'bg-blue-50 text-blue-600 border-blue-200 font-medium' 
+                : 'text-gray-600'
               }
             `}
-            {...(isItemActive && { 'aria-current': 'page' })}
           >
-            <!-- Item title -->
-            <div class="font-medium flex items-center justify-between">
-              {item.title}
-              {isItemActive && (
-                <span class="ml-2 w-2 h-2 bg-blue-500 rounded-full"></span>
-              )}
-            </div>
-            
-            <!-- Optional item description -->
-            {item.description && (
-              <div class={`text-xs mt-1 ${isItemActive ? 'text-blue-500' : 'text-gray-500'}`}>
-                {item.description}
-              </div>
-            )}
-            
-            <!-- Current page indicator -->
+            {item.title}
             {isItemActive && (
-              <div class="text-xs text-blue-500 mt-1 font-medium">• Current Page</div>
+              <span class="ml-2 w-2 h-2 bg-blue-500 rounded-full"></span>
             )}
           </a>
         );

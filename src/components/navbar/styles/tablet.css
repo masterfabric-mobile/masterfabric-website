@@ -41,25 +41,19 @@
     margin-top: 0.5rem;
   }
   
-  /* Tablet grid: use 3 columns instead of 2 for larger screens */
-  @media (min-width: 768px) and (max-width: 1023px) {
-    .grid.grid-cols-2 {
-      grid-template-columns: repeat(3, 1fr);
-    }
-    
-    .col-span-2 {
-      grid-column: span 3;
-    }
-    
-    /* Adjust grid item sizes for tablet */
-    .grid.grid-cols-2 > a {
-      min-height: 80px;
-      padding: 0.75rem;
-    }
+  /* Tablet grid: her zaman 2 kolon */
+  .grid.grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr) !important;
   }
-  
-  /* Tablet button hover effects (same as mobile) */
+
+  .col-span-2 {
+    grid-column: span 2 !important;
+  }
+
+  /* Grid item boyutları ve padding */
   .grid.grid-cols-2 > a {
+    min-height: 80px;
+    padding: 0.75rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -68,19 +62,19 @@
     border: 1px solid #e5e7eb;
     transition: all 0.2s ease-in-out;
   }
-  
+
   .grid.grid-cols-2 > a:hover {
     background-color: #f3f4f6;
     border-color: #d1d5db;
     transform: translateY(-1px);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   }
-  
+
   /* Tablet icon styling */
   .grid.grid-cols-2 > a svg {
     color: #6b7280;
   }
-  
+
   .grid.grid-cols-2 > a:hover svg {
     color: #374151;
   }

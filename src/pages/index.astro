@@ -5,6 +5,7 @@
 
 // Layout Components
 import Layout from "@layouts/layout.astro";
+import GitHubProjects from "@components/about/github-projects.astro";
 import Container from "@components/layout/container.astro";
 
 // Hero & Landing Components
@@ -60,6 +61,11 @@ const projectFlowData = JSON.parse(projectFlowDataContent);
     <!-- =================================================================== -->
     <RefactorApplication />
     <!-- =================================================================== -->
+    <!-- GITHUB PROJECTS -->
+    <!-- Display showcase of development projects and repositories -->
+    <!-- =================================================================== -->
+    <GitHubProjects />
+    <!-- =================================================================== -->
     <!-- BRAND PARTNERSHIPS -->
     <!-- Display partner logos and testimonials -->
     <!-- =================================================================== -->
@@ -67,7 +73,7 @@ const projectFlowData = JSON.parse(projectFlowDataContent);
     <!-- =================================================================== -->
     <!-- CALL TO ACTION -->
     <!-- Final conversion section with contact forms or next steps -->
-    <!-- =================================================================== -->
+    <!-- =================================================================== -->   
     <CTA/>
   </Container>
 </Layout>

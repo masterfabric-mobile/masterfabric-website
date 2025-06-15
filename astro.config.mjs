@@ -9,6 +9,9 @@ import path from "path";
 export default defineConfig({
   site: "https://masterfabric.co",
   integrations: [tailwind(), mdx(), sitemap(), icon()],
+  devToolbar: {
+    enabled: false,
+  },
   alias: {
     "@layouts": path.resolve("./src/layouts"),
   },

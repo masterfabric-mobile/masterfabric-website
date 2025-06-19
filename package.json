@@ -13,6 +13,7 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
+    "dev:silent": "npm run dev | grep -v '__astro_inspector'",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",

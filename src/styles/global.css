@@ -12,3 +12,18 @@ svg[astro-icon] {
   height: 1em;
   font-size: inherit;
 }
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
+}
+
+/* Smooth scroll snap */
+.scrollbar-hide > * {
+  scroll-snap-align: start;
+}

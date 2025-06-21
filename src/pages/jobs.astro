@@ -104,15 +104,15 @@ const today = new Date().toLocaleDateString('en-US', {
         <p class="text-lg text-gray-600 max-w-3xl mx-auto">{jobsData.hiringProcess.description}</p>
       </div>
       
-      <!-- Desktop and Tablet - Horizontal Layout -->
+      <!-- Desktop and Tablet - Horizontal Scrollable Layout -->
       <div class="hidden md:block">
         <div class="relative">
           <!-- Progress Line -->
-          <div class="absolute top-16 left-0 right-0 h-1 bg-blue-200 rounded-full">
+          <div class="absolute top-5 left-0 right-0 h-1 bg-blue-200 rounded-full z-0">
             <div class="h-full bg-blue-600 rounded-full" style="width: 100%;"></div>
           </div>
           
-          <div class="grid grid-cols-4 gap-8 relative">
+          <div class="flex gap-6 overflow-x-auto pb-6 scrollbar-hide relative z-10" style="scroll-snap-type: x mandatory;">
             {jobsData.hiringProcess.steps.map((step, index) => (
               <HiringStep step={step} />
             ))}

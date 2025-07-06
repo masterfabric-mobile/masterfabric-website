@@ -1,0 +1,321 @@
+{
+  "timeline": {
+    "title": "Project Development Process",
+    "subtitle": "Step-by-Step Progress Following Company Logic",
+    "description": "Track every project phase and discover our professional approach to mobile app development",
+    "settings": {
+      "autoProgress": true,
+      "scrollBasedProgress": false,
+      "pauseOnHover": true,
+      "showProgressBar": true,
+      "animationDuration": 600,
+      "stepDuration": 4000
+    },
+    "phases": [
+      {
+        "id": "discovery",
+        "title": "Discovery and Analysis",
+        "shortTitle": "Discovery",
+        "icon": "🔍",
+        "color": "#000000",
+        "status": "active",
+        "duration": "Days 1-5",
+        "description": "We conduct comprehensive analysis by understanding project requirements and identifying client needs.",
+        "details": {
+          "objectives": [
+            "Client requirements analysis",
+            "Technical feasibility study",
+            "Project scope definition",
+            "Risk analysis and mitigation plans"
+          ],
+          "deliverables": [
+            "Requirements document",
+            "Technical analysis report",
+            "Project scope document",
+            "Timeline planning"
+          ],
+          "team": ["Project Manager", "Business Analyst", "Technical Lead"]
+        },
+        "milestones": [
+          {
+            "name": "Requirements Gathering",
+            "status": "completed",
+            "date": "Day 1"
+          },
+          {
+            "name": "Technical Analysis",
+            "status": "completed", 
+            "date": "Day 3"
+          },
+          {
+            "name": "Project Planning",
+            "status": "completed",
+            "date": "Day 7"
+          }
+        ]
+      },
+      {
+        "id": "design",
+        "title": "Design and Prototyping",
+        "shortTitle": "Design",
+        "icon": "🎨",
+        "color": "#333333",
+        "status": "active",
+        "duration": "Days 6-12",
+        "description": "We create prototypes and test them in our user experience-focused design process.",
+        "details": {
+          "objectives": [
+            "UI/UX design process management",
+            "User experience optimization",
+            "Prototyping and testing",
+            "Design system creation"
+          ],
+          "deliverables": [
+            "Wireframe designs",
+            "UI/UX prototypes",
+            "Design system",
+            "Usability test reports"
+          ],
+          "team": ["UI/UX Designer", "Graphic Designer", "User Experience Expert"]
+        },
+        "milestones": [
+          {
+            "name": "Wireframe Design",
+            "status": "completed",
+            "date": "Week 2"
+          },
+          {
+            "name": "Prototype Development",
+            "status": "in-progress",
+            "date": "Week 3"
+          },
+          {
+            "name": "User Testing",
+            "status": "pending",
+            "date": "Week 4"
+          }
+        ]
+      },
+      {
+        "id": "development",
+        "title": "Development and Coding",
+        "shortTitle": "Development", 
+        "icon": "⚙️",
+        "color": "#555555",
+        "status": "active",
+        "duration": "Days 13-27",
+        "description": "We create robust and scalable code structure using modern technologies.",
+        "details": {
+          "objectives": [
+            "Clean code principles development",
+            "Test-driven development (TDD)",
+            "CI/CD pipeline setup",
+            "Code quality and security audits"
+          ],
+          "deliverables": [
+            "Source code",
+            "Unit test coverage",
+            "API documentation",
+            "Security audit report"
+          ],
+          "team": ["Frontend Developer", "Backend Developer", "DevOps Expert", "QA Tester"]
+        },
+        "milestones": [
+          {
+            "name": "Backend API Development",
+            "status": "pending",
+            "date": "Week 6"
+          },
+          {
+            "name": "Frontend Application",
+            "status": "pending",
+            "date": "Week 10"
+          },
+          {
+            "name": "Integration Testing",
+            "status": "pending",
+            "date": "Week 12"
+          }
+        ]
+      },
+      {
+        "id": "testing",
+        "title": "Testing and Quality Assurance",
+        "shortTitle": "Testing",
+        "icon": "🧪",
+        "color": "#777777",
+        "status": "active",
+        "duration": "Days 28-32",
+        "description": "We guarantee the quality and reliability of the application through comprehensive testing processes.",
+        "details": {
+          "objectives": [
+            "Functional testing processes",
+            "Performance and load testing",
+            "Security penetration testing",
+            "User acceptance testing"
+          ],
+          "deliverables": [
+            "Test plan document",
+            "Test case reports",
+            "Performance analysis report",
+            "Security test report"
+          ],
+          "team": ["QA Test Expert", "Security Expert", "Performance Expert"]
+        },
+        "milestones": [
+          {
+            "name": "Functional Testing",
+            "status": "pending",
+            "date": "Week 1"
+          },
+          {
+            "name": "Performance Testing",
+            "status": "pending",
+            "date": "Week 2"
+          },
+          {
+            "name": "Security Testing",
+            "status": "pending",
+            "date": "Week 2"
+          }
+        ]
+      },
+      {
+        "id": "deployment",
+        "title": "Launch and Deployment",
+        "shortTitle": "Deployment",
+        "icon": "🚀",
+        "color": "#999999",
+        "status": "active",
+        "duration": "Days 33-35",
+        "description": "We securely deploy the application to production environment and make it ready for use.",
+        "details": {
+          "objectives": [
+            "Production environment setup",
+            "Blue-green deployment strategy",
+            "Monitoring and logging system setup",
+            "Backup and disaster recovery plan"
+          ],
+          "deliverables": [
+            "Live application",
+            "Deployment documentation",
+            "Monitoring dashboard",
+            "Backup strategy"
+          ],
+          "team": ["DevOps Expert", "System Administrator", "Project Manager"]
+        },
+        "milestones": [
+          {
+            "name": "Pre-production Deploy",
+            "status": "pending",
+            "date": "Day 1"
+          },
+          {
+            "name": "Production Deploy",
+            "status": "pending",
+            "date": "Day 3"
+          },
+          {
+            "name": "Go-Live",
+            "status": "pending",
+            "date": "Day 5"
+          }
+        ]
+      },
+      {
+        "id": "maintenance",
+        "title": "Maintenance and Support",
+        "shortTitle": "Maintenance",
+        "icon": "🔧",
+        "color": "#BBBBBB",
+        "status": "active",
+        "duration": "Days 36+",
+        "description": "We ensure long-term success through continuous improvement of the application and user support.",
+        "details": {
+          "objectives": [
+            "24/7 technical support service",
+            "Performance monitoring and optimization",
+            "Feature development and improvements",
+            "Security updates"
+          ],
+          "deliverables": [
+            "Monthly performance reports",
+            "Security audit reports",
+            "Feature development roadmap",
+            "SLA reports"
+          ],
+          "team": ["Support Expert", "DevOps Expert", "Security Expert"]
+        },
+        "milestones": [
+          {
+            "name": "First Month Evaluation",
+            "status": "pending",
+            "date": "Day 30"
+          },
+          {
+            "name": "Performance Optimization",
+            "status": "pending",
+            "date": "Day 60"
+          },
+          {
+            "name": "Feature Updates",
+            "status": "pending",
+            "date": "Day 90"
+          }
+        ]
+      }
+    ]
+  },
+  "passion": {
+    "title": "We Approach Development with Precision.",
+    "description": "We are a team of dedicated developers, designers, and strategists who love creating mobile apps. Our systematic approach drives us to deliver exceptional results for our clients, combining technical excellence with creative innovation."
+  },
+  "processSteps": [
+    { "icon": "🔍", "title": "Discovery", "description": "Requirements analysis" },
+    { "icon": "🎨", "title": "Design", "description": "User-centered UI/UX" },
+    { "icon": "⚙️", "title": "Development", "description": "Modern technologies" },
+    { "icon": "🚀", "title": "Launch", "description": "Successful deployments" }
+  ],
+  "tools": {
+    "discovery": [
+      { "name": "Figma", "icon": "🎨", "category": "Design" },
+      { "name": "Miro", "icon": "🧩", "category": "Collaboration" },
+      { "name": "Notion", "icon": "📝", "category": "Documentation" },
+      { "name": "Slack", "icon": "💬", "category": "Communication" },
+      { "name": "Analytics", "icon": "📊", "category": "Analysis" }
+    ],
+    "design": [
+      { "name": "Figma", "icon": "🎨", "category": "Design" },
+      { "name": "Adobe XD", "icon": "🎭", "category": "Design" },
+      { "name": "Sketch", "icon": "✏️", "category": "Design" },
+      { "name": "InVision", "icon": "👁️", "category": "Prototyping" },
+      { "name": "Zeplin", "icon": "📐", "category": "Handoff" }
+    ],
+    "development": [
+      { "name": "React Native", "icon": "⚛️", "category": "Frontend" },
+      { "name": "Node.js", "icon": "🟢", "category": "Backend" },
+      { "name": "TypeScript", "icon": "📘", "category": "Language" },
+      { "name": "MongoDB", "icon": "🍃", "category": "Database" },
+      { "name": "AWS", "icon": "☁️", "category": "Cloud" },
+      { "name": "Docker", "icon": "🐳", "category": "DevOps" }
+    ],
+    "testing": [
+      { "name": "Jest", "icon": "🃏", "category": "Unit Testing" },
+      { "name": "Detox", "icon": "🧪", "category": "E2E Testing" },
+      { "name": "Postman", "icon": "📮", "category": "API Testing" },
+      { "name": "Selenium", "icon": "🤖", "category": "Automation" }
+    ],
+    "deployment": [
+      { "name": "App Store", "icon": "🍎", "category": "iOS Store" },
+      { "name": "Play Store", "icon": "📱", "category": "Android Store" },
+      { "name": "Firebase", "icon": "🔥", "category": "Backend" },
+      { "name": "Fastlane", "icon": "⚡", "category": "CI/CD" }
+    ],
+    "maintenance": [
+      { "name": "Sentry", "icon": "🚨", "category": "Monitoring" },
+      { "name": "Analytics", "icon": "📊", "category": "Analytics" },
+      { "name": "Zendesk", "icon": "🎧", "category": "Support" },
+      { "name": "Mixpanel", "icon": "🎛️", "category": "Analytics" }
+    ]
+  }
+}

@@ -1,0 +1,166 @@
+{
+  "openPositions": [
+    {
+      "id": "senior-flutter-dev",
+      "title": "Senior Flutter Developer",
+      "department": "Development",
+      "type": "Full-time",
+      "location": "Istanbul, Turkey / Remote",
+      "experience": "4+ years",
+      "salary": "***",
+      "posted": "today",
+      "deadline": "2025-02-15",
+      "description": "We're seeking a senior Flutter developer to lead mobile app development projects and mentor junior developers.",
+      "requirements": [
+        "4+ years of Flutter/Dart development experience",
+        "Strong understanding of state management (Bloc, Provider, Riverpod)",
+        "Experience with REST APIs and GraphQL",
+        "Knowledge of CI/CD pipelines",
+        "Excellent problem-solving skills"
+      ],
+      "responsibilities": [
+        "Lead Flutter app development from conception to deployment",
+        "Mentor junior developers and conduct code reviews",
+        "Collaborate with design and backend teams",
+        "Optimize app performance and user experience",
+        "Implement best practices and coding standards"
+      ],
+      "tags": ["Flutter", "Dart", "Mobile", "iOS", "Android", "Senior"]
+    },
+    {
+      "id": "ui-ux-designer",
+      "title": "UI/UX Designer",
+      "department": "Design",
+      "type": "Full-time",
+      "location": "Istanbul, Turkey / Hybrid",
+      "experience": "3+ years",
+      "salary": "***",
+      "posted": "today",
+      "deadline": "2025-02-10",
+      "description": "Join our design team to create beautiful, intuitive user interfaces and experiences for mobile applications.",
+      "requirements": [
+        "3+ years of UI/UX design experience",
+        "Proficiency in Figma, Sketch, or Adobe XD",
+        "Strong portfolio demonstrating mobile app designs",
+        "Understanding of design systems and accessibility",
+        "Knowledge of user research methodologies"
+      ],
+      "responsibilities": [
+        "Create wireframes, prototypes, and high-fidelity designs",
+        "Conduct user research and usability testing",
+        "Develop and maintain design systems",
+        "Collaborate with developers to ensure design implementation",
+        "Present design concepts to clients and stakeholders"
+      ],
+      "tags": ["UI/UX", "Design", "Figma", "Mobile", "Prototyping"]
+    },
+    {
+      "id": "react-native-dev",
+      "title": "React Native Developer",
+      "department": "Development",
+      "type": "Full-time",
+      "location": "Istanbul, Turkey / Remote",
+      "experience": "2+ years",
+      "salary": "***",
+      "posted": "today",
+      "deadline": "2025-02-12",
+      "description": "Looking for a React Native developer to build cross-platform mobile applications with cutting-edge features.",
+      "requirements": [
+        "2+ years of React Native development experience",
+        "Strong JavaScript/TypeScript skills",
+        "Experience with native mobile development (iOS/Android)",
+        "Knowledge of Redux or Context API",
+        "Familiarity with mobile app deployment processes"
+      ],
+      "responsibilities": [
+        "Develop cross-platform mobile applications",
+        "Integrate with native modules and third-party libraries",
+        "Collaborate with backend developers for API integration",
+        "Optimize app performance for both platforms",
+        "Maintain code quality and documentation"
+      ],
+      "tags": ["React Native", "JavaScript", "TypeScript", "Mobile", "Cross-platform"]
+    },
+    {
+      "id": "devops-engineer",
+      "title": "DevOps Engineer",
+      "department": "Development",
+      "type": "Full-time",
+      "location": "Istanbul, Turkey / Remote",
+      "experience": "3+ years",
+      "salary": "***",
+      "posted": "today",
+      "deadline": "2025-02-08",
+      "description": "Help us build and maintain robust CI/CD pipelines and cloud infrastructure for our mobile and web applications.",
+      "requirements": [
+        "3+ years of DevOps/Infrastructure experience",
+        "Experience with AWS, Google Cloud, or Azure",
+        "Knowledge of Docker, Kubernetes, and containerization",
+        "Proficiency in scripting languages (Python, Bash)",
+        "Experience with CI/CD tools (GitHub Actions, Jenkins)"
+      ],
+      "responsibilities": [
+        "Design and maintain CI/CD pipelines",
+        "Manage cloud infrastructure and deployments",
+        "Monitor application performance and security",
+        "Automate deployment and scaling processes",
+        "Collaborate with development teams on infrastructure needs"
+      ],
+      "tags": ["DevOps", "AWS", "Docker", "Kubernetes", "CI/CD", "Cloud"]
+    },
+    {
+      "id": "product-manager",
+      "title": "Product Manager",
+      "department": "Strategy",
+      "type": "Full-time",
+      "location": "Istanbul, Turkey / Hybrid",
+      "experience": "4+ years",
+      "salary": "***",
+      "posted": "today",
+      "deadline": "2025-02-05",
+      "description": "Lead product strategy and roadmap for our mobile applications, working closely with development and design teams.",
+      "requirements": [
+        "4+ years of product management experience",
+        "Experience with mobile app product development",
+        "Strong analytical and data-driven decision making",
+        "Excellent communication and leadership skills",
+        "Knowledge of Agile methodologies"
+      ],
+      "responsibilities": [
+        "Define product strategy and roadmap",
+        "Gather and prioritize product requirements",
+        "Work with cross-functional teams to deliver products",
+        "Analyze user feedback and market trends",
+        "Drive product launches and feature rollouts"
+      ],
+      "tags": ["Product Management", "Strategy", "Mobile", "Analytics", "Leadership"]
+    },
+    {
+      "id": "qa-engineer",
+      "title": "QA Engineer",
+      "department": "Quality Assurance",
+      "type": "Full-time",
+      "location": "Istanbul, Turkey / Hybrid",
+      "experience": "2+ years",
+      "salary": "***",
+      "posted": "today",
+      "deadline": "2025-02-14",
+      "description": "Ensure the quality and reliability of our mobile applications through comprehensive testing and automation.",
+      "requirements": [
+        "2+ years of QA testing experience",
+        "Experience with mobile app testing (iOS/Android)",
+        "Knowledge of automation testing tools",
+        "Understanding of API testing",
+        "Attention to detail and analytical thinking"
+      ],
+      "responsibilities": [
+        "Design and execute comprehensive test plans",
+        "Perform manual and automated testing",
+        "Identify, document, and track bugs",
+        "Collaborate with development teams on bug fixes",
+        "Maintain and improve testing processes"
+      ],
+      "tags": ["QA", "Testing", "Automation", "Mobile", "Quality Assurance"]
+    }
+  ]
+}

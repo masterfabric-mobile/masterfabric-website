@@ -1,0 +1,116 @@
+/* Floating animations */
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg); 
+  }
+  50% { 
+    transform: translateY(-20px) rotate(5deg); 
+  }
+}
+
+@keyframes float-delayed {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg); 
+  }
+  50% { 
+    transform: translateY(-15px) rotate(-3deg); 
+  }
+}
+
+@keyframes float-slow {
+  0%, 100% { 
+    transform: translateY(0px); 
+  }
+  50% { 
+    transform: translateY(-10px); 
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-gentle {
+  0%, 100% { 
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.2);
+  }
+  50% { 
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+  }
+}
+
+/* Animation classes */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float-delayed 8s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float-slow 10s ease-in-out infinite;
+}
+
+.animate-pulse-gentle {
+  animation: pulse-gentle 3s ease-in-out infinite;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 1s ease-out;
+}
+
+.animate-slide-in-up {
+  animation: slide-in-up 0.8s ease-out 0.2s both;
+}
+
+.animate-slide-in-up-delayed {
+  animation: slide-in-up 0.8s ease-out 0.4s both;
+}
+
+.animate-slide-in-up-more-delayed {
+  animation: slide-in-up 0.8s ease-out 0.6s both;
+}
+
+.animate-slide-in-up-final {
+  animation: slide-in-up 0.8s ease-out 0.8s both;
+}
+
+.animate-fade-in-final {
+  animation: fade-in-up 1s ease-out 1s both;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .absolute.top-20,
+  .absolute.bottom-20,
+  .absolute.top-1\/2,
+  .absolute.top-32,
+  .absolute.bottom-32,
+  .absolute.top-1\/3,
+  .absolute.bottom-1\/3,
+  .absolute.top-1\/4,
+  .absolute.bottom-1\/4 {
+    display: none;
+  }
+}

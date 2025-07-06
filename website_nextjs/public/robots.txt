@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Allow: /terms-of-use
+Allow: /privacy-policy
+
+Sitemap: http://masterfabric.co/sitemap-index.xml

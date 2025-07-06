@@ -1,0 +1,78 @@
+{
+  "brand": {
+    "logo": "/assets/masterfabric-logo.svg",
+    "text": {
+      "main": "Master",
+      "secondary": "Fabric",
+      "tertiary": ""
+    },
+    "description": {
+      "platform": "Platform-Based Application",
+      "studio": "Development Studio"
+    },
+    "alt": "Master Fabric Logo"
+  },
+  "menuItems": [
+    {
+      "id": "home",
+      "title": "Home",
+      "path": "/",
+      "order": 1,
+      "icon": "home",
+      "style": "inverted"
+    },
+    {
+      "id": "contact",
+      "title": "Contact",
+      "path": "/contact",
+      "order": 2,
+      "icon": "contact",
+      "style": "inverted"
+    },
+    {
+      "id": "jobs",
+      "title": "Jobs",
+      "path": "/jobs",
+      "order": 3,
+      "icon": "work",
+      "style": "outline"
+    },
+    {
+      "id": "about",
+      "title": "About",
+      "path": "/about",
+      "order": 4,
+      "icon": "about",
+      "style": "inverted"
+    }
+
+  ],
+  "socialLinks": [
+    {
+      "id": "github",
+      "title": "GitHub",
+      "url": "https://github.com/orgs/masterfabric-mobile/repositories",
+      "icon": "github",
+      "color": "gray",
+      "order": 1
+    },
+    {
+      "id": "linkedin",
+      "title": "LinkedIn",
+      "url": "https://linkedin.com/company/masterfabric",
+      "icon": "linkedin",
+      "color": "blue",
+      "order": 2
+    }
+  ],
+  "responsive": {
+    "breakpoints": {
+      "mobile": "lg",
+      "tablet": "md"
+    },
+    "animation": {
+      "duration": "200ms",
+      "easing": "ease-in-out"
+    }
+  }
+}

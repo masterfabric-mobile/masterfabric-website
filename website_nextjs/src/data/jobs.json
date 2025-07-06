@@ -1,0 +1,221 @@
+{
+  "sectionHeader": {
+    "title": "Careers",
+    "description": [
+      "Join our dynamic team of innovators and creators who are passionate about building the future of mobile applications. At MasterFabric, we believe in fostering talent, embracing challenges, and creating solutions that matter."
+    ]
+  },
+  "hero": {
+    "title": "Build Your Career With Us",
+    "subtitle": "Join the MasterFabric Family",
+    "description": "We are a <strong>growing team</strong> of passionate developers, designers, and strategists who love creating <strong>mobile applications</strong>. Our company culture is built on <strong>continuous learning</strong>, <strong>innovation</strong>, and <strong>collaboration</strong>. We don't just hire employees – we welcome <strong>new family members</strong> who share our vision of transforming ideas into impactful digital solutions."
+  },
+  "companyStructure": {
+    "title": "How We Work",
+    "description": "We build exceptional mobile applications through collaborative teams, modern workflows, and cutting-edge technology.",
+    "departments": [
+      {
+        "name": "Engineering",
+        "description": "Our development team creates robust, scalable mobile applications using modern frameworks and best practices.",
+        "size": "12 Engineers",
+        "technologies": ["Flutter", "React Native", "Swift", "Kotlin", "Firebase", "Node.js", "AWS"],
+        "icon": {
+          "paths": [
+            "M16 18l6-6-6-6",
+            "M8 6l-6 6 6 6",
+            "M10 20l4-16"
+          ],
+          "color": "#3b82f6"
+        }
+      },
+      {
+        "name": "Design",
+        "description": "Our design team crafts intuitive user experiences and beautiful interfaces that users love.",
+        "size": "4 Designers",
+        "technologies": ["Figma", "Adobe XD", "Sketch", "After Effects", "Illustrator"],
+        "icon": {
+          "paths": [
+            "M3 17.25V21h3.75l11.06-11.06a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0L3 17.25z"
+          ],
+          "color": "#f59e42"
+        }
+      },
+      {
+        "name": "Product",
+        "description": "Our product team ensures every feature delivers value and aligns with business objectives.",
+        "size": "3 Product Managers",
+        "technologies": ["Analytics", "User Research", "Roadmapping", "Agile", "Scrum"],
+        "icon": {
+          "paths": [
+            "M7 2C5.9 2 5 2.9 5 4v16c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2H7zm0 2h10v16H7V4zm5 16c-.55 0-1-.45-1-1h2c0 .55-.45 1-1 1z"
+          ],
+          "color": "#1d4ed8"
+        }
+      },
+      {
+        "name": "DevOps",
+        "description": "Our DevOps team maintains reliable infrastructure and streamlined deployment processes.",
+        "size": "2 DevOps Engineers",
+        "technologies": ["AWS", "Docker", "CI/CD", "Kubernetes", "Monitoring", "Security"],
+        "icon": {
+          "paths": [
+            "M12 2C8 2 4.5 4.5 3.5 8 1.5 8.5 0 10.5 0 13c0 3 2.5 5.5 5.5 5.5h13c3 0 5.5-2.5 5.5-5.5 0-2.5-1.5-4.5-3.5-5C19.5 4.5 16 2 12 2z"
+          ],
+          "color": "#2563eb"
+        }
+      }
+    ]
+  },
+  "employeeCare": {
+    "title": "How We Care for Our Team",
+    "description": "We believe that happy employees create amazing products. Our comprehensive benefits and supportive work environment reflect our commitment to your well-being and professional growth.",
+    "benefits": [
+      {
+        "icon": "🏠",
+        "title": "Flexible Work Environment",
+        "description": "Hybrid work model with comfortable office space and remote work options"
+      },
+      {
+        "icon": "🎓",
+        "title": "Learning & Development",
+        "description": "Annual learning budget, conference attendance, and skill development programs"
+      },
+      {
+        "icon": "⚕️",
+        "title": "Health & Wellness",
+        "description": "Comprehensive health insurance, mental health support, and wellness programs"
+      },
+      {
+        "icon": "💰",
+        "title": "Competitive Compensation",
+        "description": "Market-competitive salaries, performance bonuses, and equity participation"
+      },
+      {
+        "icon": "🏖️",
+        "title": "Work-Life Balance",
+        "description": "Generous vacation policy, flexible hours, and sabbatical opportunities"
+      },
+      {
+        "icon": "🎯",
+        "title": "Career Growth",
+        "description": "Clear career progression paths, mentorship programs, and leadership opportunities"
+      }
+    ]
+  },
+  "hiringProcess": {
+    "title": "Our 4-Step Hiring Process",
+    "description": "We've designed our hiring process to be transparent, efficient, and meaningful for both candidates and our team.",
+    "steps": [
+      {
+        "number": "01",
+        "title": "Application Review",
+        "duration": "2-3 days",
+        "description": "Our hiring team carefully reviews your application, portfolio, and experience to ensure alignment with our values and requirements.",
+        "icon": "📋",
+        "details": [
+          "Portfolio and resume review",
+          "Initial compatibility assessment",
+          "Skills and experience evaluation",
+          "Cultural fit preliminary screening"
+        ]
+      },
+      {
+        "number": "02",
+        "title": "Initial Interview",
+        "duration": "45-60 minutes",
+        "description": "A conversational interview with our HR team and hiring manager to get to know you better and discuss your background, motivations, and career goals.",
+        "icon": "🤝",
+        "details": [
+          "Background and experience discussion",
+          "Motivation and career goals",
+          "Company culture introduction",
+          "Role expectations overview"
+        ]
+      },
+      {
+        "number": "03",
+        "title": "Technical Assessment",
+        "duration": "2-3 hours",
+        "description": "Depending on the role, this may include coding challenges, design tasks, or strategic case studies that reflect real work scenarios.",
+        "icon": "⚡",
+        "details": [
+          "Role-specific technical evaluation",
+          "Problem-solving assessment",
+          "Practical skills demonstration",
+          "Creative thinking evaluation"
+        ]
+      },
+      {
+        "number": "04",
+        "title": "Final Interview",
+        "duration": "60-90 minutes",
+        "description": "Meet with team leads and potential colleagues to discuss collaboration, answer questions, and finalize the mutual fit assessment.",
+        "icon": "🎯",
+        "details": [
+          "Team integration assessment",
+          "Final technical discussion",
+          "Compensation and benefits review",
+          "Onboarding and start date planning"
+        ]
+      }
+    ]
+  },
+
+  "applicationForm": {
+    "title": "Interested in Working With Us?",
+    "subtitle": "Don't see the perfect role? We're always looking for talented individuals to join our team.",
+    "description": "Even if there isn't a current opening that matches your skills, we'd love to hear from you. Send us your information and we'll reach out when opportunities arise that align with your expertise.",
+    "fields": {
+      "name": {
+        "label": "Full Name",
+        "placeholder": "Enter your full name",
+        "required": true
+      },
+      "email": {
+        "label": "Email Address",
+        "placeholder": "Enter your email address",
+        "required": true
+      },
+      "phone": {
+        "label": "Phone Number",
+        "placeholder": "Enter your phone number",
+        "required": false
+      },
+      "position": {
+        "label": "Position of Interest",
+        "placeholder": "What role are you interested in?",
+        "required": true
+      },
+      "experience": {
+        "label": "Years of Experience",
+        "placeholder": "How many years of experience do you have?",
+        "required": true
+      },
+      "portfolio": {
+        "label": "Portfolio/LinkedIn URL",
+        "placeholder": "Share your portfolio or LinkedIn profile",
+        "required": false
+      },
+      "resume": {
+        "label": "Resume/CV",
+        "placeholder": "Upload your resume (PDF format preferred)",
+        "required": true,
+        "type": "file"
+      },
+      "message": {
+        "label": "Why MasterFabric?",
+        "placeholder": "Tell us why you want to work with MasterFabric and what makes you a great fit for our team...",
+        "required": true
+      }
+    }
+  },
+  "quote": {
+    "text": "At MasterFabric, we don't just build applications – we build careers, relationships, and the future of mobile technology. Every team member contributes to our mission of transforming innovative ideas into impactful digital solutions.",
+    "author": "MasterFabric Team",
+    "position": "Our Commitment to Excellence"
+  },
+  "api": {
+    "endpoint": "https://api.web3forms.com/submit",
+    "accessKey": "3e15a306-d815-4638-8b6d-e2318dc7bc57"
+  }
+}

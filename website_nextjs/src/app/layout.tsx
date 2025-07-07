@@ -4,6 +4,7 @@ import './globals.css'
 import Navbar from '@/components/layout/navbar'
 import Footer from '@/components/layout/footer'
 import CookieBanner from '@/components/cookie/CookieBanner'
+import SplashScreenWrapper from '@/components/wrapper/splash-screen-wrapper'
 // import { ThemeProvider } from 'next-themes'
 
 const inter = Inter({ 
@@ -80,13 +81,15 @@ export default function RootLayout({
       </head>
       <body className={`${inter.variable} font-sans antialiased`}>
         {/* <ThemeProvider attribute="class" defaultTheme="light" enableSystem> */}
-          <div className="min-h-screen flex flex-col">
-            <Navbar />
-            <main className="flex-1">
-              {children}
-            </main>
-            <Footer />
-          </div>
+          <SplashScreenWrapper>
+            <div className="min-h-screen flex flex-col">
+              <Navbar />
+              <main className="flex-1">
+                {children}
+              </main>
+              <Footer />
+            </div>
+          </SplashScreenWrapper>
           <CookieBanner />
         {/* </ThemeProvider> */}
       </body>

@@ -8,7 +8,7 @@ import Logos from '@/components/pages/logos'
 import RefactorApplication from '@/components/pages/refactor-application'
 import ProjectFlowTimeline, { TimelineRefType } from '@/components/pages/project-flow-timeline'
 import CTA from '@/components/pages/cta'
-import GitHubProjects from '@/components/about/github-projects'
+
 
 export default function HomePage() {
   // Create a ref to access timeline methods
@@ -54,8 +54,6 @@ export default function HomePage() {
       {/* Project Flow Timeline */}
       <ProjectFlowTimeline ref={timelineRef} />
       
-      {/* GitHub Projects */}
-      <GitHubProjects />
       
       {/* CTA Section */}
       <CTA />

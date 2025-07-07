@@ -18,7 +18,11 @@ interface CodeScenario {
   steps: CodeStep[]
 }
 
-export default function Welcome() {
+interface WelcomeProps {
+  onTimelineDialogRequest?: () => void;
+}
+
+export default function Welcome({ onTimelineDialogRequest }: WelcomeProps) {
   const [currentScenario, setCurrentScenario] = useState<string>('firebase')
   const [animationStep, setAnimationStep] = useState(0)
   const [showSuccess, setShowSuccess] = useState(false)
@@ -30,6 +34,20 @@ export default function Welcome() {
   const [statusText, setStatusText] = useState('Ready')
   const animationTimeoutRef = useRef<NodeJS.Timeout | null>(null)
   const isAnimatingRef = useRef(false)
+  
+  // Effect to trigger timeline dialog when welcome animation completes
+  useEffect(() => {
+    // Simulating the end of an animation - for testing purposes
+    // In a real scenario, you would call this after your animation finishes
+    const timer = setTimeout(() => {
+      if (onTimelineDialogRequest) {
+        console.log('Welcome animation complete - requesting timeline dialog');
+        onTimelineDialogRequest();
+      }
+    }, 5000); // After 5 seconds, simulate the animation completion
+    
+    return () => clearTimeout(timer);
+  }, [onTimelineDialogRequest])
 
   const scenarios: { [key: string]: CodeScenario } = {
     firebase: {

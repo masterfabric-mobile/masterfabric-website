@@ -3,6 +3,7 @@
 import React from 'react'
 import ContactBenefits from './contact/ContactBenefits'
 import ContactForm from './contact/ContactForm'
+import ContactSectionText from './contact/ContactSectionText'
 
 export default function ContactSection() {
   const handleFormSubmit = (formData: any) => {
@@ -15,8 +16,14 @@ export default function ContactSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           
-          {/* LEFT COLUMN - CONTENT AREA WITH BENEFITS */}
-          <ContactBenefits />
+          {/* LEFT COLUMN - CONTENT AREA */}
+          <div className="space-y-8">
+            {/* Contact section text with heading and description */}
+            <ContactSectionText />
+            
+            {/* Benefits section */}
+            <ContactBenefits />
+          </div>
 
           {/* RIGHT COLUMN - CONTACT FORM */}
           <ContactForm onSubmit={handleFormSubmit} />

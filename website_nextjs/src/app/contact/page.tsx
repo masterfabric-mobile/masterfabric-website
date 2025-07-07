@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import ContactSection from '@/components/forms/contact-section'
+import Contact from '@/components/forms/contact'
 
 export const metadata: Metadata = {
   title: 'Contact - MasterFabric Inc.',
@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 }
 
 export default function ContactPage() {
-  return <ContactSection />
+  return <Contact />
 }

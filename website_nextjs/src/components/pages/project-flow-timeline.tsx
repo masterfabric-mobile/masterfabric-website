@@ -1,140 +1,182 @@
 'use client'
 
-import React from 'react'
-import { CheckCircle, Clock, Users, Rocket } from 'lucide-react'
+/**
+ * ProjectFlowTimeline.tsx
+ * 
+ * Main project flow timeline component - Modular structure
+ * 
+ * This component now uses the following sub-components:
+ * - TimelineHeader: Header and description section
+ * - TimelineCard: Individual phase cards
+ * - StatusBar: Dynamic status bar and controls
+ * - Notifications: Toast notifications and modal dialogs
+ */
 
-export default function ProjectFlowTimeline() {
-  const phases = [
-    {
-      title: "Discovery & Planning",
-      description: "We analyze your requirements and create a detailed project roadmap.",
-      icon: <Users className="w-6 h-6" />,
-      status: "completed",
-      duration: "1-2 weeks"
-    },
-    {
-      title: "Design & Prototyping", 
-      description: "Creating wireframes, UI/UX designs, and interactive prototypes.",
-      icon: <Clock className="w-6 h-6" />,
-      status: "in-progress",
-      duration: "2-3 weeks"
-    },
-    {
-      title: "Development",
-      description: "Building your app with clean code and best practices.",
-      icon: <CheckCircle className="w-6 h-6" />,
-      status: "pending",
-      duration: "4-8 weeks"
-    },
-    {
-      title: "Testing & Deployment",
-      description: "Rigorous testing and deployment to app stores.",
-      icon: <Rocket className="w-6 h-6" />,
-      status: "pending", 
-      duration: "1-2 weeks"
-    }
+import React, { useContext, forwardRef, useImperativeHandle } from 'react'
+import TimelineHeader from '@/components/timeline/timeline-header'
+import TimelineCard from '@/components/timeline/timeline-card'
+import StatusBar from '@/components/timeline/status-bar'
+import Notifications from '@/components/timeline/notifications'
+import TimelineProvider from '@/components/timeline/timeline-provider'
+import { TimelineContext } from '@/components/timeline/timeline-context'
+import styles from '@/styles/timeline.module.css'
+
+// Import data and types
+import projectFlowDataImport from '@/data/project-flow.json'
+import type { TimelineData, Tool, TimelinePhase } from '@/components/timeline/types'
+
+// Define the complete structure of the project flow data
+interface ProjectFlowData {
+  timeline: TimelineData;
+  passion: {
+    title: string;
+    description: string;
+  };
+  processSteps: Array<{
+    icon: string;
+    title: string;
+    description: string;
+  }>;
+  tools: Record<string, Array<{
+    name: string;
+    icon: string;
+    category: string;
+  }>>;
+}
+
+// Cast the imported data to the correct type
+const projectFlowData = projectFlowDataImport as ProjectFlowData;
+
+// Get tools from project-flow.json
+const phaseTools: Record<string, Tool[]> = projectFlowData.tools || {
+  discovery: [
+    { name: "Figma", icon: "🎨" }, 
+    { name: "Miro", icon: "🧩" }, 
+    { name: "Notion", icon: "📝" }
+  ],
+  design: [
+    { name: "Figma", icon: "🎨" }, 
+    { name: "Adobe XD", icon: "🎭" }, 
+    { name: "Sketch", icon: "✏️" }
+  ],
+  development: [
+    { name: "React Native", icon: "⚛️" }, 
+    { name: "Node.js", icon: "🟢" }, 
+    { name: "TypeScript", icon: "📘" }
+  ],
+  testing: [
+    { name: "Jest", icon: "🃏" }, 
+    { name: "Detox", icon: "🧪" }, 
+    { name: "Postman", icon: "📮" }
+  ],
+  deployment: [
+    { name: "App Store", icon: "🍎" }, 
+    { name: "Play Store", icon: "📱" }, 
+    { name: "Firebase", icon: "🔥" }
+  ],
+  maintenance: [
+    { name: "Sentry", icon: "🚨" }, 
+    { name: "Analytics", icon: "📊" }, 
+    { name: "Zendesk", icon: "🎧" }
   ]
+};
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'completed':
-        return 'bg-green-500'
-      case 'in-progress':
-        return 'bg-blue-500'
-      default:
-        return 'bg-gray-300'
-    }
+interface ProjectFlowTimelineProps {
+  timeline?: TimelineData;
+}
+
+const TimelineContent = ({ timeline = projectFlowData.timeline as TimelineData }) => {
+  const controller = useContext(TimelineContext);
+  
+  if (!controller) {
+    return <div className={styles.timelineLoading}>Loading timeline...</div>;
   }
-
+  
+  // Get tools for a specific phase
+  const getPhaseTools = (phaseId: string): Tool[] => {
+    const phaseToolsData = phaseTools[phaseId];
+    if (!phaseToolsData) return [];
+    
+    // Convert the tools from project-flow.json format to our Tool[] format
+    return phaseToolsData.map(tool => ({
+      name: tool.name,
+      icon: tool.icon
+    }));
+  };
+  
+  // Get all phases with safety check
+  const phases = controller.updatePhaseStatuses() || [];
+  
   return (
-    <section className="py-16 lg:py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
-            Our Development Process
-          </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            We follow a proven methodology to ensure your project is delivered on time, 
-            within budget, and exceeds your expectations.
-          </p>
-        </div>
+    <section className={styles.timelineContainer}>
+      {/* Header section */}
+      <div className={styles.timelineHeader}>
+        <TimelineHeader timeline={timeline} />
+      </div>
 
-        {/* Timeline */}
-        <div className="relative">
-          {/* Timeline Line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gray-200 h-full hidden md:block"></div>
-          
-          {/* Timeline Items */}
-          <div className="space-y-12">
-            {phases.map((phase, index) => (
-              <div key={index} className="relative">
-                <div className={`flex items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} flex-col`}>
-                  
-                  {/* Content Card */}
-                  <div className={`w-full md:w-5/12 ${index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'}`}>
-                    <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300">
-                      <div className="flex items-start space-x-4">
-                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-white ${getStatusColor(phase.status)}`}>
-                          {phase.icon}
-                        </div>
-                        <div className="flex-1">
-                          <h3 className="text-xl font-bold text-gray-900 mb-2">
-                            {phase.title}
-                          </h3>
-                          <p className="text-gray-600 leading-relaxed mb-4">
-                            {phase.description}
-                          </p>
-                          <div className="flex items-center justify-between">
-                            <span className="text-sm text-blue-600 font-medium">
-                              Duration: {phase.duration}
-                            </span>
-                            <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                              phase.status === 'completed' 
-                                ? 'bg-green-100 text-green-800'
-                                : phase.status === 'in-progress'
-                                ? 'bg-blue-100 text-blue-800'
-                                : 'bg-gray-100 text-gray-800'
-                            }`}>
-                              {phase.status === 'completed' ? 'Completed' : 
-                               phase.status === 'in-progress' ? 'In Progress' : 'Pending'}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Timeline Dot */}
-                  <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 z-10">
-                    <div className={`w-6 h-6 rounded-full border-4 border-white ${getStatusColor(phase.status)}`}></div>
-                  </div>
-
-                  {/* Spacer */}
-                  <div className="w-full md:w-5/12"></div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Bottom CTA */}
-        <div className="mt-16 text-center">
-          <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-8 lg:p-12">
-            <h3 className="text-3xl font-bold text-gray-900 mb-4">
-              Ready to Start Your Journey?
-            </h3>
-            <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-              Let&apos;s discuss your project requirements and create a custom development plan 
-              that fits your timeline and budget.
-            </p>
-            <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-8 rounded-lg transition-colors duration-200">
-              Schedule a Consultation
-            </button>
-          </div>
+      {/* Timeline container */}
+      <div className={styles.timelineContainerInner}>
+        <div className={styles.timelineTrack}>
+          {phases.map((phase, index) => (
+            <div 
+              key={phase.id} 
+              className={`${styles.timelineCard} ${index === controller.currentPhase ? styles.activePhaseCard : ''}`}
+            >
+              <TimelineCard 
+                phase={phase as TimelinePhase} 
+                tools={getPhaseTools(phase.id)} 
+                isActive={index === controller.currentPhase}
+              />
+            </div>
+          ))}
         </div>
       </div>
+
+      {/* Dynamic status bar */}
+      <StatusBar />
+
+      {/* Notifications */}
+      <Notifications />
     </section>
-  )
+  );
+};
+
+// Define ref type for controlling timeline externally
+export interface TimelineRefType {
+  showCongratulationsDialog: (phaseIndex?: number) => void;
+  showCongratulationsToast: (phaseIndex?: number) => void;
 }
+
+// Create a wrapper component for TimelineContent that can receive and forward a ref
+const TimelineContentWithRef = forwardRef<TimelineRefType, { timeline?: TimelineData }>((props, ref) => {
+  const controller = useContext(TimelineContext);
+  
+  // Forward the timeline control methods via ref
+  useImperativeHandle(ref, () => ({
+    showCongratulationsDialog: (phaseIndex?: number) => {
+      if (controller && controller.showCongratulationsDialog) {
+        controller.showCongratulationsDialog(phaseIndex);
+      }
+    },
+    showCongratulationsToast: (phaseIndex?: number) => {
+      if (controller && controller.showCongratulationsToast) {
+        controller.showCongratulationsToast(phaseIndex);
+      }
+    }
+  }));
+
+  return <TimelineContent timeline={props.timeline} />;
+});
+TimelineContentWithRef.displayName = 'TimelineContentWithRef';
+
+// Export the main component with ref
+const ProjectFlowTimeline = forwardRef<TimelineRefType, ProjectFlowTimelineProps>((props, ref) => {
+  return (
+    <TimelineProvider>
+      <TimelineContentWithRef ref={ref} timeline={props.timeline} />
+    </TimelineProvider>
+  );
+});
+ProjectFlowTimeline.displayName = 'ProjectFlowTimeline';
+
+export default ProjectFlowTimeline;

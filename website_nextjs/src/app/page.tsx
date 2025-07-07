@@ -31,9 +31,11 @@ export default function HomePage() {
   
   return (
     <Container>
+       
+
       {/* Contact Section */}
-      <ContactSection />
-      
+    
+      <ContactSection/>
       {/* Welcome Section */}
       <Welcome 
         onTimelineDialogRequest={() => {

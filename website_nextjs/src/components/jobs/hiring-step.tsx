@@ -93,16 +93,18 @@ export default function HiringStep({ step, index, isLast = false }: HiringStepPr
   }, [isExpanded]);
   
   return (
-    <div className="text-center px-2 flex-shrink-0 w-full sm:w-72 md:w-80">
+    <div className="text-center w-full relative hiring-step">
       {/* Step Circle */}
       <div className="relative mb-6">
-        <div className="step-number w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 text-white rounded-full flex items-center justify-center font-bold text-base mx-auto relative z-10 border-3 border-white shadow-lg shadow-blue-200/50">
+        <div className="step-number w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto relative z-10 border-4 border-white shadow-lg shadow-blue-200/50">
           {step.number}
         </div>
+        
+        {/* No connector lines in grid layout */}
       </div>
       
       {/* Step Content Card */}
-      <div className="hiring-step-card bg-white rounded-xl shadow-lg border border-blue-100 hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer w-full h-auto min-h-[240px] mt-4">
+      <div className="hiring-step-card bg-white rounded-xl shadow-lg border border-blue-100 hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer w-full h-full min-h-[260px] mt-4">
         {/* Card Content - Clickable to expand/collapse */}
         <div 
           className="card-content p-4 sm:p-5" 

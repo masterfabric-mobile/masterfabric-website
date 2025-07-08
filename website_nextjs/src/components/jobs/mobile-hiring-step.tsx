@@ -96,16 +96,16 @@ export default function MobileHiringStep({ step, index, isLast = false }: Mobile
     <div className="relative mb-8 last:mb-0">
       {/* Step number with connecting line */}
       <div className="absolute left-5 top-0 bottom-0 flex flex-col items-center">
-        <div className="step-number w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 text-white rounded-full flex items-center justify-center font-bold text-base relative z-10 border-3 border-white shadow-lg shadow-blue-200/50">
+        <div className="step-number w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 text-white rounded-full flex items-center justify-center font-bold text-lg relative z-10 border-4 border-white shadow-lg shadow-blue-200/50">
           {step.number}
         </div>
         {!isLast && (
-          <div className="h-full w-0.5 bg-blue-100 mt-1"></div>
+          <div className="h-full w-1 bg-gradient-to-b from-blue-400 to-blue-500 mt-1"></div>
         )}
       </div>
 
       {/* Step Content Card */}
-      <div className="hiring-step-card bg-white rounded-xl shadow-lg border border-blue-100 ml-14 hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer">
+      <div className="hiring-step-card bg-white rounded-xl shadow-lg border border-blue-100 ml-20 hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer">
         {/* Card Header - Clickable to expand/collapse */}
         <div 
           className="card-content p-4"

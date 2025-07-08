@@ -3,6 +3,7 @@
 import React from 'react'
 import HiringStep from './hiring-step'
 import MobileHiringStep from './mobile-hiring-step'
+import './styles/hiring-step.css'
 
 interface HiringProcessSectionProps {
   steps: {
@@ -20,7 +21,7 @@ interface HiringProcessSectionProps {
 
 export default function HiringProcessSection({ steps, title, description }: HiringProcessSectionProps) {
   return (
-    <section className="py-16">
+    <section className="py-20 bg-gradient-to-b from-white to-blue-50">
       <div className="text-center mb-12">
         <h2 className="text-3xl font-bold text-gray-900 mb-4">
           {title}
@@ -30,16 +31,21 @@ export default function HiringProcessSection({ steps, title, description }: Hiri
         </p>
       </div>
       
-      {/* Desktop Hiring Steps - Horizontal Layout */}
-      <div className="hidden md:flex justify-center gap-6 overflow-x-auto pb-8">
-        {steps.map((step, index) => (
-          <HiringStep 
-            key={index} 
-            step={step} 
-            index={index} 
-            isLast={index === steps.length - 1}
-          />
-        ))}
+      {/* Desktop Hiring Steps - Grid Layout */}
+      <div className="hidden md:block pb-8">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            {steps.map((step, index) => (
+              <div key={index} className="relative">
+                <HiringStep 
+                  step={step} 
+                  index={index} 
+                  isLast={index === steps.length - 1}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
       
       {/* Mobile Hiring Steps - Vertical Layout */}

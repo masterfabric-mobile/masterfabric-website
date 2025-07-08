@@ -1,4 +1,8 @@
 {
+  "api": {
+    "endpoint": "https://api.web3forms.com/submit",
+    "accessKey": "1234567890abcdef"
+  },
   "sectionHeader": {
     "title": "Careers",
     "description": [
@@ -213,9 +217,5 @@
     "text": "At MasterFabric, we don't just build applications – we build careers, relationships, and the future of mobile technology. Every team member contributes to our mission of transforming innovative ideas into impactful digital solutions.",
     "author": "MasterFabric Team",
     "position": "Our Commitment to Excellence"
-  },
-  "api": {
-    "endpoint": "https://api.web3forms.com/submit",
-    "accessKey": "3e15a306-d815-4638-8b6d-e2318dc7bc57"
   }
 }

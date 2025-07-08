@@ -1,0 +1,71 @@
+/* Job position card styles */
+.job-apply-btn {
+  transition: all 0.2s ease;
+}
+
+.job-apply-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Form validation states */
+.was-validated input:invalid,
+.was-validated textarea:invalid,
+.was-validated select:invalid {
+  border-color: #ef4444;
+  background-color: rgba(239, 68, 68, 0.05);
+}
+
+.was-validated input:valid,
+.was-validated textarea:valid,
+.was-validated select:valid {
+  border-color: #10b981;
+  background-color: rgba(16, 185, 129, 0.05);
+}
+
+/* Success notification styles */
+.success-notification {
+  background: linear-gradient(135deg, #10b981, #059669);
+  border-radius: 12px;
+  padding: 1rem;
+  color: white;
+  animation: slideIn 0.5s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Application status indicator */
+.application-status {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  min-width: 300px;
+  padding: 1rem;
+  border-radius: 8px;
+  color: white;
+  font-weight: 500;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+}
+
+.application-status.show {
+  transform: translateX(0);
+}
+
+.application-status.success {
+  background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.application-status.error {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}

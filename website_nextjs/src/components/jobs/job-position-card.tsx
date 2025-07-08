@@ -1,4 +1,8 @@
+'use client'
+
 import React from 'react'
+import { MapPin, Clock, Banknote, Calendar } from 'lucide-react'
+import './styles/job-position-card.css'
 
 interface JobPositionCardProps {
   position: {
@@ -16,73 +20,107 @@ interface JobPositionCardProps {
     responsibilities: string[]
     tags: string[]
   }
+  onApply?: (jobId: string) => void
+  showDetails?: boolean
 }
 
-export default function JobPositionCard({ position }: JobPositionCardProps) {
+export default function JobPositionCard({ position, onApply, showDetails = true }: JobPositionCardProps) {
+  
+  const handleApply = () => {
+    if (onApply) {
+      onApply(position.id);
+    }
+  };
+
+  // Format date to show "today" if matching current date
+  const formatPostedDate = (postedDate: string) => {
+    if (postedDate === 'today') {
+      return 'today';
+    }
+    return postedDate;
+  };
+
   return (
-    <div className="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-200">
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-4">
-        <div>
-          <h3 className="text-xl font-semibold text-gray-900 mb-2">{position.title}</h3>
-          <div className="flex flex-wrap gap-3 text-sm text-gray-600">
-            <span className="flex items-center gap-1">
-              <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+    <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+      <div className="flex items-start justify-between mb-4">
+        <div className="flex-1">
+          <h3 className="text-lg font-bold text-gray-900 mb-1">{position.title}</h3>
+          <div className="flex items-center space-x-3 text-sm text-gray-600">
+            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
               {position.department}
             </span>
-            <span className="flex items-center gap-1">
-              <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-              {position.type}
-            </span>
-            <span className="flex items-center gap-1">
-              <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
-              {position.location}
-            </span>
-            <span className="flex items-center gap-1">
-              <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
-              {position.experience}
-            </span>
+            <span>{position.type}</span>
           </div>
         </div>
-        
-        <div className="text-right">
-          <div className="text-sm text-gray-500">Posted {position.posted}</div>
-          <div className="text-sm text-red-600">Deadline: {position.deadline}</div>
-        </div>
+        <button 
+          className="job-apply-btn px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200"
+          data-job-id={position.id}
+          onClick={handleApply}
+        >
+          Apply
+        </button>
       </div>
       
-      <p className="text-gray-600 mb-4">{position.description}</p>
-      
-      <div className="grid md:grid-cols-2 gap-6 mb-6">
-        <div>
-          <h4 className="font-semibold text-gray-900 mb-2">Requirements</h4>
-          <ul className="space-y-1">
-            {position.requirements.slice(0, 3).map((req, index) => (
-              <li key={index} className="text-sm text-gray-600 flex items-start gap-2">
-                <span className="w-1 h-1 bg-gray-400 rounded-full mt-2"></span>
-                {req}
-              </li>
-            ))}
-            {position.requirements.length > 3 && (
-              <li className="text-sm text-gray-500">+ {position.requirements.length - 3} more...</li>
-            )}
-          </ul>
+      <div className="space-y-3 mb-4">
+        <div className="flex items-center text-sm text-gray-600">
+          <MapPin className="w-4 h-4 mr-2" />
+          <span>{position.location}</span>
         </div>
-        
-        <div>
-          <h4 className="font-semibold text-gray-900 mb-2">Responsibilities</h4>
-          <ul className="space-y-1">
-            {position.responsibilities.slice(0, 3).map((resp, index) => (
-              <li key={index} className="text-sm text-gray-600 flex items-start gap-2">
-                <span className="w-1 h-1 bg-gray-400 rounded-full mt-2"></span>
-                {resp}
-              </li>
-            ))}
-            {position.responsibilities.length > 3 && (
-              <li className="text-sm text-gray-500">+ {position.responsibilities.length - 3} more...</li>
-            )}
-          </ul>
+        <div className="flex items-center text-sm text-gray-600">
+          <Clock className="w-4 h-4 mr-2" />
+          <span>{position.experience}</span>
         </div>
+        <div className="flex items-center text-sm text-gray-600">
+          <Banknote className="w-4 h-4 mr-2" />
+          <span>{position.salary}</span>
+        </div>
+        <div className="flex items-center text-sm text-gray-500">
+          <Calendar className="w-4 h-4 mr-2" />
+          <span>Posted {formatPostedDate(position.posted)}</span>
+        </div>
+        {position.deadline && (
+          <div className="flex items-center text-sm text-red-600">
+            <Calendar className="w-4 h-4 mr-2" />
+            <span>Deadline: {position.deadline}</span>
+          </div>
+        )}
       </div>
+      
+      <p className="text-sm text-gray-600 mb-4">{position.description}</p>
+      
+      {showDetails && (
+        <div className="grid md:grid-cols-2 gap-6 mb-6">
+          <div>
+            <h4 className="font-semibold text-gray-900 mb-2">Requirements</h4>
+            <ul className="space-y-1">
+              {position.requirements.slice(0, 3).map((req, index) => (
+                <li key={index} className="text-sm text-gray-600 flex items-start gap-2">
+                  <span className="w-1 h-1 bg-gray-400 rounded-full mt-2"></span>
+                  {req}
+                </li>
+              ))}
+              {position.requirements.length > 3 && (
+                <li className="text-sm text-gray-500">+ {position.requirements.length - 3} more...</li>
+              )}
+            </ul>
+          </div>
+          
+          <div>
+            <h4 className="font-semibold text-gray-900 mb-2">Responsibilities</h4>
+            <ul className="space-y-1">
+              {position.responsibilities.slice(0, 3).map((resp, index) => (
+                <li key={index} className="text-sm text-gray-600 flex items-start gap-2">
+                  <span className="w-1 h-1 bg-gray-400 rounded-full mt-2"></span>
+                  {resp}
+                </li>
+              ))}
+              {position.responsibilities.length > 3 && (
+                <li className="text-sm text-gray-500">+ {position.responsibilities.length - 3} more...</li>
+              )}
+            </ul>
+          </div>
+        </div>
+      )}
       
       <div className="flex flex-wrap gap-2 mb-4">
         {position.tags.map((tag, index) => (
@@ -92,14 +130,19 @@ export default function JobPositionCard({ position }: JobPositionCardProps) {
         ))}
       </div>
       
-      <div className="flex gap-3">
-        <button className="flex-1 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200">
-          Apply Now
-        </button>
-        <button className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200">
-          View Details
-        </button>
-      </div>
+      {showDetails && (
+        <div className="flex gap-3 mt-6">
+          <button 
+            onClick={handleApply}
+            className="flex-1 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200"
+          >
+            Apply Now
+          </button>
+          <button className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+            View Details
+          </button>
+        </div>
+      )}
     </div>
   )
 }

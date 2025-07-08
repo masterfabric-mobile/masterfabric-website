@@ -3,7 +3,7 @@ import Container from '@/components/layout/container'
 import SectionHead from '@/components/layout/section-head'
 import DepartmentCard from '@/components/jobs/department-card'
 import BenefitCard from '@/components/jobs/benefit-card'
-import HiringStep from '@/components/jobs/hiring-step'
+import HiringProcessSection from '../../components/jobs/hiring-process-section'
 import JobPositionCard from '@/components/jobs/job-position-card'
 import jobsData from '@/data/jobs.json'
 import positionsData from '@/data/positions.json'
@@ -58,22 +58,11 @@ export default function JobsPage() {
       </section>
 
       {/* Hiring Process */}
-      <section className="py-16">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            {jobsData.hiringProcess.title}
-          </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            {jobsData.hiringProcess.description}
-          </p>
-        </div>
-        
-        <div className="space-y-8">
-          {jobsData.hiringProcess.steps.map((step, index) => (
-            <HiringStep key={index} step={step} index={index} />
-          ))}
-        </div>
-      </section>
+      <HiringProcessSection 
+        steps={jobsData.hiringProcess.steps}
+        title={jobsData.hiringProcess.title}
+        description={jobsData.hiringProcess.description}
+      />
 
       {/* Open Positions */}
       <section className="py-16 bg-gray-50">

@@ -71,32 +71,32 @@
     "description": "We believe that happy employees create amazing products. Our comprehensive benefits and supportive work environment reflect our commitment to your well-being and professional growth.",
     "benefits": [
       {
-        "icon": "🏠",
+        "iconName": "home",
         "title": "Flexible Work Environment",
         "description": "Hybrid work model with comfortable office space and remote work options"
       },
       {
-        "icon": "🎓",
+        "iconName": "graduation-cap",
         "title": "Learning & Development",
         "description": "Annual learning budget, conference attendance, and skill development programs"
       },
       {
-        "icon": "⚕️",
+        "iconName": "medical",
         "title": "Health & Wellness",
         "description": "Comprehensive health insurance, mental health support, and wellness programs"
       },
       {
-        "icon": "💰",
+        "iconName": "wallet",
         "title": "Competitive Compensation",
         "description": "Market-competitive salaries, performance bonuses, and equity participation"
       },
       {
-        "icon": "🏖️",
+        "iconName": "calendar",
         "title": "Work-Life Balance",
         "description": "Generous vacation policy, flexible hours, and sabbatical opportunities"
       },
       {
-        "icon": "🎯",
+        "iconName": "trending-up",
         "title": "Career Growth",
         "description": "Clear career progression paths, mentorship programs, and leadership opportunities"
       }
@@ -111,7 +111,7 @@
         "title": "Application Review",
         "duration": "2-3 days",
         "description": "Our hiring team carefully reviews your application, portfolio, and experience to ensure alignment with our values and requirements.",
-        "icon": "📋",
+        "iconName": "clipboard",
         "details": [
           "Portfolio and resume review",
           "Initial compatibility assessment",
@@ -124,7 +124,7 @@
         "title": "Initial Interview",
         "duration": "45-60 minutes",
         "description": "A conversational interview with our HR team and hiring manager to get to know you better and discuss your background, motivations, and career goals.",
-        "icon": "🤝",
+        "iconName": "handshake",
         "details": [
           "Background and experience discussion",
           "Motivation and career goals",
@@ -137,7 +137,7 @@
         "title": "Technical Assessment",
         "duration": "2-3 hours",
         "description": "Depending on the role, this may include coding challenges, design tasks, or strategic case studies that reflect real work scenarios.",
-        "icon": "⚡",
+        "iconName": "zap",
         "details": [
           "Role-specific technical evaluation",
           "Problem-solving assessment",
@@ -150,7 +150,7 @@
         "title": "Final Interview",
         "duration": "60-90 minutes",
         "description": "Meet with team leads and potential colleagues to discuss collaboration, answer questions, and finalize the mutual fit assessment.",
-        "icon": "🎯",
+        "iconName": "target",
         "details": [
           "Team integration assessment",
           "Final technical discussion",

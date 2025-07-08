@@ -107,6 +107,18 @@ const TimelineContent = ({ timeline = projectFlowData.timeline as TimelineData }
   // Get all phases with safety check
   const phases = controller.updatePhaseStatuses() || [];
   
+  // Kart hover'ında pause/resume için local fonksiyonlar
+  const handleCardMouseEnter = () => {
+    if (controller && controller.togglePause && !controller.isPaused) {
+      controller.togglePause();
+    }
+  };
+  const handleCardMouseLeave = () => {
+    if (controller && controller.togglePause && controller.isPaused) {
+      controller.togglePause();
+    }
+  };
+
   return (
     <section className={styles.timelineContainer}>
       {/* Header section */}
@@ -126,6 +138,9 @@ const TimelineContent = ({ timeline = projectFlowData.timeline as TimelineData }
                 phase={phase as TimelinePhase} 
                 tools={getPhaseTools(phase.id)} 
                 isActive={index === controller.currentPhase}
+                isCurrent={index === controller.currentPhase}
+                onMouseEnter={handleCardMouseEnter}
+                onMouseLeave={handleCardMouseLeave}
               />
             </div>
           ))}

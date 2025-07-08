@@ -7,14 +7,21 @@ import { TimelineContext } from './timeline-context'
 const Notifications: React.FC = () => {
   const [showToast, setShowToast] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
-  const [completedPhase, setCompletedPhase] = useState<number>(0);
-  const [totalPhases, setTotalPhases] = useState<number>(6);
-  const [nextPhaseName, setNextPhaseName] = useState<string>('Design Phase');
-  const [progressPercentage, setProgressPercentage] = useState<number>(0);
-  const [phaseTitle, setPhaseTitle] = useState<string>('Discovery Phase');
   
   // Get controller from context if available
   const controller = useContext(TimelineContext);
+
+  if (!controller) return null;
+
+ 
+  const phases = controller.updatePhaseStatuses();
+  const completedPhase = Math.min(controller.currentPhase, phases.length - 1);
+  const totalPhases = phases.length;
+  const progressPercentage = Math.round(((completedPhase + 1) / totalPhases) * 100);
+  const phaseTitle = phases[completedPhase]?.shortTitle || phases[completedPhase]?.title || '';
+  const nextPhaseName = completedPhase < totalPhases - 1
+    ? (phases[completedPhase + 1]?.shortTitle || phases[completedPhase + 1]?.title || '')
+    : 'Project Complete';
   
   // Debug effect for toast visibility
   useEffect(() => {
@@ -27,25 +34,25 @@ const Notifications: React.FC = () => {
       // Calculate total phases
       const phases = controller.updatePhaseStatuses();
       if (phases) {
-        setTotalPhases(phases.length);
+        // setTotalPhases(phases.length); // This line is removed as per new_code
         
         // Set current phase info with safe bounds checking
-        setCompletedPhase(Math.min(controller.currentPhase, phases.length - 1));
+        // setCompletedPhase(Math.min(controller.currentPhase, phases.length - 1)); // This line is removed as per new_code
         
         // Calculate progress percentage, clamped to 100%
-        const calculatedPercentage = Math.round((controller.currentPhase + 1) / phases.length * 100);
-        setProgressPercentage(Math.min(calculatedPercentage, 100));
+        // const calculatedPercentage = Math.round((controller.currentPhase + 1) / phases.length * 100); // This line is removed as per new_code
+        // setProgressPercentage(Math.min(calculatedPercentage, 100)); // This line is removed as per new_code
         
         // Set phase title
-        const currentPhase = controller.getCurrentPhase();
-        if (currentPhase) {
-          setPhaseTitle(currentPhase.shortTitle || currentPhase.title);
-        }
+        // const currentPhase = controller.getCurrentPhase(); // This line is removed as per new_code
+        // if (currentPhase) { // This line is removed as per new_code
+        //   setPhaseTitle(currentPhase.shortTitle || currentPhase.title); // This line is removed as per new_code
+        // } // This line is removed as per new_code
         
         // Set next phase name if not at the end
-        if (controller.currentPhase < phases.length - 1) {
-          setNextPhaseName(phases[controller.currentPhase + 1].shortTitle || phases[controller.currentPhase + 1].title);
-        }
+        // if (controller.currentPhase < phases.length - 1) { // This line is removed as per new_code
+        //   setNextPhaseName(phases[controller.currentPhase + 1].shortTitle || phases[controller.currentPhase + 1].title); // This line is removed as per new_code
+        // } // This line is removed as per new_code
       }
     }
   }, [controller?.currentPhase]);
@@ -59,7 +66,7 @@ const Notifications: React.FC = () => {
         const phaseToShow = phaseIndex !== undefined ? phaseIndex : controller.currentPhase;
         
         // Update dialog content based on the specific phase
-        updateDialogForPhase(phaseToShow);
+        // updateDialogForPhase(phaseToShow); // This line is removed as per new_code
         
         // Log that the dialog is being shown
         console.log(`Showing congratulations dialog for phase ${phaseToShow}`);
@@ -76,7 +83,7 @@ const Notifications: React.FC = () => {
         const phaseToShow = phaseIndex !== undefined ? phaseIndex : controller.currentPhase;
         
         // Update toast content based on the specific phase
-        updateToastForPhase(phaseToShow);
+        // updateToastForPhase(phaseToShow); // This line is removed as per new_code
         
         // Log that the toast is being shown
         console.log(`Showing congratulations toast for phase ${phaseToShow}`);
@@ -94,49 +101,75 @@ const Notifications: React.FC = () => {
   }, [controller]);
   
   // Helper function to update dialog content for a specific phase
-  const updateDialogForPhase = (phaseIndex: number) => {
-    if (controller) {
-      const phases = controller.updatePhaseStatuses();
-      if (!phases || phases.length === 0) return;
+  // const updateDialogForPhase = (phaseIndex: number) => { // This function is removed as per new_code
+  //   if (controller) { // This line is removed as per new_code
+  //     const phases = controller.updatePhaseStatuses(); // This line is removed as per new_code
+  //     if (!phases || phases.length === 0) return; // This line is removed as per new_code
       
-      // Ensure phase index is valid
-      const safePhaseIndex = Math.max(0, Math.min(phaseIndex, phases.length - 1));
+  //     // Ensure phase index is valid // This line is removed as per new_code
+  //     const safePhaseIndex = Math.max(0, Math.min(phaseIndex, phases.length - 1)); // This line is removed as per new_code
       
-      // Update dialog state with the specific phase information
-      setCompletedPhase(safePhaseIndex);
-      setTotalPhases(phases.length);
+  //     // Update dialog state with the specific phase information // This line is removed as per new_code
+  //     setCompletedPhase(safePhaseIndex); // This line is removed as per new_code
+  //     setTotalPhases(phases.length); // This line is removed as per new_code
       
-      // Calculate progress percentage, clamped to 100%
-      const calculatedPercentage = Math.round((safePhaseIndex + 1) / phases.length * 100);
-      setProgressPercentage(Math.min(calculatedPercentage, 100));
+  //     // Calculate progress percentage based on the completed phase // This line is removed as per new_code
+  //     // When phase 0 is completed, we're 1/6 = 16.67% done // This line is removed as per new_code
+  //     // When phase 1 is completed, we're 2/6 = 33.33% done, etc. // This line is removed as per new_code
+  //     const calculatedPercentage = Math.round(((safePhaseIndex + 1) / phases.length) * 100); // This line is removed as per new_code
+  //     setProgressPercentage(Math.min(calculatedPercentage, 100)); // This line is removed as per new_code
       
-      // Set phase title
-      const phase = phases[safePhaseIndex];
-      if (phase) {
-        setPhaseTitle(phase.shortTitle || phase.title);
-      }
+  //     // Set phase title and customize message based on the phase type // This line is removed as per new_code
+  //     const phase = phases[safePhaseIndex]; // This line is removed as per new_code
+  //     if (phase) { // This line is removed as per new_code
+  //       const phaseName = phase.shortTitle || phase.title; // This line is removed as per new_code
+  //       setPhaseTitle(phaseName); // This line is removed as per new_code
+        
+  //       // Log phase data to help with debugging // This line is removed as per new_code
+  //       console.log(`Updating dialog for phase ${safePhaseIndex}: ${phaseName}, Progress: ${calculatedPercentage}%`, phase); // This line is removed as per new_code
+  //     } // This line is removed as per new_code
       
-      // Set next phase name if not at the end
-      if (safePhaseIndex < phases.length - 1) {
-        setNextPhaseName(phases[safePhaseIndex + 1].shortTitle || phases[safePhaseIndex + 1].title);
-      } else {
-        setNextPhaseName("Project Complete");
-      }
-    }
-  };
+  //     // Set next phase name if not at the end // This line is removed as per new_code
+  //     if (safePhaseIndex < phases.length - 1) { // This line is removed as per new_code
+  //       setNextPhaseName(phases[safePhaseIndex + 1].shortTitle || phases[safePhaseIndex + 1].title); // This line is removed as per new_code
+  //     } else { // This line is removed as per new_code
+  //       setNextPhaseName("Project Complete"); // This line is removed as per new_code
+  //     } // This line is removed as per new_code
+  //   } // This line is removed as per new_code
+  // }; // This line is removed as per new_code
   
   // Helper function to update toast content for a specific phase
-  const updateToastForPhase = (phaseIndex: number) => {
-    if (controller) {
-      const phases = controller.updatePhaseStatuses();
-      if (!phases || phases.length === 0) return;
+  // const updateToastForPhase = (phaseIndex: number) => { // This function is removed as per new_code
+  //   if (controller) { // This line is removed as per new_code
+  //     const phases = controller.updatePhaseStatuses(); // This line is removed as per new_code
+  //     if (!phases || phases.length === 0) return; // This line is removed as per new_code
       
-      // Ensure phase index is valid
-      const safePhaseIndex = Math.max(0, Math.min(phaseIndex, phases.length - 1));
+  //     // Ensure phase index is valid // This line is removed as per new_code
+  //     const safePhaseIndex = Math.max(0, Math.min(phaseIndex, phases.length - 1)); // This line is removed as per new_code
       
-      // Phase data will be used in the toast component directly
-    }
-  };
+  //     // Update toast state with the specific phase information // This line is removed as per new_code
+  //     setCompletedPhase(safePhaseIndex); // This line is removed as per new_code
+  //     setTotalPhases(phases.length); // This line is removed as per new_code
+      
+  //     // Calculate progress percentage based on the completed phase // This line is removed as per new_code
+  //     const calculatedPercentage = Math.round(((safePhaseIndex + 1) / phases.length) * 100); // This line is removed as per new_code
+  //     setProgressPercentage(Math.min(calculatedPercentage, 100)); // This line is removed as per new_code
+      
+  //     // Set phase title // This line is removed as per new_code
+  //     const phase = phases[safePhaseIndex]; // This line is removed as per new_code
+  //     if (phase) { // This line is removed as per new_code
+  //       setPhaseTitle(phase.shortTitle || phase.title); // This line is removed as per new_code
+  //       console.log(`Updating toast for phase ${safePhaseIndex}: ${phase.shortTitle || phase.title}, Progress: ${calculatedPercentage}%`); // This line is removed as per new_code
+  //     } // This line is removed as per new_code
+      
+  //     // Set next phase name if not at the end // This line is removed as per new_code
+  //     if (safePhaseIndex < phases.length - 1) { // This line is removed as per new_code
+  //       setNextPhaseName(phases[safePhaseIndex + 1].shortTitle || phases[safePhaseIndex + 1].title); // This line is removed as per new_code
+  //     } else { // This line is removed as per new_code
+  //       setNextPhaseName("Project Complete"); // This line is removed as per new_code
+  //     } // This line is removed as per new_code
+  //   } // This line is removed as per new_code
+  // }; // This line is removed as per new_code
   
   // Function to show toast - can be triggered by timeline controller
   const displayToast = () => {
@@ -168,14 +201,33 @@ const Notifications: React.FC = () => {
   
   // Function to handle Continue button click
   const handleContinue = () => {
+    // Store the current completed phase to determine what to do next
+    const currentCompleted = completedPhase;
+    const currentControllerPhase = controller?.currentPhase || 0;
+    
+    console.log(`Continue button clicked:`, {
+      completedPhase: currentCompleted,
+      controllerPhase: currentControllerPhase,
+      totalPhases: totalPhases
+    });
+    
+    // Close the dialog first
     closeDialog();
     
     // Progress to the next phase if we have the controller
     if (controller && controller.goToNextPhase) {
-      console.log('Advancing to next phase after dialog close');
       // Wait a little bit before moving to next phase for better UX
       setTimeout(() => {
-        controller.goToNextPhase();
+        // Always try to advance to the next phase when Continue is clicked
+        // This is the expected behavior for a "Continue Timeline" button
+        console.log('Attempting to advance to next phase...');
+        
+        try {
+          controller.goToNextPhase();
+          console.log('Successfully called goToNextPhase()');
+        } catch (error) {
+          console.error('Error advancing to next phase:', error);
+        }
       }, 300);
     } else {
       console.log('No controller available for phase progression');
@@ -204,7 +256,21 @@ const Notifications: React.FC = () => {
           <div className={styles.toastText}>
             <div className={styles.toastTitle} id="toast-title">{phaseTitle} Completed!</div>
             <div className={styles.toastMessage} id="toast-message">
-              Great progress! Moving to next phase. ({progressPercentage}% complete)
+              {completedPhase === 0 ? (
+                `Discovery complete! Moving to design phase. (${progressPercentage}% complete)`
+              ) : completedPhase === 1 ? (
+                `Design finalized! Starting development. (${progressPercentage}% complete)`
+              ) : completedPhase === 2 ? (
+                `Development complete! Beginning testing. (${progressPercentage}% complete)`
+              ) : completedPhase === 3 ? (
+                `Testing passed! Ready for deployment. (${progressPercentage}% complete)`
+              ) : completedPhase === 4 ? (
+                `Successfully deployed! Moving to maintenance. (${progressPercentage}% complete)`
+              ) : completedPhase === 5 ? (
+                `Project complete! All phases finished. (${progressPercentage}% complete)`
+              ) : (
+                `Great progress! Moving to next phase. (${progressPercentage}% complete)`
+              )}
             </div>
           </div>
         </div>
@@ -235,9 +301,23 @@ const Notifications: React.FC = () => {
             {/* Main title */}
             <h3 className={styles.dialogTitle} id="dialog-title">Congratulations!</h3>
             
-            {/* Description message */}
+            {/* Description message - Dynamically changes based on the phase */}
             <p className={styles.dialogMessage} id="dialog-message">
-              {`🎯 ${phaseTitle} Completed! All requirements analyzed and documented.`}
+              {completedPhase === 0 ? (
+                `🎯 ${phaseTitle} Completed! All requirements analyzed and documented.`
+              ) : completedPhase === 1 ? (
+                `🎨 ${phaseTitle} Completed! All designs finalized and approved.`
+              ) : completedPhase === 2 ? (
+                `💻 ${phaseTitle} Completed! Code implementation successfully completed.`
+              ) : completedPhase === 3 ? (
+                `🧪 ${phaseTitle} Completed! All tests passed successfully.`
+              ) : completedPhase === 4 ? (
+                `🚀 ${phaseTitle} Completed! Project deployed to production.`
+              ) : completedPhase === 5 ? (
+                `🔧 ${phaseTitle} Completed! Ongoing maintenance and support ensured.`
+              ) : (
+                `✅ ${phaseTitle} Completed! Phase milestones achieved successfully.`
+              )}
             </p>
             
             {/* Progress indicator */}
@@ -280,7 +360,7 @@ const Notifications: React.FC = () => {
               {/* Progress details */}
               <div className={styles.progressDetails}>
                 <p className={styles.progressText}>
-                  Phase <span id="completed-phase">{Math.min(completedPhase + 1, totalPhases)}</span> of <span id="total-phases">{totalPhases}</span> completed
+                  Phase <span id="completed-phase">{completedPhase + 1}</span> of <span id="total-phases">{totalPhases}</span> completed
                 </p>
                 <p className={styles.nextPhaseText}>
                   Next: <span id="next-phase-name">{nextPhaseName}</span>
@@ -294,8 +374,16 @@ const Notifications: React.FC = () => {
                 className={styles.dialogContinueBtn} 
                 id="dialog-continue-btn"
                 onClick={handleContinue}
+                style={{ 
+                  opacity: 1, 
+                  pointerEvents: 'auto',
+                  backgroundColor: '#10b981',
+                  color: 'white',
+                  border: 'none',
+                  cursor: 'pointer'
+                }}
               >
-                Continue Timeline
+                Continue Timeline (Phase {completedPhase + 1} → {Math.min(completedPhase + 2, totalPhases)})
               </button>
             </div>
             

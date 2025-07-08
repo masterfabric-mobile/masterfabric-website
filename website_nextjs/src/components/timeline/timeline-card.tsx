@@ -8,9 +8,12 @@ interface TimelineCardProps {
   phase: TimelinePhase;
   tools?: Tool[];
   isActive?: boolean;
+  isCurrent?: boolean;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 }
 
-const TimelineCard: React.FC<TimelineCardProps> = ({ phase, tools = [], isActive = false }) => {
+const TimelineCard: React.FC<TimelineCardProps> = ({ phase, tools = [], isActive = false, isCurrent = false, onMouseEnter, onMouseLeave }) => {
   // Helper function to get status class
   const getStatusClass = (status: string): string => {
     switch (status) {
@@ -40,9 +43,27 @@ const TimelineCard: React.FC<TimelineCardProps> = ({ phase, tools = [], isActive
     }
   };
 
+  // Kart container class'ları
+  const cardClass = [
+    styles.timelineCardContainer,
+    styles.timelineCard,
+    isActive ? styles.activePhaseCard : '',
+    isCurrent ? styles.currentPhaseCard : '',
+    styles[`border${phase.status.charAt(0).toUpperCase() + phase.status.slice(1)}`],
+    styles[`${phase.status}PhaseCard`],
+  ].filter(Boolean).join(' ');
+
   // Use CSS modules instead of Tailwind
   return (
-    <div className={`${styles.timelineCardContainer} ${isActive ? styles.activePhaseCard : ''} ${styles[`border${phase.status.charAt(0).toUpperCase() + phase.status.slice(1)}`]}`}>
+    <div
+      className={cardClass}
+      tabIndex={0}
+      aria-current={isCurrent ? 'step' : undefined}
+      aria-label={phase.title}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      role="group"
+    >
       <div>
         {/* Card header */}
         <div className={styles.cardHeader}>
@@ -56,7 +77,9 @@ const TimelineCard: React.FC<TimelineCardProps> = ({ phase, tools = [], isActive
             </h3>
             
             {/* Status badge */}
-            <span className={`${styles.statusBadge} ${getStatusClass(phase.status)}`}>
+            <span className={`${styles.statusBadge} ${getStatusClass(phase.status)}`}
+              aria-label={`Status: ${phase.status}`}
+            >
               {phase.status.charAt(0).toUpperCase() + phase.status.slice(1).replace('-', ' ')}
             </span>
           </div>

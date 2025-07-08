@@ -27,6 +27,11 @@ export const TimelineProvider: React.FC<TimelineProviderProps> = ({ children }) 
     phases: []
   }) as TimelineData;
   
+  console.log('Timeline Provider initialized with:', {
+    phasesCount: timeline.phases.length,
+    phases: timeline.phases.map(p => ({ id: p.id, title: p.title, duration: p.duration }))
+  });
+  
   // Calculate total days from the timeline data
   const calculateTotalDays = (): number => {
     try {
@@ -101,27 +106,35 @@ export const TimelineProvider: React.FC<TimelineProviderProps> = ({ children }) 
   
   // Parse phase day ranges from timeline data
   const phaseRanges = useMemo(() => {
-    return normalizedTimeline.phases.map(phase => {
+    const ranges = normalizedTimeline.phases.map((phase, index) => {
       // Parse phase duration string (format: "Days X-Y")
       const durationMatch = phase.duration.match(/Days? (\d+)-(\d+)/i);
       
       if (durationMatch && durationMatch.length >= 3) {
         const start = parseInt(durationMatch[1], 10);
         const end = parseInt(durationMatch[2], 10);
-        return { start, end } as PhaseDayRange;
+        const range = { start, end } as PhaseDayRange;
+        console.log(`Phase ${index} (${phase.id}): ${phase.duration} -> Range: ${start}-${end}`);
+        return range;
       }
       
       // Fallback if format doesn't match
+      console.warn(`Phase ${index} (${phase.id}): Could not parse duration "${phase.duration}", using fallback`);
       return { start: 1, end: 7 } as PhaseDayRange;
     });
+    
+    console.log('All phase ranges:', ranges);
+    return ranges;
   }, [normalizedTimeline]);
   
   // Initialize timeline
   useEffect(() => {
-    // Start auto-progress if enabled
-    if (timeline.settings.autoProgress) {
-      startAutoProgress()
-    }
+    // Do NOT start auto-progress - we want manual control via Continue button
+    // if (timeline.settings.autoProgress) {
+    //   startAutoProgress()
+    // }
+    
+    console.log('Timeline initialized - auto-progress disabled for manual control');
     
     // Clean up on unmount
     return () => {
@@ -152,15 +165,22 @@ export const TimelineProvider: React.FC<TimelineProviderProps> = ({ children }) 
       
       // Small delay to ensure the UI updates first
       setTimeout(() => {
-        // Always show toast for any phase change
-        showCongratulationsToast(currentPhase);
-        
-        // If not the first phase, also show dialog
-        if (currentPhase > 0) {
-          // Show dialog for completed phase after a short delay
+        // When we advance to a new phase, we want to celebrate the completion of the previous phase
+        if (currentPhase > 0 && lastNotifiedPhase >= 0) {
+          // Show completion notifications for the phase we just finished
+          const completedPhaseIndex = currentPhase - 1;
+          console.log(`Showing completion notifications for phase ${completedPhaseIndex}`);
+          
+          // Show toast for the completed phase
+          showCongratulationsToast(completedPhaseIndex);
+          
+          // Show dialog for the completed phase after a short delay
           setTimeout(() => {
-            showCongratulationsDialog(currentPhase - 1);
-          }, 300);
+            showCongratulationsDialog(completedPhaseIndex);
+          }, 500);
+        } else if (currentPhase === 0) {
+          // Special case for first phase - just show toast to indicate start
+          showCongratulationsToast(0);
         }
       }, 300);
       
@@ -187,34 +207,33 @@ export const TimelineProvider: React.FC<TimelineProviderProps> = ({ children }) 
   const advanceDay = () => {
     setCurrentDay(prevDay => {
       const nextDay = prevDay + 1;
-      
-      // Check if we need to reset after reaching the end
-      if (nextDay > totalDays) {
-        // Schedule phase change separately to ensure proper notification triggering
-        setTimeout(() => {
-          setCurrentPhase(0); // Reset to first phase
-        }, 10);
-        return 1; // Reset to day 1
+      const isLastPhase = currentPhase === normalizedTimeline.phases.length - 1;
+      const isLastDay = nextDay > totalDays;
+      if (isLastPhase && isLastDay) {
+        setIsPaused(true);
+        // Final notification sadece bir kez gösterilsin
+        if (lastNotifiedPhase !== currentPhase) {
+          showCongratulationsToast(currentPhase);
+          setTimeout(() => {
+            showCongratulationsDialog(currentPhase);
+          }, 500);
+          setLastNotifiedPhase(currentPhase);
+        }
+        return prevDay; // Son günde kal
       }
-      
-      // Check if we should advance to the next phase based on day ranges
+      // Faz geçişi
       if (currentPhase < normalizedTimeline.phases.length - 1) {
         const currentRange = phaseRanges[currentPhase];
-        
-        // If we've passed the end day of the current phase, move to the next phase
-        // Ensure we don't exceed the maximum number of phases
         if (nextDay > currentRange.end) {
-          const nextPhase = Math.min(currentPhase + 1, normalizedTimeline.phases.length - 1);
-          // Schedule phase change separately to ensure proper notification triggering
-          setTimeout(() => {
-            setCurrentPhase(nextPhase);
-          }, 10);
+          setCurrentPhase(prevPhase => prevPhase + 1);
         }
       }
-      
+      if (nextDay > totalDays) {
+        return prevDay; // Son günde kal
+      }
       return nextDay;
-    })
-  }
+    });
+  };
   
   // Toggle pause state
   const togglePause = () => {
@@ -330,21 +349,26 @@ export const TimelineProvider: React.FC<TimelineProviderProps> = ({ children }) 
   
   // Go to next phase with bounds checking
   const goToNextPhase = () => {
+    console.log(`goToNextPhase called. Current phase: ${currentPhase}, Total phases: ${normalizedTimeline.phases.length}`);
+    
     if (currentPhase < normalizedTimeline.phases.length - 1) {
       // Ensure we don't exceed the maximum number of phases
       const nextPhase = Math.min(currentPhase + 1, normalizedTimeline.phases.length - 1);
       
+      console.log(`Moving from phase ${currentPhase} to phase ${nextPhase}`);
+      
       // Update current day based on the new phase's range
       if (phaseRanges[nextPhase]) {
+        console.log(`Setting current day to ${phaseRanges[nextPhase].start} for phase ${nextPhase}`);
         setCurrentDay(phaseRanges[nextPhase].start);
       }
       
       // Set the phase last (this will trigger the notification effect)
       setCurrentPhase(nextPhase);
       
-      console.log(`Advanced to phase ${nextPhase}`);
+      console.log(`Successfully advanced to phase ${nextPhase}`);
     } else {
-      console.log('Already at final phase');
+      console.log(`Cannot advance: Already at final phase (${currentPhase}/${normalizedTimeline.phases.length - 1})`);
     }
   };
   
@@ -445,3 +469,4 @@ export const TimelineProvider: React.FC<TimelineProviderProps> = ({ children }) 
 };
 
 export default TimelineProvider;
+

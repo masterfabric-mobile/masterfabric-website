@@ -71,23 +71,38 @@ export const useTimelineController = (timeline: TimelineData) => {
   const advanceDay = () => {
     setCurrentDay(prevDay => {
       const nextDay = prevDay + 1
-      
-      // Check if we need to reset after reaching the end
-      if (nextDay > totalDays) {
-        setCurrentPhase(0); // Reset to first phase
-        return 1; // Reset to day 1
+      // Son gün ve son faz kontrolü
+      const isLastPhase = currentPhase === timeline.phases.length - 1
+      const isLastDay = nextDay > totalDays
+      if (isLastPhase && isLastDay) {
+        // Timeline tamamlandı, ilerlemeyi durdur
+        setIsPaused(true)
+        // Final dialog ve tebrik mesajı göster
+        const phase = timeline.phases[currentPhase]
+        setToastTitle(`${phase.title} Completed!`)
+        setToastMessage(phase.description)
+        setShowToast(true)
+        setTimeout(() => setShowToast(false), 3000)
+        setTimeout(() => {
+          setDialogTitle('Project Complete!')
+          setDialogMessage('Congratulations, you have completed all phases!')
+          setShowDialog(true)
+          setIsFinalDialog(true)
+        }, 1000)
+        return prevDay // Son günde kal
       }
-      
       // Check if we should advance to the next phase based on day ranges
       if (currentPhase < timeline.phases.length - 1) {
         const currentRange = phaseRanges[currentPhase];
-        
         // If we've passed the end day of the current phase, move to the next phase
         if (nextDay > currentRange.end) {
           setCurrentPhase(prevPhase => prevPhase + 1);
         }
       }
-      
+      // Son gün değilse normal ilerle
+      if (nextDay > totalDays) {
+        return prevDay // Son günde kal
+      }
       return nextDay;
     })
   }
@@ -182,6 +197,104 @@ export const useTimelineController = (timeline: TimelineData) => {
     return updatedPhases;
   }
   
+  // Eklenen: Toast ve Dialog state'leri
+  const [showToast, setShowToast] = useState(false)
+  const [toastTitle, setToastTitle] = useState('')
+  const [toastMessage, setToastMessage] = useState('')
+  const [showDialog, setShowDialog] = useState(false)
+  const [dialogTitle, setDialogTitle] = useState('')
+  const [dialogMessage, setDialogMessage] = useState('')
+  const [isFinalDialog, setIsFinalDialog] = useState(false)
+  const [isStatusBarMinimized, setIsStatusBarMinimized] = useState(false)
+  const [isContactDialogVisible, setIsContactDialogVisible] = useState(false)
+
+  // Hover ile otomatik duraklatma
+  const [isHovering, setIsHovering] = useState(false)
+
+  // Scroll tabanlı ilerleme (isteğe bağlı, Astro'daki gibi)
+  const [scrollProgress, setScrollProgress] = useState(0)
+
+  // Phase geçişinde toast/dialog tetikleme
+  useEffect(() => {
+    // Phase değiştiğinde tebrik mesajı göster
+    if (currentPhase > 0) {
+      const phase = timeline.phases[currentPhase - 1]
+      setToastTitle(`${phase.title} Completed!`)
+      setToastMessage(phase.description)
+      setShowToast(true)
+      // Toast 3 sn sonra kaybolsun
+      setTimeout(() => setShowToast(false), 3000)
+      // 1 sn sonra dialog aç
+      setTimeout(() => {
+        setDialogTitle('Congratulations!')
+        setDialogMessage(phase.description)
+        setShowDialog(true)
+        setIsFinalDialog(currentPhase === timeline.phases.length)
+      }, 1000)
+    }
+  }, [currentPhase])
+
+  // Dialog kapama fonksiyonu
+  const hideDialog = () => {
+    setShowDialog(false)
+    // Eğer kullanıcı tarafından duraklatılmadıysa devam et
+    if (!isPaused) setIsPaused(false)
+  }
+
+  // Status bar toggle (gelişmiş)
+  const toggleStatusBarMinimized = () => {
+    setIsStatusBarMinimized(val => !val)
+  }
+
+  // Hover ile otomatik duraklatma fonksiyonları
+  const onTimelineCardMouseEnter = () => {
+    if (!isPaused) setIsHovering(true)
+    setIsPaused(true)
+  }
+  const onTimelineCardMouseLeave = () => {
+    if (!isPaused) setIsHovering(false)
+    setIsPaused(false)
+  }
+
+  // Scroll tabanlı ilerleme (isteğe bağlı)
+  useEffect(() => {
+    if (!timeline.settings.scrollBasedProgress) return
+    const handleScroll = () => {
+      const timelineSection = document.querySelector('.project-flow-timeline') as HTMLElement
+      if (!timelineSection) return
+      const rect = timelineSection.getBoundingClientRect()
+      const windowHeight = window.innerHeight
+      let progress = 0
+      if (rect.top < windowHeight && rect.bottom > 0) {
+        const sectionHeight = rect.height
+        const visibleTop = Math.max(0, windowHeight - rect.top)
+        const visibleHeight = Math.min(visibleTop, sectionHeight)
+        progress = Math.min(visibleHeight / sectionHeight, 1)
+      }
+      setScrollProgress(progress)
+      // Fazı güncelle
+      const newPhase = Math.floor(progress * timeline.phases.length)
+      const clampedPhase = Math.min(newPhase, timeline.phases.length - 1)
+      if (clampedPhase !== currentPhase && clampedPhase >= 0) {
+        setCurrentPhase(clampedPhase)
+      }
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [timeline, currentPhase])
+
+  // Progress bar güncellemesi (scroll veya gün bazlı)
+  const getProgressBarWidth = () => {
+    if (timeline.settings.scrollBasedProgress) {
+      return `${Math.min(scrollProgress * 100, 100)}%`
+    }
+    return `${getProgressPercentage()}%`
+  }
+
+  // Contact section dialog fonksiyonları
+  const showContactDialog = () => setIsContactDialogVisible(true)
+  const hideContactDialog = () => setIsContactDialogVisible(false)
+  
   return {
     currentPhase,
     currentDay,
@@ -197,6 +310,24 @@ export const useTimelineController = (timeline: TimelineData) => {
     togglePause,
     resetTimeline,
     toggleStatusBar,
-    advanceDay
+    advanceDay,
+    showToast,
+    toastTitle,
+    toastMessage,
+    showDialog,
+    dialogTitle,
+    dialogMessage,
+    isFinalDialog,
+    hideDialog,
+    isStatusBarMinimized,
+    toggleStatusBarMinimized,
+    isHovering,
+    onTimelineCardMouseEnter,
+    onTimelineCardMouseLeave,
+    getProgressBarWidth,
+    isContactDialogVisible,
+    showContactDialog,
+    hideContactDialog,
+    scrollProgress,
   }
 }

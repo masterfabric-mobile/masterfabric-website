@@ -1,0 +1,20 @@
+.process-step {
+  transition: transform 0.3s ease;
+}
+
+.process-step:hover {
+  transform: translateY(-5px);
+}
+
+@media (max-width: 768px) {
+  .process-steps-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .process-steps-grid {
+    grid-template-columns: 1fr;
+  }
+}

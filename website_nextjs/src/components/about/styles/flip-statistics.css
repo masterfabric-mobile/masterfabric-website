@@ -1,0 +1,418 @@
+:root {
+  --blue-primary: #002ac4;     
+  --blue-darker: #0034a3;      
+  --blue-darkest: #031854;    
+  --blue-light: #6089fa;      
+  --blue-lightest: #93c1fd;   
+}
+
+.stats-section {
+  padding: 4rem 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.stats-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.statistics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  justify-items: center;
+  align-items: center;
+  place-items: center;
+}
+
+.statistics-grid::before,
+.statistics-grid::after {
+  content: '';
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%); 
+  pointer-events: none;
+  z-index: -1;
+  animation: floatAround 8s ease-in-out infinite;
+}
+
+.statistics-grid::before {
+  top: -60px;
+  left: -60px;
+  animation-delay: 0s;
+}
+
+.statistics-grid::after {
+  bottom: -60px;
+  right: -60px;
+  animation-delay: 4s;
+  background: radial-gradient(circle, rgba(29, 78, 216, 0.08) 0%, transparent 70%); /* Darker blue */
+}
+
+.stat-card {
+  position: relative;
+  background: linear-gradient(145deg, 
+    rgba(255, 255, 255, 0.95) 0%, 
+    rgba(248, 250, 252, 0.9) 100%);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(59, 130, 246, 0.15);
+  border-radius: 20px;
+  padding: 0.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  overflow: hidden;
+  box-shadow: 
+    0 10px 40px rgba(59, 130, 246, 0.08),
+    0 4px 12px rgba(59, 130, 246, 0.05),
+    0 0 0 1px rgba(255, 255, 255, 0.3) inset;
+  isolation: isolate;
+  width: 260px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  transform: translateY(0);
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(90deg, 
+    rgba(59, 130, 246, 0.1) 0%, 
+    rgba(37, 99, 235, 0.05) 50%,
+    rgba(29, 78, 216, 0.1) 100%); 
+  border-radius: 18px;
+  opacity: 0;
+  transition: all 0.5s ease;
+  z-index: -1;
+}
+
+.stat-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 
+    0 25px 50px rgba(59, 130, 246, 0.15),
+    0 10px 25px rgba(59, 130, 246, 0.1),
+    0 0 0 2px rgba(59, 130, 246, 0.2) inset;
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.stat-card:hover::before {
+  opacity: 1;
+  transform: scale(1.02);
+}
+
+.card-glow {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  background: linear-gradient(90deg, 
+    rgba(59, 130, 246, 0.08) 0%, 
+    rgba(37, 99, 235, 0.06) 50%,
+    rgba(29, 78, 216, 0.08) 100%); 
+  border-radius: 20px;
+  opacity: 0;
+  transition: all 0.5s ease;
+  z-index: -2;
+  filter: blur(12px);
+}
+
+.stat-card:hover .card-glow {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.geometric-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: 16px;
+  opacity: 0.3;
+}
+
+.pattern-grid {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(rgba(59, 130, 246, 0.2) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(59, 130, 246, 0.2) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.3;
+  transition: all 0.5s ease;
+  transform: rotate(-3deg) scale(1.5);
+  top: 10%;
+  left: -5%;
+}
+
+.pattern-dots {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(rgba(59, 130, 246, 0.4) 2px, transparent 2px);
+  background-size: 20px 20px;
+  opacity: 0.2;
+  transition: all 0.5s ease;
+  transform: rotate(3deg) scale(1.5);
+  top: -10%;
+  left: 5%;
+}
+
+.stat-card:hover .pattern-grid {
+  transform: rotate(0deg) scale(1.8);
+  opacity: 0.4;
+}
+
+.stat-card:hover .pattern-dots {
+  transform: rotate(0deg) scale(1.8);
+  opacity: 0.3;
+}
+
+.stat-icon {
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.icon-container {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(59, 130, 246, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--blue-primary);
+  font-size: 1.5rem;
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.icon-container svg {
+  width: 24px;
+  height: 24px;
+  stroke: #2563eb;
+}
+
+.icon-glow {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(59, 130, 246, 0.2);
+  filter: blur(10px);
+  opacity: 0.5;
+  z-index: 0;
+  transition: all 0.5s ease;
+}
+
+.stat-card:hover .icon-container {
+  transform: scale(1.1);
+  background: rgba(59, 130, 246, 0.15);
+  color: var(--blue-darker);
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+}
+
+.stat-card:hover .icon-glow {
+  transform: scale(1.5);
+  opacity: 0.8;
+}
+
+.stat-content {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease;
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--blue-darker);
+  line-height: 1.2;
+  margin-bottom: 0.25rem;
+  transition: all 0.5s ease;
+  position: relative;
+  display: inline-block;
+}
+
+.stat-title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #1f2937;
+  margin-bottom: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.stat-description {
+  font-size: 0.875rem;
+  color: #4b5563;
+  max-width: 220px;
+  margin: 0 auto;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+  line-height: 1.4;
+}
+
+.stat-card:hover .stat-number {
+  transform: scale(1.1);
+  color: var(--blue-primary);
+}
+
+.stat-card:hover .stat-title {
+  color: #111827;
+}
+
+.stat-card:hover .stat-description {
+  opacity: 0.95;
+}
+
+.card-border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 20px;
+  border: 1px solid rgba(59, 130, 246, 0.1);
+  pointer-events: none;
+}
+
+.hover-icon-container {
+  position: absolute;
+  bottom: -40px;
+  right: -40px;
+  width: 80px;
+  height: 80px;
+  opacity: 0;
+  transform: translate(0, 0) scale(0.5);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.hover-icon {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  top: 16px;
+  left: 16px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.hover-icon-trail {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.6) 0%, rgba(29, 78, 216, 0.4) 60%, transparent 80%);
+  filter: blur(5px);
+}
+
+.stat-card:hover .hover-icon-container {
+  opacity: 1;
+  transform: translate(-20px, -20px) scale(1);
+}
+
+.navy-theme {
+  background: linear-gradient(145deg, 
+    rgba(2, 6, 23, 0.95) 0%, 
+    rgba(17, 24, 39, 0.9) 100%);
+  border-color: rgba(66, 153, 225, 0.3);
+  box-shadow: 
+    0 10px 40px rgba(10, 37, 64, 0.35),
+    0 4px 12px rgba(10, 37, 64, 0.2),
+    0 0 0 1px rgba(66, 153, 225, 0.2) inset;
+}
+
+.navy-theme .stat-number {
+  color: #60a5fa;
+}
+
+.navy-theme .stat-title {
+  color: #e5e7eb;
+}
+
+.navy-theme .stat-description {
+  color: #9ca3af;
+}
+
+.navy-theme .icon-container {
+  background: rgba(66, 153, 225, 0.2);
+  border-color: rgba(66, 153, 225, 0.4);
+}
+
+.navy-theme .icon-container svg {
+  stroke: #60a5fa;
+}
+
+.navy-theme:hover {
+  box-shadow: 
+    0 25px 50px rgba(10, 37, 64, 0.45),
+    0 10px 25px rgba(10, 37, 64, 0.3),
+    0 0 0 2px rgba(66, 153, 225, 0.3) inset;
+  border-color: rgba(66, 153, 225, 0.5);
+}
+
+.navy-theme:hover .stat-number {
+  color: #93c5fd;
+}
+
+.navy-theme:hover .stat-title {
+  color: #f9fafb;
+}
+
+.navy-theme:hover .icon-container {
+  background: rgba(66, 153, 225, 0.25);
+  border-color: rgba(66, 153, 225, 0.6);
+}
+
+@media (max-width: 768px) {
+  .statistics-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 0 1rem;
+  }
+  
+  .stat-card {
+    width: 100%;
+    max-width: 320px;
+  }
+}
+
+@keyframes floatAround {
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px);
+  }
+  50% {
+    transform: translateY(0) translateX(20px);
+  }
+  75% {
+    transform: translateY(20px) translateX(10px);
+  }
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+}

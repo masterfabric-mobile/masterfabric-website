@@ -19,6 +19,23 @@ interface Benefit {
 export default function ContactBenefits() {
   // SVG Icons for benefits
   const getIconContent = (benefit: Benefit, index: number) => {
+    // Check for specific benefit titles first
+    if (benefit.title === "24/7 Support") {
+      // Cross icon for support - hardcoded to ensure display
+      return (
+        <svg className="w-6 h-6 transform transition-transform duration-300 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10" strokeWidth="2" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6M12 9v6" />
+        </svg>
+      );
+    } else if (benefit.title === "Scalable Solutions") {
+      return (
+        <svg className="w-6 h-6 transform transition-transform duration-300 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+      );
+    }
+    
     // If the benefit has custom SVG icon paths
     if (benefit.icon && benefit.icon.paths) {
       return (
@@ -65,8 +82,19 @@ export default function ContactBenefits() {
         {contactData.benefits.map((benefit: Benefit, index: number) => {
           const bgColor = benefit.bgColor || "bg-blue-500";
           
-          // Special color for Fast Delivery item
-          const specialBgColor = benefit.title === "Fast Delivery" ? "bg-gradient-to-br from-orange-400 to-orange-600" : `${bgColor}`;
+          // Use the gradient color if provided, otherwise create a gradient based on bgColor
+          let specialBgColor = benefit.gradientColor 
+            ? `bg-gradient-to-br ${benefit.gradientColor}` 
+            : `${bgColor}`;
+          
+          // Handle special cases for consistency
+          if (benefit.title === "Fast Delivery" && !benefit.gradientColor) {
+            specialBgColor = "bg-gradient-to-br from-yellow-400 to-orange-500";
+          } else if (benefit.title === "Scalable Solutions" && !benefit.gradientColor) {
+            specialBgColor = "bg-gradient-to-br from-purple-400 to-purple-600";
+          } else if (benefit.title === "24/7 Support") {
+            specialBgColor = "bg-gradient-to-br from-green-400 to-green-600";
+          }
           
           return (
             <div key={index} className="flex items-start gap-5 group transition-all duration-300 hover:translate-y-[-2px]">
@@ -75,7 +103,27 @@ export default function ContactBenefits() {
                 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg relative overflow-hidden`}>
                 {/* Icon */}
                 <div className="relative z-10">
-                  {getIconContent(benefit, index)}
+                  {/* Force specific icons for each benefit to ensure they display properly */}
+                  {benefit.title === "Mobile Excellence" ? (
+                    <svg className="w-6 h-6 transform transition-transform duration-300 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                    </svg>
+                  ) : benefit.title === "Fast Delivery" ? (
+                    <svg className="w-6 h-6 transform transition-transform duration-300 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                  ) : benefit.title === "24/7 Support" ? (
+                    <svg className="w-6 h-6 transform transition-transform duration-300 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <circle cx="12" cy="12" r="10" strokeWidth="2" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6M12 9v6" />
+                    </svg>
+                  ) : benefit.title === "Scalable Solutions" ? (
+                    <svg className="w-6 h-6 transform transition-transform duration-300 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                    </svg>
+                  ) : (
+                    getIconContent(benefit, index)
+                  )}
                 </div>
                 
                 {/* Modern hover animation effects */}
@@ -90,7 +138,13 @@ export default function ContactBenefits() {
               
               {/* Text content with bold title and hover effects */}
               <div className="flex flex-col transition-all duration-300">
-                <h3 className="text-[#121826] text-lg font-bold mb-1 group-hover:text-blue-600 transition-colors duration-300">{benefit.title}</h3>
+                <h3 className={`text-[#121826] text-lg font-bold mb-1 transition-colors duration-300 
+                  ${benefit.title === "Mobile Excellence" ? "group-hover:text-blue-600" : 
+                    benefit.title === "Fast Delivery" ? "group-hover:text-orange-500" :
+                    benefit.title === "24/7 Support" ? "group-hover:text-green-600" :
+                    benefit.title === "Scalable Solutions" ? "group-hover:text-purple-600" :
+                    "group-hover:text-blue-600"}`
+                }>{benefit.title}</h3>
                 <p className="text-gray-600 text-base group-hover:text-gray-800 transition-colors duration-300">{benefit.description}</p>
               </div>
             </div>

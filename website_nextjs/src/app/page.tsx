@@ -10,6 +10,7 @@ import ProjectFlowTimeline, { TimelineRefType } from '@/components/pages/project
 import CTA from '@/components/pages/cta'
 
 
+
 export default function HomePage() {
   // Create a ref to access timeline methods
   const timelineRef = useRef<TimelineRefType>(null);
@@ -31,10 +32,7 @@ export default function HomePage() {
   
   return (
     <Container>
-       
-
       {/* Contact Section */}
-    
       <ContactSection/>
       {/* Welcome Section */}
       <Welcome 

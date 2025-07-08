@@ -1,5 +1,5 @@
 /* Footer specific styles */
-footer {
+.footer {
   position: relative;
   overflow: hidden;
   margin-top: 6rem; /* More space from content */
@@ -16,7 +16,7 @@ footer {
 }
 
 /* Remove old border styles */
-footer::before {
+.footer::before {
   display: none;
 }
 
@@ -80,7 +80,7 @@ footer::before {
 
 /* Responsive design improvements - Mobile and Tablet (up to 1023px) */
 @media (max-width: 1023px) {
-  footer {
+  .footer {
     margin-top: 4rem; /* Good spacing on mobile and tablet */
   }
   
@@ -104,27 +104,27 @@ footer::before {
   }
   
   /* Ensure consistent layout for mobile and tablet */
-  .flex.flex-col.md\:flex-row {
+  .footer .flex.flex-col.md\:flex-row {
     flex-direction: column !important;
     text-align: center;
   }
   
-  .text-center.md\:text-left {
+  .footer .text-center.md\:text-left {
     text-align: center !important;
   }
   
   /* Keep navigation links centered on tablet as well */
-  .flex.flex-wrap.justify-center {
+  .footer .flex.flex-wrap.justify-center {
     justify-content: center !important;
   }
 }
 
 /* Smooth animations */
-* {
+.footer * {
   scroll-behavior: smooth;
 }
 
 /* Clean minimal design */
-.flex > * {
+.footer .flex > * {
   transition: transform 0.2s ease;
-}
+} 

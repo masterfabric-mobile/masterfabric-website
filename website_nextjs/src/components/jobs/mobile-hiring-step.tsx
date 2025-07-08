@@ -18,7 +18,7 @@ import {
 } from 'lucide-react'
 import './styles/hiring-step.css'
 
-interface HiringStepProps {
+interface MobileHiringStepProps {
   step: {
     number: string
     title: string
@@ -32,7 +32,7 @@ interface HiringStepProps {
   isLast?: boolean
 }
 
-export default function HiringStep({ step, index, isLast = false }: HiringStepProps) {
+export default function MobileHiringStep({ step, index, isLast = false }: MobileHiringStepProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const expandedContentRef = useRef<HTMLDivElement>(null);
   
@@ -91,69 +91,63 @@ export default function HiringStep({ step, index, isLast = false }: HiringStepPr
       }
     }
   }, [isExpanded]);
-  
+
   return (
-    <div className="text-center px-2 flex-shrink-0 w-full sm:w-72 md:w-80">
-      {/* Step Circle */}
-      <div className="relative mb-6">
-        <div className="step-number w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 text-white rounded-full flex items-center justify-center font-bold text-base mx-auto relative z-10 border-3 border-white shadow-lg shadow-blue-200/50">
+    <div className="relative mb-8 last:mb-0">
+      {/* Step number with connecting line */}
+      <div className="absolute left-5 top-0 bottom-0 flex flex-col items-center">
+        <div className="step-number w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 text-white rounded-full flex items-center justify-center font-bold text-base relative z-10 border-3 border-white shadow-lg shadow-blue-200/50">
           {step.number}
         </div>
+        {!isLast && (
+          <div className="h-full w-0.5 bg-blue-100 mt-1"></div>
+        )}
       </div>
-      
+
       {/* Step Content Card */}
-      <div className="hiring-step-card bg-white rounded-xl shadow-lg border border-blue-100 hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer w-full h-auto min-h-[240px] mt-4">
-        {/* Card Content - Clickable to expand/collapse */}
+      <div className="hiring-step-card bg-white rounded-xl shadow-lg border border-blue-100 ml-14 hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer">
+        {/* Card Header - Clickable to expand/collapse */}
         <div 
-          className="card-content p-4 sm:p-5" 
+          className="card-content p-4"
           onClick={toggleExpand}
         >
-          {/* Icon */}
-          <div className="icon-container w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100 rounded-lg flex items-center justify-center mx-auto mb-3 border border-blue-100 shadow-sm hover:shadow-md hover:scale-105 transition-all duration-300">
-            {getIcon()}
-          </div>
-          
-          {/* Title */}
-          <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2">{step.title}</h3>
-          
-          {/* Duration Badge */}
-          <div className="inline-flex items-center px-2.5 py-1 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-full border border-blue-100 mb-3">
-            <Clock className="w-3.5 h-3.5 text-blue-500 mr-1" />
-            <span className="text-xs sm:text-sm text-blue-700 font-medium">{step.duration}</span>
+          <div className="flex items-center gap-3 mb-3">
+            <div className="icon-container w-12 h-12 bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100 rounded-lg flex items-center justify-center border border-blue-100 shadow-sm">
+              {getIcon()}
+            </div>
+            
+            <div>
+              <h3 className="text-lg font-bold text-gray-900">{step.title}</h3>
+              <div className="inline-flex items-center mt-1">
+                <Clock className="w-3 h-3 text-blue-500 mr-1" />
+                <span className="text-xs text-blue-700 font-medium">{step.duration}</span>
+              </div>
+            </div>
+            
+            <div className="ml-auto">
+              <ChevronDown className={`w-5 h-5 text-blue-600 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
+            </div>
           </div>
         </div>
         
         {/* Expanded Content */}
         <div 
           ref={expandedContentRef}
-          className={`expanded-content px-4 sm:px-5 pb-4 sm:pb-5 max-h-0 overflow-hidden transition-all duration-500 ease-in-out ${isExpanded ? 'opacity-100' : 'opacity-0'}`}
+          className={`expanded-content px-4 pb-4 max-h-0 overflow-hidden transition-all duration-500 ease-in-out ${isExpanded ? 'opacity-100' : 'opacity-0'}`}
         >
           <div className="border-t border-gray-100 pt-3 space-y-3">
-            <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">{step.description}</p>
+            <p className="text-gray-600 text-sm leading-relaxed">{step.description}</p>
             
             <div className="space-y-2">
               {step.details.map((detail, idx) => (
-                <div key={idx} className="text-xs sm:text-sm text-gray-600 bg-gray-50 rounded-lg p-2.5 sm:p-3 border border-gray-100 leading-relaxed">
+                <div key={idx} className="text-sm text-gray-600 bg-gray-50 rounded-lg p-3 border border-gray-100 leading-relaxed">
                   <span className="break-words">{detail}</span>
                 </div>
               ))}
             </div>
           </div>
         </div>
-        
-        {/* Expand/Collapse Button */}
-        <div className="px-4 sm:px-5 pb-3">
-          <button 
-            className="expand-btn w-full flex items-center justify-center py-1.5 text-blue-600 hover:text-blue-700 transition-colors duration-200"
-            onClick={(e) => {
-              e.stopPropagation();
-              toggleExpand();
-            }}
-          >
-            <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
-          </button>
-        </div>
       </div>
     </div>
-  )
+  );
 }

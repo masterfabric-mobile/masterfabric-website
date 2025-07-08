@@ -1,0 +1,87 @@
+/* Hiring step animations */
+.hiring-step-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hiring-step-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+}
+
+/* Step number styles */
+.step-number {
+  position: relative;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.step-number::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: scale(0);
+  transition: transform 0.5s ease;
+  z-index: -1;
+}
+
+.step-number:hover {
+  transform: scale(1.1);
+}
+
+.step-number:hover::after {
+  transform: scale(1.5);
+}
+
+/* Icon container animations */
+.icon-container {
+  transition: all 0.3s ease;
+}
+
+.icon-container:hover {
+  transform: translateY(-2px) scale(1.05);
+}
+
+/* Expanded content transitions */
+.expanded-content {
+  transition: max-height 0.5s ease, opacity 0.3s ease;
+}
+
+.expanded-content.opacity-0 {
+  opacity: 0;
+}
+
+.expanded-content.opacity-100 {
+  opacity: 1;
+}
+
+/* Expand button hover effects */
+.expand-btn {
+  transition: all 0.2s ease;
+}
+
+.expand-btn:hover svg {
+  transform: scale(1.2) rotate(0deg);
+}
+
+.expand-btn:hover svg.rotate-180 {
+  transform: scale(1.2) rotate(180deg);
+}
+
+/* Card content hover effects */
+.card-content {
+  transition: background-color 0.3s ease;
+}
+
+.card-content:hover {
+  background-color: rgba(243, 244, 246, 0.5);
+}
+
+/* Border styles for jobs layout */
+.border-3 {
+  border-width: 3px;
+}

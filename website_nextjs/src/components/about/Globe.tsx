@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useCallback } from 'react'
 
 interface Activity {
   flag: string;
@@ -31,14 +31,13 @@ const Globe: React.FC<GlobeProps> = ({ activities }) => {
     return item;
   }
 
-  const addActivity = () => {
+  const addActivity = useCallback(() => {
     const activityStream = activityStreamRef.current;
     if (!activityStream) return;
-    
+
     const randomActivity = activities[Math.floor(Math.random() * activities.length)];
     const activityItem = createActivityItem(randomActivity);
-    
-    // Light up the corresponding country on globe
+
     const countryLight = document.querySelector(`.light[data-country="${randomActivity.country}"]`);
     if (countryLight) {
       countryLight.classList.add('active');
@@ -46,25 +45,22 @@ const Globe: React.FC<GlobeProps> = ({ activities }) => {
         countryLight.classList.remove('active');
       }, 1200);
     }
-    
+
     activityStream.insertBefore(activityItem, activityStream.firstChild);
-    
-    // Animate in with delay
+
     requestAnimationFrame(() => {
       setTimeout(() => {
         activityItem.style.transform = 'translateX(0) scale(1)';
         activityItem.style.opacity = '1';
       }, 50);
     });
-    
-    // Push down existing items smoothly
+
     const existingItems = activityStream.querySelectorAll('.activity-item:not(:first-child)');
     existingItems.forEach((item, index) => {
       (item as HTMLElement).style.transform = `translateY(${(index + 1) * 4}px) scale(${1 - (index * 0.02)})`;
       (item as HTMLElement).style.opacity = `${1 - (index * 0.1)}`;
     });
-    
-    // Remove old items (keep only 6 for smoother performance)
+
     while (activityStream.children.length > 6) {
       const lastItem = activityStream.lastChild as HTMLElement;
       lastItem.style.transform = 'translateX(120%) scale(0.7)';
@@ -75,8 +71,7 @@ const Globe: React.FC<GlobeProps> = ({ activities }) => {
         }
       }, 600);
     }
-    
-    // Auto remove after 8 seconds with smooth fade
+
     setTimeout(() => {
       if (activityItem.parentNode) {
         activityItem.style.transform = 'translateX(120%) scale(0.7)';
@@ -88,7 +83,7 @@ const Globe: React.FC<GlobeProps> = ({ activities }) => {
         }, 600);
       }
     }, 8000);
-  }
+  }, [activities]);
 
   useEffect(() => {
     const interval = setInterval(addActivity, 2500);
@@ -98,7 +93,7 @@ const Globe: React.FC<GlobeProps> = ({ activities }) => {
       clearInterval(interval);
       clearTimeout(timeout);
     };
-  }, []);
+  }, [addActivity]);
 
   return (
     <div className="relative mb-8">

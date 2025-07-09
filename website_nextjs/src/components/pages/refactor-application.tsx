@@ -1,30 +1,43 @@
 'use client'
 
 import React from 'react'
-import { Zap, BarChart3, Users, Settings } from 'lucide-react'
+import { Zap, BarChart3, Users, Settings, Cloud, Database } from 'lucide-react'
+import { Icon } from '@iconify/react';
 
 export default function RefactorApplication() {
   const services = [
     {
-      icon: <BarChart3 className="w-8 h-8" />,
+      icon: <BarChart3 className="w-8 h-8" />, // Event Tracking
       title: "Event Tracking",
       description: "Track user interactions and behaviors with detailed analytics and insights",
       color: "blue"
     },
     {
-      icon: <Settings className="w-8 h-8" />,
+      icon: <Settings className="w-8 h-8" />, // Crash Reports & Monitoring
       title: "Crash Reports & Monitoring", 
-      description: "Real-time monitoring and crash reporting for improved app stability",
+      description: "Monitor app stability and identify performance issues in real-time",
       color: "indigo"
     },
     {
-      icon: <BarChart3 className="w-8 h-8" />,
+      icon: <BarChart3 className="w-8 h-8" />, // Analytics Reports
       title: "Analytics Reports",
       description: "Comprehensive data insights and metrics to drive growth strategies", 
       color: "purple"
     },
     {
-      icon: <Users className="w-8 h-8" />,
+      icon: <Cloud className="w-8 h-8" />, // Release Monitoring (Cloud icon as closest match)
+      title: "Release Monitoring",
+      description: "Track deployment success and monitor issues with real-time alerts",
+      color: "cyan"
+    },
+    {
+      icon: <Database className="w-8 h-8" />, // BigData Management
+      title: "BigData Management",
+      description: "Process and analyze large datasets to extract meaningful insights",
+      color: "slate"
+    },
+    {
+      icon: <Users className="w-8 h-8" />, // User Growth & Retention
       title: "User Growth & Retention",
       description: "Optimize user acquisition and engagement to increase retention rates",
       color: "teal"
@@ -136,6 +149,72 @@ export default function RefactorApplication() {
           </div>
         </div>
 
+        {/* Third-Party Integrations Section */}
+        <div className="mt-16 lg:mt-20">
+          <div className="bg-white border border-gray-100 rounded-3xl p-8 lg:p-12 shadow-sm">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 leading-tight mb-6">
+                <span className="block">Third-Party</span>
+                <span className="block text-blue-600">Integrations</span>
+              </h2>
+              <p className="text-lg lg:text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                Maximize your app's potential with <span className="font-semibold text-blue-600">strategic integrations</span>,
+                accelerating development processes and helping you achieve your <span className="font-semibold text-blue-600">growth</span>
+                objectives faster than ever before.
+              </p>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+              {/* Firebase */}
+              <div className="integration-partner group relative cursor-pointer">
+                <div className="w-24 h-24 bg-white rounded-3xl shadow-sm border border-gray-200 flex items-center justify-center group-hover:shadow-xl group-hover:scale-105 transition-all duration-300 mx-auto">
+                  <Icon icon="simple-icons:firebase" className="w-12 h-12 text-gray-400 group-hover:text-yellow-500 transition-colors duration-300" />
+                </div>
+                <div className="text-center mt-4">
+                  <h4 className="font-semibold text-gray-900 mb-2">Firebase</h4>
+                  <p className="text-sm text-gray-600">Backend services, analytics, and real-time database</p>
+                </div>
+              </div>
+              {/* Meta Analytics */}
+              <div className="integration-partner group relative cursor-pointer">
+                <div className="w-24 h-24 bg-white rounded-3xl shadow-sm border border-gray-200 flex items-center justify-center group-hover:shadow-xl group-hover:scale-105 transition-all duration-300 mx-auto">
+                  <Icon icon="simple-icons:meta" className="w-12 h-12 text-gray-400 group-hover:text-blue-600 transition-colors duration-300" />
+                </div>
+                <div className="text-center mt-4">
+                  <h4 className="font-semibold text-gray-900 mb-2">Meta Analytics</h4>
+                  <p className="text-sm text-gray-600">Advanced user behavior tracking and insights</p>
+                </div>
+              </div>
+              {/* Mixpanel */}
+              <div className="integration-partner group relative cursor-pointer">
+                <div className="w-24 h-24 bg-white rounded-3xl shadow-sm border border-gray-200 flex items-center justify-center group-hover:shadow-xl group-hover:scale-105 transition-all duration-300 mx-auto">
+                  <Icon icon="simple-icons:mixpanel" className="w-12 h-12 text-gray-400 group-hover:text-purple-600 transition-colors duration-300" />
+                </div>
+                <div className="text-center mt-4">
+                  <h4 className="font-semibold text-gray-900 mb-2">Mixpanel</h4>
+                  <p className="text-sm text-gray-600">Product analytics and user engagement metrics</p>
+                </div>
+              </div>
+              {/* Google Analytics */}
+              <div className="integration-partner group relative cursor-pointer">
+                <div className="w-24 h-24 bg-white rounded-3xl shadow-sm border border-gray-200 flex items-center justify-center group-hover:shadow-xl group-hover:scale-105 transition-all duration-300 mx-auto">
+                  <Icon icon="simple-icons:googleanalytics" className="w-12 h-12 text-gray-400 group-hover:text-emerald-600 transition-colors duration-300" />
+                </div>
+                <div className="text-center mt-4">
+                  <h4 className="font-semibold text-gray-900 mb-2">Google Analytics</h4>
+                  <p className="text-sm text-gray-600">Comprehensive web and app analytics platform</p>
+                </div>
+              </div>
+            </div>
+            <div className="text-center">
+              <p className="text-sm text-gray-500 max-w-3xl mx-auto leading-relaxed">
+                * Custom third-party integrations specific to your product are evaluated and
+                customized based on the analysis you provide during our collaboration process.
+                We support 50+ popular services and can integrate with any API.
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* CTA Section */}
         <div className="mt-16 lg:mt-20">
           <div className="bg-white border border-gray-100 rounded-3xl p-8 lg:p-12 shadow-sm">
@@ -146,40 +225,34 @@ export default function RefactorApplication() {
               </h2>
               <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
                 Join hundreds of successful companies that have optimized their applications with MasterFabric. 
-                Let&apos;s discuss how we can enhance your app&apos;s performance and user experience.
+                Let's discuss how we can enhance your app's <span className="font-semibold text-blue-600">performance</span> and <span className="font-semibold text-gray-600">user experience</span>.
               </p>
             </div>
-            
             <div className="grid md:grid-cols-3 gap-8 mb-12">
+              {/* Fast Implementation */}
               <div className="text-center p-8 bg-white rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 group">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl text-white mb-6 group-hover:scale-110 transition-transform duration-300">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-500 rounded-2xl text-white mb-6 group-hover:scale-110 transition-transform duration-300">
                   <Zap className="w-8 h-8" />
                 </div>
-                <h4 className="text-xl font-bold text-gray-900 mb-3">Fast Implementation</h4>
+                <h4 className="text-2xl font-bold text-gray-900 mb-3">Fast Implementation</h4>
                 <p className="text-gray-600 leading-relaxed">Get your optimized app within 2-4 weeks with our proven development process.</p>
               </div>
-
+              {/* Data-Driven Results */}
               <div className="text-center p-8 bg-white rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 group">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl text-white mb-6 group-hover:scale-110 transition-transform duration-300">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-500 rounded-2xl text-white mb-6 group-hover:scale-110 transition-transform duration-300">
                   <BarChart3 className="w-8 h-8" />
                 </div>
-                <h4 className="text-xl font-bold text-gray-900 mb-3">Proven Results</h4>
-                <p className="text-gray-600 leading-relaxed">Our optimization strategies have improved app performance by up to 300% on average.</p>
+                <h4 className="text-2xl font-bold text-gray-900 mb-3">Data-Driven Results</h4>
+                <p className="text-gray-600 leading-relaxed">Achieve measurable improvements in performance, user engagement, and conversion rates.</p>
               </div>
-
+              {/* Ongoing Support */}
               <div className="text-center p-8 bg-white rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 group">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl text-white mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <Users className="w-8 h-8" />
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-2xl text-white mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Settings className="w-8 h-8" />
                 </div>
-                <h4 className="text-xl font-bold text-gray-900 mb-3">Expert Team</h4>
-                <p className="text-gray-600 leading-relaxed">Work with experienced developers who understand mobile app optimization inside and out.</p>
+                <h4 className="text-2xl font-bold text-gray-900 mb-3">Ongoing Support</h4>
+                <p className="text-gray-600 leading-relaxed">Continuous monitoring, updates, and technical support for long-term success.</p>
               </div>
-            </div>
-
-            <div className="text-center">
-              <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-8 rounded-lg transition-colors duration-200 text-lg">
-                Start Your App Optimization
-              </button>
             </div>
           </div>
         </div>

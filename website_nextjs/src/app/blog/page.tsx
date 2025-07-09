@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import Container from '@/components/layout/container'
 import SectionHead from '@/components/layout/section-head'
 import Link from 'next/link'
+import { getFormattedDate } from '@/utils/utils'
 
 export const metadata: Metadata = {
   title: 'Blog - MasterFabric Inc.',
@@ -63,7 +64,7 @@ export default function BlogPage() {
                       </span>
                       <span className="text-gray-400">• </span>
                       <time className="text-gray-400" dateTime={post.publishDate}>
-                        {new Date(post.publishDate).toDateString()}
+                        {getFormattedDate(post.publishDate)}
                       </time>
                     </div>
                   </div>

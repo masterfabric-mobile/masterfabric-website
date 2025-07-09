@@ -8,7 +8,7 @@ import {
   saveCookieConsent,
   getCookieConsent,
   markBannerAsShown
-} from "../../lib/cookies";
+} from "../../utils/cookies";
 
 const COOKIE_POLICY = {
   types: {

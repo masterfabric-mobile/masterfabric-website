@@ -2,92 +2,57 @@
 
 import React from 'react'
 import { ArrowRight, MessageCircle, Calendar } from 'lucide-react'
+import { Icon } from '@iconify/react';
 
 export default function CTA() {
   return (
-    <section className="py-16 lg:py-24 bg-gradient-to-br from-blue-600 to-purple-700">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-16 lg:py-24 bg-white">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          
+          {/* Technologies Heading */}
+          <div className="text-gray-500 text-lg font-medium mb-8 flex flex-col items-center">
+            <span>Our Experts Works with your technologies <span className="text-red-500">❤️</span></span>
+            {/* Tech Icons Row */}
+            <div className="flex justify-center items-center gap-8 mt-6 mb-2">
+              <Icon icon="simple-icons:flutter" className="w-10 h-10 text-gray-400 hover:text-blue-500 transition-colors duration-300" />
+              <Icon icon="simple-icons:nestjs" className="w-10 h-10 text-gray-400 hover:text-red-500 transition-colors duration-300" />
+              <Icon icon="simple-icons:swift" className="w-10 h-10 text-gray-400 hover:text-orange-500 transition-colors duration-300" />
+              <Icon icon="simple-icons:kotlin" className="w-10 h-10 text-gray-400 hover:text-purple-500 transition-colors duration-300" />
+              <Icon icon="simple-icons:react" className="w-10 h-10 text-gray-400 hover:text-blue-400 transition-colors duration-300" />
+            </div>
+          </div>
+
+          {/* Rocket Icon Box */}
+          <div className="flex justify-center mb-6">
+            <div className="w-20 h-20 bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl flex items-center justify-center mx-auto shadow-sm">
+              <Icon icon="ph:rocket-launch" className="w-10 h-10 text-blue-500" />
+            </div>
+          </div>
+
           {/* Main Heading */}
-          <h2 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight mb-6">
-            <span className="block">Ready to Build</span>
-            <span className="block">Your Dream App?</span>
+          <h2 className="text-4xl lg:text-5xl xl:text-6xl font-extrabold text-gray-900 leading-tight mb-4">
+            Ready to Start Your Project?
           </h2>
-          
-          {/* Description */}
-          <p className="text-xl lg:text-2xl text-blue-100 max-w-4xl mx-auto leading-relaxed mb-12">
-            Transform your ideas into powerful mobile applications that users love. 
-            Our expert team is ready to bring your vision to life with cutting-edge technology 
-            and innovative design.
+          <p className="text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed mb-10">
+            Let's build something amazing together.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
-            <button className="group bg-white text-blue-600 hover:bg-blue-50 font-bold py-4 px-8 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-xl flex items-center space-x-2">
-              <MessageCircle className="w-5 h-5" />
-              <span>Start Your Project</span>
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-            </button>
-            
-            <button className="group border-2 border-white text-white hover:bg-white hover:text-blue-600 font-bold py-4 px-8 rounded-lg transition-all duration-300 hover:scale-105 flex items-center space-x-2">
-              <Calendar className="w-5 h-5" />
-              <span>Schedule a Call</span>
-            </button>
-          </div>
-
-          {/* Features Grid */}
-          <div className="grid md:grid-cols-3 gap-8 text-white">
-            <div className="space-y-4">
-              <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto">
-                <span className="text-2xl">🚀</span>
-              </div>
-              <h3 className="text-xl font-bold">Fast Development</h3>
-              <p className="text-blue-100 leading-relaxed">
-                Get your app to market quickly with our agile development process and 
-                proven methodologies.
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto">
-                <span className="text-2xl">🎯</span>
-              </div>
-              <h3 className="text-xl font-bold">Expert Team</h3>
-              <p className="text-blue-100 leading-relaxed">
-                Work with experienced developers, designers, and product managers who 
-                understand your business needs.
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto">
-                <span className="text-2xl">💎</span>
-              </div>
-              <h3 className="text-xl font-bold">Premium Quality</h3>
-              <p className="text-blue-100 leading-relaxed">
-                Receive high-quality, scalable applications built with the latest 
-                technologies and best practices.
-              </p>
-            </div>
-          </div>
-
-          {/* Contact Info */}
-          <div className="mt-16 pt-12 border-t border-white/20">
-            <div className="grid md:grid-cols-3 gap-8 text-center text-blue-100">
-              <div>
-                <h4 className="font-semibold text-white mb-2">Email Us</h4>
-                <p>hello@masterfabric.co</p>
-              </div>
-              <div>
-                <h4 className="font-semibold text-white mb-2">Call Us</h4>
-                <p>+1 (555) 123-4567</p>
-              </div>
-              <div>
-                <h4 className="font-semibold text-white mb-2">Response Time</h4>
-                <p>Within 24 hours</p>
-              </div>
-            </div>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-2">
+            <a
+              href="#contact"
+              className="group bg-blue-600 text-white hover:bg-blue-700 font-bold py-4 px-8 rounded-lg transition-all duration-300 flex items-center space-x-2 text-lg shadow-md transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            >
+              <Icon icon="ph:rocket-launch" className="w-6 h-6 mr-2 transition-transform duration-300 group-hover:translate-x-2" />
+              <span>Get Started</span>
+            </a>
+            <a
+              href="#learn-more"
+              className="group border-2 border-gray-200 text-gray-700 hover:bg-gray-100 font-bold py-4 px-8 rounded-lg transition-all duration-300 flex items-center space-x-2 text-lg transform hover:scale-105 hover:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-200"
+            >
+              <Icon icon="ph:books" className="w-6 h-6 mr-2 transition-transform duration-300 group-hover:-translate-y-1 group-hover:text-blue-500" />
+              <span>Learn More</span>
+            </a>
           </div>
         </div>
       </div>

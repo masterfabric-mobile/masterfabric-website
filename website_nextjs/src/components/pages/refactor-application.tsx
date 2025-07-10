@@ -5,44 +5,85 @@ import { Zap, BarChart3, Users, Settings, Database, TrendingUp, Activity, Cloud 
 import styles from '../../styles/refactor-application.module.css';
 import { Icon } from '@iconify/react';
 
-const serviceCards = [
+type ServiceColor = 'blue' | 'indigo' | 'purple' | 'cyan' | 'slate' | 'teal';
+
+const serviceCards: {
+  icon: JSX.Element;
+  title: string;
+  description: string;
+  color: ServiceColor;
+}[] = [
   {
-    icon: <Activity className="w-8 h-8 text-blue-600" />,
+    icon: (
+      <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"/>
+      </svg>
+    ),
     title: 'Event Tracking',
     description: 'Track user interactions and behaviors with detailed analytics and insights',
     color: 'blue',
   },
   {
-    icon: <Settings className="w-8 h-8 text-indigo-600" />,
+    icon: (
+      <svg className="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+      </svg>
+    ),
     title: 'Crash Reports & Monitoring',
     description: 'Monitor app stability and identify performance issues in real-time',
     color: 'indigo',
   },
   {
-    icon: <TrendingUp className="w-8 h-8 text-purple-600" />,
+    icon: (
+      <svg className="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+      </svg>
+    ),
     title: 'Analytics Reports',
     description: 'Comprehensive data insights and metrics to drive growth strategies',
     color: 'purple',
   },
   {
-    icon: <BarChart3 className="w-8 h-8 text-cyan-600" />,
+    icon: (
+      <svg className="w-8 h-8 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+      </svg>
+    ),
     title: 'Release Monitoring',
     description: 'Track deployment success and monitor issues with real-time alerts',
     color: 'cyan',
   },
   {
-    icon: <Database className="w-8 h-8 text-slate-600" />,
+    icon: (
+      <svg className="w-8 h-8 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
+      </svg>
+    ),
     title: 'BigData Management',
     description: 'Process and analyze large datasets to extract meaningful insights',
     color: 'slate',
   },
   {
-    icon: <Users className="w-8 h-8 text-teal-600" />,
+    icon: (
+      <svg className="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+      </svg>
+    ),
     title: 'User Growth & Retention',
     description: 'Optimize user acquisition and engagement to increase retention rates',
     color: 'teal',
   },
 ];
+
+const colorBgMap: Record<ServiceColor, string> = {
+  blue: 'bg-blue-500',
+  indigo: 'bg-indigo-500',
+  purple: 'bg-purple-500',
+  cyan: 'bg-cyan-500',
+  slate: 'bg-slate-500',
+  teal: 'bg-teal-500',
+};
 
 // Phone Showcase Component
 function PhoneShowcase() {
@@ -335,36 +376,64 @@ function PhoneShowcase() {
 
 export default function RefactorApplication() {
   return (
-    <section className="py-16 lg:py-24 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative py-16 lg:py-24 bg-white overflow-hidden">
+      {/* Subtle geometric background */}
+      <div className="absolute inset-0 pointer-events-none select-none">
+        <svg className="absolute top-0 left-0 w-full h-full opacity-[0.02]" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <defs>
+            <pattern id="triangles" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+              <polygon points="10,2 18,16 2,16" fill="currentColor"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#triangles)"/>
+        </svg>
+      </div>
+      {/* Floating minimal elements */}
+      <div className="absolute top-24 right-16 w-20 h-20 border border-blue-200 rounded-full opacity-30 floating-ring"></div>
+      <div className="absolute bottom-32 left-12 w-16 h-16 border border-gray-200 rounded-full opacity-40 floating-ring delay-1"></div>
+      <div className="absolute top-1/2 left-1/4 w-12 h-12 border border-blue-200 rounded-full opacity-25 floating-ring delay-2"></div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header Section - Consistent with codebase patterns */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
-            Refactor Your Application
-          </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Optimize your existing applications for better performance, scalability, and user experience.
+          <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 leading-tight mb-6">
+            <span className="block">App Design,</span>
+            <span className="block text-blue-600">Optimization</span>
+            <span className="block">and Growth</span>
+          </h1>
+          <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Already have an app? We can help refresh its look and enhance its performance. 
+            We focus on improving user experience and applying the latest technologies.
           </p>
         </div>
-        
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Phone Showcase */}
-          <div className="flex justify-center">
-            <PhoneShowcase />
-          </div>
-          
-          {/* Services Grid */}
+
+        {/* Main Content Grid */}
+        <div className="grid lg:grid-cols-2 gap-12 xl:gap-16 items-center">
+          {/* Services Column */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {serviceCards.map((service, index) => (
-              <div key={index} className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100">
-                <div className="flex items-center space-x-3 mb-4">
-                  <div className={`p-2 rounded-lg bg-${service.color}-100`}>
-                    {service.icon}
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900">{service.title}</h3>
+              <div
+                key={index}
+                className={`service-card service-${service.color} group relative p-8 rounded-2xl border-2 transition-all duration-500 hover:scale-[1.02] cursor-pointer bg-white shadow-sm hover:shadow-xl`}
+              >
+                <div className="absolute top-0 right-0 w-24 h-24 opacity-5 overflow-hidden rounded-tr-2xl">
+                  <div className={`w-full h-full ${colorBgMap[service.color]} transform rotate-45 translate-x-6 -translate-y-6`}></div>
                 </div>
-                <p className="text-gray-600 text-sm leading-relaxed">{service.description}</p>
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-white border-2 border-gray-100 mb-6 group-hover:scale-110 transition-transform duration-300">
+                  {service.icon}
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-gray-800 transition-colors">
+                  {service.title}
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  {service.description}
+                </p>
               </div>
             ))}
+          </div>
+          {/* App Showcase Column - Centered */}
+          <div className="flex justify-center">
+            <PhoneShowcase />
           </div>
         </div>
       </div>

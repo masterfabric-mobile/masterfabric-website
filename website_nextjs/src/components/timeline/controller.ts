@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useRef, useMemo } from 'react'
+import { useEffect, useState, useRef, useMemo, useCallback } from 'react'
 import type { TimelineData, TimelinePhase, PhaseDayRange } from './types'
 
 export const useTimelineController = (timeline: TimelineData) => {
@@ -36,6 +36,53 @@ export const useTimelineController = (timeline: TimelineData) => {
     });
   }, [timeline]);
   
+  // Advance to next day
+  const advanceDay = useCallback(() => {
+    setCurrentDay(prevDay => {
+      const nextDay = prevDay + 1
+      const isLastPhase = currentPhase === timeline.phases.length - 1
+      const isLastDay = nextDay > totalDays
+      if (isLastPhase && isLastDay) {
+        setIsPaused(true)
+        const phase = timeline.phases[currentPhase]
+        setToastTitle(`${phase.title} Completed!`)
+        setToastMessage(phase.description)
+        setShowToast(true)
+        setTimeout(() => setShowToast(false), 3000)
+        setTimeout(() => {
+          setDialogTitle('Project Complete!')
+          setDialogMessage('Congratulations, you have completed all phases!')
+          setShowDialog(true)
+          setIsFinalDialog(true)
+        }, 1000)
+        return prevDay
+      }
+      if (currentPhase < timeline.phases.length - 1) {
+        const currentRange = phaseRanges[currentPhase]
+        if (nextDay > currentRange.end) {
+          setCurrentPhase(prevPhase => prevPhase + 1)
+        }
+      }
+      if (nextDay > totalDays) {
+        return prevDay
+      }
+      return nextDay
+    })
+  }, [currentPhase, phaseRanges, timeline.phases, totalDays])
+
+  // Start auto progress
+  const startAutoProgress = useCallback(() => {
+    if (progressIntervalRef.current) {
+      clearInterval(progressIntervalRef.current)
+    }
+
+    progressIntervalRef.current = setInterval(() => {
+      if (!isPaused) {
+        advanceDay()
+      }
+    }, timeline.settings.stepDuration)
+  }, [isPaused, advanceDay, timeline.settings.stepDuration])
+
   // Initialize timeline
   useEffect(() => {
     if (!timeline) return
@@ -51,61 +98,7 @@ export const useTimelineController = (timeline: TimelineData) => {
         clearInterval(progressIntervalRef.current)
       }
     }
-  }, [timeline])
-  
-  // Start auto progress
-  const startAutoProgress = () => {
-    if (progressIntervalRef.current) {
-      clearInterval(progressIntervalRef.current)
-    }
-    
-    // Set interval to advance days
-    progressIntervalRef.current = setInterval(() => {
-      if (!isPaused) {
-        advanceDay()
-      }
-    }, timeline.settings.stepDuration)
-  }
-  
-  // Advance to next day
-  const advanceDay = () => {
-    setCurrentDay(prevDay => {
-      const nextDay = prevDay + 1
-      // Son gün ve son faz kontrolü
-      const isLastPhase = currentPhase === timeline.phases.length - 1
-      const isLastDay = nextDay > totalDays
-      if (isLastPhase && isLastDay) {
-        // Timeline tamamlandı, ilerlemeyi durdur
-        setIsPaused(true)
-        // Final dialog ve tebrik mesajı göster
-        const phase = timeline.phases[currentPhase]
-        setToastTitle(`${phase.title} Completed!`)
-        setToastMessage(phase.description)
-        setShowToast(true)
-        setTimeout(() => setShowToast(false), 3000)
-        setTimeout(() => {
-          setDialogTitle('Project Complete!')
-          setDialogMessage('Congratulations, you have completed all phases!')
-          setShowDialog(true)
-          setIsFinalDialog(true)
-        }, 1000)
-        return prevDay // Son günde kal
-      }
-      // Check if we should advance to the next phase based on day ranges
-      if (currentPhase < timeline.phases.length - 1) {
-        const currentRange = phaseRanges[currentPhase];
-        // If we've passed the end day of the current phase, move to the next phase
-        if (nextDay > currentRange.end) {
-          setCurrentPhase(prevPhase => prevPhase + 1);
-        }
-      }
-      // Son gün değilse normal ilerle
-      if (nextDay > totalDays) {
-        return prevDay // Son günde kal
-      }
-      return nextDay;
-    })
-  }
+  }, [timeline, startAutoProgress])
   
   // Toggle pause state
   const togglePause = () => {
@@ -232,7 +225,7 @@ export const useTimelineController = (timeline: TimelineData) => {
         setIsFinalDialog(currentPhase === timeline.phases.length)
       }, 1000)
     }
-  }, [currentPhase])
+  }, [currentPhase, timeline.phases])
 
   // Dialog kapama fonksiyonu
   const hideDialog = () => {

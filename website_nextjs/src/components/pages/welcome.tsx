@@ -1,7 +1,7 @@
 'use client'
 
-import React, { useState, useEffect, useRef } from 'react'
-import { Smartphone, TabletIcon as TabletSmartphone, MonitorIcon as Monitor } from 'lucide-react'
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react'
+import { Icon } from '@iconify/react';
 import styles from '../../styles/welcome.module.css'
 
 interface CodeStep {
@@ -28,7 +28,9 @@ export default function Welcome({ onTimelineDialogRequest }: WelcomeProps) {
   const [showSuccess, setShowSuccess] = useState(false)
   const [consoleMessage, setConsoleMessage] = useState('')
   const [consoleType, setConsoleType] = useState<'info' | 'error' | 'success'>('info')
-  const [codeLines, setCodeLines] = useState<{ [key: string]: string }>({})
+  const [codeLines, setCodeLines] = useState<{ [key: string]: string }>(
+    Object.fromEntries(Array.from({ length: 15 }, (_, i) => [(i + 5).toString(), '']))
+  );
   const [editorTitle, setEditorTitle] = useState('auth_service.dart')
   const [statusDot, setStatusDot] = useState('')
   const [statusText, setStatusText] = useState('Ready')
@@ -49,7 +51,8 @@ export default function Welcome({ onTimelineDialogRequest }: WelcomeProps) {
     return () => clearTimeout(timer);
   }, [onTimelineDialogRequest])
 
-  const scenarios: { [key: string]: CodeScenario } = {
+  // Remove any undefined values from the lines objects in scenarios
+  const scenarios: { [key: string]: CodeScenario } = useMemo(() => ({
     firebase: {
       title: 'auth_service.dart',
       successTitle: 'Authentication Service Ready!',
@@ -64,34 +67,40 @@ export default function Welcome({ onTimelineDialogRequest }: WelcomeProps) {
           type: 'info'
         },
         {
-          lines: {
-            '7': '<span class="indent">  </span>',
-            '8': '<span class="indent">  </span><span class="comment">// User authentication method</span>',
-            '9': '<span class="indent">  </span><span class="keyword">Future</span>&lt;<span class="class">User</span>?&gt; <span class="function">signInWithEmail</span>(<span class="class">String</span> <span class="variable">email</span>, <span class="class">String</span> <span class="variable">password</span>) <span class="keyword">async</span> {',
-            '10': '<span class="indent">    </span><span class="keyword">try</span> {',
-            '11': '<span class="indent">      </span><span class="keyword">final</span> <span class="variable">credential</span> = <span class="keyword">await</span> <span class="variable">_auth</span>.<span class="function">signInWithEmailAndPassword</span>(',
-            '12': '<span class="indent">        </span><span class="variable">email</span>: <span class="variable">email</span>, <span class="variable">password</span>: <span class="error">passwd</span>',
-            '13': '<span class="indent">      </span>);'
-          },
+          lines: Object.fromEntries(
+            Object.entries({
+              '7': '<span class="indent">  </span>',
+              '8': '<span class="indent">  </span><span class="comment">// User authentication method</span>',
+              '9': '<span class="indent">  </span><span class="keyword">Future</span>&lt;<span class="class">User</span>?&gt; <span class="function">signInWithEmail</span>(<span class="class">String</span> <span class="variable">email</span>, <span class="class">String</span> <span class="variable">password</span>) <span class="keyword">async</span> {',
+              '10': '<span class="indent">    </span><span class="keyword">try</span> {',
+              '11': '<span class="indent">      </span><span class="keyword">final</span> <span class="variable">credential</span> = <span class="keyword">await</span> <span class="variable">_auth</span>.<span class="function">signInWithEmailAndPassword</span>(',
+              '12': '<span class="indent">        </span><span class="variable">email</span>: <span class="variable">email</span>, <span class="variable">password</span>: <span class="error">passwd</span>',
+              '13': '<span class="indent">      </span>);'
+            }).filter(([_, v]) => v !== undefined)
+          ),
           console: '❌ Error: undefined name \'passwd\' (line 12)',
           type: 'error'
         },
         {
-          lines: {
-            '12': '<span class="indent">        </span><span class="variable">email</span>: <span class="variable">email</span>, <span class="variable">password</span>: <span class="variable">password</span>'
-          },
+          lines: Object.fromEntries(
+            Object.entries({
+              '12': '<span class="indent">        </span><span class="variable">email</span>: <span class="variable">email</span>, <span class="variable">password</span>: <span class="variable">password</span>'
+            }).filter(([_, v]) => v !== undefined)
+          ),
           console: '✅ Error fixed. Continuing compilation...',
           type: 'success'
         },
         {
-          lines: {
-            '14': '<span class="indent">      </span><span class="keyword">return</span> <span class="variable">credential</span>.<span class="variable">user</span>;',
-            '15': '<span class="indent">    </span>} <span class="keyword">catch</span> (<span class="variable">e</span>) {',
-            '16': '<span class="indent">      </span><span class="function">print</span>(<span class="string">\'Authentication failed: $e\'</span>);',
-            '17': '<span class="indent">      </span><span class="keyword">return</span> <span class="keyword">null</span>;',
-            '18': '<span class="indent">    </span>}',
-            '19': '<span class="indent">  </span>}'
-          },
+          lines: Object.fromEntries(
+            Object.entries({
+              '14': '<span class="indent">      </span><span class="keyword">return</span> <span class="variable">credential</span>.<span class="variable">user</span>;',
+              '15': '<span class="indent">    </span>} <span class="keyword">catch</span> (<span class="variable">e</span>) {',
+              '16': '<span class="indent">      </span><span class="function">print</span>(<span class="string">\'Authentication failed: $e\'</span>);',
+              '17': '<span class="indent">      </span><span class="keyword">return</span> <span class="keyword">null</span>;',
+              '18': '<span class="indent">    </span>}',
+              '19': '<span class="indent">  </span>}'
+            }).filter(([_, v]) => v !== undefined)
+          ),
           console: '🚀 Build successful! Firebase authentication ready for production.',
           type: 'success',
           isSuccess: true
@@ -104,35 +113,41 @@ export default function Welcome({ onTimelineDialogRequest }: WelcomeProps) {
       successDescription: 'CI/CD workflow configured successfully',
       steps: [
         {
-          lines: {
-            '5': '<span class="keyword">name</span>: <span class="string">Deploy to Production</span>',
-            '6': '<span class="keyword">on</span>:',
-            '7': '<span class="indent">  </span><span class="keyword">push</span>:',
-            '8': '<span class="indent">    </span><span class="keyword">branches</span>: [<span class="string">main</span>]'
-          },
+          lines: Object.fromEntries(
+            Object.entries({
+              '5': '<span class="keyword">name</span>: <span class="string">Deploy to Production</span>',
+              '6': '<span class="keyword">on</span>:',
+              '7': '<span class="indent">  </span><span class="keyword">push</span>:',
+              '8': '<span class="indent">    </span><span class="keyword">branches</span>: [<span class="string">main</span>]'
+            }).filter(([_, v]) => v !== undefined)
+          ),
           console: '🔄 Setting up CI/CD pipeline...',
           type: 'info'
         },
         {
-          lines: {
-            '9': '<span class="keyword">jobs</span>:',
-            '10': '<span class="indent">  </span><span class="keyword">deploy</span>:',
-            '11': '<span class="indent">    </span><span class="keyword">runs-on</span>: <span class="string">ubuntu-latest</span>',
-            '12': '<span class="indent">    </span><span class="keyword">steps</span>:',
-            '13': '<span class="indent">      </span>- <span class="keyword">name</span>: <span class="string">Checkout code</span>',
-            '14': '<span class="indent">        </span><span class="keyword">uses</span>: <span class="string">actions/checkout@v3</span>'
-          },
+          lines: Object.fromEntries(
+            Object.entries({
+              '9': '<span class="keyword">jobs</span>:',
+              '10': '<span class="indent">  </span><span class="keyword">deploy</span>:',
+              '11': '<span class="indent">    </span><span class="keyword">runs-on</span>: <span class="string">ubuntu-latest</span>',
+              '12': '<span class="indent">    </span><span class="keyword">steps</span>:',
+              '13': '<span class="indent">      </span>- <span class="keyword">name</span>: <span class="string">Checkout code</span>',
+              '14': '<span class="indent">        </span><span class="keyword">uses</span>: <span class="string">actions/checkout@v3'
+            }).filter(([_, v]) => v !== undefined)
+          ),
           console: '📦 Configuring deployment steps...',
           type: 'info'
         },
         {
-          lines: {
-            '15': '<span class="indent">      </span>- <span class="keyword">name</span>: <span class="string">Build and Deploy</span>',
-            '16': '<span class="indent">        </span><span class="keyword">run</span>: |',
-            '17': '<span class="indent">          </span><span class="function">flutter</span> <span class="variable">build</span> <span class="variable">apk</span> <span class="variable">--release</span>',
-            '18': '<span class="indent">          </span><span class="function">firebase</span> <span class="variable">deploy</span> <span class="variable">--only</span> <span class="variable">hosting</span>',
-            '19': '<span class="indent">          </span><span class="function">echo</span> <span class="string">"Deployment completed!"</span>'
-          },
+          lines: Object.fromEntries(
+            Object.entries({
+              '15': '<span class="indent">      </span>- <span class="keyword">name</span>: <span class="string">Build and Deploy</span>',
+              '16': '<span class="indent">        </span><span class="keyword">run</span>: |',
+              '17': '<span class="indent">          </span><span class="function">flutter</span> <span class="variable">build</span> <span class="variable">apk</span> <span class="variable">--release</span>',
+              '18': '<span class="indent">          </span><span class="function">firebase</span> <span class="variable">deploy</span> <span class="variable">--only</span> <span class="variable">hosting</span>',
+              '19': '<span class="indent">          </span><span class="function">echo</span> <span class="string">"Deployment completed!"</span>'
+            }).filter(([_, v]) => v !== undefined)
+          ),
           console: '🚀 Pipeline configured! Ready for automated deployment.',
           type: 'success',
           isSuccess: true
@@ -145,42 +160,48 @@ export default function Welcome({ onTimelineDialogRequest }: WelcomeProps) {
       successDescription: 'User session management implemented',
       steps: [
         {
-          lines: {
-            '5': '<span class="keyword">class</span> <span class="class">SplashViewModel</span> <span class="keyword">extends</span> <span class="class">ChangeNotifier</span> {',
-            '6': '<span class="indent">  </span><span class="keyword">final</span> <span class="class">AuthService</span> <span class="variable">_authService</span>;',
-            '7': '<span class="indent">  </span><span class="keyword">bool</span> <span class="variable">_isLoading</span> = <span class="keyword">true</span>;'
-          },
+          lines: Object.fromEntries(
+            Object.entries({
+              '5': '<span class="keyword">class</span> <span class="class">SplashViewModel</span> <span class="keyword">extends</span> <span class="class">ChangeNotifier</span> {',
+              '6': '<span class="indent">  </span><span class="keyword">final</span> <span class="class">AuthService</span> <span class="variable">_authService</span>;',
+              '7': '<span class="indent">  </span><span class="keyword">bool</span> <span class="variable">_isLoading</span> = <span class="keyword">true</span>;'
+            }).filter(([_, v]) => v !== undefined)
+          ),
           console: '🎯 Initializing splash screen viewmodel...',
           type: 'info'
         },
         {
-          lines: {
-            '8': '<span class="indent">  </span>',
-            '9': '<span class="indent">  </span><span class="keyword">Future</span>&lt;<span class="keyword">void</span>&gt; <span class="function">checkUserSession</span>() <span class="keyword">async</span> {',
-            '10': '<span class="indent">    </span><span class="keyword">await</span> <span class="class">Future</span>.<span class="function">delayed</span>(<span class="class">Duration</span>(<span class="variable">seconds</span>: <span class="number">2</span>));',
-            '11': '<span class="indent">    </span>',
-            '12': '<span class="indent">    </span><span class="keyword">final</span> <span class="variable">user</span> = <span class="variable">_authService</span>.<span class="function">getCurrentUser</span>();'
-          },
+          lines: Object.fromEntries(
+            Object.entries({
+              '8': '<span class="indent">  </span>',
+              '9': '<span class="indent">  </span><span class="keyword">Future</span>&lt;<span class="keyword">void</span>&gt; <span class="function">checkUserSession</span>() <span class="keyword">async</span> {',
+              '10': '<span class="indent">    </span><span class="keyword">await</span> <span class="class">Future</span>.<span class="function">delayed</span>(<span class="class">Duration</span>(<span class="variable">seconds</span>: <span class="number">2</span>));',
+              '11': '<span class="indent">    </span>',
+              '12': '<span class="indent">    </span><span class="keyword">final</span> <span class="variable">user</span> = <span class="variable">_authService</span>.<span class="function">getCurrentUser</span>();'
+            }).filter(([_, v]) => v !== undefined)
+          ),
           console: '⏳ Checking user session status...',
           type: 'info'
         },
         {
-          lines: {
-            '13': '<span class="indent">    </span><span class="keyword">if</span> (<span class="variable">user</span> != <span class="keyword">null</span>) {',
-            '14': '<span class="indent">      </span><span class="comment">// User is logged in, navigate to main app</span>',
-            '15': '<span class="indent">      </span><span class="function">navigateToHome</span>();',
-            '16': '<span class="indent">    </span>} <span class="keyword">else</span> {',
-            '17': '<span class="indent">      </span><span class="comment">// User not logged in, show login screen</span>',
-            '18': '<span class="indent">      </span><span class="function">navigateToLogin</span>();',
-            '19': '<span class="indent">    </span>}'
-          },
+          lines: Object.fromEntries(
+            Object.entries({
+              '13': '<span class="indent">    </span><span class="keyword">if</span> (<span class="variable">user</span> != <span class="keyword">null</span>) {',
+              '14': '<span class="indent">      </span><span class="comment">// User is logged in, navigate to main app</span>',
+              '15': '<span class="indent">      </span><span class="function">navigateToHome</span>();',
+              '16': '<span class="indent">    </span>} <span class="keyword">else</span> {',
+              '17': '<span class="indent">      </span><span class="comment">// User not logged in, show login screen</span>',
+              '18': '<span class="indent">      </span><span class="function">navigateToLogin</span>();',
+              '19': '<span class="indent">    </span>}'
+            }).filter(([_, v]) => v !== undefined)
+          ),
           console: '✅ Session check completed! Navigation logic implemented.',
           type: 'success',
           isSuccess: true
         }
       ]
     }
-  }
+  }), []);
 
   const typeText = async (element: HTMLElement | null, text: string, speed: number = 30): Promise<void> => {
     return new Promise(resolve => {
@@ -212,7 +233,7 @@ export default function Welcome({ onTimelineDialogRequest }: WelcomeProps) {
     })
   }
 
-  const updateConsole = async (message: string, type: 'info' | 'error' | 'success' = 'info') => {
+  const updateConsole = useCallback(async (message: string, type: 'info' | 'error' | 'success' = 'info') => {
     const consoleEl = document.getElementById('console-output')
     if (!consoleEl) return
     
@@ -220,35 +241,42 @@ export default function Welcome({ onTimelineDialogRequest }: WelcomeProps) {
                         type === 'success' ? 'success-message' : 'info-message'
     
     await typeText(consoleEl, `<span class="${messageClass}">${message}</span>`, 40)
-  }
+  }, []);
 
-  const updateCodeLine = async (lineId: string, content: string) => {
+  const updateCodeLine = useCallback(async (lineId: string, content: string) => {
     const line = document.getElementById(lineId)
     if (line) {
       await typeText(line, content, 25)
     }
-  }
+  }, []);
 
-  const animateStep = async (stepData: CodeStep) => {
-    // Update code lines
-    for (const [lineId, content] of Object.entries(stepData.lines)) {
-      await updateCodeLine(`line-${lineId}`, content)
-      await new Promise(resolve => setTimeout(resolve, 100))
-    }
-    
-    // Update console
-    await new Promise(resolve => setTimeout(resolve, 300))
-    await updateConsole(stepData.console, stepData.type)
-    
-    // Show success overlay if completed
-    if (stepData.isSuccess) {
-      setTimeout(() => {
-        setShowSuccess(true)
-      }, 1000)
-    }
-  }
+  const animateStep = useCallback(
+    async (stepData: CodeStep) => {
+      // Update code lines
+      for (let i = 5; i <= 19; i++) {
+        await updateCodeLine(`line-${i}`, '')
+        await new Promise(resolve => setTimeout(resolve, 100))
+      }
+      for (const [lineId, content] of Object.entries(stepData.lines)) {
+        await updateCodeLine(`line-${lineId}`, content)
+        await new Promise(resolve => setTimeout(resolve, 100))
+      }
+      
+      // Update console
+      await new Promise(resolve => setTimeout(resolve, 300))
+      await updateConsole(stepData.console, stepData.type)
+      
+      // Show success overlay if completed
+      if (stepData.isSuccess) {
+        setTimeout(() => {
+          setShowSuccess(true)
+        }, 1000)
+      }
+    },
+    [updateCodeLine, updateConsole]
+  );
 
-  const animateScenario = async (scenarioName: string) => {
+  const animateScenario = useCallback(async (scenarioName: string) => {
     if (isAnimatingRef.current) return
     isAnimatingRef.current = true
     
@@ -270,7 +298,7 @@ export default function Welcome({ onTimelineDialogRequest }: WelcomeProps) {
     // Reset editor lines
     const resetLines: { [key: string]: string } = {}
     for (let i = 5; i <= 19; i++) {
-      resetLines[i.toString()] = '<span class="indent">  </span>'
+      resetLines[i.toString()] = ''
     }
     setCodeLines(resetLines)
     
@@ -297,7 +325,7 @@ export default function Welcome({ onTimelineDialogRequest }: WelcomeProps) {
         }
       }, 8000)
     }
-  }
+  }, [scenarios, animateStep]);
 
   const handleScenarioChange = (scenarioName: string) => {
     if (!isAnimatingRef.current) {
@@ -378,14 +406,14 @@ export default function Welcome({ onTimelineDialogRequest }: WelcomeProps) {
         clearTimeout(animationTimeoutRef.current)
       }
     }
-  }, [])
+  }, [animateScenario])
 
   return (
     <main className="grid lg:grid-cols-2 place-items-center pt-10 pb-8 md:pt-8 md:pb-12">
       {/* Content Section */}
       <div className="md:order-1">
         <h2 className="text-xl lg:text-3xl xl:text-5xl font-bold lg:tracking-tight xl:tracking-tighter">
-          Custom Mobile App Development 
+          &apos;Custom Mobile App Development&apos;
         </h2>
         <p className="text-lg mt-4 text-slate-600 max-w-xl">
           Take your business to the next level in the mobile world! Reach your customers anytime, 
@@ -393,9 +421,9 @@ export default function Welcome({ onTimelineDialogRequest }: WelcomeProps) {
         </p>
         <div className="mt-4">
           <div className="flex gap-8 md:gap-20 items-center mt-10 flex-wrap justify-start">
-            <Smartphone className="size-8 md:size-12 hover:text-blue-700 transition-colors cursor-pointer" />
-            <TabletSmartphone className="size-8 md:size-12 hover:text-blue-700 transition-colors cursor-pointer" />
-            <Monitor className="size-8 md:size-12 hover:text-blue-700 transition-colors cursor-pointer" />
+            <Icon icon="simple-icons:ios" className="size-8 md:size-12 hover:text-blue-700 transition-colors cursor-pointer" />
+            <Icon icon="simple-icons:android" className="size-8 md:size-12 hover:text-blue-700 transition-colors cursor-pointer" />
+            <Icon icon="simple-icons:harmonyos" className="size-8 md:size-12 hover:text-blue-700 transition-colors cursor-pointer" />
           </div>
         </div>
       </div>
@@ -463,31 +491,34 @@ export default function Welcome({ onTimelineDialogRequest }: WelcomeProps) {
           {/* Editor Content */}
           <div className={styles.editorContent}>
             <div className={styles.lineNumbers}>
-              {Array.from({ length: 19 }, (_, i) => (
+              {Array.from({ length: 16 }, (_, i) => (
                 <span key={i + 1}>{i + 1}</span>
               ))}
             </div>
             
             <div className={styles.codeContent}>
               <div className={styles.codeLine}>
-                <span className="keyword">import</span> <span className="string">&apos;package:firebase_auth/firebase_auth.dart&apos;</span>;
+                <span className="keyword">import</span> <span className="string">&quot;package:firebase_auth/firebase_auth.dart&quot;</span>;
               </div>
               <div className={styles.codeLine}>
-                <span className="keyword">import</span> <span className="string">&apos;package:cloud_firestore/cloud_firestore.dart&apos;</span>;
+                <span className="keyword">import</span> <span className="string">&quot;package:cloud_firestore/cloud_firestore.dart&quot;</span>;
               </div>
               <div className={styles.codeLine}></div>
               <div className={styles.codeLine}>
                 <span className="keyword">class</span> <span className="class">AuthService</span> {'{'}
               </div>
-              {[5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19].map(lineNum => (
-                <div key={lineNum} className={styles.codeLine} id={`line-${lineNum}`}>
-                  <span 
-                    dangerouslySetInnerHTML={{ 
-                      __html: codeLines[lineNum.toString()] || '<span class="indent">  </span>' 
-                    }}
-                  />
-                </div>
-              ))}
+              {Array.from({ length: 15 }, (_, idx) => {
+                const lineNum = idx + 5;
+                return (
+                  <div key={lineNum} className={styles.codeLine} id={`line-${lineNum}`}>
+                    <span
+                      dangerouslySetInnerHTML={{
+                        __html: codeLines[lineNum.toString()] || '<span class="indent">  </span>',
+                      }}
+                    />
+                  </div>
+                );
+              })}
               <div className={styles.codeLine}>{'}'}</div>
             </div>
           </div>
@@ -496,7 +527,7 @@ export default function Welcome({ onTimelineDialogRequest }: WelcomeProps) {
           <div className={styles.editorConsole}>
             <div className={styles.consoleHeader}>Console Output</div>
             <div className={styles.consoleContent}>
-              <div className={`${styles.consoleMessage} ${consoleType === 'error' ? styles.errorMessage : consoleType === 'success' ? styles.successMessage : styles.infoMessage}`} id="console-output">
+              <div className={`${styles.consoleMessage} ${consoleType === "error" ? styles.errorMessage : consoleType === "success" ? styles.successMessage : styles.infoMessage}`} id="console-output">
                 {consoleMessage}
               </div>
             </div>
@@ -528,7 +559,7 @@ export default function Welcome({ onTimelineDialogRequest }: WelcomeProps) {
                       <path d="M12 2L22 9L20 20H4L2 9L12 2Z" stroke="currentColor" strokeWidth="2"/>
                       <path d="M12 2V20" stroke="currentColor" strokeWidth="2"/>
                     </svg>
-                    Deploy Your Code
+                  &apos;Deploy Your Code&apos;
                   </button>
                 </div>
               </div>

@@ -34,7 +34,7 @@ export default function CTA() {
             Ready to Start Your Project?
           </h2>
           <p className="text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed mb-10">
-            Let's build something amazing together.
+            Let&apos;s build something amazing together.
           </p>
 
           {/* CTA Buttons */}

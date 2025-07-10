@@ -6,6 +6,7 @@ import Footer from '@/components/layout/footer'
 import CookieBanner from '@/components/cookie/CookieBanner'
 import SplashScreenWrapper from '@/components/wrapper/splash-screen-wrapper'
 // import { ThemeProvider } from 'next-themes'
+import Script from 'next/script';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -64,11 +65,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <script
+        <Script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-2VN4H4QK6S"
         />
-        <script
+        <Script
+          id="google-analytics"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];

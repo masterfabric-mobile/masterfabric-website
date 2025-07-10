@@ -11,52 +11,26 @@ const Notifications: React.FC = () => {
   // Get controller from context if available
   const controller = useContext(TimelineContext);
 
-  if (!controller) return null;
-
  
-  const phases = controller.updatePhaseStatuses();
-  const completedPhase = Math.min(controller.currentPhase, phases.length - 1);
-  const totalPhases = phases.length;
-  const progressPercentage = Math.round(((completedPhase + 1) / totalPhases) * 100);
-  const phaseTitle = phases[completedPhase]?.shortTitle || phases[completedPhase]?.title || '';
-  const nextPhaseName = completedPhase < totalPhases - 1
-    ? (phases[completedPhase + 1]?.shortTitle || phases[completedPhase + 1]?.title || '')
-    : 'Project Complete';
-  
+  // --- All hooks must be called before any conditional returns ---
+  // Effects (must be before any early return)
+
   // Debug effect for toast visibility
   useEffect(() => {
     console.log('Toast visibility changed:', showToast ? 'visible' : 'hidden');
-  }, [showToast]);
-  
+  }, [showToast, controller]);
+
   // Effect to update dialog content when controller changes phase
   useEffect(() => {
     if (controller) {
       // Calculate total phases
       const phases = controller.updatePhaseStatuses();
       if (phases) {
-        // setTotalPhases(phases.length); // This line is removed as per new_code
-        
-        // Set current phase info with safe bounds checking
-        // setCompletedPhase(Math.min(controller.currentPhase, phases.length - 1)); // This line is removed as per new_code
-        
-        // Calculate progress percentage, clamped to 100%
-        // const calculatedPercentage = Math.round((controller.currentPhase + 1) / phases.length * 100); // This line is removed as per new_code
-        // setProgressPercentage(Math.min(calculatedPercentage, 100)); // This line is removed as per new_code
-        
-        // Set phase title
-        // const currentPhase = controller.getCurrentPhase(); // This line is removed as per new_code
-        // if (currentPhase) { // This line is removed as per new_code
-        //   setPhaseTitle(currentPhase.shortTitle || currentPhase.title); // This line is removed as per new_code
-        // } // This line is removed as per new_code
-        
-        // Set next phase name if not at the end
-        // if (controller.currentPhase < phases.length - 1) { // This line is removed as per new_code
-        //   setNextPhaseName(phases[controller.currentPhase + 1].shortTitle || phases[controller.currentPhase + 1].title); // This line is removed as per new_code
-        // } // This line is removed as per new_code
+        // (see removed code for state updates)
       }
     }
-  }, [controller?.currentPhase]);
-  
+  }, [controller]);
+
   // Register the notification functions with the TimelineProvider
   useEffect(() => {
     if (controller && controller._registerNotificationFunctions) {
@@ -99,6 +73,23 @@ const Notifications: React.FC = () => {
       console.log('Notifications component registered its functions with TimelineProvider');
     }
   }, [controller]);
+
+  // --- End hook section ---
+
+  // If controller is not available, render nothing (after all hooks)
+  if (!controller) {
+    return null;
+  }
+ 
+  const phases = controller.updatePhaseStatuses();
+  const completedPhase = Math.min(controller.currentPhase, phases.length - 1);
+  const totalPhases = phases.length;
+  const progressPercentage = Math.round(((completedPhase + 1) / totalPhases) * 100);
+  const phaseTitle = phases[completedPhase]?.shortTitle || phases[completedPhase]?.title || '';
+  const nextPhaseName = completedPhase < totalPhases - 1
+    ? (phases[completedPhase + 1]?.shortTitle || phases[completedPhase + 1]?.title || '')
+    : 'Project Complete';
+  
   
   // Helper function to update dialog content for a specific phase
   // const updateDialogForPhase = (phaseIndex: number) => { // This function is removed as per new_code
@@ -401,7 +392,7 @@ const Notifications: React.FC = () => {
                 <div className={styles.contactContent}>
                   <h4 className={styles.contactTitle}>Enjoyed this experience?</h4>
                   <p className={styles.contactDescription}>
-                    If you're satisfied with what you've seen, let's discuss how we can bring your mobile app idea to life.
+                    If you&apos;re satisfied with what you&apos;ve seen, let&apos;s discuss how we can bring your mobile app idea to life.
                   </p>
                   
                   {/* Contact buttons */}

@@ -243,7 +243,7 @@ export default function CookieBanner() {
               <h3 className="cookie-title">We Use Cookies</h3>
               <p className="cookie-description">
                 We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. 
-                By clicking "Accept All", you consent to our use of cookies.
+                By clicking &quot;Accept All&quot;, you consent to our use of cookies.
                 <a href="/privacy-policy" className="cookie-link">Learn more</a>
               </p>
             </div>

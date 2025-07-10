@@ -124,7 +124,7 @@ export default function JobsClient({
         <section className="py-16 lg:py-20 text-center">
           <div className="max-w-4xl mx-auto">
             <blockquote className="text-2xl lg:text-3xl font-light text-gray-600 italic leading-relaxed mb-8">
-              "{jobsData.quote.text}"
+              &quot;{jobsData.quote.text}&quot;
             </blockquote>
             <div className="text-gray-900">
               <p className="font-semibold text-lg">{jobsData.quote.author}</p>

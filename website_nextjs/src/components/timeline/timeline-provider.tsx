@@ -12,20 +12,47 @@ interface TimelineProviderProps {
 
 export const TimelineProvider: React.FC<TimelineProviderProps> = ({ children }) => {
   // Get timeline data directly from project-flow.json and handle null case
-  const timeline = (projectFlowData?.timeline || {
-    title: "Project Development Process",
-    subtitle: "Step-by-Step Progress",
-    description: "Timeline",
-    settings: {
-      autoProgress: true,
-      scrollBasedProgress: false,
-      pauseOnHover: true,
-      showProgressBar: true,
-      animationDuration: 600,
-      stepDuration: 4000
-    },
-    phases: []
-  }) as TimelineData;
+  const timeline = useMemo(() => {
+    const timelineData = (projectFlowData?.timeline || {
+      title: "Project Development Process",
+      subtitle: "Step-by-Step Progress",
+      description: "Timeline",
+      settings: {
+        autoProgress: true,
+        scrollBasedProgress: false,
+        pauseOnHover: true,
+        showProgressBar: true,
+        animationDuration: 600,
+        stepDuration: 4000
+      },
+      phases: []
+    }) as TimelineData;
+    
+    // Normalize statuses of all phases and milestones
+    timelineData.phases = timelineData.phases.map((phase: any) => {
+      // Map the string status to our type-safe status
+      const safeStatus = (status: string) => {
+        switch (status) {
+          case 'completed': return 'completed';
+          case 'in-progress': return 'in-progress';
+          case 'active': return 'active';
+          case 'pending':
+          default: return 'pending';
+        }
+      };
+      
+      return {
+        ...phase,
+        status: safeStatus(phase.status),
+        milestones: phase.milestones.map((milestone: any) => ({
+          ...milestone,
+          status: safeStatus(milestone.status)
+        }))
+      };
+    });
+    
+    return timelineData;
+  }, []);
   
   console.log('Timeline Provider initialized with:', {
     phasesCount: timeline.phases.length,
@@ -144,6 +171,32 @@ export const TimelineProvider: React.FC<TimelineProviderProps> = ({ children }) 
     }
   }, [timeline])
   
+  // Function to show congratulations dialog - will be used by the notifications component
+  const showCongratulationsDialog = React.useCallback((phaseIndex?: number) => {
+    const phaseToShow = phaseIndex !== undefined ? phaseIndex : currentPhase;
+
+    console.log(`Timeline Provider: Request to show congratulations dialog for phase ${phaseToShow}`);
+
+    if (notificationFunctionsRef.current.showDialogFn) {
+      notificationFunctionsRef.current.showDialogFn(phaseToShow);
+    }
+
+    return phaseToShow;
+  }, [currentPhase]);
+
+  // Function to show congratulations toast
+  const showCongratulationsToast = React.useCallback((phaseIndex?: number) => {
+    const phaseToShow = phaseIndex !== undefined ? phaseIndex : currentPhase;
+
+    console.log(`Timeline Provider: Request to show congratulations toast for phase ${phaseToShow}`);
+
+    if (notificationFunctionsRef.current.showToastFn) {
+      notificationFunctionsRef.current.showToastFn(phaseToShow);
+    }
+
+    return phaseToShow;
+  }, [currentPhase]);
+
   // Effect to show notifications when phase changes
   useEffect(() => {
     // Skip the initial render (when lastNotifiedPhase is -1)
@@ -187,7 +240,7 @@ export const TimelineProvider: React.FC<TimelineProviderProps> = ({ children }) 
       // Update the last notified phase
       setLastNotifiedPhase(currentPhase);
     }
-  }, [currentPhase, lastNotifiedPhase]);
+  }, [currentPhase, lastNotifiedPhase, showCongratulationsDialog, showCongratulationsToast]);
   
   // Start auto progress
   const startAutoProgress = () => {
@@ -397,36 +450,8 @@ export const TimelineProvider: React.FC<TimelineProviderProps> = ({ children }) 
     showDialogFn: null,
     showToastFn: null
   });
-  
-  // Function to show congratulations dialog - will be used by the notifications component
-  const showCongratulationsDialog = (phaseIndex?: number) => {
-    // Use the provided phase index or default to current phase
-    const phaseToShow = phaseIndex !== undefined ? phaseIndex : currentPhase;
-    
-    console.log(`Timeline Provider: Request to show congratulations dialog for phase ${phaseToShow}`);
-    
-    // Call the function if it has been overridden by Notifications component
-    if (notificationFunctionsRef.current.showDialogFn) {
-      notificationFunctionsRef.current.showDialogFn(phaseToShow);
-    }
-    
-    return phaseToShow; // Return the phase index to be used by the notifications component
-  };
-  
-  // Function to show congratulations toast
-  const showCongratulationsToast = (phaseIndex?: number) => {
-    // Use the provided phase index or default to current phase
-    const phaseToShow = phaseIndex !== undefined ? phaseIndex : currentPhase;
-    
-    console.log(`Timeline Provider: Request to show congratulations toast for phase ${phaseToShow}`);
-    
-    // Call the function if it has been overridden by Notifications component
-    if (notificationFunctionsRef.current.showToastFn) {
-      notificationFunctionsRef.current.showToastFn(phaseToShow);
-    }
-    
-    return phaseToShow; // Return the phase index to be used by the notifications component
-  };
+
+
   
   // Create the context value
   const contextValue: TimelineControllerContext = {

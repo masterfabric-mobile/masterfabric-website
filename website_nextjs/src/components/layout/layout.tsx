@@ -4,6 +4,7 @@ import React from 'react'
 import Head from 'next/head'
 import Navbar from './navbar'
 import Footer from './footer'
+import Script from 'next/script';
 
 interface LayoutProps {
   children: React.ReactNode
@@ -44,19 +45,6 @@ export default function Layout({
         <meta property="twitter:title" content={makeTitle} />
         <meta property="twitter:description" content={description} />
         <meta property="twitter:image" content="/opengraph.png" />
-        
-        {/* Google Analytics */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-2VN4H4QK6S" />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-2VN4H4QK6S');
-            `,
-          }}
-        />
       </Head>
       
       <div className="min-h-screen flex flex-col">
@@ -66,6 +54,24 @@ export default function Layout({
         </main>
         <Footer />
       </div>
+
+      {/* Google Analytics */}
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-2VN4H4QK6S"
+        strategy="afterInteractive"
+      />
+      <Script
+        id="google-analytics"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-2VN4H4QK6S');
+          `,
+        }}
+      />
     </>
   )
 }

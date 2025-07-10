@@ -24,11 +24,7 @@
         "size": "12 Engineers",
         "technologies": ["Flutter", "React Native", "Swift", "Kotlin", "Firebase", "Node.js", "AWS"],
         "icon": {
-          "paths": [
-            "M16 18l6-6-6-6",
-            "M8 6l-6 6 6 6",
-            "M10 20l4-16"
-          ],
+          "iconify": "mdi:code",
           "color": "#3b82f6"
         }
       },
@@ -38,10 +34,8 @@
         "size": "4 Designers",
         "technologies": ["Figma", "Adobe XD", "Sketch", "After Effects", "Illustrator"],
         "icon": {
-          "paths": [
-            "M3 17.25V21h3.75l11.06-11.06a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0L3 17.25z"
-          ],
-          "color": "#f59e42"
+          "iconify" :"mdi:design",
+          "color": "#3b82f6"
         }
       },
       {
@@ -50,10 +44,8 @@
         "size": "3 Product Managers",
         "technologies": ["Analytics", "User Research", "Roadmapping", "Agile", "Scrum"],
         "icon": {
-          "paths": [
-            "M7 2C5.9 2 5 2.9 5 4v16c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2H7zm0 2h10v16H7V4zm5 16c-.55 0-1-.45-1-1h2c0 .55-.45 1-1 1z"
-          ],
-          "color": "#1d4ed8"
+          "iconify": "mdi:cellphone",
+          "color": "#3b82f6"
         }
       },
       {
@@ -62,10 +54,8 @@
         "size": "2 DevOps Engineers",
         "technologies": ["AWS", "Docker", "CI/CD", "Kubernetes", "Monitoring", "Security"],
         "icon": {
-          "paths": [
-            "M12 2C8 2 4.5 4.5 3.5 8 1.5 8.5 0 10.5 0 13c0 3 2.5 5.5 5.5 5.5h13c3 0 5.5-2.5 5.5-5.5 0-2.5-1.5-4.5-3.5-5C19.5 4.5 16 2 12 2z"
-          ],
-          "color": "#2563eb"
+          "iconify": "mdi:cloud",
+          "color": "#3b82f6"
         }
       }
     ]

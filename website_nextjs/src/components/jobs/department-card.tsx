@@ -1,4 +1,5 @@
 import React from 'react'
+import { Icon } from '@iconify/react';
 
 interface DepartmentCardProps {
   department: {
@@ -7,7 +8,7 @@ interface DepartmentCardProps {
     size: string
     technologies: string[]
     icon: {
-      paths: string[]
+      iconify: string
       color: string
     }
   }
@@ -21,11 +22,7 @@ export default function DepartmentCard({ department }: DepartmentCardProps) {
           className="w-12 h-12 rounded-lg flex items-center justify-center text-white"
           style={{ backgroundColor: department.icon.color }}
         >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            {department.icon.paths.map((path, i) => (
-              <path key={i} d={path} />
-            ))}
-          </svg>
+          <Icon icon={department.icon.iconify} width={32} height={32} color="#fff" />
         </div>
         <div>
           <h3 className="text-xl font-semibold text-gray-900">{department.name}</h3>

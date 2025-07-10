@@ -136,8 +136,7 @@ export default function MobileHiringStep({ step, index, isLast = false }: Mobile
           className={`expanded-content px-4 pb-4 max-h-0 overflow-hidden transition-all duration-500 ease-in-out ${isExpanded ? 'opacity-100' : 'opacity-0'}`}
         >
           <div className="border-t border-gray-100 pt-3 space-y-3">
-            <p className="text-gray-600 text-sm leading-relaxed">{step.description}</p>
-            
+            <div className="text-gray-600 text-sm leading-relaxed mb-2">{step.description}</div>
             <div className="space-y-2">
               {step.details.map((detail, idx) => (
                 <div key={idx} className="text-sm text-gray-600 bg-gray-50 rounded-lg p-3 border border-gray-100 leading-relaxed">

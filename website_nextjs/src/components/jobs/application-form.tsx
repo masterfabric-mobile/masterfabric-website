@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, FormEvent } from 'react'
+import React, { useState, useEffect, FormEvent } from 'react'
 import './styles/application-form.css'
 
 interface ApplicationFormProps {
@@ -35,6 +35,13 @@ export default function ApplicationForm({ formData, positions, selectedPositionI
     message?: string
   }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedPosition, setSelectedPosition] = useState(selectedPositionId || '');
+
+  useEffect(() => {
+    if (selectedPositionId) {
+      setSelectedPosition(selectedPositionId);
+    }
+  }, [selectedPositionId]);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -166,13 +173,14 @@ export default function ApplicationForm({ formData, positions, selectedPositionI
               name="position"
               required={formData.fields.position.required}
               className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              defaultValue={selectedPositionId ? positions.find(job => job.id === selectedPositionId)?.title || '' : ''}
+              value={selectedPosition}
+              onChange={e => setSelectedPosition(e.target.value)}
             >
               <option value="" className="text-gray-900">Select a position...</option>
               {positions.map((job) => (
                 <option 
                   key={job.id} 
-                  value={job.title} 
+                  value={job.id} 
                   className="text-gray-900"
                 >
                   {job.title}

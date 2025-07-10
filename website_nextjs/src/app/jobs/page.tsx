@@ -40,9 +40,16 @@ export default function JobsPage() {
           skipQuote={true}
         />
       </div>
-      
+
+      {/* Decorative Divider (About style) */}
+      <div className="flex items-center justify-center mb-10 px-8">
+        <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent min-w-[20px]"></div>
+        <div className="mx-6 w-3 h-3 bg-blue-500 rounded-full"></div>
+        <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent min-w-[20px]"></div>
+      </div>
+
       {/* 1. Company Structure Section (How We Work) */}
-      <section className="py-12 lg:py-16">
+      <section className="py-6 lg:py-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
             {jobsData.companyStructure.title}
@@ -61,7 +68,7 @@ export default function JobsPage() {
       </section>
 
       {/* 3. Employee Care Section (Benefits) */}
-      <section className="py-16 lg:py-20">
+      <section className="py-8 lg:py-10">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
             {jobsData.employeeCare.title}
@@ -86,7 +93,7 @@ export default function JobsPage() {
       />
       
       {/* 5. Open Positions and Application Form */}
-      <div className="mt-12">
+      <div className="mt-4">
         <JobsClient 
           jobsData={{
             applicationForm: jobsData.applicationForm,

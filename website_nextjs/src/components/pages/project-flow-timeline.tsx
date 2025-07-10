@@ -15,8 +15,7 @@
 import React, { useContext, forwardRef, useImperativeHandle } from 'react'
 import TimelineHeader from '@/components/timeline/timeline-header'
 import TimelineCard from '@/components/timeline/timeline-card'
-import StatusBar from '@/components/timeline/status-bar'
-import Notifications from '@/components/timeline/notifications'
+
 import TimelineProvider from '@/components/timeline/timeline-provider'
 import { TimelineContext } from '@/components/timeline/timeline-context'
 import styles from '@/styles/timeline.module.css'
@@ -147,11 +146,6 @@ const TimelineContent = ({ timeline = projectFlowData.timeline as TimelineData }
         </div>
       </div>
 
-      {/* Dynamic status bar */}
-      <StatusBar />
-
-      {/* Notifications */}
-      <Notifications />
     </section>
   );
 };

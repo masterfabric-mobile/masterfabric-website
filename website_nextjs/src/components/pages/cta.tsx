@@ -55,14 +55,12 @@ export default function CTA() {
               href="/contact"
               className="group inline-flex items-center justify-center px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg"
             >
-              <span className="mr-2 group-hover:animate-bounce">🚀</span>
               Get Started
             </a>
             <a
               href="/about"
               className="group inline-flex items-center justify-center px-8 py-3 border border-gray-300 hover:border-gray-400 text-gray-700 font-medium rounded-lg transition-all duration-300 hover:scale-105 hover:bg-gray-50"
             >
-              <span className="mr-2 group-hover:rotate-12 transition-transform duration-300">📚</span>
               Learn More
             </a>
           </div>

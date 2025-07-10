@@ -9,6 +9,7 @@ import {
   getCookieConsent,
   markBannerAsShown
 } from "../../utils/cookies";
+import { Cookie } from 'lucide-react';
 
 const COOKIE_POLICY = {
   types: {
@@ -215,7 +216,7 @@ export default function CookieBanner() {
           title="Cookie Settings"
           onClick={handleIconClick}
         >
-          <span role="img" aria-label="cookie">🍪</span>
+          <Cookie className="w-7 h-7" style={{ color: 'white', filter: 'drop-shadow(0 0 8px #3b82f6)' }} />
         </button>
         <div className="cookie-tooltip">Cookie Settings</div>
       </div>
@@ -226,7 +227,7 @@ export default function CookieBanner() {
         className={`cookie-banner${bannerVisible ? ' show' : ''}`}
         style={{ pointerEvents: bannerVisible ? "auto" : "none" }}
       >
-        <div className="cookie-banner-content">
+        <div className="cookie-banner-content" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           {/* Close button */}
           <button
             className="cookie-close-btn"
@@ -237,17 +238,19 @@ export default function CookieBanner() {
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
           </button>
           {/* Cookie icon and main content */}
-          <div className="cookie-main-content">
-            <div className="cookie-icon">🍪</div>
-            <div className="cookie-text">
-              <h3 className="cookie-title">We Use Cookies</h3>
-              <p className="cookie-description">
-                We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. 
-                By clicking &quot;Accept All&quot;, you consent to our use of cookies.
-                <a href="/privacy-policy" className="cookie-link">Learn more</a>
-              </p>
+            <div className="cookie-main-content" style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'center', gap: '12px', marginBottom: 12 }}>
+              <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 28, height: 28, background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)', borderRadius: '50%', flexShrink: 0, marginTop: 2 }}>
+                <Cookie className="w-4 h-4" style={{ color: 'white', filter: 'drop-shadow(0 0 1.5px #3b82f6aa)' }} />
+              </span>
+              <div className="cookie-text" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', maxWidth: 420 }}>
+                <h3 className="cookie-title" style={{ marginBottom: 4 }}>We Use Cookies</h3>
+                <p className="cookie-description">
+                  We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. 
+                  By clicking &quot;Accept All&quot;, you consent to our use of cookies.
+                  <a href="/privacy-policy" className="cookie-link">Learn more</a>
+                </p>
+              </div>
             </div>
-          </div>
           {/* Action buttons */}
           <div className="cookie-actions">
             <button onClick={handleEssential} className="cookie-btn cookie-btn-outline" id="accept-essential">

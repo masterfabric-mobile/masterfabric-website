@@ -34,6 +34,8 @@ export default function HomePage() {
     <Container>
       {/* Contact Section */}
       <ContactSection/>
+      {/* Project Flow Timeline */}
+      <ProjectFlowTimeline ref={timelineRef} />
       {/* Welcome Section */}
       <Welcome 
         onTimelineDialogRequest={() => {
@@ -42,17 +44,10 @@ export default function HomePage() {
           }
         }}
       />
-      
       {/* Logos Section */}
       <Logos />
-      
       {/* Refactor Application Section */}
       <RefactorApplication />
-      
-      {/* Project Flow Timeline */}
-      <ProjectFlowTimeline ref={timelineRef} />
-      
-      
       {/* CTA Section */}
       <CTA />
     </Container>

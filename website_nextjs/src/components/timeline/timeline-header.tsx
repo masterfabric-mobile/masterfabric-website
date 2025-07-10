@@ -21,28 +21,38 @@ const TimelineHeader: React.FC<TimelineHeaderProps> = ({ timeline }) => {
   // Safe access to current phase
   const currentPhase = controller?.getCurrentPhase();
   const currentDay = controller?.currentDay || 1;
+  const phaseRanges = controller?.phaseRanges || [];
+  const isTimelineCompleted = controller && phaseRanges.length > 0 &&
+    controller.currentPhase === phaseRanges.length - 1 &&
+    controller.currentDay >= phaseRanges[phaseRanges.length - 1].end;
 
   return (
     <div className={styles.timelineHeaderContainer}>
       {/* Main title */}
       <h2 className={styles.timelineTitle}>
-        {title}
+        {isTimelineCompleted ? '🎉 Project Timeline Completed!' : title}
       </h2>
-      
       {/* Subtitle with current phase */}
       <p className={styles.timelineSubtitle}>
-        {subtitle}
-        {controller && currentPhase && (
-          <span className={styles.currentPhaseLabel}>
-            Current: {currentPhase.title} (Day {currentDay})
-          </span>
-        )}
+        {isTimelineCompleted
+          ? 'All phases are completed. Congratulations!'
+          : (
+            <>
+              {subtitle}
+              {controller && currentPhase && (
+                <span className={styles.currentPhaseLabel}>
+                  Current: {currentPhase.title} (Day {currentDay})
+                </span>
+              )}
+            </>
+          )}
       </p>
-      
       {/* Description text */}
-      <p className={styles.timelineDescription}>
-        {description}
-      </p>
+      {!isTimelineCompleted && (
+        <p className={styles.timelineDescription}>
+          {description}
+        </p>
+      )}
     </div>
   )
 }

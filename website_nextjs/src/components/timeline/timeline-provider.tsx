@@ -156,13 +156,11 @@ export const TimelineProvider: React.FC<TimelineProviderProps> = ({ children }) 
   
   // Initialize timeline
   useEffect(() => {
-    // Do NOT start auto-progress - we want manual control via Continue button
-    // if (timeline.settings.autoProgress) {
-    //   startAutoProgress()
-    // }
-    
-    console.log('Timeline initialized - auto-progress disabled for manual control');
-    
+    // Start auto-progress if enabled
+    if (timeline.settings.autoProgress) {
+      startAutoProgress();
+    }
+    console.log('Timeline initialized - auto-progress enabled');
     // Clean up on unmount
     return () => {
       if (progressIntervalRef.current) {
@@ -261,9 +259,16 @@ export const TimelineProvider: React.FC<TimelineProviderProps> = ({ children }) 
     setCurrentDay(prevDay => {
       const nextDay = prevDay + 1;
       const isLastPhase = currentPhase === normalizedTimeline.phases.length - 1;
-      const isLastDay = nextDay > totalDays;
-      if (isLastPhase && isLastDay) {
+      const currentRange = phaseRanges[currentPhase];
+      const isLastDayOfPhase = currentRange && nextDay > currentRange.end;
+      const isLastDayOverall = nextDay > totalDays;
+
+      // Eğer son fazdaysak ve gün aralığı bitti ise, ilerlemeyi tamamen durdur
+      if (isLastPhase && (isLastDayOfPhase || isLastDayOverall)) {
         setIsPaused(true);
+        if (progressIntervalRef.current) {
+          clearInterval(progressIntervalRef.current);
+        }
         // Final notification sadece bir kez gösterilsin
         if (lastNotifiedPhase !== currentPhase) {
           showCongratulationsToast(currentPhase);
@@ -274,15 +279,19 @@ export const TimelineProvider: React.FC<TimelineProviderProps> = ({ children }) 
         }
         return prevDay; // Son günde kal
       }
-      // Faz geçişi
-      if (currentPhase < normalizedTimeline.phases.length - 1) {
-        const currentRange = phaseRanges[currentPhase];
-        if (nextDay > currentRange.end) {
-          setCurrentPhase(prevPhase => prevPhase + 1);
-        }
+
+      // Faz geçişi (son fazda değilsek ve fazın gün aralığı bitti ise)
+      if (!isLastPhase && isLastDayOfPhase) {
+        setCurrentPhase(prevPhase => prevPhase + 1);
       }
+
+      // currentDay hiçbir zaman totalDays'i geçmesin
       if (nextDay > totalDays) {
-        return prevDay; // Son günde kal
+        return prevDay;
+      }
+      // Son fazdaysak ve fazın bitiş gününü geçtiysek, currentDay artmasın
+      if (isLastPhase && isLastDayOfPhase) {
+        return prevDay;
       }
       return nextDay;
     });
@@ -327,9 +336,12 @@ export const TimelineProvider: React.FC<TimelineProviderProps> = ({ children }) 
         milestones: []
       };
     }
-    
-    // Make sure currentPhase is within bounds
-    const safeIndex = Math.max(0, Math.min(currentPhase, normalizedTimeline.phases.length - 1));
+
+    // currentDay'e göre fazı bul
+    const foundIndex = phaseRanges.findIndex(
+      (range) => currentDay >= range.start && currentDay <= range.end
+    );
+    const safeIndex = foundIndex !== -1 ? foundIndex : Math.max(0, Math.min(currentPhase, normalizedTimeline.phases.length - 1));
     return normalizedTimeline.phases[safeIndex];
   }
   
@@ -361,32 +373,32 @@ export const TimelineProvider: React.FC<TimelineProviderProps> = ({ children }) 
   const updatePhaseStatuses = () => {
     // Clone the phases array to avoid direct mutation
     const updatedPhases = [...normalizedTimeline.phases];
-    
+
     // Update phase statuses based on current day
     updatedPhases.forEach((phase, index) => {
       const range = phaseRanges[index];
-      
-      if (index < currentPhase) {
+      if (!range) return;
+      if (currentDay > range.end) {
         phase.status = 'completed';
-      } else if (index === currentPhase) {
+      } else if (currentDay >= range.start && currentDay <= range.end) {
         phase.status = 'active';
-      } else {
+      } else if (currentDay < range.start) {
         phase.status = 'pending';
       }
-      
+
       // Update milestones based on current day
       phase.milestones.forEach(milestone => {
         // Parse milestone day from date string (format: "Day X" or "Week X")
         const dayMatch = milestone.date.match(/Day (\d+)/i);
         const weekMatch = milestone.date.match(/Week (\d+)/i);
-        
+
         let milestoneDay = 1;
         if (dayMatch && dayMatch[1]) {
           milestoneDay = parseInt(dayMatch[1], 10);
         } else if (weekMatch && weekMatch[1]) {
           milestoneDay = parseInt(weekMatch[1], 10) * 7; // Convert weeks to days
         }
-        
+
         if (currentDay >= milestoneDay) {
           milestone.status = 'completed';
         } else if (Math.abs(currentDay - milestoneDay) <= 3) {
@@ -396,7 +408,7 @@ export const TimelineProvider: React.FC<TimelineProviderProps> = ({ children }) 
         }
       });
     });
-    
+
     return updatedPhases;
   }
   

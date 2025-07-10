@@ -5,7 +5,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import Container from './container'
-import { Menu, X, Github, Linkedin } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
+import { SocialIcon } from '@/components/ui/SocialIcon'
 
 // Import dropdown from the navbar folder
 import Dropdown from './navbar/dropdown'
@@ -89,18 +90,6 @@ function Navbar() {
     return normalizedPath === normalizedItemPath
   }
 
-  // Get the correct icon for social links
-  const getSocialIcon = (iconName: string) => {
-    switch (iconName) {
-      case 'github':
-        return <Github className="w-5 h-5" />
-      case 'linkedin':
-        return <Linkedin className="w-5 h-5" />
-      default:
-        return null
-    }
-  }
-
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
       <Container>
@@ -175,21 +164,23 @@ function Navbar() {
               ))}
               
               {/* Social Links */}
-              <div className="hidden lg:flex items-center space-x-2 pl-2 border-l border-gray-200">
+              <div className="hidden lg:flex items-center space-x-px pl-2 border-l border-gray-200 h-8 self-center">
                 {sortedSocialLinks.map((link) => (
                   <a
                     key={link.id}
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`p-2 rounded-lg transition-colors ${
-                      link.color === 'blue'
-                        ? 'text-blue-600 hover:bg-blue-50'
-                        : 'text-gray-700 hover:bg-gray-50'
-                    }`}
+                    className={`navbar-social-link ${link.color}`}
                     title={link.title}
+                    style={{ width: 48, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                   >
-                    {getSocialIcon(link.icon)}
+                    {link.icon === 'github' && (
+                      <SocialIcon name="github" size={28} color="#23272F" withBackground />
+                    )}
+                    {link.icon === 'linkedin' && (
+                      <SocialIcon name="linkedin" size={28} withBackground />
+                    )}
                   </a>
                 ))}
               </div>
@@ -241,21 +232,23 @@ function Navbar() {
               
               {/* Mobile Social Links */}
               <div className="mt-4 pt-4 border-t border-gray-200">
-                <div className="flex items-center justify-center gap-4">
+                <div className="flex items-center justify-center gap-px">
                   {sortedSocialLinks.map((link) => (
                     <a
                       key={link.id}
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`p-2 rounded-lg transition-colors ${
-                        link.color === 'blue'
-                          ? 'text-blue-600 hover:bg-blue-50'
-                          : 'text-gray-700 hover:bg-gray-50'
-                      }`}
+                      className={`navbar-social-link ${link.color}`}
                       title={link.title}
+                      style={{ width: 48, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                     >
-                      {getSocialIcon(link.icon)}
+                      {link.icon === 'github' && (
+                        <SocialIcon name="github" size={28} color="#23272F" withBackground />
+                      )}
+                      {link.icon === 'linkedin' && (
+                        <SocialIcon name="linkedin" size={30} withBackground />
+                      )}
                     </a>
                   ))}
                 </div>

@@ -1,61 +1,73 @@
 'use client'
 
-import React from 'react'
-import { ArrowRight, MessageCircle, Calendar } from 'lucide-react'
+import React from 'react';
 import { Icon } from '@iconify/react';
+import styles from '../../styles/logos.module.css';
 
 export default function CTA() {
   return (
-    <section className="py-16 lg:py-24 bg-white">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          {/* Technologies Heading */}
-          <div className="text-gray-500 text-lg font-medium mb-8 flex flex-col items-center">
-            <span>Our Experts Works with your technologies <span className="text-red-500">❤️</span></span>
-            {/* Tech Icons Row */}
-            <div className="flex justify-center items-center gap-8 mt-6 mb-2">
-              <Icon icon="simple-icons:flutter" className="w-10 h-10 text-gray-400 hover:text-blue-500 transition-colors duration-300" />
-              <Icon icon="simple-icons:nestjs" className="w-10 h-10 text-gray-400 hover:text-red-500 transition-colors duration-300" />
-              <Icon icon="simple-icons:swift" className="w-10 h-10 text-gray-400 hover:text-orange-500 transition-colors duration-300" />
-              <Icon icon="simple-icons:kotlin" className="w-10 h-10 text-gray-400 hover:text-purple-500 transition-colors duration-300" />
-              <Icon icon="simple-icons:react" className="w-10 h-10 text-gray-400 hover:text-blue-400 transition-colors duration-300" />
-            </div>
+    <section className="py-16 lg:pb-8 lg:pt-16 relative overflow-hidden">
+      {/* Animated background elements with emojis */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-32 h-32 bg-blue-100 rounded-full opacity-20 animate-float"></div>
+        <div className="absolute bottom-20 right-16 w-24 h-24 bg-purple-100 rounded-full opacity-30 animate-float-delayed"></div>
+        <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-green-100 rounded-full opacity-25 animate-float-slow"></div>
+        {/* Floating emojis */}
+        <div className="absolute top-32 right-20 text-4xl animate-float opacity-30">🚀</div>
+        <div className="absolute bottom-32 left-20 text-3xl animate-float-delayed opacity-25">💡</div>
+        <div className="absolute top-1/3 right-1/4 text-2xl animate-float-slow opacity-20">⭐</div>
+        <div className="absolute bottom-1/3 left-1/3 text-3xl animate-float opacity-15">✨</div>
+        <div className="absolute top-1/4 left-16 text-2xl animate-float-delayed opacity-20">🎯</div>
+        <div className="absolute bottom-1/4 right-12 text-2xl animate-float-slow opacity-25">🎨</div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Technologies Section */}
+        <div className="text-center mb-12 animate-fade-in-up">
+          <h2 className="text-center text-2xl text-slate-500">
+            Our Experts Works with your technologies <span className="animate-pulse text-red-500">&hearts;</span>
+          </h2>
+          <div className="flex gap-8 md:gap-20 items-center justify-center mt-10 flex-wrap">
+            <Icon className="size-8 md:size-12 text-gray-400 hover:text-blue-600 transition-all duration-500 hover:scale-125" icon="simple-icons:flutter" />
+            <Icon className="size-8 md:size-12 text-gray-400 hover:text-green-600 transition-all duration-500 hover:scale-125" icon="simple-icons:nestjs" />
+            <Icon className="size-8 md:size-12 text-gray-400 hover:text-orange-500 transition-all duration-500 hover:scale-125" icon="simple-icons:swift" />
+            <Icon className="size-8 md:size-12 text-gray-400 hover:text-purple-600 transition-all duration-500 hover:scale-125" icon="simple-icons:kotlin" />
+            <Icon className="size-8 md:size-16 text-gray-400 hover:text-blue-500 transition-all duration-500 hover:scale-125" icon="simple-icons:react" />
+          </div>
+        </div>
+
+        {/* Main CTA */}
+        <div className="text-center animate-slide-in-up">
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl mb-6 animate-pulse-gentle">
+            <Icon className="w-10 h-10 text-blue-600" icon="bx:rocket" />
           </div>
 
-          {/* Rocket Icon Box */}
-          <div className="flex justify-center mb-6">
-            <div className="w-20 h-20 bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl flex items-center justify-center mx-auto shadow-sm">
-              <Icon icon="ph:rocket-launch" className="w-10 h-10 text-blue-500" />
-            </div>
-          </div>
-
-          {/* Main Heading */}
-          <h2 className="text-4xl lg:text-5xl xl:text-6xl font-extrabold text-gray-900 leading-tight mb-4">
+          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 animate-slide-in-up-delayed">
             Ready to Start Your Project?
           </h2>
-          <p className="text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed mb-10">
-            Let&apos;s build something amazing together.
+
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8 animate-slide-in-up-more-delayed">
+            Let's build something amazing together.
           </p>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-2">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-in-up-final">
             <a
-              href="#contact"
-              className="group bg-blue-600 text-white hover:bg-blue-700 font-bold py-4 px-8 rounded-lg transition-all duration-300 flex items-center space-x-2 text-lg shadow-md transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              href="/contact"
+              className="group inline-flex items-center justify-center px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg"
             >
-              <Icon icon="ph:rocket-launch" className="w-6 h-6 mr-2 transition-transform duration-300 group-hover:translate-x-2" />
-              <span>Get Started</span>
+              <span className="mr-2 group-hover:animate-bounce">🚀</span>
+              Get Started
             </a>
             <a
-              href="#learn-more"
-              className="group border-2 border-gray-200 text-gray-700 hover:bg-gray-100 font-bold py-4 px-8 rounded-lg transition-all duration-300 flex items-center space-x-2 text-lg transform hover:scale-105 hover:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-200"
+              href="/about"
+              className="group inline-flex items-center justify-center px-8 py-3 border border-gray-300 hover:border-gray-400 text-gray-700 font-medium rounded-lg transition-all duration-300 hover:scale-105 hover:bg-gray-50"
             >
-              <Icon icon="ph:books" className="w-6 h-6 mr-2 transition-transform duration-300 group-hover:-translate-y-1 group-hover:text-blue-500" />
-              <span>Learn More</span>
+              <span className="mr-2 group-hover:rotate-12 transition-transform duration-300">📚</span>
+              Learn More
             </a>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

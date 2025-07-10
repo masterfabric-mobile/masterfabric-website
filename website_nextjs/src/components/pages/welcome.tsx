@@ -413,7 +413,7 @@ export default function Welcome({ onTimelineDialogRequest }: WelcomeProps) {
       {/* Content Section */}
       <div className="md:order-1">
         <h2 className="text-xl lg:text-3xl xl:text-5xl font-bold lg:tracking-tight xl:tracking-tighter">
-          &apos;Custom Mobile App Development&apos;
+          Custom Mobile App Development
         </h2>
         <p className="text-lg mt-4 text-slate-600 max-w-xl">
           Take your business to the next level in the mobile world! Reach your customers anytime, 

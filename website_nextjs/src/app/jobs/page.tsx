@@ -28,7 +28,7 @@ export default function JobsPage() {
       />
       
       {/* Hero Section (in JobsClient) */}
-      <div className="mb-12">
+      <div className="mb-0">
         <JobsClient 
           jobsData={{
             hero: jobsData.hero,
@@ -42,9 +42,9 @@ export default function JobsPage() {
       </div>
 
       {/* Decorative Divider (About style) */}
-      <div className="flex items-center justify-center mb-10 px-8">
+      <div className="flex items-center justify-center mb-0 px-8" style={{marginBottom: 0, paddingBottom: 0}}>
         <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent min-w-[20px]"></div>
-        <div className="mx-6 w-3 h-3 bg-blue-500 rounded-full"></div>
+        <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
         <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent min-w-[20px]"></div>
       </div>
 

@@ -24,7 +24,7 @@ export default function AboutPage() {
         description={
           <div className="max-w-4xl mx-auto text-center space-y-4">
             {aboutData.sectionHeader.description.map((item, index) => (
-              <p key={index} dangerouslySetInnerHTML={{ __html: item.paragraph }}></p>
+              <p key={index} className="mb-4" dangerouslySetInnerHTML={{ __html: item.paragraph }}></p>
             ))}
           </div>
         }

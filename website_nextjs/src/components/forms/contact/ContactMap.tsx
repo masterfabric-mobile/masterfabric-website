@@ -116,7 +116,9 @@ export default function ContactMap() {
         
         // Set a slight delay to ensure proper rendering
         setTimeout(() => {
-          map.invalidateSize();
+          if (map && typeof map.invalidateSize === 'function') {
+            map.invalidateSize();
+          }
         }, 300);
         
         setMapLoaded(true);

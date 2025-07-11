@@ -111,15 +111,10 @@ export default function ContactMap() {
         window.resetMapView = resetMapView;
         window.navigateToLocation = navigateToLocation;
         
-        // Force a reflow to ensure map is properly sized
-        map.invalidateSize();
-        
-        // Set a slight delay to ensure proper rendering
-        setTimeout(() => {
-          if (map && typeof map.invalidateSize === 'function') {
-            map.invalidateSize();
-          }
-        }, 300);
+        // Force a reflow to ensure map is properly sized (only once, after map is ready)
+        if (map && typeof map.invalidateSize === 'function') {
+          map.invalidateSize();
+        }
         
         setMapLoaded(true);
       } catch (error) {

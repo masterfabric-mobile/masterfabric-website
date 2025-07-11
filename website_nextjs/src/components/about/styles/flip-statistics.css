@@ -386,6 +386,11 @@
   border-color: rgba(66, 153, 225, 0.6);
 }
 
+/* Remove stat-card-minimal style, as new design uses Tailwind classes directly. */
+.stat-card-minimal {
+  display: none !important;
+}
+
 @media (max-width: 768px) {
   .statistics-grid {
     grid-template-columns: 1fr;
@@ -396,6 +401,13 @@
   .stat-card {
     width: 100%;
     max-width: 320px;
+  }
+  .stat-card-minimal {
+    min-height: 140px;
+    padding: 1.5rem 0.5rem;
+  }
+  .stat-card-minimal .text-5xl {
+    font-size: 2rem;
   }
 }
 

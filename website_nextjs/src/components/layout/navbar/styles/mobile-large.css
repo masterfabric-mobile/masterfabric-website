@@ -1,0 +1,61 @@
+/* ========================================================================= */
+/* DESKTOP STYLES (1024px+) */
+/* ========================================================================= */
+
+@media (min-width: 768px) {
+    header {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    /* Desktop social links gap - increased spacing */
+    .desktop-nav .flex.items-center {
+      gap: 1.5rem; /* Increased from 1rem to 1.5rem */
+    }
+    
+    /* Additional spacing between social buttons */
+    .desktop-nav .flex.items-center > a + a {
+      margin-left: 1rem; /* Extra margin between buttons */
+    }
+    
+    /* Force desktop navigation to be visible */
+    .desktop-nav,
+    nav.hidden.lg\:flex,
+    nav.desktop-nav {
+      display: flex !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+    
+    /* Force hide mobile menu on desktop */
+    .lg\:hidden,
+    [astro-navbar] .lg\:hidden {
+      display: none !important;
+    }
+  }
+  
+  /* ========================================================================= */
+  /* FORCE DESKTOP NAVIGATION VISIBILITY */
+  /* ========================================================================= */
+  
+  /* Override any JavaScript hiding */
+  @media (min-width: 768px) {
+    .desktop-nav {
+      display: flex !important;
+    }
+    
+    /* Ensure all desktop nav children are visible */
+    .desktop-nav > * {
+      display: block !important;
+      visibility: visible !important;
+    }
+    
+    /* Social links container specific spacing */
+    .desktop-nav .border-l.border-gray-200 {
+      gap: 1.5rem !important;
+      padding-left: 1.5rem !important;
+      margin-left: 1.5rem !important;
+    }
+  }
+  

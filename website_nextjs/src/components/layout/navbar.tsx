@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
+
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
@@ -10,7 +11,7 @@ import { SocialIcon } from '@/components/ui/SocialIcon'
 
 // Import dropdown from the navbar folder
 import Dropdown from './navbar/dropdown'
-
+import './navbar/styles/navbar.css'
 // Define types for the navigation data
 interface DropdownItem {
   title: string;
@@ -95,11 +96,11 @@ function Navbar() {
       <Container>
         <div className="flex flex-col">
           {/* Top navbar section */}
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-between h-16 navbar-header">
             {/* Logo and Brand */}
-            <Link href="/" className="flex items-center group">
+            <Link href="/" className="flex items-center group flex-shrink-0 navbar-brand">
               {/* Logo with hover animation */}
-              <span className="inline-block mr-2 sm:mr-3 transition-transform duration-200 group-hover:scale-110 flex-shrink-0">
+              <span className="inline-block mr-2 sm:mr-3 transition-transform duration-200 group-hover:scale-110 flex-shrink-0 navbar-logo">
                 <Image
                   src={navigationData.brand.logo}
                   alt={navigationData.brand.alt}
@@ -110,9 +111,9 @@ function Navbar() {
               </span>
               
               {/* Brand text and description */}
-              <div className="flex flex-col min-w-0">
+              <div className="flex flex-col min-w-0 overflow-hidden navbar-brand-text">
                 {/* Company name */}
-                <div className="flex items-baseline flex-wrap">
+                <div className="flex items-baseline flex-wrap navbar-brand-main">
                   <span className="font-bold font-mono text-lg sm:text-xl text-slate-800">
                     {navigationData.brand.text.main}
                   </span>
@@ -125,7 +126,7 @@ function Navbar() {
                 </div>
                 
                 {/* Company tagline */}
-                <div className="font-mono text-xs sm:text-sm text-slate-400 mt-1 leading-tight">
+                <div className="font-mono text-xs sm:text-sm text-slate-400 mt-1 leading-tight navbar-brand-tagline">
                   <div className="flex flex-col sm:flex-row sm:gap-1">
                     <span className="whitespace-nowrap">{navigationData.brand.description.platform}</span>
                     <span className="font-bold text-slate-500 whitespace-nowrap">{navigationData.brand.description.studio}</span>
@@ -135,7 +136,7 @@ function Navbar() {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-4">
+            <nav className="hidden md:flex items-center space-x-4 ml-auto navbar-desktop-nav">
               {sortedMenuItems.map((item) => (
                 <React.Fragment key={item.id}>
                   {item.dropdown ? (
@@ -155,16 +156,13 @@ function Navbar() {
                       }`}
                     >
                       {item.title}
-                      {isCurrentPage(item.path) && (
-                        <span className="ml-2 inline-block w-2 h-2 bg-blue-500 rounded-full"></span>
-                      )}
                     </Link>
                   )}
                 </React.Fragment>
               ))}
               
               {/* Social Links */}
-              <div className="hidden lg:flex items-center space-x-px pl-2 border-l border-gray-200 h-8 self-center">
+              <div className="hidden md:flex items-center space-x-px pl-2 border-l border-gray-200 h-8 self-center">
                 {sortedSocialLinks.map((link) => (
                   <a
                     key={link.id}
@@ -189,7 +187,7 @@ function Navbar() {
             {/* Mobile menu button */}
             <button
               onClick={toggleMenu}
-              className="md:hidden p-2 rounded-md text-gray-700 hover:text-blue-600"
+              className="md:hidden p-2 rounded-md text-gray-700 hover:text-blue-600 navbar-menu-toggle"
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -198,8 +196,8 @@ function Navbar() {
 
           {/* Mobile Navigation */}
           {isMenuOpen && (
-            <div className="md:hidden py-4 border-t border-gray-200">
-              <nav className="flex flex-col space-y-2">
+            <div className="md:hidden py-4 border-t border-gray-200 navbar-mobile-menu">
+              <nav className="flex flex-col space-y-2 navbar-mobile-menu-content">
                 {sortedMenuItems.map((item) => (
                   <React.Fragment key={item.id}>
                     {item.dropdown ? (
@@ -221,9 +219,6 @@ function Navbar() {
                         onClick={() => setIsMenuOpen(false)}
                       >
                         {item.title}
-                        {isCurrentPage(item.path) && (
-                          <span className="ml-2 inline-block w-2 h-2 bg-blue-500 rounded-full"></span>
-                        )}
                       </Link>
                     )}
                   </React.Fragment>

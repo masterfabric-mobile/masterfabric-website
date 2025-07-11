@@ -1,0 +1,64 @@
+/* ========================================================================= */
+/* MOBILE STYLES (max-width: 640px) */
+/* ========================================================================= */
+
+@media (max-width: 640px) {
+    /* Prevent horizontal scroll on mobile */
+    header {
+      overflow-x: hidden;
+    }
+    
+    /* Mobile brand section improvements */
+    .navbar-brand {
+      flex: 1;
+      min-width: 0;
+      margin-right: 0.75rem;
+    }
+    
+    /* Ensure brand text doesn't overflow */
+    .font-mono {
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    }
+    
+    /* Mobile menu visibility */
+    .lg\:hidden .bg-white {
+      margin-left: 0;
+      margin-right: 0;
+    }
+    
+    /* Mobile grid items - flat button style */
+    .grid.grid-cols-2 > a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #f9fafb;
+      border: 1px solid #e5e7eb;
+      transition: all 0.2s ease-in-out;
+    }
+    
+    /* Mobile button hover effects */
+    .grid.grid-cols-2 > a:hover {
+      background-color: #f3f4f6;
+      border-color: #d1d5db;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    
+    /* Mobile icon colors and hover effects */
+    .grid.grid-cols-2 > a svg {
+      color: #6b7280;
+    }
+    
+    .grid.grid-cols-2 > a:hover svg {
+      color: #374151;
+    }
+    
+    /* Ensure menu icon is always visible and properly sized */
+    .lg\:hidden [class*="MenuIcon"] {
+      min-width: 1.75rem;
+      min-height: 1.75rem;
+    }
+  }
+  

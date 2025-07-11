@@ -19,9 +19,9 @@ export default function SectionHead({
         {title}
       </h1>
       {description && (
-        <p className="text-lg mt-4 text-slate-600">
+        <div className="text-lg mt-4 text-slate-600">
           {description}
-        </p>
+        </div>
       )}
     </div>
   )

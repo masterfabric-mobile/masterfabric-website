@@ -24,7 +24,7 @@ export default function Logos() {
           </h2>
           <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Join hundreds of successful companies that have optimized their applications with MasterFabric. <br />
-            Let's discuss how we can enhance your app's <span className="font-semibold text-blue-600">performance</span> and <span className="font-semibold text-gray-600">user experience</span>.
+            Let&apos;s discuss how we can enhance your app&apos;s <span className="font-semibold text-blue-600">performance</span> and <span className="font-semibold text-gray-600">user experience</span>.
           </p>
         </div>
 

@@ -11,9 +11,17 @@ interface ProcessStep {
 
 interface ProcessStepsProps {
   processSteps: ProcessStep[];
+  currentColor?: string; // e.g. 'text-blue-600' or '#2563eb'
 }
 
-const ProcessSteps: React.FC<ProcessStepsProps> = ({ processSteps }) => {
+const stepColors = [
+  'bg-blue-600', // fast
+  'bg-green-600', // controlled
+  'bg-purple-600', // tested
+  'bg-red-600', // running
+];
+
+const ProcessSteps: React.FC<ProcessStepsProps> = ({ processSteps, currentColor }) => {
   return (
     <div className="grid md:grid-cols-4 gap-6 max-w-3xl mx-auto process-steps-grid">
       {processSteps.map((step, index) => (

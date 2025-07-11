@@ -154,6 +154,20 @@ export const TimelineProvider: React.FC<TimelineProviderProps> = ({ children }) 
     return ranges;
   }, [normalizedTimeline]);
   
+  // Start auto progress
+  const startAutoProgress = React.useCallback(() => {
+    if (progressIntervalRef.current) {
+      clearInterval(progressIntervalRef.current)
+    }
+    
+    // Set interval to advance days
+    progressIntervalRef.current = setInterval(() => {
+      if (!isPaused) {
+        advanceDay()
+      }
+    }, timeline.settings.stepDuration)
+  }, [isPaused, timeline.settings.stepDuration])
+  
   // Initialize timeline
   useEffect(() => {
     // Start auto-progress if enabled
@@ -167,7 +181,7 @@ export const TimelineProvider: React.FC<TimelineProviderProps> = ({ children }) 
         clearInterval(progressIntervalRef.current)
       }
     }
-  }, [timeline])
+  }, [timeline, startAutoProgress])
   
   // Function to show congratulations dialog - will be used by the notifications component
   const showCongratulationsDialog = React.useCallback((phaseIndex?: number) => {
@@ -240,22 +254,8 @@ export const TimelineProvider: React.FC<TimelineProviderProps> = ({ children }) 
     }
   }, [currentPhase, lastNotifiedPhase, showCongratulationsDialog, showCongratulationsToast]);
   
-  // Start auto progress
-  const startAutoProgress = () => {
-    if (progressIntervalRef.current) {
-      clearInterval(progressIntervalRef.current)
-    }
-    
-    // Set interval to advance days
-    progressIntervalRef.current = setInterval(() => {
-      if (!isPaused) {
-        advanceDay()
-      }
-    }, timeline.settings.stepDuration)
-  }
-  
   // Advance to next day with proper bounds checking
-  const advanceDay = () => {
+  const advanceDay = React.useCallback(() => {
     setCurrentDay(prevDay => {
       const nextDay = prevDay + 1;
       const isLastPhase = currentPhase === normalizedTimeline.phases.length - 1;
@@ -295,7 +295,7 @@ export const TimelineProvider: React.FC<TimelineProviderProps> = ({ children }) 
       }
       return nextDay;
     });
-  };
+  }, [currentPhase, normalizedTimeline.phases.length, phaseRanges, totalDays, lastNotifiedPhase, showCongratulationsToast, showCongratulationsDialog]);
   
   // Toggle pause state
   const togglePause = () => {

@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Container from './container'
 import { Github, Twitter, Mail } from 'lucide-react'
 import '../../styles/footer.css'
+import { Icon } from '@iconify/react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
@@ -29,20 +30,16 @@ export default function Footer() {
               </p>
               {/* Compact Tech Credit */}
               <div className="astro-credit mt-3 flex items-center text-sm">
-                <span className="built-with mr-1">Built with</span>
+                <span className="built-with mr-1 text-gray-500">Built with</span>
                 <a
                   href="https://nextjs.org"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="astro-link flex items-center"
+                  className="astro-link flex items-center px-2 py-1 rounded-lg transition-all duration-200 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-200"
+                  style={{ gap: '0.5rem' }}
                 >
-                  {/* Next.js SVG logo */}
-                  <svg className="astro-icon mx-1" width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="16" cy="16" r="16" fill="black"/>
-                    <path d="M21.5 16c0-3.037-2.463-5.5-5.5-5.5s-5.5 2.463-5.5 5.5 2.463 5.5 5.5 5.5 5.5-2.463 5.5-5.5Zm-1.25 0a4.25 4.25 0 1 1-8.5 0 4.25 4.25 0 0 1 8.5 0Z" fill="white"/>
-                    <path d="M22.5 22.5 16 16" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-                  </svg>
-                  <span className="astro-text">Next.js</span>
+                  <Icon icon="simple-icons:nextdotjs" width={22} height={22} color="#18181b" style={{ display: 'inline-block', verticalAlign: 'middle' }} />
+                  <span className="astro-text font-semibold text-gray-700 ml-1">Next.js</span>
                 </a>
               </div>
             </div>

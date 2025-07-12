@@ -20,55 +20,55 @@ const iconifyNames: Record<SocialIconName, string> = {
 export const SocialIcon: React.FC<SocialIconProps> = ({
   name,
   className = "",
-  size = 24,
+  size = 32,
   color,
   withBackground = false,
   ...props
 }) => {
-
-  if (name === "github" && withBackground) {
-    return (
-      <span
-        className={className}
-        style={{
-          display: "inline-flex",
-          alignItems: "center",
-          justifyContent: "center",
-          background: "#fff",
-          border: "0.5px solid #000000FF",
-          borderRadius: 8,
-          width: size,
-          height: size,
-        }}
-        {...props}
-      >
-        <Icon icon={iconifyNames.github} color="#23272F" width={size * 0.7} height={size * 0.7} />
-      </span>
-    );
+  // Modern, flat, shadowed style for navbar
+  if (withBackground) {
+    if (name === "github") {
+      return (
+        <span
+          className={className}
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            background: "#fff",
+            borderRadius: 7,
+            width: size,
+            height: size,
+            transition: "transform 0.18s cubic-bezier(.4,1.2,.6,1), box-shadow 0.18s cubic-bezier(.4,1.2,.6,1)",
+          }}
+          {...props}
+        >
+          <Icon icon={iconifyNames.github} color="#18181b" width={36} height={36} />
+        </span>
+      );
+    }
+    if (name === "linkedin") {
+      return (
+        <span
+          className={className}
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            background: "#fff",
+            borderRadius: 7,
+            width: size,
+            height: size,
+            transition: "transform 0.18s cubic-bezier(.4,1.2,.6,1), box-shadow 0.18s cubic-bezier(.4,1.2,.6,1)",
+          }}
+          {...props}
+        >
+          <Icon icon={iconifyNames.linkedin} color="#2563eb" width={36} height={36} />
+        </span>
+      );
+    }
   }
-
-
-  if (name === "linkedin" && withBackground) {
-    return (
-      <span
-        className={className}
-        style={{
-          display: "inline-flex",
-          alignItems: "center",
-          justifyContent: "center",
-          background: "#2563eb",
-          borderRadius: 8,
-          width: size,
-          height: size,
-        }}
-        {...props}
-      >
-        <Icon icon={iconifyNames.linkedin} color="#fff" width={size * 0.7} height={size * 0.7} />
-      </span>
-    );
-  }
-
-
+  // Fallback: icon only
   return (
     <Icon
       icon={iconifyNames[name]}

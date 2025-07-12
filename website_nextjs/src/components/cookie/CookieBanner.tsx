@@ -154,6 +154,15 @@ export default function CookieBanner() {
     }
   }, []);
 
+  // Listen for openCookieSettings event from footer
+  useEffect(() => {
+    const handleOpenCookieSettings = () => {
+      showBanner();
+    };
+    window.addEventListener('openCookieSettings', handleOpenCookieSettings);
+    return () => window.removeEventListener('openCookieSettings', handleOpenCookieSettings);
+  }, []);
+
   // Escape key closes modal
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {

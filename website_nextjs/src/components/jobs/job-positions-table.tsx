@@ -28,7 +28,7 @@ export default function JobPositionsTable({ positions, onApply }: JobPositionsTa
   };
   
   return (
-    <div className="hidden lg:block bg-white rounded-2xl shadow-sm overflow-hidden">
+    <div className="hidden md:block bg-white rounded-2xl shadow-sm overflow-hidden">
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead className="bg-gray-50 border-b border-gray-200">

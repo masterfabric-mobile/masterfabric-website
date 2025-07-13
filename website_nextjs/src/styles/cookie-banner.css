@@ -440,11 +440,52 @@
     gap: 12px;
   }
 
-  .cookie-toggle {
+  .toggle {
     align-items: flex-start;
   }
 
   .persistent-cookie-icon {
     bottom: 80px;
+  }
+
+  .cookie-title {
+    font-size: 15px;
+  }
+
+  .cookie-description,
+  .cookie-link,
+  .cookie-category-info p,
+  .cookie-modal-description {
+    font-size: 11px;
+  }
+
+  .cookie-btn {
+    padding: 4px 8px;
+    font-size: 10px;
+    border-radius: 4px;
+    min-width: 0;
+  }
+
+  .cookie-banner-content {
+    padding: 8px;
+  }
+
+  .cookie-main-content {
+    gap: 6px;
+    margin-bottom: 8px;
+    padding-right: 8px;
+  }
+
+  .cookie-modal-content {
+    min-width: 0;
+    padding: 0;
+  }
+
+  .cookie-close-btn {
+    top: 4px;
+    right: 4px;
+    width: 28px;
+    height: 28px;
+    padding: 0;
   }
 } 

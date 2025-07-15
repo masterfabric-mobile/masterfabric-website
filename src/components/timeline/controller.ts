@@ -190,7 +190,7 @@ export const useTimelineController = (timeline: TimelineData) => {
     return updatedPhases;
   }
   
-  // Eklenen: Toast ve Dialog state'leri
+  // Added: Toast and Dialog states
   const [showToast, setShowToast] = useState(false)
   const [toastTitle, setToastTitle] = useState('')
   const [toastMessage, setToastMessage] = useState('')
@@ -201,13 +201,12 @@ export const useTimelineController = (timeline: TimelineData) => {
   const [isStatusBarMinimized, setIsStatusBarMinimized] = useState(false)
   const [isContactDialogVisible, setIsContactDialogVisible] = useState(false)
 
-  // Hover ile otomatik duraklatma
+  // Automatic pause on hover
   const [isHovering, setIsHovering] = useState(false)
 
-  // Scroll tabanlı ilerleme (isteğe bağlı, Astro'daki gibi)
   const [scrollProgress, setScrollProgress] = useState(0)
 
-  // Phase geçişinde toast/dialog tetikleme
+  // Trigger toast/dialog on phase change
   useEffect(() => {
     // Phase değiştiğinde tebrik mesajı göster
     if (currentPhase > 0) {
@@ -227,19 +226,19 @@ export const useTimelineController = (timeline: TimelineData) => {
     }
   }, [currentPhase, timeline.phases])
 
-  // Dialog kapama fonksiyonu
+  // Dialog close function
   const hideDialog = () => {
     setShowDialog(false)
     // Eğer kullanıcı tarafından duraklatılmadıysa devam et
     if (!isPaused) setIsPaused(false)
   }
 
-  // Status bar toggle (gelişmiş)
+  // Status bar toggle (advanced)
   const toggleStatusBarMinimized = () => {
     setIsStatusBarMinimized(val => !val)
   }
 
-  // Hover ile otomatik duraklatma fonksiyonları
+  // Automatic pause functions on hover
   const onTimelineCardMouseEnter = () => {
     if (!isPaused) setIsHovering(true)
     setIsPaused(true)
@@ -249,7 +248,7 @@ export const useTimelineController = (timeline: TimelineData) => {
     setIsPaused(false)
   }
 
-  // Scroll tabanlı ilerleme (isteğe bağlı)
+  // Scroll-based progress (optional)
   useEffect(() => {
     if (!timeline.settings.scrollBasedProgress) return
     const handleScroll = () => {
@@ -276,7 +275,7 @@ export const useTimelineController = (timeline: TimelineData) => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [timeline, currentPhase])
 
-  // Progress bar güncellemesi (scroll veya gün bazlı)
+  // Update progress bar (scroll or day-based)
   const getProgressBarWidth = () => {
     if (timeline.settings.scrollBasedProgress) {
       return `${Math.min(scrollProgress * 100, 100)}%`
@@ -284,7 +283,7 @@ export const useTimelineController = (timeline: TimelineData) => {
     return `${getProgressPercentage()}%`
   }
 
-  // Contact section dialog fonksiyonları
+  // Contact section dialog functions
   const showContactDialog = () => setIsContactDialogVisible(true)
   const hideContactDialog = () => setIsContactDialogVisible(false)
   

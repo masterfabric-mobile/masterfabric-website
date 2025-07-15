@@ -136,16 +136,13 @@ export const TimelineProvider: React.FC<TimelineProviderProps> = ({ children }) 
         const start = parseInt(durationMatch[1], 10);
         const end = parseInt(durationMatch[2], 10);
         const range = { start, end } as PhaseDayRange;
-        console.log(`Phase ${index} (${phase.id}): ${phase.duration} -> Range: ${start}-${end}`);
         return range;
       }
       
       // Fallback if format doesn't match
-      console.warn(`Phase ${index} (${phase.id}): Could not parse duration "${phase.duration}", using fallback`);
       return { start: 1, end: 7 } as PhaseDayRange;
     });
     
-    console.log('All phase ranges:', ranges);
     return ranges;
   }, [normalizedTimeline]);
   

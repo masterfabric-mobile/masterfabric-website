@@ -105,7 +105,7 @@ const FlipStatistics: React.FC<FlipStatisticsProps> = ({
               {/* İçerik */}
               <div className="flex flex-col items-center justify-center h-full w-full">
                 <div className="stat-number" style={{ fontSize: '1.5rem', fontWeight: 800, color: '#2563eb', marginBottom: 4 }}>{stat.value}</div>
-                {/* Metin geçişi */}
+                {/* Text transition */}
                 <div style={{ position: 'relative', height: 32, width: '100%' }}>
                   <span
                     style={{

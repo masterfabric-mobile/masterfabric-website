@@ -15,6 +15,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://masterfabric.co'),
   title: 'MasterFabric Inc. - Custom Mobile App Development',
   description: 'MasterFabric Co. is a mobile app agency specializing in developing innovative cross-platform applications for businesses.',
   keywords: ['mobile app development', 'custom apps', 'cross-platform', 'iOS', 'Android', 'React Native', 'Flutter'],

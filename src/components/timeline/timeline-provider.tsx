@@ -54,11 +54,6 @@ export const TimelineProvider: React.FC<TimelineProviderProps> = ({ children }) 
     return timelineData;
   }, []);
   
-  console.log('Timeline Provider initialized with:', {
-    phasesCount: timeline.phases.length,
-    phases: timeline.phases.map(p => ({ id: p.id, title: p.title, duration: p.duration }))
-  });
-  
   // Calculate total days from the timeline data
   const calculateTotalDays = (): number => {
     try {

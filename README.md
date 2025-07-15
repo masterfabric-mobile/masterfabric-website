@@ -10,10 +10,8 @@
 ![Firebase](https://img.shields.io/badge/Firebase-Hosting-FFCA28?logo=firebase&logoColor=black)
 ![License](https://img.shields.io/badge/License-AGPL--3.0-blue.svg)
 
-| Link            | URL                                                                 | Açıklama                                      |
-|-----------------|---------------------------------------------------------------------|------------------------------------------------|
-| 🌐 Live Site    | [https://masterfabric.co](https://masterfabric.co)                  | MasterFabric'ın güncel, canlı web sitesi       |
-| 📁 Repository   | [https://github.com/masterfabric/masterfabric-website](https://github.com/masterfabric/masterfabric-website) | Projenin tüm kaynak kodu ve dokümantasyonu    |
+[![Live Site](https://img.shields.io/badge/🌐%20Live-masterfabric.co-blue?style=for-the-badge)](https://masterfabric.co)
+[![Repository](https://img.shields.io/badge/📁%20Repo-GitHub-black?style=for-the-badge&logo=github)](https://github.com/masterfabric/masterfabric-website)
 
 ---
 
@@ -282,8 +280,3 @@ This project uses open-source software under various licenses:
 ---
 
 **🚀 Ready to get started? Run `./run.sh setup` and begin building amazing experiences!**
-
----
-
-*Last updated: December 2024*
-*Version: 1.0.0*

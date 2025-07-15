@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# 🚀 MasterFabric Website - Comprehensive Development and Deploy Script
-# This script sets up, tests, and deploys the project
+# 🚀 MasterFabric Website - Next.js Development and Deploy Script
+# This script sets up, tests, and deploys the Next.js project in the root directory
 
 set -e  # Exit on error
 
@@ -16,7 +16,7 @@ NC='\033[0m' # No Color
 echo -e "${BLUE}"
 echo "╔═══════════════════════════════════════════════════════════╗"
 echo "║                  🚀 MasterFabric Website                  ║"
-echo "║              💻 Development & Deploy Script               ║"
+echo "║           💻 Next.js Development & Deploy Script          ║"
 echo "╚═══════════════════════════════════════════════════════════╝"
 echo -e "${NC}"
 
@@ -37,13 +37,13 @@ print_error() {
     echo -e "${RED}[❌ ERROR]${NC} $1"
 }
 
-# 📁 Check current directory
+# 📁 Check Next.js directory
 check_directory() {
     if [[ ! -f "package.json" ]]; then
-        print_error "package.json not found. Make sure you're in the correct directory."
+        print_error "package.json not found. Make sure you're in the project root."
         exit 1
     fi
-    print_success "Project directory verified"
+    print_success "Next.js project directory verified."
 }
 
 # 🟢 Check Node.js and npm versions
@@ -81,7 +81,6 @@ detect_package_manager() {
 # 📥 Install dependencies
 install_dependencies() {
     print_step "Installing dependencies..."
-    
     case $PKG_MANAGER in
         "pnpm")
             if ! command -v pnpm &> /dev/null; then
@@ -101,14 +100,12 @@ install_dependencies() {
             npm install
             ;;
     esac
-    
-    print_success "Dependencies successfully installed"
+    print_success "Dependencies successfully installed."
 }
 
 # ▲ Check and install Vercel CLI
 setup_vercel() {
     print_step "Checking Vercel CLI..."
-    
     if ! command -v vercel &> /dev/null; then
         print_warning "Vercel CLI not installed. Installing..."
         npm install -g vercel@latest
@@ -121,7 +118,6 @@ setup_vercel() {
 # 🔥 Check and install Firebase CLI
 setup_firebase() {
     print_step "Checking Firebase CLI..."
-    
     if ! command -v firebase &> /dev/null; then
         print_warning "Firebase CLI not installed. Installing..."
         npm install -g firebase-tools
@@ -133,8 +129,7 @@ setup_firebase() {
 
 # 🔨 Build project
 build_project() {
-    print_step "Building project..."
-    
+    print_step "Building Next.js project..."
     case $PKG_MANAGER in
         "pnpm")
             pnpm run build
@@ -146,66 +141,60 @@ build_project() {
             npm run build
             ;;
     esac
-    
-    print_success "Build completed successfully"
+    print_success "Build completed successfully."
 }
 
 # 🧪 Setup test environment
 setup_test_environment() {
     print_step "Setting up test environment..."
-    
     # Create .env.test file (if not exists)
     if [[ ! -f ".env.test" ]]; then
         cat > .env.test << EOF
 # Test Environment Variables
 NODE_ENV=test
-ASTRO_BASE_URL=http://localhost:4321
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
 EOF
         print_success ".env.test file created"
     fi
-    
     # Check test dependencies
     print_step "Checking test dependencies..."
-    
     case $PKG_MANAGER in
         "pnpm")
-            if ! pnpm list vitest &> /dev/null; then
-                print_warning "Test framework not found. Installing Vitest..."
-                pnpm add -D vitest @vitest/ui jsdom
+            if ! pnpm list jest &> /dev/null; then
+                print_warning "Test framework not found. Installing Jest..."
+                pnpm add -D jest @testing-library/react @testing-library/jest-dom
             fi
             ;;
         "yarn")
-            if ! yarn list vitest &> /dev/null; then
-                print_warning "Test framework not found. Installing Vitest..."
-                yarn add -D vitest @vitest/ui jsdom
+            if ! yarn list jest &> /dev/null; then
+                print_warning "Test framework not found. Installing Jest..."
+                yarn add -D jest @testing-library/react @testing-library/jest-dom
             fi
             ;;
         *)
-            if ! npm list vitest &> /dev/null; then
-                print_warning "Test framework not found. Installing Vitest..."
-                npm install -D vitest @vitest/ui jsdom
+            if ! npm list jest &> /dev/null; then
+                print_warning "Test framework not found. Installing Jest..."
+                npm install -D jest @testing-library/react @testing-library/jest-dom
             fi
             ;;
     esac
-    
-    print_success "Test environment ready"
+    print_success "Test environment ready."
 }
 
 # 🌐 Start localhost server
 start_localhost() {
-    print_step "Starting localhost server..."
-    
+    print_step "Starting Next.js development server..."
     case $PKG_MANAGER in
         "pnpm")
-            echo -e "${GREEN}🚀 Starting localhost server... http://localhost:4321${NC}"
+            echo -e "${GREEN}🚀 Starting Next.js dev server... http://localhost:3000${NC}"
             pnpm run dev
             ;;
         "yarn")
-            echo -e "${GREEN}🚀 Starting localhost server... http://localhost:4321${NC}"
+            echo -e "${GREEN}🚀 Starting Next.js dev server... http://localhost:3000${NC}"
             yarn dev
             ;;
         *)
-            echo -e "${GREEN}🚀 Starting localhost server... http://localhost:4321${NC}"
+            echo -e "${GREEN}🚀 Starting Next.js dev server... http://localhost:3000${NC}"
             npm run dev
             ;;
     esac
@@ -213,66 +202,60 @@ start_localhost() {
 
 # 👀 Start preview server
 start_preview() {
-    print_step "Starting preview server..."
-    
+    print_step "Starting Next.js preview server..."
     build_project
-    
     case $PKG_MANAGER in
         "pnpm")
-            echo -e "${GREEN}🔍 Starting preview server... http://localhost:4321${NC}"
-            pnpm run preview
+            echo -e "${GREEN}🔍 Starting Next.js preview server... http://localhost:3000${NC}"
+            pnpm run start
             ;;
         "yarn")
-            echo -e "${GREEN}🔍 Starting preview server... http://localhost:4321${NC}"
-            yarn preview
+            echo -e "${GREEN}🔍 Starting Next.js preview server... http://localhost:3000${NC}"
+            yarn start
             ;;
         *)
-            echo -e "${GREEN}🔍 Starting preview server... http://localhost:4321${NC}"
-            npm run preview
+            echo -e "${GREEN}🔍 Starting Next.js preview server... http://localhost:3000${NC}"
+            npm run start
             ;;
     esac
 }
 
 # ▲ Vercel deploy
 deploy_vercel() {
-    print_step "Deploying to Vercel..."
-    
+    print_step "Deploying Next.js app to Vercel..."
     # Create vercel.json if not exists
     if [[ ! -f "vercel.json" ]]; then
         cat > vercel.json << EOF
 {
   "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "framework": "astro",
+  "outputDirectory": ".next",
+  "framework": "nextjs",
   "devCommand": "npm run dev"
 }
 EOF
-        print_success "vercel.json file created"
+        print_success "vercel.json file created (Next.js)"
     fi
-    
     # Build first
     build_project
-    
     # Deploy
     if [[ "$1" == "--prod" ]]; then
         vercel --prod
-        print_success "Deployed to production"
+        print_success "Deployed to production (Vercel)"
     else
         vercel
-        print_success "Deployed to preview"
+        print_success "Deployed to preview (Vercel)"
     fi
 }
 
 # 🔥 Firebase deploy
 deploy_firebase() {
-    print_step "Deploying to Firebase..."
-    
+    print_step "Deploying Next.js app to Firebase..."
     # Create firebase.json if not exists
     if [[ ! -f "firebase.json" ]]; then
         cat > firebase.json << EOF
 {
   "hosting": {
-    "public": "dist",
+    "public": "out",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -283,45 +266,32 @@ deploy_firebase() {
         "source": "**",
         "destination": "/index.html"
       }
-    ],
-    "headers": [
-      {
-        "source": "**/*.@(jpg|jpeg|gif|png|svg|webp)",
-        "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "max-age=31536000"
-          }
-        ]
-      },
-      {
-        "source": "**/*.@(css|js)",
-        "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "max-age=31536000"
-          }
-        ]
-      }
     ]
   }
 }
 EOF
-        print_success "firebase.json file created"
+        print_success "firebase.json file created (Next.js)"
     fi
-    
-    # Build first
-    build_project
-    
+    # Build static export
+    case $PKG_MANAGER in
+        "pnpm")
+            pnpm run build && pnpm run export
+            ;;
+        "yarn")
+            yarn build && yarn export
+            ;;
+        *)
+            npm run build && npm run export
+            ;;
+    esac
     # Firebase login check
     if ! firebase projects:list &> /dev/null; then
         print_warning "Not logged in to Firebase. Please log in:"
         firebase login
     fi
-    
     # Deploy
     firebase deploy
-    print_success "Deployed to Firebase"
+    print_success "Deployed to Firebase (Next.js)"
 }
 
 # 📚 Help message
@@ -330,13 +300,13 @@ show_help() {
     echo "  ./run.sh [COMMAND] [OPTIONS]"
     echo ""
     echo -e "${BLUE}Commands:${NC}"
-    echo "  setup           - 🛠️  Complete setup (dependencies, CLI tools)"
-    echo "  dev             - 🌐 Start development server"
-    echo "  build           - 🔨 Build the project"
-    echo "  preview         - 👀 Build and start preview server"
-    echo "  test            - 🧪 Setup test environment"
-    echo "  deploy-vercel   - ▲  Deploy to Vercel"
-    echo "  deploy-firebase - 🔥 Deploy to Firebase"
+    echo "  setup           - 🛠️  Complete setup (dependencies, CLI tools) for Next.js"
+    echo "  dev             - 🌐 Start Next.js development server"
+    echo "  build           - 🔨 Build the Next.js project"
+    echo "  preview         - 👀 Build and start Next.js preview server"
+    echo "  test            - 🧪 Setup test environment (Jest)"
+    echo "  deploy-vercel   - ▲  Deploy Next.js app to Vercel"
+    echo "  deploy-firebase - 🔥 Deploy Next.js app to Firebase (static export)"
     echo "  deploy-all      - 🚀 Deploy to both Vercel and Firebase"
     echo "  help            - 📚 Show this help message"
     echo ""
@@ -344,9 +314,9 @@ show_help() {
     echo "  --prod          - 🎯 Production deploy (Vercel only)"
     echo ""
     echo -e "${BLUE}Examples:${NC}"
-    echo "  ./run.sh setup                 # Complete setup"
-    echo "  ./run.sh dev                   # Start development"
-    echo "  ./run.sh deploy-vercel --prod  # Deploy to production"
+    echo "  ./run.sh setup                 # Complete setup for Next.js"
+    echo "  ./run.sh dev                   # Start Next.js development"
+    echo "  ./run.sh deploy-vercel --prod  # Deploy to production (Vercel)"
     echo "  ./run.sh deploy-all            # Deploy everywhere"
 }
 
@@ -354,10 +324,9 @@ show_help() {
 main() {
     check_directory
     detect_package_manager
-    
     case "${1:-setup}" in
         "setup")
-            print_step "Starting comprehensive setup..."
+            print_step "Starting comprehensive setup for Next.js..."
             check_node
             install_dependencies
             setup_vercel

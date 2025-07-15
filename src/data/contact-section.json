@@ -1,0 +1,216 @@
+{
+  "hero": {
+    "title": {
+      "line1": "Grow Your Business with,",
+      "line2": "Save Your Time,",
+      "line3": "Easy Manage"
+    },
+    "description": "We Develop <strong>Tomorrow's Applications</strong> Today. We specialize in <strong>mobile</strong> and <u>business application development</u>; We turn your <strong>ideas</strong> into <u>reality</u>. Whether you are a <strong>startup</strong> or an <u>established business</u>, we bring your <strong>vision</strong> to life with <u>innovative designs</u> and <strong>powerful functionalities</strong>."
+  },
+  "benefits": [
+    {
+      "emoji": "📱",
+      "bgColor": "bg-blue-500",
+      "gradientColor": "from-blue-400 to-blue-600",
+      "hoverGradient": "from-blue-500 to-blue-700",
+      "rippleColor": "rgba(59, 130, 246, 0.4)",
+      "title": "Mobile Excellence",
+      "description": "Native & cross-platform solutions"
+    },
+    {
+      "emoji": "⚡",
+      "bgColor": "bg-yellow-500",
+      "gradientColor": "from-yellow-400 to-orange-500",
+      "hoverGradient": "from-yellow-500 to-orange-600",
+      "rippleColor": "rgba(251, 191, 36, 0.4)",
+      "title": "Fast Delivery",
+      "description": "Quick turnaround times"
+    },
+    {
+      "icon": {
+        "viewBox": "0 0 24 24",
+        "paths": [
+          "M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z",
+          "M12 8a4 4 0 1 0 4 4 4 4 0 0 0-4-4zm0 6a2 2 0 1 1 2-2 2 2 0 0 1-2 2z",
+          "M6 10h2v4H6zM16 10h2v4h-2zM10 6h4v2h-4zM10 16h4v2h-4z"
+        ]
+      },
+      "bgColor": "bg-green-500",
+      "gradientColor": "from-green-400 to-green-600",
+      "hoverGradient": "from-green-500 to-green-700",
+      "rippleColor": "rgba(34, 197, 94, 0.4)",
+      "title": "24/7 Support",
+      "description": "Ongoing maintenance & support"
+    },
+    {
+      "emoji": "🚀",
+      "bgColor": "bg-purple-500",
+      "gradientColor": "from-purple-400 to-purple-600",
+      "hoverGradient": "from-purple-500 to-purple-700",
+      "rippleColor": "rgba(147, 51, 234, 0.4)",
+      "title": "Scalable Solutions",
+      "description": "Built for growth"
+    }
+  ],
+  "form": {
+    "title": "Get Started Today",
+    "subtitle": "Tell us about your project and we'll get back to you within 24 hours.",
+    "initialButton": {
+      "text": "Let's Contact Us",
+      "class": "bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-200"
+    },
+    "stages": {
+      "initial": {
+        "title": "Get Started Today",
+        "subtitle": "Tell us about your project and we'll get back to you within 24 hours.",
+        "buttonText": "Let's Contact Us"
+      },
+      "form": {
+        "title": "Tell Us About Your Project",
+        "subtitle": "Fill out the form below and we'll get back to you within 24 hours."
+      },
+      "success": {
+        "title": "Thank You!",
+        "subtitle": "We've received your message and will contact you soon.",
+        "backButtonText": "Back to Home"
+      }
+    },
+    "returnVisitor": {
+      "notifications": [
+        {
+          "type": "recent-contact",
+          "title": "We're in touch!",
+          "message": "You contacted us recently. We'll get back to you within 24 hours.",
+          "icon": "✉️",
+          "actions": [
+            { "text": "Check Email", "action": "check-email" },
+            { "text": "Send Another Message", "action": "new-message" }
+          ]
+        },
+        {
+          "type": "pending-response",
+          "title": "Waiting for your response",
+          "message": "Did you check your email? We may have already responded.",
+          "icon": "⏳",
+          "actions": [
+            { "text": "Check Email", "action": "check-email" },
+            { "text": "Didn't receive? Send again", "action": "resend" }
+          ]
+        },
+        {
+          "type": "no-response",
+          "title": "Haven't heard back?",
+          "message": "If we haven't contacted you yet, feel free to send another message.",
+          "icon": "🔄",
+          "actions": [
+            { "text": "Send New Message", "action": "new-message" }
+          ]
+        }
+      ]
+    },
+    "fields": {
+      "name": {
+        "label": "Full Name *",
+        "placeholder": "Enter your full name",
+        "type": "text",
+        "required": true,
+        "validation": {
+          "emptyMessage": "Please enter your full name",
+          "invalidMessage": "Please enter a valid name"
+        }
+      },
+      "email": {
+        "label": "Email Address*",
+        "placeholder": "Enter your email address",
+        "type": "email",
+        "required": true,
+        "validation": {
+          "emptyMessage": "Please enter your email address",
+          "invalidMessage": "Please enter a valid email address"
+        }
+      },
+      "phone": {
+        "label": "Phone Number",
+        "placeholder": "Enter your phone number",
+        "type": "tel",
+        "required": false
+      },
+      "projectType": {
+        "label": "Project Type",
+        "type": "select",
+        "required": false,
+        "options": [
+          { "value": "", "text": "Select project type" },
+          { "value": "mobile-app", "text": "Mobile Application" },
+          { "value": "web-app", "text": "Web Application" },
+          { "value": "desktop-app", "text": "Desktop Application" },
+          { "value": "api-backend", "text": "API & Backend" },
+          { "value": "ui-ux-design", "text": "UI/UX Design" },
+          { "value": "consulting", "text": "Consulting" },
+          { "value": "maintenance", "text": "Maintenance & Support" },
+          { "value": "other", "text": "Other" }
+        ]
+      },
+      "message": {
+        "label": "Project Description *",
+        "placeholder": "Tell us about your project requirements, goals, and timeline...",
+        "type": "textarea",
+        "required": true,
+        "rows": 4,
+        "validation": {
+          "emptyMessage": "Please describe your project",
+          "invalidMessage": "Please provide more details about your project"
+        }
+      },
+      "budget": {
+        "label": "Budget Range",
+        "type": "select",
+        "required": false,
+        "options": [
+          { "value": "", "text": "Select budget range" },
+          { "value": "under-5k", "text": "Under $5,000" },
+          { "value": "5k-10k", "text": "$5,000 - $10,000" },
+          { "value": "10k-25k", "text": "$10,000 - $25,000" },
+          { "value": "25k-50k", "text": "$25,000 - $50,000" },
+          { "value": "50k-100k", "text": "$50,000 - $100,000" },
+          { "value": "over-100k", "text": "Over $100,000" },
+          { "value": "discuss", "text": "Let's discuss" }
+        ]
+      }
+    },
+    "submitButton": {
+      "text": "Send Message",
+      "loadingText": "Sending..."
+    },
+    "messages": {
+      "success": {
+        "title": "Thank you for your message!",
+        "description": "We've received your project details and will get back to you within 24 hours.",
+        "icon": {
+          "viewBox": "0 0 20 20",
+          "path": "M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+        }
+      },
+      "error": {
+        "title": "Oops! Something went wrong.",
+        "description": "Please try again or contact us directly at hello@masterfabric.dev",
+        "icon": {
+          "viewBox": "0 0 20 20",
+          "path": "M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+        }
+      },
+      "sending": {
+        "title": "Sending your message...",
+        "description": "Please wait while we process your request.",
+        "icon": {
+          "viewBox": "0 0 20 20",
+          "path": "M10 12a2 2 0 100-4 2 2 0 000 4z"
+        }
+      }
+    }
+  },
+  "api": {
+    "endpoint": "https://api.web3forms.com/submit",
+    "accessKey": "3e15a306-d815-4638-8b6d-e2318dc7bc57"
+  }
+}

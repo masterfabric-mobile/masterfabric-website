@@ -1,0 +1,1175 @@
+/* Timeline Container */
+.timelineContainer {
+  padding: 4rem 0;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.timelineContainerInner {
+  width: 100%;
+}
+
+/* Timeline Header Animation */
+.timelineHeader {
+  margin-bottom: 3rem;
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: headerFadeIn 0.8s ease-out 0.2s forwards;
+}
+
+@keyframes headerFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Timeline Track */
+.timelineTrack {
+  display: flex;
+  gap: 1.25rem;
+  padding: 1rem 0;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 #f1f5f9;
+  margin: 0 auto;
+  max-width: 90vw;
+  padding: 1rem 2rem;
+}
+
+.timelineTrack::-webkit-scrollbar {
+  height: 8px;
+}
+
+.timelineTrack::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 10px;
+}
+
+.timelineTrack::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 10px;
+  border: 2px solid #f1f5f9;
+}
+
+/* Timeline Card Animations */
+.timelineCard {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: cardFadeIn 0.6s ease-out forwards;
+}
+
+@keyframes cardFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Timeline Card Animation Delay */
+.timelineTrack .timelineCard:nth-child(1) { animation-delay: 0.3s; }
+.timelineTrack .timelineCard:nth-child(2) { animation-delay: 0.4s; }
+.timelineTrack .timelineCard:nth-child(3) { animation-delay: 0.5s; }
+.timelineTrack .timelineCard:nth-child(4) { animation-delay: 0.6s; }
+.timelineTrack .timelineCard:nth-child(5) { animation-delay: 0.7s; }
+.timelineTrack .timelineCard:nth-child(6) { animation-delay: 0.8s; }
+
+/* Status Badge Colors */
+.statusBadge {
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.125rem 0.5rem;
+}
+
+.statusCompleted { 
+  background-color: #22c55e; /* green-500 */
+  color: white;
+}
+
+.statusInProgress { 
+  background-color: #3b82f6; /* blue-500 */
+  color: white;
+}
+
+.statusPending { 
+  background-color: #d1d5db; /* gray-300 */
+  color: #374151; /* gray-700 */
+}
+
+.statusActive { 
+  background-color: #2563eb; /* blue-600 */
+  color: white;
+}
+
+/* Tool Chips */
+.toolChip {
+  background-color: #f1f5f9; /* slate-100 */
+  color: #334155; /* slate-700 */
+  padding: 0.125rem 0.375rem; /* px-1.5 py-0.5 */
+  border-radius: 0.375rem; /* rounded-md */
+  font-size: 0.75rem; /* text-xs */
+}
+
+.toolChipMore {
+  background-color: #e2e8f0; /* slate-200 */
+  color: #475569; /* slate-600 */
+  padding: 0.125rem 0.375rem; /* px-1.5 py-0.5 */
+  border-radius: 0.375rem; /* rounded-md */
+  font-size: 0.75rem; /* text-xs */
+}
+
+/* Status Bar Transitions */
+.dynamicStatusMessages {
+  transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease, height 0.3s ease;
+}
+
+/* Status Toggle Button */
+.statusToggleBtn {
+  background-color: white;
+  padding: 0.3rem 0.5rem;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e5e7eb;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 24px;
+  border-radius: 8px 8px 0 0;
+  outline: none;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 101;
+  transition: top 0.3s ease, border-radius 0.3s ease, box-shadow 0.3s ease, border-bottom-width 0.3s ease;
+}
+
+.statusToggleBtn:hover {
+  background-color: #f9fafb;
+  box-shadow: 0 -3px 7px rgba(0, 0, 0, 0.12);
+}
+
+.statusToggleBtn:focus {
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.15);
+  border-color: #d1d5db;
+}
+
+.statusToggleBtnPosition {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  z-index: 101;
+}
+
+/* Chevron icons */
+.chevronDown,
+.chevronUp {
+  display: inline-block;
+}
+
+.chevronDown svg,
+.chevronUp svg {
+  stroke: #4b5563;
+}
+
+/* Reduced Motion Support */
+/* Active Phase Card */
+.activePhaseCard {
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
+  transform: translateY(-5px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Pulsing icon animation */
+.pulsingIcon {
+  animation: pulseIcon 2s infinite ease-in-out;
+}
+
+@keyframes pulseIcon {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Status Bar Styles */
+.statusBarWrapper {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  width: 90%;
+  max-width: 600px;
+}
+
+.statusBarContainer {
+  position: relative;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  border-radius: 0 0 8px 8px;
+  width: 100%;
+  transition: all 0.3s ease;
+  border: 1px solid #e5e7eb;
+  border-top-width: 0;
+}
+
+.statusMessageContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.statusIcon {
+  font-size: 1.25rem;
+  margin-right: 0.75rem;
+}
+
+.statusText {
+  flex: 1;
+}
+
+.statusTitle {
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.statusDescription {
+  font-size: 0.75rem;
+  color: #4b5563;
+}
+
+.statusProgress {
+  display: flex;
+  align-items: center;
+  margin-top: 0.25rem;
+}
+
+.progressText {
+  font-size: 0.75rem;
+  margin-right: 0.5rem;
+}
+
+.progressBarMini {
+  height: 0.375rem;
+  background-color: #e5e7eb;
+  border-radius: 9999px;
+  flex: 1;
+}
+
+.progressFillMini {
+  height: 100%;
+  background-color: #3b82f6;
+  border-radius: 9999px;
+}
+
+/* Status bar progress indicators */
+.statusProgress {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.statusPercentage {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #10b981;
+  background-color: rgba(16, 185, 129, 0.1);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+/* Toast Notification Styles */
+.notificationToast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+  padding: 1rem;
+  max-width: 24rem;
+  width: 100%;
+  transform: translateX(0);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 100;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+}
+
+.toastVisible {
+  transform: translateX(0);
+}
+
+.toastHidden {
+  transform: translateX(100%);
+}
+
+.toastContent {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.toastIcon {
+  font-size: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toastText {
+  flex: 1;
+}
+
+.toastTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+}
+
+.toastMessage {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Dialog Styles */
+.dialogOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.dialogContainer {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  max-width: 28rem;
+  width: 100%;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.dialogHeader {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.dialogIconContainer {
+  display: inline-block;
+  padding: 0.75rem;
+  background-color: #dbeafe;
+  border-radius: 9999px;
+  margin: 0 auto 0.5rem auto;
+}
+
+.dialogIcon {
+  font-size: 1.5rem;
+}
+
+.dialogTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.dialogMessage {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.dialogText {
+  color: #4b5563;
+}
+
+.progressContainer {
+  margin-top: 1rem;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.progressHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.progressPercentage {
+  font-weight: 600;
+}
+
+.progressBar {
+  width: 100%;
+  background-color: #e5e7eb;
+  border-radius: 9999px;
+  height: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.progressFill {
+  background-color: #2563eb;
+  height: 100%;
+  border-radius: 9999px;
+}
+
+.progressFooter {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.dialogActions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .dialogActions {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+}
+
+.primaryButton {
+  width: 100%;
+  background-color: #2563eb;
+  color: white;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+}
+
+.primaryButton:hover {
+  background-color: #1d4ed8;
+}
+
+@media (min-width: 640px) {
+  .primaryButton {
+    width: auto;
+  }
+}
+
+.secondaryButton {
+  width: 100%;
+  background-color: #f3f4f6;
+  color: #1f2937;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+}
+
+.secondaryButton:hover {
+  background-color: #e5e7eb;
+}
+
+@media (min-width: 640px) {
+  .secondaryButton {
+    width: auto;
+  }
+}
+
+.demoButtonContainer {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 10;
+}
+
+.demoButtonPrimary {
+  background-color: #2563eb;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+}
+
+.demoButtonPrimary:hover {
+  background-color: #1d4ed8;
+}
+
+.demoButtonSecondary {
+  background-color: #16a34a;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+}
+
+.demoButtonSecondary:hover {
+  background-color: #15803d;
+}
+
+/* Timeline Header Component Styles */
+.timelineHeaderContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.timelineTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+}
+
+.timelineSubtitle {
+  font-size: 1.125rem;
+  color: #4b5563;
+  margin-bottom: 0.5rem;
+}
+
+.timelineDescription {
+  font-size: 1rem;
+  color: #6b7280;
+  max-width: 48rem;
+  margin: 0 auto;
+  line-height: 1.625;
+}
+
+.currentPhaseLabel {
+  display: inline-block;
+  margin-left: 0.5rem;
+  background-color: #dbeafe;
+  color: #1e40af;
+  font-size: 0.875rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.timelineLoading {
+  text-align: center;
+  padding: 3rem;
+  color: #6b7280;
+  font-size: 1.125rem;
+}
+
+/* Timeline Card Component Styles */
+.timelineCardContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 0.75rem 1rem;
+  min-width: 240px;
+  border-left-width: 4px;
+  height: 100%;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.phaseIcon {
+  font-size: 1.25rem;
+  margin-right: 0.5rem;
+  padding-top: 0.25rem;
+}
+
+.phaseHeaderContent {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.phaseTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.25rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.phaseDescription {
+  font-size: 0.75rem;
+  color: #4b5563;
+  margin-bottom: 0.5rem;
+  line-height: 1.25;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.statusBadge {
+  display: inline-block;
+  font-size: 0.75rem;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+}
+
+.statusCompleted {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.statusInProgress {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.statusActive {
+  background-color: #bfdbfe;
+  color: #1e3a8a;
+}
+
+.statusPending {
+  background-color: #f3f4f6;
+  color: #4b5563;
+}
+
+.borderCompleted {
+  border-color: #10b981;
+}
+
+.borderInProgress {
+  border-color: #3b82f6;
+}
+
+.borderActive {
+  border-color: #2563eb;
+}
+
+.borderPending {
+  border-color: #9ca3af;
+}
+
+.toolsSection {
+  margin-bottom: 0.5rem;
+}
+
+.sectionLabel {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-bottom: 0.25rem;
+}
+
+.toolsChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.toolChip {
+  display: flex;
+  align-items: center;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  background-color: #f1f5f9;
+}
+
+.toolIcon {
+  margin-right: 0.25rem;
+  font-size: 0.75rem;
+}
+
+.toolName {
+  font-size: 0.75rem;
+}
+
+.toolChipMore {
+  display: flex;
+  align-items: center;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  background-color: #f1f5f9;
+}
+
+.durationInfo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.durationIcon {
+  font-size: 0.75rem;
+  margin-right: 0.25rem;
+}
+
+.durationText {
+  font-weight: 500;
+  font-size: 0.75rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-left: 0.25rem;
+}
+
+.milestonesPreview {
+  margin-bottom: 0.5rem;
+}
+
+.milestonesList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.milestoneItem {
+  display: flex;
+  align-items: center;
+  font-size: 0.75rem;
+  color: #374151;
+}
+
+.milestoneStatus {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 50%;
+  margin-right: 0.375rem;
+}
+
+.milestoneStatusDot {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 50%;
+  margin-right: 0.375rem;
+  display: inline-block;
+}
+
+.milestoneName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.75rem;
+}
+
+.milestonesMore {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.deliverablesPreview {
+  margin-bottom: 0.5rem;
+}
+
+.deliverablesList {
+  font-size: 0.75rem;
+  color: #4b5563;
+  line-height: 1.25;
+}
+
+.deliverableItem {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.75rem;
+}
+
+.deliverablesMore {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.cardFooter {
+  display: flex;
+  margin-top: 0.5rem;
+  gap: 0.5rem;
+}
+
+.buttonIcon {
+  margin-right: 0.25rem;
+}
+
+.activePhaseCard {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pulsingIcon {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .timelineHeader,
+  .timelineCard,
+  .pulsingIcon {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Congratulations Toast Styles */
+.congratulationsToast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+  transform: translateX(400px);
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 9999; /* Ensure it's on top */
+  max-width: 350px;
+  visibility: hidden;
+  pointer-events: none; /* So it doesn't block interactions when hidden */
+}
+
+.toastVisible {
+  transform: translateX(0) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+.toastHidden {
+  transform: translateX(400px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* .show class for compatibility with Nextjs version */
+.congratulationsToast.show {
+  transform: translateX(0) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+.toastContent {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.toastIcon {
+  font-size: 1.5rem;
+  min-width: 32px;
+  text-align: center;
+}
+
+.toastText {
+  flex: 1;
+}
+
+.toastTitle {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+}
+
+.toastMessage {
+  font-size: 0.85rem;
+  opacity: 0.9;
+  line-height: 1.3;
+}
+
+/* Congratulations Dialog Styles */
+.congratulationsDialogOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 2000;
+}
+
+.dialogVisible {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Make sure .show also works for backward compatibility with Nextjs version */
+.congratulationsDialogOverlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.congratulationsDialog {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+  transform: scale(0.7) translateY(50px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.dialogVisible .congratulationsDialog {
+  transform: scale(1) translateY(0);
+}
+
+/* Dialog header styles */
+.dialogHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.dialogIcon {
+  font-size: 3rem;
+  animation: bounce 1s infinite;
+}
+
+.dialogClose {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #64748b;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.dialogClose:hover {
+  background: #f1f5f9;
+  color: #1e293b;
+}
+
+/* Dialog content styles */
+.dialogContent {
+  text-align: center;
+}
+
+.dialogTitle {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 0.75rem;
+}
+
+.dialogMessage {
+  font-size: 1rem;
+  color: #64748b;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/* Dialog progress section */
+.dialogProgress {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+}
+
+.progressRing {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progressCircle {
+  transform: rotate(-90deg);
+}
+
+.progressStroke {
+  transition: stroke-dashoffset 0.5s ease-in-out;
+}
+
+.progressPercentage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  z-index: 1;
+}
+
+.progressDetails {
+  text-align: left;
+}
+
+.progressText {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin-bottom: 0.5rem;
+}
+
+.nextPhaseText {
+  font-size: 0.875rem;
+  color: #10b981;
+  font-weight: 600;
+}
+
+/* Dialog continue button */
+.dialogActions {
+  margin-top: 1.5rem;
+}
+
+.dialogContinueBtn {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.dialogContinueBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+}
+
+/* Contact section styles */
+.dialogContactSection {
+  margin-top: 1.5rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.contactDivider {
+  display: flex;
+  align-items: center;
+  margin: 1.5rem 0 1rem 0;
+  gap: 1rem;
+}
+
+.dividerLine {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #e2e8f0, transparent);
+}
+
+.dividerText {
+  color: #64748b;
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.contactContent {
+  text-align: center;
+}
+
+.contactTitle {
+  color: #1e293b;
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.contactDescription {
+  color: #64748b;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.contactButtons {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.contactBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.primaryContactBtn {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.primaryContactBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+}
+
+.secondaryContactBtn {
+  background: #f8fafc;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+}
+
+.secondaryContactBtn:hover {
+  background: #f1f5f9;
+  color: #475569;
+  border-color: #cbd5e1;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}

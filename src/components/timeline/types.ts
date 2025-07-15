@@ -22,6 +22,9 @@ export interface TimelineSettings {
   stepDuration: number;
 }
 
+// Phase status type
+export type PhaseStatus = 'completed' | 'in-progress' | 'pending' | 'active';
+
 // Timeline phase interface
 export interface TimelinePhase {
   id: string;
@@ -29,7 +32,7 @@ export interface TimelinePhase {
   shortTitle: string;
   icon: string;
   color: string;
-  status: 'completed' | 'in-progress' | 'pending' | 'active';
+  status: PhaseStatus;
   duration: string;
   description: string;
   details: PhaseDetails;
@@ -46,7 +49,7 @@ export interface PhaseDetails {
 // Milestone interface
 export interface Milestone {
   name: string;
-  status: 'completed' | 'in-progress' | 'pending' | 'active';
+  status: PhaseStatus;
   date: string;
 }
 

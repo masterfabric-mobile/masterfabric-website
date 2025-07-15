@@ -1,0 +1,126 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles from original Nextjs project */
+:root {
+  --color-primary: #3b82f6;
+  --color-secondary: #1e40af;
+  --color-accent: #60a5fa;
+}
+
+/* Global styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply text-gray-900 bg-white;
+}
+
+/* Animation utilities */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+.floating-ring {
+  animation: float 6s ease-in-out infinite;
+}
+
+.floating-ring.delay-1 {
+  animation-delay: 2s;
+}
+
+.floating-ring.delay-2 {
+  animation-delay: 4s;
+}
+
+/* Code editor styles */
+.code-editor-container {
+  @apply bg-gray-900 rounded-lg shadow-2xl overflow-hidden border border-gray-800;
+}
+
+.editor-header {
+  @apply bg-gray-800 px-4 py-3 flex items-center justify-between border-b border-gray-700;
+}
+
+.editor-controls {
+  @apply flex space-x-2;
+}
+
+.control-dot {
+  @apply w-3 h-3 rounded-full;
+}
+
+.control-dot.red {
+  @apply bg-red-500;
+}
+
+.control-dot.yellow {
+  @apply bg-yellow-500;
+}
+
+.control-dot.green {
+  @apply bg-green-500;
+}
+
+.editor-title {
+  @apply text-gray-300 text-sm font-medium;
+}
+
+/* Service card styles */
+.service-card {
+  @apply transition-all duration-300 hover:shadow-lg;
+}
+
+.service-blue:hover {
+  @apply border-blue-300 shadow-blue-100;
+}
+
+.service-indigo:hover {
+  @apply border-indigo-300 shadow-indigo-100;
+}
+
+/* Timeline styles */
+.timeline-container {
+  @apply relative;
+}
+
+.timeline-track {
+  @apply flex flex-col space-y-8;
+}
+
+/* Typography */
+.prose {
+  @apply max-w-none;
+}
+
+.prose h1 {
+  @apply text-4xl font-bold text-gray-900 mb-6;
+}
+
+.prose h2 {
+  @apply text-3xl font-bold text-gray-900 mb-4;
+}
+
+.prose h3 {
+  @apply text-2xl font-bold text-gray-900 mb-3;
+}
+
+.prose p {
+  @apply text-lg text-gray-600 leading-relaxed mb-4;
+}
+
+/* Button styles */
+.btn-primary {
+  @apply bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors;
+}
+
+.btn-secondary {
+  @apply bg-gray-200 text-gray-900 px-6 py-3 rounded-lg font-medium hover:bg-gray-300 transition-colors;
+}
+
+.btn-outline {
+  @apply border-2 border-gray-900 text-gray-900 px-6 py-3 rounded-lg font-medium hover:bg-gray-900 hover:text-white transition-colors;
+}

@@ -1,6 +1,6 @@
 # 🚀 MasterFabric Website - Run Script Usage Guide
 
-This script manages the MasterFabric website project from development environment to production deployment.
+This script manages the MasterFabric website Next.js project from development environment to production deployment.
 
 ## 🚀 Basic Usage
 
@@ -10,7 +10,7 @@ This script manages the MasterFabric website project from development environmen
 ```
 This command:
 - ✅ Checks Node.js version compatibility
-- 📦 Installs required npm/pnpm packages
+- 📦 Installs required npm/pnpm/yarn packages
 - ▲ Installs Vercel CLI
 - 🔥 Installs Firebase CLI
 - 🧪 Sets up test environment
@@ -20,7 +20,7 @@ This command:
 ```bash
 ./run.sh dev
 ```
-- 🚀 Starts development server on localhost:4321
+- 🚀 Starts development server on http://localhost:3000
 - ⚡ Includes hot reload functionality
 
 ### 3. 🔨 Build and Preview
@@ -74,7 +74,7 @@ This command:
 
 ## 📁 File Structure
 
-The script automatically creates the following files:
+The script automatically creates the following files in the project root:
 
 - `vercel.json` - ▲ Vercel deploy configuration
 - `firebase.json` - 🔥 Firebase hosting configuration

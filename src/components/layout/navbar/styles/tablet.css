@@ -1,0 +1,127 @@
+/* ========================================================================= */
+/* TABLET STYLES (641px - 1023px) */
+/* ========================================================================= */
+
+@media (min-width: 641px) and (max-width: 1023px) {
+    /* Tablet: use mobile-style layout but keep header structure */
+    header {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    
+    /* Brand section alignment for tablet */
+    .flex.w-full.lg\:w-auto {
+      align-items: flex-start;
+    }
+    
+    /* Brand text line height for tablet */
+    .font-mono {
+      line-height: 1.2;
+    }
+    
+    /* Show hamburger menu button on tablet (like mobile) */
+    .block.lg\:hidden {
+      display: block !important;
+    }
+    
+    /* Hide desktop navigation on tablet */
+    .desktop-nav {
+      display: none !important;
+    }
+    
+    /* Hide mobile menu by default on tablet (only show when toggled) */
+    .hidden.lg\:hidden {
+      display: none !important;
+    }
+    
+    /* Tablet: mobile menu container margin adjustments */
+    .lg\:hidden .bg-white {
+      margin-left: 1rem;
+      margin-right: 1rem;
+      margin-top: 0.5rem;
+    }
+    
+    /* --- Dropdown/Mobile grid: always 2 columns on tablet --- */
+    .grid.grid-cols-2 {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+  
+    /* Ensure full row span for dropdowns that need it */
+    .col-span-2 {
+      grid-column: span 2 !important;
+    }
+  
+    /* --- Grid item (button) styles for tablet --- */
+    .grid.grid-cols-2 > a {
+      min-height: 80px;
+      padding: 0.75rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #f9fafb;
+      border: 1px solid #e5e7eb;
+      transition: all 0.2s ease-in-out;
+    }
+  
+    /* --- Grid item hover effect for tablet --- */
+    .grid.grid-cols-2 > a:hover {
+      background-color: #f3f4f6;
+      border-color: #d1d5db;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+  
+    /* --- Icon color for tablet grid items --- */
+    .grid.grid-cols-2 > a svg {
+      color: #6b7280;
+    }
+  
+    /* --- Icon hover color for tablet grid items --- */
+    .grid.grid-cols-2 > a:hover svg {
+      color: #374151;
+    }
+
+    /* Ensure social links are visible on tablet */
+    .navbar-social-links, .navbar-social-link {
+      display: flex !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+
+    .rounded-lg {
+      border-radius: 0.25rem !important;
+    }
+
+    .font-mono.text-lg {
+      font-size: 1.125rem !important;
+    }
+    .font-mono.text-xl {
+      font-size: 1.25rem !important;
+    }
+
+    .navbar-brand .font-mono.text-lg,
+    .navbar-brand .font-mono.text-xl {
+      font-size: 1.125rem !important;
+    }
+    .navbar-brand-tagline {
+      font-size: 0.65rem !important;
+    }
+
+
+    .navbar-active-item,
+    .rounded-lg {
+      border-radius: 0.25rem !important;
+    }
+
+    .navbar-desktop-nav > * {
+      margin-left: 0.25rem !important;
+      margin-right: 0.25rem !important;
+      padding-left: 0.5rem !important;
+      padding-right: 0.5rem !important;
+    }
+    .navbar-desktop-nav {
+      gap: 0.25rem !important;
+    }
+  }
+  

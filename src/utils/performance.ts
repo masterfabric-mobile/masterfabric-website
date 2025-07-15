@@ -47,8 +47,8 @@ export const initializationStates = [
 // Preload critical resources
 export function preloadCriticalResources(): Promise<void[]> {
   const criticalResources = [
-    '/src/assets/masterfabric-logo.svg',
-    '/src/components/timeline/styles.css'
+    '/assets/masterfabric-logo.svg',
+    '/styles/timeline.module.css'
   ];
 
   const preloadPromises = criticalResources.map(resource => {
@@ -87,7 +87,7 @@ export async function initializeApp(): Promise<void> {
 
 // Initialize lazy loading for images
 function initializeLazyLoading(): void {
-  if ('IntersectionObserver' in window) {
+  if (typeof window !== 'undefined' && 'IntersectionObserver' in window) {
     const imageObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -106,4 +106,4 @@ function initializeLazyLoading(): void {
       imageObserver.observe(img);
     });
   }
-}
+} 

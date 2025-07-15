@@ -130,4 +130,4 @@ export function hasUserSetCookiePreferences(): boolean {
   if (typeof window === 'undefined') return false;
   
   return localStorage.getItem('cookieSettings') !== null;
-}
+} 

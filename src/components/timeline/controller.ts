@@ -1,700 +1,325 @@
-/**
- * ProjectFlowTimeline JavaScript Controller
- * Manages all interactive behaviors of the timeline component
- * Auto-progression, pause/play, notifications and dialog management
- */
+'use client'
 
-import type { TimelineData, PhaseDayRange } from './types.ts';
+import { useEffect, useState, useRef, useMemo, useCallback } from 'react'
+import type { TimelineData, TimelinePhase, PhaseDayRange } from './types'
 
-// Import timeline data
-import timelineStaticData from '../../data/timeline-data.json';
-
-export class ProjectFlowTimeline {
-  // Timeline main data
-  timeline: TimelineData;
+export const useTimelineController = (timeline: TimelineData) => {
+  // Current state
+  const [currentPhase, setCurrentPhase] = useState(0)
+  const [currentDay, setCurrentDay] = useState(1)
+  const [totalDays] = useState(35) // Total project duration
+  const [isPaused, setIsPaused] = useState(false)
+  const [isStatusBarVisible, setIsStatusBarVisible] = useState(true)
   
-  // Current state variables
-  currentPhase: number = 0;
-  currentDay: number = 1;
-  totalDays: number = 35;
+  // DOM references (would be used for more complex animations)
+  const statusIconRef = useRef<HTMLDivElement>(null)
+  const statusTitleRef = useRef<HTMLDivElement>(null)
+  const statusDescriptionRef = useRef<HTMLDivElement>(null)
   
-  // Settings
-  isScrollBased: boolean;
-  autoProgress: boolean;
-  stepDuration: number;
-  isPaused: boolean = false;
-  isPausedByUser: boolean = false;
+  // Intervals
+  const progressIntervalRef = useRef<NodeJS.Timeout | null>(null)
   
-  // Interval references
-  autoProgressInterval: NodeJS.Timeout | null = null;
-  dayProgressInterval: NodeJS.Timeout | null = null;
-  
-  // DOM element references - Status bar
-  statusIcon: HTMLElement | null;
-  statusTitle: HTMLElement | null;
-  statusDescription: HTMLElement | null;
-  currentDayElement: HTMLElement | null;
-  totalDaysElement: HTMLElement | null;
-  progressFillMini: HTMLElement | null;
-  refreshBtn: HTMLElement | null;
-  pauseBtn: HTMLElement | null;
-  
-  // DOM element references - Status bar toggle
-  statusBar: HTMLElement | null;
-  statusToggleBtn: HTMLElement | null;
-  statusContent: HTMLElement | null;
-  isStatusBarHidden: boolean = false;
-  
-  // DOM element references - Toast notifications
-  congratulationsToast: HTMLElement | null;
-  toastIcon: HTMLElement | null;
-  toastTitle: HTMLElement | null;
-  toastMessage: HTMLElement | null;
-  
-  // DOM element references - Dialog
-  congratulationsDialogOverlay: HTMLElement | null;
-  congratulationsDialog: HTMLElement | null;
-  dialogIcon: HTMLElement | null;
-  dialogTitle: HTMLElement | null;
-  dialogMessage: HTMLElement | null;
-  dialogClose: HTMLElement | null;
-  dialogContinueBtn: HTMLElement | null;
-  progressCircle: HTMLElement | null;
-  progressPercentage: HTMLElement | null;
-  completedPhaseElement: HTMLElement | null;
-  totalPhasesElement: HTMLElement | null;
-  nextPhaseNameElement: HTMLElement | null;
-  
-  // DOM element references - Contact section
-  dialogContactSection: HTMLElement | null;
-  contactMaybeLaterBtn: HTMLElement | null;
-  
-  // Static data
-  phaseDayRanges: PhaseDayRange[];
-  phaseMessages: Record<string, string[]>;
-  congratulationMessages: Record<string, string>;
-
-  constructor(timeline: TimelineData) {
-    // Set main timeline data
-    this.timeline = timeline;
-    this.isScrollBased = this.timeline.settings.scrollBasedProgress;
-    this.autoProgress = this.timeline.settings.autoProgress;
-    this.stepDuration = this.timeline.settings.stepDuration;
-    
-    // Load static data from JSON
-    this.phaseDayRanges = timelineStaticData.phaseDayRanges;
-    this.phaseMessages = timelineStaticData.phaseMessages;
-    this.congratulationMessages = timelineStaticData.congratulationMessages;
-    
-    // Initialize DOM elements
-    this.initializeElements();
-    
-    // Start timeline
-    this.init();
-  }
-
-  /**
-   * Initialize DOM elements
-   * Get all required element references
-   */
-  initializeElements(): void {
-    // Status message elements
-    this.statusIcon = document.getElementById('status-icon');
-    this.statusTitle = document.getElementById('status-title');
-    this.statusDescription = document.getElementById('status-description');
-    this.currentDayElement = document.getElementById('current-day');
-    this.totalDaysElement = document.getElementById('total-days');
-    this.progressFillMini = document.getElementById('progress-fill-mini');
-    this.refreshBtn = document.getElementById('refresh-btn');
-    this.pauseBtn = document.getElementById('pause-btn');
-    
-    // Status bar toggle elements
-    this.statusBar = document.getElementById('dynamic-status-messages');
-    this.statusToggleBtn = document.getElementById('status-toggle-btn');
-    this.statusContent = document.getElementById('status-message-content');
-    
-    // Toast elements
-    this.congratulationsToast = document.getElementById('congratulations-toast');
-    this.toastIcon = document.getElementById('toast-icon');
-    this.toastTitle = document.getElementById('toast-title');
-    this.toastMessage = document.getElementById('toast-message');
-    
-    // Dialog elements
-    this.congratulationsDialogOverlay = document.getElementById('congratulations-dialog-overlay');
-    this.congratulationsDialog = document.getElementById('congratulations-dialog');
-    this.dialogIcon = document.getElementById('dialog-icon');
-    this.dialogTitle = document.getElementById('dialog-title');
-    this.dialogMessage = document.getElementById('dialog-message');
-    this.dialogClose = document.getElementById('dialog-close');
-    this.dialogContinueBtn = document.getElementById('dialog-continue-btn');
-    this.progressCircle = document.getElementById('progress-circle');
-    this.progressPercentage = document.getElementById('progress-percentage');
-    this.completedPhaseElement = document.getElementById('completed-phase');
-    this.totalPhasesElement = document.getElementById('total-phases');
-    this.nextPhaseNameElement = document.getElementById('next-phase-name');
-    
-    // Contact section elements
-    this.dialogContactSection = document.getElementById('dialog-contact-section');
-    this.contactMaybeLaterBtn = document.getElementById('contact-maybe-later');
-  }
-
-  /**
-   * Initialize timeline
-   * Set up event listeners and start auto-progression
-   */
-  init(): void {
-    console.log('Initializing timeline...');
-    
-    // 1. First set up event listeners
-    this.setupScrollListener();
-    this.setupHoverEvents();
-    this.setupStatusEvents();
-    
-    // 2. Initial state update
-    this.updateStatusMessage();
-    this.updateDayProgress();
-    this.updatePauseButtonState();
-    
-    // 3. Show StatusBar gradually
-    setTimeout(() => {
-      this.showStatusBar();
-    }, 500);
-    
-    // 4. Make StatusBar visible after animation completes
-    setTimeout(() => {
-      this.statusBar?.classList.add('status-bar-visible');
-      console.log('Status bar made visible');
-    }, 800);
-    
-    // 5. Start timeline - start later
-    setTimeout(() => {
-      if (this.autoProgress) {
-        console.log('Starting auto progression...');
-        this.startAutoProgress();
-        this.startDaySimulation();
-      }
-    }, 1500);
-  }
-
-  /**
-   * Clean up resources
-   * Stop intervals and remove event listeners
-   */
-  cleanup(): void {
-    // Clear all intervals
-    if (this.dayProgressInterval) {
-      clearInterval(this.dayProgressInterval);
-      this.dayProgressInterval = null;
-    }
-    if (this.autoProgressInterval) {
-      clearInterval(this.autoProgressInterval);
-      this.autoProgressInterval = null;
-    }
-    
-    // Remove event listeners
-    window.removeEventListener('scroll', this.handleScrollProgress.bind(this));
-  }
-
-  /**
-   * Set up status events
-   * Add all button and dialog event listeners
-   */
-  setupStatusEvents(): void {
-    // Status bar toggle
-    this.statusToggleBtn?.addEventListener('click', () => {
-      this.toggleStatusBar();
-    });
-
-    // Pause button
-    this.pauseBtn?.addEventListener('click', () => {
-      this.togglePause();
-    });
-
-    // Restart button
-    this.refreshBtn?.addEventListener('click', () => {
-      this.restartTimeline();
-    });
-
-    // Dialog event handlers
-    this.dialogClose?.addEventListener('click', () => {
-      this.hideDialog();
-    });
-
-    this.dialogContinueBtn?.addEventListener('click', () => {
-      this.hideDialog();
-    });
-
-    // Close dialog when clicking overlay
-    this.congratulationsDialogOverlay?.addEventListener('click', (e) => {
-      if (e.target === this.congratulationsDialogOverlay) {
-        this.hideDialog();
-      }
-    });
-
-    // Contact section event handlers
-    this.contactMaybeLaterBtn?.addEventListener('click', () => {
-      this.hideDialog();
-    });
-  }
-
-  /**
-   * Show status bar
-   * Initialize and display the status bar
-   */
-  showStatusBar(): void {
-    if (this.statusBar) {
-      this.statusBar.style.display = 'flex';
-      this.statusBar.classList.add('status-bar-initialized');
-    }
-  }
-
-  /**
-   * Toggle status bar
-   * Hide/show bar and change chevron direction
-   */
-  toggleStatusBar(): void {
-    if (!this.statusBar || !this.statusToggleBtn || !this.statusContent) {
-      console.warn('StatusBar elements not found');
-      return;
-    }
-
-    this.isStatusBarHidden = !this.isStatusBarHidden;
-    const chevronUp = this.statusToggleBtn.querySelector('.chevron-up') as HTMLElement;
-    const chevronDown = this.statusToggleBtn.querySelector('.chevron-down') as HTMLElement;
-
-    console.log('Toggling status bar. Hidden:', this.isStatusBarHidden);
-
-    if (this.isStatusBarHidden) {
-      // Hide the status bar
-      this.statusBar.classList.add('minimized');
-      this.statusContent.classList.add('status-content-hidden');
+  // Parse phase day ranges from timeline data
+  const phaseRanges = useMemo(() => {
+    return timeline.phases.map(phase => {
+      // Parse phase duration string (format: "Days X-Y")
+      const durationMatch = phase.duration.match(/Days? (\d+)-(\d+)/i);
       
-      // Switch arrows
-      if (chevronUp) {
-        chevronUp.classList.add('hidden');
-      }
-      if (chevronDown) {
-        chevronDown.classList.remove('hidden');
+      if (durationMatch && durationMatch.length >= 3) {
+        const start = parseInt(durationMatch[1], 10);
+        const end = parseInt(durationMatch[2], 10);
+        return { start, end } as PhaseDayRange;
       }
       
-      // Update aria-expanded for accessibility
-      this.statusToggleBtn.setAttribute('aria-expanded', 'false');
-      console.log('Status bar minimized');
-    } else {
-      // Show the status bar
-      this.statusBar.classList.remove('minimized');
-      this.statusContent.classList.remove('status-content-hidden');
-      
-      // Switch arrows
-      if (chevronUp) {
-        chevronUp.classList.remove('hidden');
+      // Fallback if format doesn't match
+      return { start: 1, end: 7 } as PhaseDayRange;
+    });
+  }, [timeline]);
+  
+  // Advance to next day
+  const advanceDay = useCallback(() => {
+    setCurrentDay(prevDay => {
+      const nextDay = prevDay + 1
+      const isLastPhase = currentPhase === timeline.phases.length - 1
+      const isLastDay = nextDay > totalDays
+      if (isLastPhase && isLastDay) {
+        setIsPaused(true)
+        const phase = timeline.phases[currentPhase]
+        setToastTitle(`${phase.title} Completed!`)
+        setToastMessage(phase.description)
+        setShowToast(true)
+        setTimeout(() => setShowToast(false), 3000)
+        setTimeout(() => {
+          setDialogTitle('Project Complete!')
+          setDialogMessage('Congratulations, you have completed all phases!')
+          setShowDialog(true)
+          setIsFinalDialog(true)
+        }, 1000)
+        return prevDay
       }
-      if (chevronDown) {
-        chevronDown.classList.add('hidden');
+      if (currentPhase < timeline.phases.length - 1) {
+        const currentRange = phaseRanges[currentPhase]
+        if (nextDay > currentRange.end) {
+          setCurrentPhase(prevPhase => prevPhase + 1)
+        }
+      }
+      if (nextDay > totalDays) {
+        return prevDay
+      }
+      return nextDay
+    })
+  }, [currentPhase, phaseRanges, timeline.phases, totalDays])
+
+  // Start auto progress
+  const startAutoProgress = useCallback(() => {
+    if (progressIntervalRef.current) {
+      clearInterval(progressIntervalRef.current)
+    }
+
+    progressIntervalRef.current = setInterval(() => {
+      if (!isPaused) {
+        advanceDay()
+      }
+    }, timeline.settings.stepDuration)
+  }, [isPaused, advanceDay, timeline.settings.stepDuration])
+
+  // Initialize timeline
+  useEffect(() => {
+    if (!timeline) return
+    
+    // Start auto-progress if enabled
+    if (timeline.settings.autoProgress) {
+      startAutoProgress()
+    }
+    
+    // Clean up on unmount
+    return () => {
+      if (progressIntervalRef.current) {
+        clearInterval(progressIntervalRef.current)
+      }
+    }
+  }, [timeline, startAutoProgress])
+  
+  // Toggle pause state
+  const togglePause = () => {
+    setIsPaused(!isPaused)
+  }
+  
+  // Reset timeline
+  const resetTimeline = () => {
+    setCurrentPhase(0)
+    setCurrentDay(1)
+    setIsPaused(false)
+    
+    // Restart auto progress
+    if (timeline.settings.autoProgress) {
+      startAutoProgress()
+    }
+  }
+  
+  // Toggle status bar visibility
+  const toggleStatusBar = () => {
+    setIsStatusBarVisible(!isStatusBarVisible)
+  }
+  
+  // Get current phase data
+  const getCurrentPhase = (): TimelinePhase => {
+    return timeline.phases[currentPhase]
+  }
+  
+  // Calculate progress percentage
+  const getProgressPercentage = (): number => {
+    return (currentDay / totalDays) * 100
+  }
+  
+  // Get current phase day range
+  const getCurrentPhaseRange = (): PhaseDayRange => {
+    return phaseRanges[currentPhase];
+  }
+  
+  // Get phase status text
+  const getStatusText = (): string => {
+    const phase = getCurrentPhase();
+    const phaseRange = getCurrentPhaseRange();
+    const daysInPhase = currentDay - phaseRange.start + 1;
+    const totalPhaseDays = phaseRange.end - phaseRange.start + 1;
+    
+    return `${phase.title} - Day ${daysInPhase}/${totalPhaseDays} (Overall Day ${currentDay}/${totalDays})`;
+  }
+  
+  // Update phase statuses based on current day
+  const updatePhaseStatuses = () => {
+    // Clone the phases array to avoid direct mutation
+    const updatedPhases = [...timeline.phases];
+    
+    // Update phase statuses based on current day
+    updatedPhases.forEach((phase, index) => {
+      const range = phaseRanges[index];
+      
+      if (index < currentPhase) {
+        phase.status = 'completed';
+      } else if (index === currentPhase) {
+        phase.status = 'active';
+      } else {
+        phase.status = 'pending';
       }
       
-      // Update aria-expanded for accessibility
-      this.statusToggleBtn.setAttribute('aria-expanded', 'true');
-      console.log('Status bar expanded');
-    }
-  }
-
-  /**
-   * Pause/resume timeline
-   * User control
-   */
-  togglePause(): void {
-    this.isPausedByUser = !this.isPausedByUser;
-    this.isPaused = this.isPausedByUser;
-    this.updatePauseButtonState();
-  }
-
-  /**
-   * Update pause button appearance
-   * Switch between Play/Pause icons
-   */
-  updatePauseButtonState(): void {
-    if (!this.pauseBtn) return;
-    
-    const pauseIcon = this.pauseBtn.querySelector('.pause-icon');
-    const playIcon = this.pauseBtn.querySelector('.play-icon');
-    
-    if (this.isPausedByUser) {
-      pauseIcon?.classList.add('hidden');
-      playIcon?.classList.remove('hidden');
-    } else {
-      pauseIcon?.classList.remove('hidden');
-      playIcon?.classList.add('hidden');
-    }
-  }
-
-  /**
-   * Restart timeline
-   * Reset all values and restart simulation
-   */
-  restartTimeline(): void {
-    // Clear intervals
-    if (this.dayProgressInterval) {
-      clearInterval(this.dayProgressInterval);
-      this.dayProgressInterval = null;
-    }
-    if (this.autoProgressInterval) {
-      clearInterval(this.autoProgressInterval);
-      this.autoProgressInterval = null;
-    }
-    
-    // Reset values
-    this.currentPhase = 0;
-    this.currentDay = 1;
-    this.isPaused = false;
-    this.isPausedByUser = false;
-    
-    // Update UI
-    this.updatePauseButtonState();
-    this.updateCurrentPhase();
-    this.updateStatusMessage();
-    this.updateDayProgress();
-    
-    // Restart simulation
-    if (this.autoProgress) {
-      this.startAutoProgress();
-      this.startDaySimulation();
-    }
-  }
-
-  /**
-   * Start day simulation
-   * Update status messages for each day
-   */
-  startDaySimulation(): void {
-    if (this.dayProgressInterval) {
-      clearInterval(this.dayProgressInterval);
-    }
-    
-    this.dayProgressInterval = setInterval(() => {
-      // Only progress if not paused by any reason
-      if (!this.isPaused && !this.isPausedByUser) {
-        this.currentDay++;
-        this.updateDayProgress();
-        this.updateStatusMessage();
-        this.updatePhaseFromDay();
+      // Update milestones based on current day
+      phase.milestones.forEach(milestone => {
+        // Parse milestone day from date string (format: "Day X" or "Week X")
+        const dayMatch = milestone.date.match(/Day (\d+)/i);
+        const weekMatch = milestone.date.match(/Week (\d+)/i);
         
-        // Stop simulation if we reach the last day
-        if (this.currentDay >= this.totalDays) {
-          clearInterval(this.dayProgressInterval!);
-          this.dayProgressInterval = null;
-          this.showFinalCongratulations();
+        let milestoneDay = 1;
+        if (dayMatch && dayMatch[1]) {
+          milestoneDay = parseInt(dayMatch[1], 10);
+        } else if (weekMatch && weekMatch[1]) {
+          milestoneDay = parseInt(weekMatch[1], 10) * 7; // Convert weeks to days
         }
-      }
-    }, this.stepDuration / 4); // Slower progression
+        
+        if (currentDay >= milestoneDay) {
+          milestone.status = 'completed';
+        } else if (Math.abs(currentDay - milestoneDay) <= 3) {
+          milestone.status = 'in-progress';
+        } else {
+          milestone.status = 'pending';
+        }
+      });
+    });
+    
+    return updatedPhases;
   }
+  
+  // Added: Toast and Dialog states
+  const [showToast, setShowToast] = useState(false)
+  const [toastTitle, setToastTitle] = useState('')
+  const [toastMessage, setToastMessage] = useState('')
+  const [showDialog, setShowDialog] = useState(false)
+  const [dialogTitle, setDialogTitle] = useState('')
+  const [dialogMessage, setDialogMessage] = useState('')
+  const [isFinalDialog, setIsFinalDialog] = useState(false)
+  const [isStatusBarMinimized, setIsStatusBarMinimized] = useState(false)
+  const [isContactDialogVisible, setIsContactDialogVisible] = useState(false)
 
-  /**
-   * Show final congratulations message
-   * Called when entire timeline is completed
-   */
-  showFinalCongratulations(): void {
-    // Pause timeline completely
-    this.isPaused = true;
-    
-    // Show refresh button
-    this.refreshBtn?.classList.remove('hidden');
-    
-    // Show final dialog after a short delay
-    setTimeout(() => {
-      this.showDialog(this.timeline.phases.length - 1, true);
-    }, 1000);
-    
-    console.log('Timeline completed - Showing final dialog');
-  }
+  // Automatic pause on hover
+  const [isHovering, setIsHovering] = useState(false)
 
-  /**
-   * Update day progress
-   * Update day count and progress bar in status bar
-   */
-  updateDayProgress(): void {
-    if (this.currentDayElement) {
-      this.currentDayElement.textContent = this.currentDay.toString();
-    }
-    if (this.totalDaysElement) {
-      this.totalDaysElement.textContent = this.totalDays.toString();
-    }
-    if (this.progressFillMini) {
-      const progress = (this.currentDay / this.totalDays) * 100;
-      this.progressFillMini.style.width = `${Math.min(progress, 100)}%`;
-    }
-  }
+  const [scrollProgress, setScrollProgress] = useState(0)
 
-  /**
-   * Update status message
-   * Update title, description and icon according to current phase
-   */
-  updateStatusMessage(): void {
-    const phase = this.timeline.phases[this.currentPhase];
-    if (!phase) return;
-    
-    if (this.statusIcon) {
-      this.statusIcon.textContent = phase.icon;
-    }
-    if (this.statusTitle) {
-      this.statusTitle.textContent = phase.title;
-    }
-    if (this.statusDescription) {
-      const messages = this.phaseMessages[this.currentPhase.toString()];
-      if (messages && messages.length > 0) {
-        const messageIndex = Math.floor(Math.random() * messages.length);
-        this.statusDescription.textContent = messages[messageIndex];
-      } else {
-        this.statusDescription.textContent = phase.description;
-      }
-    }
-  }
-
-  /**
-   * Show congratulations message
-   * Show toast and dialog when phase is completed
-   */
-  showCongratulations(completedPhaseIndex: number): void {
-    // PAUSE timeline immediately when showing congratulations
-    this.isPaused = true;
-    
-    const phase = this.timeline.phases[completedPhaseIndex];
-    const message = this.congratulationMessages[completedPhaseIndex.toString()];
-    
-    // Show toast
-    if (this.congratulationsToast && this.toastTitle && this.toastMessage) {
-      this.toastTitle.textContent = `${phase.title} Completed!`;
-      this.toastMessage.textContent = message;
-      this.congratulationsToast.classList.add('show');
-      
-      // Hide toast after 3 seconds
+  // Trigger toast/dialog on phase change
+  useEffect(() => {
+    // Phase değiştiğinde tebrik mesajı göster
+    if (currentPhase > 0) {
+      const phase = timeline.phases[currentPhase - 1]
+      setToastTitle(`${phase.title} Completed!`)
+      setToastMessage(phase.description)
+      setShowToast(true)
+      // Toast 3 sn sonra kaybolsun
+      setTimeout(() => setShowToast(false), 3000)
+      // 1 sn sonra dialog aç
       setTimeout(() => {
-        this.congratulationsToast?.classList.remove('show');
-      }, 3000);
+        setDialogTitle('Congratulations!')
+        setDialogMessage(phase.description)
+        setShowDialog(true)
+        setIsFinalDialog(currentPhase === timeline.phases.length)
+      }, 1000)
     }
-    
-    // Show dialog after 1 second - timeline stays paused
-    setTimeout(() => {
-      this.showDialog(completedPhaseIndex);
-    }, 1000);
+  }, [currentPhase, timeline.phases])
+
+  // Dialog close function
+  const hideDialog = () => {
+    setShowDialog(false)
+    // Eğer kullanıcı tarafından duraklatılmadıysa devam et
+    if (!isPaused) setIsPaused(false)
   }
 
-  /**
-   * Show congratulations dialog
-   * Opens modal dialog when phase is completed
-   */
-  showDialog(completedPhaseIndex: number, isFinal: boolean = false): void {
-    // Ensure timeline is paused while dialog is shown
-    this.isPaused = true;
-    
-    const phase = this.timeline.phases[completedPhaseIndex];
-    const message = this.congratulationMessages[completedPhaseIndex.toString()];
-    const progressPercentage = Math.round(((completedPhaseIndex + 1) / this.timeline.phases.length) * 100);
-    
-    // Update dialog content
-    if (this.dialogIcon) this.dialogIcon.textContent = phase.icon;
-    if (this.dialogTitle) this.dialogTitle.textContent = isFinal ? 'Project Complete!' : 'Congratulations!';
-    if (this.dialogMessage) this.dialogMessage.textContent = message;
-    if (this.progressPercentage) this.progressPercentage.textContent = `${progressPercentage}%`;
-    if (this.completedPhaseElement) this.completedPhaseElement.textContent = (completedPhaseIndex + 1).toString();
-    if (this.totalPhasesElement) this.totalPhasesElement.textContent = this.timeline.phases.length.toString();
-    
-    // Next phase information
-    if (this.nextPhaseNameElement) {
-      if (completedPhaseIndex < this.timeline.phases.length - 1) {
-        this.nextPhaseNameElement.textContent = this.timeline.phases[completedPhaseIndex + 1].title;
-      } else {
-        this.nextPhaseNameElement.textContent = 'Project Complete';
+  // Status bar toggle (advanced)
+  const toggleStatusBarMinimized = () => {
+    setIsStatusBarMinimized(val => !val)
+  }
+
+  // Automatic pause functions on hover
+  const onTimelineCardMouseEnter = () => {
+    if (!isPaused) setIsHovering(true)
+    setIsPaused(true)
+  }
+  const onTimelineCardMouseLeave = () => {
+    if (!isPaused) setIsHovering(false)
+    setIsPaused(false)
+  }
+
+  // Scroll-based progress (optional)
+  useEffect(() => {
+    if (!timeline.settings.scrollBasedProgress) return
+    const handleScroll = () => {
+      const timelineSection = document.querySelector('.project-flow-timeline') as HTMLElement
+      if (!timelineSection) return
+      const rect = timelineSection.getBoundingClientRect()
+      const windowHeight = window.innerHeight
+      let progress = 0
+      if (rect.top < windowHeight && rect.bottom > 0) {
+        const sectionHeight = rect.height
+        const visibleTop = Math.max(0, windowHeight - rect.top)
+        const visibleHeight = Math.min(visibleTop, sectionHeight)
+        progress = Math.min(visibleHeight / sectionHeight, 1)
+      }
+      setScrollProgress(progress)
+      // Fazı güncelle
+      const newPhase = Math.floor(progress * timeline.phases.length)
+      const clampedPhase = Math.min(newPhase, timeline.phases.length - 1)
+      if (clampedPhase !== currentPhase && clampedPhase >= 0) {
+        setCurrentPhase(clampedPhase)
       }
     }
-    
-    // Update progress circle
-    if (this.progressCircle) {
-      const circle = this.progressCircle.querySelector('.progress-stroke') as SVGCircleElement;
-      if (circle) {
-        const circumference = 2 * Math.PI * 45;
-        const offset = circumference - (progressPercentage / 100) * circumference;
-        circle.style.strokeDashoffset = offset.toString();
-      }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [timeline, currentPhase])
+
+  // Update progress bar (scroll or day-based)
+  const getProgressBarWidth = () => {
+    if (timeline.settings.scrollBasedProgress) {
+      return `${Math.min(scrollProgress * 100, 100)}%`
     }
-    
-    // Show/hide contact section
-    if (this.dialogContactSection) {
-      if (isFinal) {
-        this.dialogContactSection.classList.remove('hidden');
-      } else {
-        this.dialogContactSection.classList.add('hidden');
-      }
-    }
-    
-    // Show dialog
-    this.congratulationsDialogOverlay?.classList.add('show');
-    
-    console.log(`Showing dialog: ${phase.title} - Timeline paused`);
+    return `${getProgressPercentage()}%`
   }
 
-  /**
-   * Hide dialog
-   * Close modal and continue timeline
-   */
-  hideDialog(): void {
-    this.congratulationsDialogOverlay?.classList.remove('show');
-    
-    console.log('Dialog closed - Timeline continuing');
-    
-    // Resume timeline only if not paused by user
-    if (!this.isPausedByUser) {
-      this.isPaused = false;
-      console.log('Timeline automatically resuming');
-    } else {
-      console.log('Timeline not resuming because paused by user');
-    }
-  }
-
-  /**
-   * Update phase from day
-   * Determine which phase we are in based on current day
-   */
-  updatePhaseFromDay(): void {
-    for (let i = 0; i < this.phaseDayRanges.length; i++) {
-      const range = this.phaseDayRanges[i];
-      if (this.currentDay >= range.start && this.currentDay <= range.end) {
-        if (this.currentPhase !== i) {
-          const previousPhase = this.currentPhase;
-          this.currentPhase = i;
-          this.updateCurrentPhase();
-          
-          // Show congratulations when moving to new phase (only if progressing forward)
-          if (previousPhase < this.currentPhase && previousPhase >= 0) {
-            console.log(`Transition to new phase: ${previousPhase} -> ${this.currentPhase}`);
-            // Wait a bit before showing congratulations to avoid overlapping
-            setTimeout(() => {
-              this.showCongratulations(previousPhase);
-            }, 500);
-          }
-        }
-        break;
-      }
-    }
-  }
-
-  /**
-   * Set up hover events
-   * Pause timeline when hovering over cards
-   */
-  setupHoverEvents(): void {
-    const timelineCards = document.querySelectorAll('.timeline-card');
-    
-    timelineCards.forEach(card => {
-      card.addEventListener('mouseenter', () => {
-        if (!this.isPausedByUser) {
-          this.isPaused = true;
-        }
-      });
-      
-      card.addEventListener('mouseleave', () => {
-        if (!this.isPausedByUser) {
-          this.isPaused = false;
-        }
-      });
-    });
-  }
-
-  /**
-   * Start auto progression
-   * Start automatic transition between phases
-   */
-  startAutoProgress(): void {
-    if (this.autoProgressInterval) {
-      clearInterval(this.autoProgressInterval);
-    }
-    
-    this.autoProgressInterval = setInterval(() => {
-      if (!this.isPaused && !this.isPausedByUser && !this.isScrollBased) {
-        this.currentPhase = (this.currentPhase + 1) % this.timeline.phases.length;
-        this.updateCurrentPhase();
-        this.updateProgressBar(this.currentPhase / (this.timeline.phases.length - 1));
-      }
-    }, this.stepDuration);
-  }
-
-  /**
-   * Update current phase
-   * Visually mark the active phase
-   */
-  updateCurrentPhase(): void {
-    const phases = document.querySelectorAll('.timeline-card');
-    phases.forEach((phase, index) => {
-      phase.classList.remove('current');
-      phase.classList.add('active');
-      
-      if (index === this.currentPhase) {
-        phase.classList.add('current');
-      }
-    });
-  }
-
-  /**
-   * Update progress bar
-   * Adjust the width of the main progress bar
-   */
-  updateProgressBar(progress: number): void {
-    const progressBar = document.querySelector('.progress-bar') as HTMLElement;
-    if (progressBar) {
-      progressBar.style.width = `${Math.min(progress * 100, 100)}%`;
-    }
-  }
-
-  /**
-   * Set up scroll listener
-   * Add event listener for scroll-based progression
-   */
-  setupScrollListener(): void {
-    if (!this.isScrollBased) return;
-    
-    let ticking = false;
-    
-    const updateOnScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          this.handleScrollProgress();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-    
-    window.addEventListener('scroll', updateOnScroll, { passive: true });
-    this.handleScrollProgress();
-  }
-
-  /**
-   * Handle scroll progress
-   * Calculate timeline progress based on scroll position
-   */
-  handleScrollProgress(): void {
-    const timelineSection = document.querySelector('.project-flow-timeline') as HTMLElement;
-    if (!timelineSection) return;
-    
-    const rect = timelineSection.getBoundingClientRect();
-    const windowHeight = window.innerHeight;
-    
-    let progress = 0;
-    if (rect.top < windowHeight && rect.bottom > 0) {
-      const sectionHeight = rect.height;
-      const visibleTop = Math.max(0, windowHeight - rect.top);
-      const visibleHeight = Math.min(visibleTop, sectionHeight);
-      progress = Math.min(visibleHeight / sectionHeight, 1);
-    }
-    
-    const newPhase = Math.floor(progress * this.timeline.phases.length);
-    const clampedPhase = Math.min(newPhase, this.timeline.phases.length - 1);
-    
-    if (clampedPhase !== this.currentPhase && clampedPhase >= 0) {
-      this.currentPhase = clampedPhase;
-      this.updateCurrentPhase();
-    }
-    
-    this.updateProgressBar(progress);
+  // Contact section dialog functions
+  const showContactDialog = () => setIsContactDialogVisible(true)
+  const hideContactDialog = () => setIsContactDialogVisible(false)
+  
+  return {
+    currentPhase,
+    currentDay,
+    totalDays,
+    isPaused,
+    isStatusBarVisible,
+    phaseRanges,
+    getCurrentPhase,
+    getCurrentPhaseRange,
+    getProgressPercentage,
+    getStatusText,
+    updatePhaseStatuses,
+    togglePause,
+    resetTimeline,
+    toggleStatusBar,
+    advanceDay,
+    showToast,
+    toastTitle,
+    toastMessage,
+    showDialog,
+    dialogTitle,
+    dialogMessage,
+    isFinalDialog,
+    hideDialog,
+    isStatusBarMinimized,
+    toggleStatusBarMinimized,
+    isHovering,
+    onTimelineCardMouseEnter,
+    onTimelineCardMouseLeave,
+    getProgressBarWidth,
+    isContactDialogVisible,
+    showContactDialog,
+    hideContactDialog,
+    scrollProgress,
   }
 }

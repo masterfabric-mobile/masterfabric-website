@@ -30,7 +30,7 @@
     
     /* Force hide mobile menu on desktop */
     .lg\:hidden,
-    [astro-navbar] .lg\:hidden {
+    [nextjs-navbar] .lg\:hidden {
       display: none !important;
     }
   }

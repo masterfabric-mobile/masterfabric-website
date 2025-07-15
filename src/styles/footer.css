@@ -20,8 +20,8 @@
   display: none;
 }
 
-/* Astro credit styling - more compact */
-.astro-credit {
+/* Nextjs credit styling - more compact */
+.nextjs-credit {
   display: flex;
   align-items: center;
   gap: 0.25rem;
@@ -33,7 +33,7 @@
   color: #9ca3af;
 }
 
-.astro-link {
+.nextjs-link {
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
@@ -41,18 +41,18 @@
   transition: color 0.2s ease;
 }
 
-.astro-link:hover {
+.nextjs-link:hover {
   color: #ff5d01;
 }
 
-/* Fix for oversized Astro icon */
-.astro-icon {
+/* Fix for oversized Nextjs icon */
+.nextjs-icon {
   width: 1rem;
   height: 1.25rem;
   flex-shrink: 0;
 }
 
-.astro-text {
+.nextjs-text {
   font-size: 0.75rem;
 }
 
@@ -88,7 +88,7 @@
     padding: 1.5rem 0 0 0;
   }
   
-  .astro-credit {
+  .nextjs-credit {
     justify-content: center;
     margin-top: 0.75rem;
   }
@@ -98,7 +98,7 @@
     padding: 0.25rem 0.375rem;
   }
   
-  .astro-icon {
+  .nextjs-icon {
     width: 0.75rem;
     height: 0.75rem;
   }

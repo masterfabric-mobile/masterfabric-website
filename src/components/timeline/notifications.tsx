@@ -227,7 +227,7 @@ const Notifications: React.FC = () => {
   
   return (
     <>
-      {/* Congratulations Toast Notification - Based on Astro version */}
+      {/* Congratulations Toast Notification - Based on Nextjs version */}
       <div 
         className={styles.notificationToast}
         style={{
@@ -267,7 +267,7 @@ const Notifications: React.FC = () => {
         </div>
       </div>
 
-      {/* Congratulations Modal Dialog - Based on Astro version */}
+      {/* Congratulations Modal Dialog - Based on Nextjs version */}
       <div 
         className={`${styles.congratulationsDialogOverlay} ${showDialog ? styles.dialogVisible : ''}`}
         id="congratulations-dialog-overlay"

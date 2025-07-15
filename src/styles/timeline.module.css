@@ -862,7 +862,7 @@
   pointer-events: none;
 }
 
-/* .show class for compatibility with Astro version */
+/* .show class for compatibility with Nextjs version */
 .congratulationsToast.show {
   transform: translateX(0) !important;
   opacity: 1 !important;
@@ -921,7 +921,7 @@
   visibility: visible !important;
 }
 
-/* Make sure .show also works for backward compatibility with Astro version */
+/* Make sure .show also works for backward compatibility with Nextjs version */
 .congratulationsDialogOverlay.show {
   opacity: 1;
   visibility: visible;

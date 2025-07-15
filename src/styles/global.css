@@ -1,5 +1,5 @@
 /* Add these rules to your global CSS */
-svg[astro-icon] {
+svg[nextjs-icon] {
   width: 1em;
   height: 1em;
   display: inline-block;

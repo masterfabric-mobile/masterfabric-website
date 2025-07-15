@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom styles from original Astro project */
+/* Custom styles from original Nextjs project */
 :root {
   --color-primary: #3b82f6;
   --color-secondary: #1e40af;

@@ -50,7 +50,7 @@ export default function GitHubProjects() {
               language: "TypeScript",
               stars: 0,
               forks: 0,
-              topics: ["astro", "tailwindcss", "typescript", "website", "mobile-company"]
+              topics: ["nextjs", "tailwindcss", "typescript", "website", "mobile-company"]
             }
           ]);
         }
@@ -65,7 +65,7 @@ export default function GitHubProjects() {
             language: "TypeScript",
             stars: 0,
             forks: 0,
-            topics: ["astro", "tailwindcss", "typescript", "website", "mobile-company"]
+            topics: ["nextjs", "tailwindcss", "typescript", "website", "mobile-company"]
           }
         ]);
       } finally {
@@ -84,7 +84,7 @@ export default function GitHubProjects() {
     "Swift": "#fa7343",
     "Kotlin": "#a97bff",
     "Python": "#3572A5",
-    "Astro": "#ff5d01"
+    "Nextjs": "#ff5d01"
   }
 
   return (
@@ -215,7 +215,7 @@ export default function GitHubProjects() {
   )
 }
 
-// Add CSS styles equivalent to those in the Astro file
+// Add CSS styles equivalent to those in the Nextjs file
 const styles = {
   lineClamp3: {
     display: '-webkit-box',

@@ -429,7 +429,7 @@ export default function Welcome({ onTimelineDialogRequest }: WelcomeProps) {
       </div>
 
       {/* Animated Code Editor */}
-      <div className="py-6 md:order-2 md:block w-full max-w-2xl">
+      <div className="py-6 md:order-2 hidden md:block w-full max-w-2xl">
         <div className={styles.codeEditorContainer}>
           {/* Editor Header */}
           <div className={styles.editorHeader}>

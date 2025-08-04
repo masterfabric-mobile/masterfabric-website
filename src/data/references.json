@@ -1,0 +1,40 @@
+{
+  "references": [
+    {
+      "id": "infotechacademy",
+      "name": "Infotech Academy",
+      "logo": "/assets/infotechAcademy.svg",
+      "website": "https://infotechacademy.com"
+    },
+    {
+      "id": "desialarm",
+      "name": "Desi Alarm",
+      "logo": "/assets/desiAlarm.svg",
+      "website": "https://desialarm.com"
+    },
+    {
+      "id": "incehesap",
+      "name": "İnce Hesap",
+      "logo": "/assets/incehesap.svg",
+      "website": "https://incehesap.com"
+    },
+    {
+      "id": "teknopark",
+      "name": "Teknopark İstanbul",
+      "logo": "/assets/teknoparkIstanbul.svg",
+      "website": "https://teknopark.com"
+    },
+    {
+      "id": "ticimax",
+      "name": "Ticimax",
+      "logo": "/assets/ticimax.svg",
+      "website": "https://ticimax.com"
+    },
+    {
+      "id": "veripark",
+      "name": "Veripark",
+      "logo": "/assets/veripark.svg",
+      "website": "https://veripark.com"
+    }
+  ]
+}

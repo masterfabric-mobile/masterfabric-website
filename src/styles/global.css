@@ -27,3 +27,21 @@ svg[nextjs-icon] {
 .scrollbar-hide > * {
   scroll-snap-align: start;
 }
+
+/* References scrolling animation */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-scroll-left {
+  animation: scroll-left 30s linear infinite;
+}
+
+.animate-scroll-left:hover {
+  animation-play-state: paused;
+}

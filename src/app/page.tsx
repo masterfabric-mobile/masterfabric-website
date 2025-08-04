@@ -5,6 +5,7 @@ import Container from '@/components/layout/container'
 import ContactSection from '@/components/forms/contact-section'
 import Welcome from '@/components/pages/welcome'
 import Logos from '@/components/pages/logos'
+import References from '@/components/pages/references'
 import RefactorApplication from '@/components/pages/refactor-application'
 import ProjectFlowTimeline, { TimelineRefType } from '@/components/pages/project-flow-timeline'
 import CTA from '@/components/pages/cta'
@@ -46,6 +47,8 @@ export default function HomePage() {
       />
       {/* Logos Section */}
       <Logos />
+      {/* References Section */}
+      <References />
       {/* Refactor Application Section */}
       <RefactorApplication />
       {/* CTA Section */}

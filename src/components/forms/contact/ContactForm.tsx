@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import contactData from '@/data/contact-section.json'
 import { ChevronDown, ChevronUp, Send } from 'lucide-react'
+import { getCookie, setCookie } from '@/utils/cookies'
 
 interface ContactFormProps {
   onSubmit?: (formData: any) => void;
@@ -20,6 +21,17 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
     budget: ''
   })
 
+  // Cookie key for tracking form submission
+  const FORM_SUBMISSION_COOKIE = 'masterfabric_contact_form_submitted'
+
+  // Check if form was previously submitted on component mount
+  useEffect(() => {
+    const wasSubmitted = getCookie(FORM_SUBMISSION_COOKIE)
+    if (wasSubmitted === 'true') {
+      setIsSubmitted(true)
+    }
+  }, [])
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     
@@ -32,6 +44,10 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
       
       // Handle form submission
       console.log('Form submitted:', formData)
+      
+      // Set cookie to remember form submission (expires in 7 days)
+      setCookie(FORM_SUBMISSION_COOKIE, 'true', 7)
+      
       if (onSubmit) {
         onSubmit(formData)
       }
@@ -39,23 +55,6 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
       // Show success message
       setIsSubmitted(true)
       
-      // Reset form after a delay
-      setTimeout(() => {
-        setIsFormOpen(false)
-        
-        // Reset submission state and form data after closing
-        setTimeout(() => {
-          setIsSubmitted(false)
-          setFormData({
-            name: '',
-            email: '',
-            phone: '',
-            projectType: '',
-            message: '',
-            budget: ''
-          })
-        }, 500)
-      }, 2000)
     } catch (error) {
       console.error('Error submitting form:', error)
     } finally {
@@ -99,14 +98,39 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
         }`}
       >
         {isSubmitted ? (
-          <div className="py-8 text-center space-y-4 transform transition-all duration-300">
-            <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
-              <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="py-8 text-center space-y-6 transform transition-all duration-300">
+            <div className="mx-auto w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
+              <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
               </svg>
             </div>
-            <h4 className="text-xl font-semibold text-gray-900">{contactData.form.messages.success.title}</h4>
-            <p className="text-gray-600">{contactData.form.messages.success.description}</p>
+            <div className="space-y-3">
+              <h4 className="text-xl font-semibold text-gray-900">You have already sent a message!</h4>
+              <p className="text-gray-600">We received your previous request. Would you like to send another message?</p>
+            </div>
+            <button
+              onClick={() => {
+                // Clear the submission cookie
+                setCookie(FORM_SUBMISSION_COOKIE, '', -1) // Expire immediately
+                
+                // Reset states
+                setIsSubmitted(false)
+                setFormData({
+                  name: '',
+                  email: '',
+                  phone: '',
+                  projectType: '',
+                  message: '',
+                  budget: ''
+                })
+              }}
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
+            >
+              <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+              </svg>
+              Send New Message
+            </button>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-6 transform transition-all duration-300">

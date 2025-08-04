@@ -421,9 +421,9 @@ export default function Welcome({ onTimelineDialogRequest }: WelcomeProps) {
         </p>
         <div className="mt-4">
           <div className="flex gap-8 md:gap-20 items-center mt-10 flex-wrap justify-start">
-            <Icon icon="simple-icons:ios" className="size-8 md:size-12 hover:text-blue-700 transition-colors cursor-pointer" />
-            <Icon icon="simple-icons:android" className="size-8 md:size-12 hover:text-blue-700 transition-colors cursor-pointer" />
-            <Icon icon="simple-icons:harmonyos" className="size-8 md:size-12 hover:text-blue-700 transition-colors cursor-pointer" />
+            <Icon icon="simple-icons:ios" className="size-8 md:size-12 hover:text-gray-800 transition-colors cursor-pointer" />
+            <Icon icon="simple-icons:android" className="size-8 md:size-12 hover:text-green-500 transition-colors cursor-pointer" />
+            <Icon icon="simple-icons:harmonyos" className="size-8 md:size-12 hover:text-red-600 transition-colors cursor-pointer" />
           </div>
         </div>
       </div>

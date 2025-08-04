@@ -125,7 +125,7 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
             value={formData.name}
             onChange={handleChange}
             placeholder={contactData.form.fields.name.placeholder}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors duration-200 placeholder:text-gray-400"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-blue-500 outline-none transition-colors duration-200 placeholder:text-gray-400"
             required={contactData.form.fields.name.required}
           />
         </div>
@@ -142,7 +142,7 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
             value={formData.email}
             onChange={handleChange}
             placeholder={contactData.form.fields.email.placeholder}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors duration-200 placeholder:text-gray-400"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-blue-500 outline-none transition-colors duration-200 placeholder:text-gray-400"
             required={contactData.form.fields.email.required}
           />
         </div>
@@ -159,7 +159,7 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
             value={formData.phone}
             onChange={handleChange}
             placeholder={contactData.form.fields.phone.placeholder}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors duration-200 placeholder:text-gray-400"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-blue-500 outline-none transition-colors duration-200 placeholder:text-gray-400"
             required={contactData.form.fields.phone.required}
           />
         </div>
@@ -174,7 +174,7 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
             name="projectType"
             value={formData.projectType}
             onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors duration-200"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-blue-500 outline-none transition-colors duration-200"
             required={contactData.form.fields.projectType.required}
           >
             {contactData.form.fields.projectType.options.map((option: { value: string; text: string }) => (
@@ -197,7 +197,7 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
             onChange={handleChange}
             placeholder={contactData.form.fields.message.placeholder}
             rows={contactData.form.fields.message.rows}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors duration-200 placeholder:text-gray-400 resize-none"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-blue-500 outline-none transition-colors duration-200 placeholder:text-gray-400 resize-none"
             required={contactData.form.fields.message.required}
           />
         </div>          {/* Budget Field */}
@@ -209,7 +209,7 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
               id="budget"
               name="budget"
               onChange={handleChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors duration-200"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-blue-500 outline-none transition-colors duration-200"
               required={contactData.form.fields.budget.required}
             >
               {contactData.form.fields.budget.options.map((option: { value: string; text: string }) => (

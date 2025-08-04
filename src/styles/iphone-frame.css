@@ -1,0 +1,200 @@
+/* iPhone 16 Frame Styles */
+.iphone-frame-container {
+  display: flex; /* Show on all devices for testing */
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* iPhone 16 specific frame styles */
+.iphone-16-frame {
+  position: relative;
+  width: 280px;
+  height: 580px;
+  background: #000;
+  border-radius: 40px;
+  padding: 6px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+
+
+/* Dynamic Island */
+.iphone-16-frame .dynamic-island {
+  position: absolute;
+  top: 6px;
+  right: 20px;
+  width: 90px;
+  height: 25px;
+  background: #000;
+  border-radius: 12px;
+  z-index: 15;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.iphone-16-frame .dynamic-island::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: #1a1a1a;
+  border-radius: 50%;
+  border: 1px solid #333;
+}
+
+.iphone-16-frame .dynamic-island::after {
+  content: '';
+  width: 15px;
+  height: 3px;
+  background: #1a1a1a;
+  border-radius: 2px;
+  border: 1px solid #333;
+}
+
+
+
+.iphone-16-screen {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  border-radius: 34px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Side buttons for iPhone 16 */
+.iphone-16-frame .side-button {
+  position: absolute;
+  width: 2px;
+  background: #1a1a1a;
+  border-radius: 1px;
+  border: 1px solid #333;
+  z-index: 5;
+}
+
+.iphone-16-frame .side-button.volume-up {
+  left: -2px;
+  top: 90px;
+  height: 18px;
+}
+
+.iphone-16-frame .side-button.volume-down {
+  left: -2px;
+  top: 115px;
+  height: 18px;
+}
+
+.iphone-16-frame .side-button.action {
+  right: -2px;
+  top: 150px;
+  height: 30px;
+}
+
+.iphone-16-frame .side-button.left {
+  left: -2px;
+  top: 200px;
+  height: 45px;
+}
+
+/* iPhone frame styles for mobile devices */
+@media (max-width: 768px) {
+
+  .iphone-frame {
+    position: relative;
+    width: 375px;
+    height: 812px;
+    background: #000;
+    border-radius: 50px;
+    padding: 8px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .iphone-screen {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    border-radius: 42px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Adjust body and html for iPhone frame */
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  /* Ensure content fits within iPhone screen */
+  .iphone-screen > * {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* Adjust navbar for iPhone frame */
+  .iphone-screen header {
+    border-radius: 42px 42px 0 0;
+  }
+
+  /* Adjust footer for iPhone frame */
+  .iphone-screen footer {
+    border-radius: 0 0 42px 42px;
+  }
+}
+
+/* iPhone 16 Pro Max frame for larger mobile devices */
+@media (min-width: 769px) and (max-width: 1024px) {
+
+  .iphone-frame {
+    position: relative;
+    width: 430px;
+    height: 932px;
+    background: #000;
+    border-radius: 55px;
+    padding: 10px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+  }
+
+  .iphone-screen {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    border-radius: 45px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Adjust body and html for iPhone frame */
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  /* Ensure content fits within iPhone screen */
+  .iphone-screen > * {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* Adjust navbar for iPhone frame */
+  .iphone-screen header {
+    border-radius: 45px 45px 0 0;
+  }
+
+  /* Adjust footer for iPhone frame */
+  .iphone-screen footer {
+    border-radius: 0 0 45px 45px;
+  }
+}
+
+/* Desktop frame styles */
+@media (min-width: 1025px) {
+  .iphone-frame-container {
+    padding: 40px;
+  }
+} 

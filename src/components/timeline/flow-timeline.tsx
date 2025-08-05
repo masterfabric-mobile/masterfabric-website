@@ -45,10 +45,10 @@ const FlowTimeline: React.FC<FlowTimelineProps> = ({
   };
 
   return (
-    <div className="relative py-8 sm:py-12 bg-white">
+    <div className="relative py-4 sm:py-8 bg-white">
       <div className="max-w-3xl md:max-w-5xl lg:max-w-6xl mx-auto px-2 sm:px-4 lg:px-8">
         {/* Header - Using codebase title pattern */}
-        <div className="text-center mb-8 sm:mb-10 md:mb-14">
+        <div className="text-center mb-4 sm:mb-6 md:mb-8">
           <h1 className="text-2xl sm:text-3xl lg:text-5xl xl:text-6xl font-bold text-gray-900 leading-tight mb-3 sm:mb-6">
             <span className="block">{timelineData.title}</span>
             <span className="block text-gray-600 text-base sm:text-xl lg:text-3xl font-normal mt-2">{timelineData.subtitle}</span>
@@ -61,8 +61,8 @@ const FlowTimeline: React.FC<FlowTimelineProps> = ({
         {/* Main Timeline */}
         <div className="relative">
           {/* Progress Bar */}
-          <div className="mb-6 sm:mb-8">
-            <div className="flex items-center justify-between text-xs sm:text-sm text-gray-600 mb-2 sm:mb-3">
+          <div className="mb-3 sm:mb-4">
+            <div className="flex items-center justify-between text-xs sm:text-sm text-gray-600 mb-1">
               <span>Project Progress</span>
               <span className="font-semibold text-blue-600">
                 {Math.round(((currentStep + 1) / phases.length) * 100)}%
@@ -77,8 +77,8 @@ const FlowTimeline: React.FC<FlowTimelineProps> = ({
           </div>
 
           {/* Timeline Overview - Responsive */}
-          <div className="mb-6 sm:mb-8">
-            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2 sm:gap-4">
+          <div className="mb-3 sm:mb-4">
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-0.5 sm:gap-1">
               {phases.map((phase: TimelinePhase, index: number) => {
                 const status = getStepStatus(index);
                 const isActive = status === 'active';
@@ -88,7 +88,7 @@ const FlowTimeline: React.FC<FlowTimelineProps> = ({
                   <div key={phase.id} className="flex flex-col items-center group cursor-pointer" onClick={() => setCurrentStep(index)}>
                     {/* Modern Icon Container */}
                     <div className={`
-                      w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-xs sm:text-base md:text-lg mb-1 sm:mb-2 md:mb-3
+                      w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-xs sm:text-base md:text-lg mb-0.5 sm:mb-1
                       transition-all duration-300
                       ${isActive ? 'bg-blue-600 text-white shadow-lg shadow-blue-200 scale-110' : ''}
                       ${isCompleted ? 'bg-emerald-500 text-white shadow-md shadow-emerald-200' : ''}
@@ -98,7 +98,7 @@ const FlowTimeline: React.FC<FlowTimelineProps> = ({
                       <span className="text-xs sm:text-base md:text-lg">{phase.icon}</span>
                     </div>
                     <div className="text-center">
-                      <h3 className="text-[10px] sm:text-xs md:text-sm font-semibold text-gray-900 mb-0.5 md:mb-1">
+                      <h3 className="text-[10px] sm:text-xs md:text-sm font-semibold text-gray-900 mb-0">
                         {phase.shortTitle}
                       </h3>
                       <p className="text-[9px] sm:text-xs text-gray-500">

@@ -26,8 +26,8 @@ export default function Logos() {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 leading-tight mb-6">
-            <span className="block">Trusted by</span>
-            <span className="block text-blue-600">Leading Brands</span>
+            <span className="block">Our Works</span>
+            <span className="block text-blue-600">On Companies</span>
           </h2>
           <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             We&apos;ve partnered with industry leaders to deliver exceptional results. <br />

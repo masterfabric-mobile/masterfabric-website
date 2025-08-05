@@ -26,11 +26,10 @@ const References: React.FC = () => {
         {/* Section Header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Trusted Brands
-          </h2>
+Brands we’ve collaborated with.
+        </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Our reliable business partners with whom we have signed many successful projects
-          </p>
+Driving value through design, code, and strategy.            </p>
         </div>
 
         {/* Scrolling References Container */}

@@ -13,13 +13,15 @@
   position: relative;
   width: 280px;
   height: 580px;
-  background: #000;
+  background: linear-gradient(145deg, #1a1a1a, #2d2d2d);
   border-radius: 40px;
   padding: 6px;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
-
-
 
 /* Dynamic Island */
 .iphone-16-frame .dynamic-island {
@@ -28,34 +30,38 @@
   right: 20px;
   width: 90px;
   height: 25px;
-  background: #000;
+  background: linear-gradient(145deg, #000000, #1a1a1a);
   border-radius: 12px;
   z-index: 15;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .iphone-16-frame .dynamic-island::before {
   content: '';
   width: 6px;
   height: 6px;
-  background: #1a1a1a;
+  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
   border-radius: 50%;
-  border: 1px solid #333;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .iphone-16-frame .dynamic-island::after {
   content: '';
   width: 15px;
   height: 3px;
-  background: #1a1a1a;
+  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
   border-radius: 2px;
-  border: 1px solid #333;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
-
-
 
 .iphone-16-screen {
   width: 100%;
@@ -64,16 +70,20 @@
   border-radius: 34px;
   overflow: hidden;
   position: relative;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
 }
 
 /* Side buttons for iPhone 16 */
 .iphone-16-frame .side-button {
   position: absolute;
   width: 2px;
-  background: #1a1a1a;
+  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
   border-radius: 1px;
-  border: 1px solid #333;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   z-index: 5;
+  box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .iphone-16-frame .side-button.volume-up {
@@ -107,10 +117,14 @@
     position: relative;
     width: 375px;
     height: 812px;
-    background: #000;
+    background: linear-gradient(145deg, #1a1a1a, #2d2d2d);
     border-radius: 50px;
     padding: 8px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 
+      0 30px 60px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(255, 255, 255, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .iphone-screen {
@@ -120,6 +134,7 @@
     border-radius: 42px;
     overflow: hidden;
     position: relative;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
   }
 
   /* Adjust body and html for iPhone frame */
@@ -153,10 +168,14 @@
     position: relative;
     width: 430px;
     height: 932px;
-    background: #000;
+    background: linear-gradient(145deg, #1a1a1a, #2d2d2d);
     border-radius: 55px;
     padding: 10px;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    box-shadow: 
+      0 35px 70px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(255, 255, 255, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .iphone-screen {
@@ -166,6 +185,7 @@
     border-radius: 45px;
     overflow: hidden;
     position: relative;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
   }
 
   /* Adjust body and html for iPhone frame */
@@ -197,4 +217,29 @@
   .iphone-frame-container {
     padding: 40px;
   }
+}
+
+/* Modern glassmorphism effect for the frame */
+.iphone-16-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: inherit;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Enhanced shadow effects */
+.iphone-16-frame::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), transparent);
+  z-index: -1;
+  filter: blur(10px);
+  opacity: 0.5;
 } 

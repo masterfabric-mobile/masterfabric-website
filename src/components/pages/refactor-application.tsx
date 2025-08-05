@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { Zap, BarChart3, Users, Settings, Database, TrendingUp, Activity, Cloud } from 'lucide-react';
+import { Zap, BarChart3, Users, Settings, Database, TrendingUp, Activity, Cloud, Search, Target } from 'lucide-react';
 import styles from '../../styles/refactor-application.module.css';
 import { Icon } from '@iconify/react';
 
@@ -173,17 +173,17 @@ function PhoneShowcase() {
   const closePerfectionPopup = () => setShowPerfection(false);
 
   const stats = [
-    { value: '24.8K', label: 'Active Users', change: '+15.2%' },
-    { value: '0.8s', label: 'Load Time', change: '-45%' },
-    { value: '99.2%', label: 'Stability', change: '+2.4%' },
-    { value: '4.9', label: 'Rating', change: '+0.2' },
+    { value: '24.8K', label: 'Active Users', change: '+15.2%', icon: 'Users', color: 'from-blue-500 to-blue-600' },
+    { value: '0.8s', label: 'Load Time', change: '-45%', icon: 'Zap', color: 'from-green-500 to-green-600' },
+    { value: '99.2%', label: 'Stability', change: '+2.4%', icon: 'Shield', color: 'from-purple-500 to-purple-600' },
+    { value: '4.9', label: 'Rating', change: '+0.2', icon: 'Star', color: 'from-amber-500 to-amber-600' },
   ];
 
   const features = [
-    { text: 'Real-time Analytics', color: 'bg-blue-500' },
-    { text: 'Crash Detection', color: 'bg-purple-500' },
-    { text: 'Performance Monitor', color: 'bg-green-500' },
-    { text: 'User Engagement', color: 'bg-yellow-500' },
+    { text: 'Real-time Analytics', color: 'from-blue-500 to-blue-600', icon: 'BarChart3' },
+    { text: 'Crash Detection', color: 'from-purple-500 to-purple-600', icon: 'Search' },
+    { text: 'Performance Monitor', color: 'from-green-500 to-green-600', icon: 'TrendingUp' },
+    { text: 'User Engagement', color: 'from-amber-500 to-amber-600', icon: 'Target' },
   ];
 
   const steps = [
@@ -193,29 +193,29 @@ function PhoneShowcase() {
   ];
 
   return (
-    <div className="w-full h-full flex flex-col">
+    <div className="w-full h-full flex flex-col bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
       {/* Perfection Popup */}
       {showPerfection ? (
         <div className="absolute inset-0 z-50 flex items-center justify-center">
-          <div className="absolute inset-0 z-0 bg-gradient-to-br from-amber-400/80 via-yellow-300/60 to-orange-400/70 pointer-events-none"></div>
-          <div className="relative z-10 bg-white rounded-xl p-4 mx-3 w-full max-w-[200px]">
-            <div className="w-12 h-12 bg-amber-400 rounded-full flex items-center justify-center mx-auto mb-3">
-              <svg className="w-5 h-5 text-white drop-shadow-lg" fill="currentColor" viewBox="0 0 20 20">
+          <div className="absolute inset-0 z-0 bg-gradient-to-br from-amber-400/90 via-yellow-300/80 to-orange-400/85"></div>
+          <div className="relative z-10 bg-white rounded-xl p-4 mx-3 w-full max-w-[200px] border border-amber-200/50 shadow-xl">
+            <div className="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg">
+              <svg className="w-6 h-6 text-white drop-shadow-lg" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 2L13 8l6 .75-4.12 4.62L16 20l-6-3-6 3 1.12-6.63L1 8.75 7 8l3-6z" clipRule="evenodd"/>
               </svg>
             </div>
-            <h3 className="text-base font-bold text-amber-600 mb-2 text-center">PERFECTION!</h3>
+            <h3 className="text-sm font-bold text-amber-700 mb-1 text-center">PERFECTION!</h3>
             <div className="text-2xl font-black text-amber-600 mb-1 text-center">98%</div>
-            <div className="text-xs text-amber-700 font-bold text-center mb-2">MAX PERFORMANCE</div>
+            <div className="text-[10px] text-amber-700 font-bold text-center mb-3">MAX PERFORMANCE</div>
             <div className="text-center mb-3">
-              <p className="text-xs font-bold text-gray-800 mb-1">🏆 Amazing!</p>
-              <p className="text-xs text-gray-700 leading-relaxed">
+              <p className="text-xs font-bold text-gray-800 mb-1">Amazing!</p>
+              <p className="text-[10px] text-gray-700 leading-relaxed">
                 Your app reached <span className="font-bold text-amber-600">maximum</span> performance possible.
               </p>
             </div>
             <div className="space-y-2">
-              <a href="/contact" className="block w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-2 rounded-lg text-xs text-center transition-all duration-300">
-                🚀 Enterprise Solutions
+              <a href="/contact" className="block w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold py-2 rounded-lg text-xs text-center transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+                Enterprise Solutions
               </a>
               <button onClick={closePerfectionPopup} className="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-2 rounded-lg text-xs transition-all duration-200">
                 Continue
@@ -225,18 +225,18 @@ function PhoneShowcase() {
         </div>
       ) : showSuccess ? (
         <div className="absolute inset-0 z-50 flex items-center justify-center">
-          <div className="absolute inset-0 bg-gray-900/70 backdrop-blur-sm"></div>
-          <div className="relative bg-white rounded-xl p-4 mx-3 w-full max-w-[200px] border border-gray-100" style={{boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)'}}>
-            <div className="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3 relative">
-              <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center relative">
-                <svg className="w-6 h-6 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="absolute inset-0 bg-gray-900/80"></div>
+          <div className="relative bg-white rounded-xl p-4 mx-3 w-full max-w-[200px] border border-gray-200/50 shadow-xl">
+            <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-emerald-500 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg relative">
+              <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center relative">
+                <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path>
                 </svg>
               </div>
-              <div className="absolute inset-0 bg-green-500/30 rounded-full animate-ping"></div>
+              <div className="absolute inset-0 bg-green-500/30 rounded-xl animate-ping"></div>
             </div>
-            <h3 className="text-base font-bold text-gray-900 mb-2 text-center">Optimization Complete!</h3>
-            <div className="bg-blue-50 rounded-lg p-3 mb-3">
+            <h3 className="text-sm font-bold text-gray-900 mb-2 text-center">Optimization Complete!</h3>
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-3 mb-3 border border-blue-100/50">
               <div className="text-center">
                 <div className="text-xl font-bold text-blue-600 mb-1">+{afterOptimization - beforeOptimization}%</div>
                 <div className="text-xs text-blue-700 font-medium">Performance Boost</div>
@@ -247,10 +247,10 @@ function PhoneShowcase() {
               <p className="text-xs font-semibold text-green-600">faster and more efficiently</p>
             </div>
             <div className="space-y-2">
-              <a href="/contact" className="block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg text-xs text-center transition-all duration-200">
+              <a href="/contact" className="block w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold py-2 rounded-lg text-xs text-center transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
                 Get Professional Help
               </a>
-              <button onClick={closeSuccessPopup} className="w-full bg-gray-100 text-gray-700 font-medium py-2 rounded-lg text-xs hover:bg-gray-200 transition-colors">
+              <button onClick={closeSuccessPopup} className="w-full bg-gray-100 text-gray-700 font-medium py-2 rounded-lg text-xs hover:bg-gray-200 transition-all duration-200">
                 Go App
               </button>
             </div>
@@ -258,10 +258,10 @@ function PhoneShowcase() {
         </div>
       ) : showOptimizationPopup ? (
         <div className="absolute inset-0 z-50 flex items-center justify-center">
-          <div className="absolute inset-0 bg-gray-900/70 backdrop-blur-sm"></div>
-          <div className="relative bg-white rounded-xl p-4 mx-3 w-full max-w-[200px] border border-gray-100 popup-content" style={{boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)'}}>
+          <div className="absolute inset-0 bg-gray-900/80"></div>
+          <div className="relative bg-white rounded-xl p-4 mx-3 w-full max-w-[200px] border border-gray-200/50 shadow-xl">
             <div className="text-center mb-3">
-              <div className="w-8 h-8 mx-auto mb-2 relative">
+              <div className="w-10 h-10 mx-auto mb-2 relative">
                 <div className="absolute inset-0 text-blue-600 optimization-gear-icon">
                   <svg className="w-full h-full animate-spin" style={{animationDuration: '2s'}} fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd"/>
@@ -269,10 +269,10 @@ function PhoneShowcase() {
                 </div>
                 <div className="absolute inset-0 bg-blue-500/20 rounded-full animate-ping"></div>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-1 h-1 bg-blue-600 rounded-full"></div>
+                  <div className="w-1.5 h-1.5 bg-blue-600 rounded-full"></div>
                 </div>
               </div>
-              <h3 className="text-base font-bold text-gray-900 mb-1">Optimizing Your App</h3>
+              <h3 className="text-sm font-bold text-gray-900 mb-1">Optimizing Your App</h3>
               <p className="text-xs text-gray-600">Enhancing app performance</p>
             </div>
             <div className="mb-3">
@@ -280,16 +280,16 @@ function PhoneShowcase() {
                 <span className="text-xs font-medium text-gray-700">{progressText}</span>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-1.5">
-                <div className="bg-blue-600 h-1.5 rounded-full transition-all duration-500 ease-out" style={{width: `${Math.round(progress)}%`}}></div>
+                <div className="bg-gradient-to-r from-blue-500 to-indigo-500 h-1.5 rounded-full transition-all duration-500 ease-out shadow-sm" style={{width: `${Math.round(progress)}%`}}></div>
               </div>
             </div>
             <div className="space-y-2 mb-4">
               {steps.map((s, i) => (
                 <div key={i} className="flex items-center space-x-2 step-indicator">
-                  <div className={`step-icon w-4 h-4 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${step === i ? 'border-blue-600' : 'border-gray-300'}`}>
+                  <div className={`step-icon w-4 h-4 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${step === i ? 'border-blue-600 bg-blue-50' : 'border-gray-300'}`}>
                     <div className={`w-2 h-2 rounded-full step-dot transition-all duration-300 ${step === i ? 'bg-blue-600' : 'bg-gray-300'}`}></div>
                   </div>
-                  <span className={`text-xs transition-colors duration-300 ${step === i ? 'text-blue-600' : 'text-gray-600'}`}>{s}</span>
+                  <span className={`text-xs transition-colors duration-300 ${step === i ? 'text-blue-600 font-medium' : 'text-gray-600'}`}>{s}</span>
                 </div>
               ))}
             </div>
@@ -300,7 +300,7 @@ function PhoneShowcase() {
                 <div className="w-1.5 h-1.5 bg-blue-600 rounded-full animate-bounce loading-dot" style={{animationDelay: '0.2s'}}></div>
               </div>
             </div>
-            <button onClick={cancelOptimization} className="w-full bg-gray-100 text-gray-700 font-medium py-2 rounded-lg text-xs hover:bg-gray-200 transition-colors">
+            <button onClick={cancelOptimization} className="w-full bg-gray-100 text-gray-700 font-medium py-2 rounded-lg text-xs hover:bg-gray-200 transition-all duration-200">
               Cancel
             </button>
           </div>
@@ -308,48 +308,56 @@ function PhoneShowcase() {
       ) : (
         <>
           {/* Main Content */}
-          <div className="flex-1 flex flex-col px-4 py-6">
+          <div className="flex-1 flex flex-col px-4 py-4">
             <div className="flex-1 flex flex-col items-center justify-center space-y-3">
               {/* Performance Card */}
-              <div className="bg-blue-50 rounded-lg p-3 text-center border border-blue-100 w-full max-w-[200px] shadow-sm hover:shadow-md transition-all duration-300">
-                <div className="text-2xl font-bold text-blue-600 mb-1">{currentPerformance}%</div>
-                <div className="text-sm font-medium text-gray-800 mb-1">App Performance</div>
-                <div className="text-[10px] text-blue-600">↗ +12% this week</div>
+              <div className="bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-600 rounded-xl p-3 text-center w-full max-w-[200px] shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border border-blue-400/20">
+                <div className="text-2xl font-black text-white mb-1 drop-shadow-sm">{currentPerformance}%</div>
+                <div className="text-xs font-semibold text-blue-100 mb-1">App Performance</div>
+                <div className="text-[10px] text-blue-200 bg-blue-500/30 rounded-full px-2 py-0.5 inline-block">+12% this week</div>
               </div>
+              
               {/* Analytics Cards */}
               <div className="grid grid-cols-2 gap-2 w-full max-w-[200px]">
                 {stats.map((stat, i) => (
-                  <div key={i} className="bg-white rounded-lg p-2 text-center border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
-                    <div className="text-base font-bold text-gray-900">{stat.value}</div>
-                    <div className="text-[10px] text-gray-500">{stat.label}</div>
-                    <div className="text-[10px] text-green-600">{stat.change}</div>
+                  <div key={i} className="bg-white rounded-lg p-2 text-center border border-gray-100 shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                    <div className="text-sm font-bold text-gray-900 mb-0.5">{stat.value}</div>
+                    <div className="text-[10px] text-gray-600 mb-0.5">{stat.label}</div>
+                    <div className="text-[10px] font-medium text-green-600 bg-green-50 rounded-full px-1.5 py-0.5 inline-block">{stat.change}</div>
                   </div>
                 ))}
               </div>
+              
               {/* Features Section */}
-              <div className="w-full max-w-[200px] bg-white rounded-lg p-3 border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
-                <div className="text-xs font-semibold text-gray-800 mb-2">Features</div>
+              <div className="w-full max-w-[200px] bg-white rounded-lg p-3 border border-gray-100 shadow-md hover:shadow-lg transition-all duration-300">
+                <div className="text-xs font-bold text-gray-800 mb-2">Features</div>
                 <div className="space-y-1.5">
                   {features.map((feature, i) => (
                     <div key={i} className={`feature-item flex items-center space-x-2 opacity-0 animate-feature`} style={{animationDelay: `${i * 200}ms`, opacity: featureVisible[i] ? 1 : 0}}>
-                      <div className={`w-2 h-2 rounded-full ${feature.color}`}></div>
-                      <span className="text-[11px] text-gray-700">{feature.text}</span>
+                      <div className={`w-6 h-6 bg-gradient-to-r ${feature.color} rounded-md flex items-center justify-center text-white shadow-sm`}>
+                        {feature.icon === 'BarChart3' && <BarChart3 className="w-3 h-3" />}
+                        {feature.icon === 'Search' && <Search className="w-3 h-3" />}
+                        {feature.icon === 'TrendingUp' && <TrendingUp className="w-3 h-3" />}
+                        {feature.icon === 'Target' && <Target className="w-3 h-3" />}
+                      </div>
+                      <span className="text-xs text-gray-700 font-medium">{feature.text}</span>
                     </div>
                   ))}
                 </div>
               </div>
+              
               {/* Button */}
-              <div className="w-full max-w-[200px] pt-2">
+              <div className="w-full max-w-[200px] pt-1">
                 <button 
                   onClick={startOptimization}
                   disabled={isOptimizing}
-                  className={`w-full rounded-lg py-3 font-semibold text-sm transition-all duration-200 ${
+                  className={`w-full rounded-lg py-3 font-bold text-xs transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 ${
                     currentPerformance >= 98 
-                      ? 'bg-amber-500 hover:bg-amber-600 text-white' 
-                      : 'bg-green-600 hover:bg-green-700 text-white'
+                      ? 'bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white' 
+                      : 'bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white'
                   }`}
                 >
-                  {currentPerformance >= 98 ? 'Perfect! 🎯' : 'Optimize! 🚀'}
+                  {currentPerformance >= 98 ? 'Perfect!' : 'Optimize!'}
                 </button>
               </div>
             </div>
@@ -374,10 +382,7 @@ export default function RefactorApplication() {
           <rect width="100%" height="100%" fill="url(#triangles)"/>
         </svg>
       </div>
-      {/* Floating minimal elements */}
-      <div className="absolute top-24 right-16 w-20 h-20 border border-blue-200 rounded-full opacity-30 floating-ring"></div>
-      <div className="absolute bottom-32 left-12 w-16 h-16 border border-gray-200 rounded-full opacity-40 floating-ring delay-1"></div>
-      <div className="absolute top-1/2 left-1/4 w-12 h-12 border border-blue-200 rounded-full opacity-25 floating-ring delay-2"></div>
+      {/* Floating minimal elements - removed for static design */}
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header Section - Consistent with codebase patterns */}

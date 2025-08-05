@@ -36,7 +36,7 @@ export default function Logos() {
         </div>
 
         {/* Scrolling References Container */}
-        <div className="relative overflow-hidden h-24 scrolling-container">
+        <div className="relative overflow-hidden h-32 scrolling-container">
           {/* Gradient overlays for fade effect */}
           <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
@@ -44,7 +44,7 @@ export default function Logos() {
           {/* Scrolling container */}
           <div className={`flex items-center h-full transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
             {/* First set of logos */}
-            <div className="flex animate-scroll-left space-x-16 items-center min-w-max will-change-transform">
+            <div className="flex animate-scroll-left space-x-20 items-center min-w-max will-change-transform">
               {referencesData.references.map((reference: Reference) => (
                 <div
                   key={`first-${reference.id}`}
@@ -53,7 +53,7 @@ export default function Logos() {
                   onMouseLeave={() => setHoveredId(null)}
                   onClick={() => window.open(reference.website, '_blank')}
                 >
-                  <div className="relative w-36 h-20 flex items-center justify-center transition-all duration-300 transform group-hover:scale-110 group-hover:z-20">
+                  <div className="relative w-48 h-28 flex items-center justify-center transition-all duration-300 transform group-hover:scale-110 group-hover:z-20">
                     <div
                       className={`absolute inset-0 rounded-lg transition-all duration-300 ${
                         hoveredId === reference.id
@@ -61,12 +61,12 @@ export default function Logos() {
                           : 'bg-transparent'
                       }`}
                     />
-                    <div className="relative z-10 w-32 h-16 flex items-center justify-center">
+                    <div className="relative z-10 w-44 h-24 flex items-center justify-center">
                       <Image
                         src={reference.logo}
                         alt={reference.name}
-                        width={128}
-                        height={64}
+                        width={176}
+                        height={96}
                         className={`transition-all duration-300 object-contain max-w-full max-h-full ${
                           hoveredId === reference.id
                             ? 'filter-none'
@@ -95,7 +95,7 @@ export default function Logos() {
             </div>
             
             {/* Duplicate set for seamless scrolling */}
-            <div className="flex animate-scroll-left space-x-16 items-center min-w-max ml-16 will-change-transform">
+            <div className="flex animate-scroll-left space-x-20 items-center min-w-max ml-20 will-change-transform">
               {referencesData.references.map((reference: Reference) => (
                 <div
                   key={`second-${reference.id}`}
@@ -104,7 +104,7 @@ export default function Logos() {
                   onMouseLeave={() => setHoveredId(null)}
                   onClick={() => window.open(reference.website, '_blank')}
                 >
-                  <div className="relative w-36 h-20 flex items-center justify-center transition-all duration-300 transform group-hover:scale-110 group-hover:z-20">
+                  <div className="relative w-48 h-28 flex items-center justify-center transition-all duration-300 transform group-hover:scale-110 group-hover:z-20">
                     <div
                       className={`absolute inset-0 rounded-lg transition-all duration-300 ${
                         hoveredId === reference.id
@@ -112,12 +112,12 @@ export default function Logos() {
                           : 'bg-transparent'
                       }`}
                     />
-                    <div className="relative z-10 w-32 h-16 flex items-center justify-center">
+                    <div className="relative z-10 w-44 h-24 flex items-center justify-center">
                       <Image
                         src={reference.logo}
                         alt={reference.name}
-                        width={128}
-                        height={64}
+                        width={176}
+                        height={96}
                         className={`transition-all duration-300 object-contain max-w-full max-h-full ${
                           hoveredId === reference.id
                             ? 'filter-none'

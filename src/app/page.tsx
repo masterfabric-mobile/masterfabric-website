@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <Container>
       <ContactSection />
-      <FlowTimeline />
+      
       <Welcome />
       <SuperchargeExperience />
       <Logos />

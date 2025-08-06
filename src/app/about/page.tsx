@@ -12,6 +12,7 @@ import ProcessSteps from '@/components/about/ProcessSteps'
 import FlipStatistics from '@/components/about/FlipStatistics'
 import GitHubProjects from '@/components/about/github-projects'
 import aboutData from '@/data/about.json'
+import FlowTimeline from '@/components/timeline/flow-timeline'
 
 export default function AboutPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -39,6 +40,7 @@ export default function AboutPage() {
       <Globe activities={aboutData.activities} />
 
       <AboutTimeline timeline={aboutData.timeline} />
+      <FlowTimeline />
 
       <DynamicText dynamicText={aboutData.dynamicText} 
         onIndexChange={setCurrentIndex}

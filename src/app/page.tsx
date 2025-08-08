@@ -6,6 +6,7 @@ import ContactSection from '@/components/forms/contact-section'
 import FlowTimeline from '@/components/timeline/flow-timeline'
 import Welcome from '@/components/pages/welcome'
 import Logos from '@/components/pages/logos'
+import References from '@/components/pages/references'
 import SuperchargeExperience from '@/components/pages/supercharge-experience'
 import RefactorApplication from '@/components/pages/refactor-application'
 import ProjectFlowTimeline, { TimelineRefType } from '@/components/pages/project-flow-timeline'
@@ -17,8 +18,9 @@ export default function Home() {
       <ContactSection />
       
       <Welcome />
+      <References />
       <SuperchargeExperience />
-      <Logos />
+      
       {/* Refactor Application Section */}
       <RefactorApplication />
       {/* CTA Section */}

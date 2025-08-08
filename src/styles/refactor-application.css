@@ -5,6 +5,9 @@
   transform: translateY(20px);
   position: relative;
   overflow: hidden;
+  width: 240px !important;
+  min-height: 200px !important;
+  padding-left: 16px !important;
 }
 
 .service-card:nth-child(1) { animation-delay: 0.1s; }
@@ -273,11 +276,6 @@
   animation: pulseGlow 2s ease-in-out infinite;
 }
 
-/* Floating animation for background elements */
-.floating-ring {
-  /* animation: float 6s ease-in-out infinite; */
-}
-
 @keyframes float {
   0%, 100% {
     transform: translateY(0px);
@@ -287,13 +285,7 @@
   }
 }
 
-.floating-ring.delay-1 {
-  /* animation-delay: -2s; */
-}
 
-.floating-ring.delay-2 {
-  /* animation-delay: -4s; */
-}
 
 /* Modern card shadows */
 .modern-shadow {

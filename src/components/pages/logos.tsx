@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
-import referencesData from '../../data/references.json'
+import referencesData from '@/data/references.json'
 
 interface Reference {
   id: string

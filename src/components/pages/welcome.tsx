@@ -244,20 +244,26 @@ export default function Welcome({ onTimelineDialogRequest }: WelcomeProps) {
   }, []);
 
   const updateCodeLine = useCallback(async (lineId: string, content: string) => {
+    // Live type into the DOM for animation effect
     const line = document.getElementById(lineId)
     if (line) {
       await typeText(line, content, 25)
     }
-  }, []);
+    // Persist final content in React state so re-renders keep what was typed
+    const id = lineId.replace('line-', '')
+    setCodeLines(prev => ({
+      ...prev,
+      [id]: content && content.length > 0 ? content : '<span class="indent">  </span>'
+    }))
+  }, [typeText]);
 
   const animateStep = useCallback(
     async (stepData: CodeStep) => {
-      // Update code lines
-      for (let i = 5; i <= 19; i++) {
-        await updateCodeLine(`line-${i}`, '')
-        await new Promise(resolve => setTimeout(resolve, 100))
-      }
-      for (const [lineId, content] of Object.entries(stepData.lines)) {
+      // Type only the lines for this step, in ascending order, to ensure top-to-bottom effect
+      const entries = Object.entries(stepData.lines).sort(
+        ([a], [b]) => parseInt(a, 10) - parseInt(b, 10)
+      )
+      for (const [lineId, content] of entries) {
         await updateCodeLine(`line-${lineId}`, content)
         await new Promise(resolve => setTimeout(resolve, 100))
       }
@@ -409,11 +415,11 @@ export default function Welcome({ onTimelineDialogRequest }: WelcomeProps) {
   }, [animateScenario])
 
   return (
-    <main className="grid lg:grid-cols-2 place-items-center pt-10 pb-8 md:pt-8 md:pb-12">
+    <main className="grid lg:grid-cols-2 pt-10 pb-8 md:pt-8 md:pb-12 gap-0">
       {/* Content Section */}
-      <div className="md:order-1">
-        <h2 className="text-xl lg:text-3xl xl:text-5xl font-bold lg:tracking-tight xl:tracking-tighter">
-          Custom Mobile App Development
+      <div className="md:order-1 pl-6 md:pl-8 lg:pl-12">
+        <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">
+          Custom App Development
         </h2>
         <p className="text-lg mt-4 text-slate-600 max-w-xl">
           Take your business to the next level in the mobile world! Reach your customers anytime, 
@@ -429,7 +435,7 @@ export default function Welcome({ onTimelineDialogRequest }: WelcomeProps) {
       </div>
 
       {/* Animated Code Editor */}
-      <div className="py-6 md:order-2 hidden md:block w-full max-w-2xl">
+      <div className="md:order-2 hidden md:block w-full max-w-2xl">
         <div className={styles.codeEditorContainer}>
           {/* Editor Header */}
           <div className={styles.editorHeader}>

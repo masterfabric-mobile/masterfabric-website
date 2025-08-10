@@ -29,7 +29,14 @@ const TimelineHeader: React.FC<TimelineHeaderProps> = ({ timeline }) => {
   return (
     <div className={styles.timelineHeaderContainer}>
       {/* Main title */}
-      <h2 className={styles.timelineTitle}>
+      <h2 
+        className={styles.timelineTitle} 
+        style={{ 
+          fontSize: '1.45rem', 
+          fontWeight: '600',
+          lineHeight: '1.75rem'
+        }}
+      >
         {isTimelineCompleted ? '🎉 Project Timeline Completed!' : title}
       </h2>
       {/* Subtitle with current phase */}

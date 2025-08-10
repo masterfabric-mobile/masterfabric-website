@@ -16,7 +16,7 @@ interface DepartmentCardProps {
 
 export default function DepartmentCard({ department }: DepartmentCardProps) {
   return (
-    <div className="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+    <div className="bg-white rounded-lg p-6 border border-gray-200 hover:shadow-md transition-shadow duration-300">
       <div className="flex items-start gap-4 mb-4">
         <div 
           className="w-12 h-12 rounded-lg flex items-center justify-center text-white"

@@ -106,7 +106,7 @@ const TimelineContent = ({ timeline = projectFlowData.timeline as TimelineData }
   // Get all phases with safety check
   const phases = controller.updatePhaseStatuses() || [];
   
-  // Kart hover'ında pause/resume için local fonksiyonlar
+  
   const handleCardMouseEnter = () => {
     if (controller && controller.togglePause && !controller.isPaused) {
       controller.togglePause();

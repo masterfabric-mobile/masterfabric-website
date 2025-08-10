@@ -90,8 +90,8 @@ const FlowTimeline: React.FC<FlowTimelineProps> = ({
                     <div className={`
                       w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-xs sm:text-base md:text-lg mb-0.5 sm:mb-1
                       transition-all duration-300
-                      ${isActive ? 'bg-blue-600 text-white shadow-lg shadow-blue-200 scale-110' : ''}
-                      ${isCompleted ? 'bg-emerald-500 text-white shadow-md shadow-emerald-200' : ''}
+                      ${isActive ? 'bg-blue-600 text-white scale-110' : ''}
+                      ${isCompleted ? 'bg-emerald-500 text-white' : ''}
                       ${status === 'upcoming' ? 'bg-gray-100 text-gray-600 hover:bg-gray-200' : ''}
                       group-hover:scale-105
                     `}>
@@ -112,12 +112,12 @@ const FlowTimeline: React.FC<FlowTimelineProps> = ({
           </div>
 
           {/* Current Step Details - Responsive Card */}
-          <div className="bg-white border border-gray-200 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 shadow-lg">
+          <div className="bg-white border border-gray-200 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8">
             <div className="flex flex-col md:flex-row items-start gap-4 md:gap-6">
               {/* Modern Icon with proper styling */}
               <div className={`
                 w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-lg sm:rounded-xl md:rounded-2xl flex items-center justify-center text-lg sm:text-xl md:text-2xl
-                bg-blue-600 text-white shadow-sm
+                bg-blue-600 text-white
               `}>
                 <span className="text-lg sm:text-xl md:text-2xl">{phases[currentStep].icon}</span>
               </div>
@@ -176,7 +176,7 @@ const FlowTimeline: React.FC<FlowTimelineProps> = ({
             {/* Minimalist Toggle Button */}
             <button
               onClick={() => setShowControls((v) => !v)}
-              className="w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center rounded-l-lg bg-gray-100 hover:bg-gray-200 border border-gray-200 border-r-0 shadow-sm transition-all duration-200"
+              className="w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center rounded-l-lg bg-gray-100 hover:bg-gray-200 border border-gray-200 border-r-0 transition-all duration-200"
               aria-label={showControls ? 'Hide controls' : 'Show controls'}
             >
               {showControls ? (
@@ -191,7 +191,7 @@ const FlowTimeline: React.FC<FlowTimelineProps> = ({
             </button>
             {/* Main Controls */}
             {showControls && (
-              <div className="bg-white border border-gray-200 rounded-r-lg shadow-sm p-2 sm:p-3">
+              <div className="bg-white border border-gray-200 rounded-r-lg p-2 sm:p-3">
                 <div className="flex items-center gap-2 sm:gap-3">
                   <div className="text-center">
                     <div className="text-sm sm:text-base font-bold text-gray-900">

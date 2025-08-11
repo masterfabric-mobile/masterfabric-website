@@ -32,28 +32,15 @@
 
 .statistics-grid::before,
 .statistics-grid::after {
-  content: '';
-  position: absolute;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%); 
-  pointer-events: none;
-  z-index: -1;
-  animation: floatAround 8s ease-in-out infinite;
+  display: none;
 }
 
 .statistics-grid::before {
-  top: -60px;
-  left: -60px;
-  animation-delay: 0s;
+  display: none;
 }
 
 .statistics-grid::after {
-  bottom: -60px;
-  right: -60px;
-  animation-delay: 4s;
-  background: radial-gradient(circle, rgba(29, 78, 216, 0.08) 0%, transparent 70%); /* Darker blue */
+  display: none;
 }
 
 .stat-card {
@@ -69,10 +56,7 @@
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   overflow: hidden;
-  box-shadow: 
-    0 10px 40px rgba(59, 130, 246, 0.08),
-    0 4px 12px rgba(59, 130, 246, 0.05),
-    0 0 0 1px rgba(255, 255, 255, 0.3) inset;
+  box-shadow: none;
   isolation: isolate;
   width: 260px;
   height: 200px;
@@ -85,56 +69,22 @@
 }
 
 .stat-card::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: linear-gradient(90deg, 
-    rgba(59, 130, 246, 0.1) 0%, 
-    rgba(37, 99, 235, 0.05) 50%,
-    rgba(29, 78, 216, 0.1) 100%); 
-  border-radius: 18px;
-  opacity: 0;
-  transition: all 0.5s ease;
-  z-index: -1;
-}
-
-.stat-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 
-    0 25px 50px rgba(59, 130, 246, 0.15),
-    0 10px 25px rgba(59, 130, 246, 0.1),
-    0 0 0 2px rgba(59, 130, 246, 0.2) inset;
-  border-color: rgba(59, 130, 246, 0.3);
+  display: none;
+}.stat-card:hover {
+  border-color: rgba(59, 130, 246, 0.8);
+  box-shadow: none;
 }
 
 .stat-card:hover::before {
-  opacity: 1;
-  transform: scale(1.02);
+  display: none;
 }
 
 .card-glow {
-  position: absolute;
-  top: -4px;
-  left: -4px;
-  right: -4px;
-  bottom: -4px;
-  background: linear-gradient(90deg, 
-    rgba(59, 130, 246, 0.08) 0%, 
-    rgba(37, 99, 235, 0.06) 50%,
-    rgba(29, 78, 216, 0.08) 100%); 
-  border-radius: 20px;
-  opacity: 0;
-  transition: all 0.5s ease;
-  z-index: -2;
-  filter: blur(12px);
+  display: none;
 }
 
 .stat-card:hover .card-glow {
-  opacity: 1;
-  transform: scale(1.1);
+  display: none;
 }
 
 .geometric-pattern {
@@ -232,7 +182,7 @@
   background: rgba(59, 130, 246, 0.15);
   color: var(--blue-darker);
   border-color: rgba(59, 130, 246, 0.5);
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+  box-shadow: none;
 }
 
 .stat-card:hover .icon-glow {
@@ -338,10 +288,7 @@
     rgba(2, 6, 23, 0.95) 0%, 
     rgba(17, 24, 39, 0.9) 100%);
   border-color: rgba(66, 153, 225, 0.3);
-  box-shadow: 
-    0 10px 40px rgba(10, 37, 64, 0.35),
-    0 4px 12px rgba(10, 37, 64, 0.2),
-    0 0 0 1px rgba(66, 153, 225, 0.2) inset;
+  box-shadow: none;
 }
 
 .navy-theme .stat-number {
@@ -366,10 +313,7 @@
 }
 
 .navy-theme:hover {
-  box-shadow: 
-    0 25px 50px rgba(10, 37, 64, 0.45),
-    0 10px 25px rgba(10, 37, 64, 0.3),
-    0 0 0 2px rgba(66, 153, 225, 0.3) inset;
+  box-shadow: none;
   border-color: rgba(66, 153, 225, 0.5);
 }
 

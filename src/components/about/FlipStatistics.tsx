@@ -93,14 +93,9 @@ const FlipStatistics: React.FC<FlipStatisticsProps> = ({
             >
              
               <div style={{ position: 'absolute', top: 16, right: 16, zIndex: 2 }}>
-                <div style={{ width: 32, height: 32, borderRadius: '50%', background: '#2563eb', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 8px rgba(37,99,235,0.10)' }}>
+                <div style={{ width: 32, height: 32, borderRadius: '50%', background: '#2563eb', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: 'none' }}>
                   <span dangerouslySetInnerHTML={{ __html: iconSvg.replace('<svg ', '<svg class=\"w-5 h-5\" fill=\"none\" stroke=\"white\" ') }} />
                 </div>
-              </div>
-             
-              <div className="geometric-pattern">
-                <div className="pattern-grid"></div>
-                <div className="pattern-dots"></div>
               </div>
            
               <div className="flex flex-col items-center justify-center h-full w-full">

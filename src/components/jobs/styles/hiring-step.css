@@ -2,10 +2,14 @@
 .hiring-step-card {
   transition: border-color 0.3s ease;
   height: 100%;
+  min-height: 180px; /* Reduced for mobile */
+  box-shadow: none !important;
+  text-align: center;
 }
 
 .hiring-step-card:hover {
   border-color: #3b82f6;
+  box-shadow: none !important;
 }
 
 /* Step number styles */
@@ -60,11 +64,52 @@
   transition: transform 0.2s ease;
 }
 
+/* Mobile responsive improvements */
+@media (max-width: 767px) {
+  .hiring-step-card {
+    min-height: 160px;
+    margin: 0 auto 1.5rem auto;
+    max-width: 280px;
+  }
+  
+  .hiring-step {
+    padding: 0 0.5rem;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+  
+  /* Hide step numbers and lines on mobile */
+  .step-number {
+    display: none !important;
+  }
+  
+  /* Hide any connecting lines */
+  .hiring-step::before,
+  .hiring-step::after {
+    display: none !important;
+  }
+  
+  .card-content {
+    padding: 0.75rem !important;
+  }
+  
+  .expanded-content {
+    padding: 0 0.75rem 0.75rem !important;
+  }
+}
+
 /* Responsive grid layout */
 @media (min-width: 768px) {
   .hiring-process-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1.5rem;
+  }
+}
+
+/* Large mobile screens */
+@media (min-width: 480px) and (max-width: 767px) {
+  .hiring-step-card {
+    max-width: 320px;
   }
 }

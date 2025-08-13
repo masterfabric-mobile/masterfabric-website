@@ -93,9 +93,9 @@ export default function MobileHiringStep({ step, index, isLast = false }: Mobile
   }, [isExpanded]);
 
   return (
-    <div className="relative mb-8 last:mb-0">
-      {/* Step number with connecting line */}
-      <div className="absolute left-5 top-0 bottom-0 flex flex-col items-center">
+    <div className="relative mb-6 last:mb-0">
+      {/* Step number and connecting line - Hidden on mobile */}
+      <div className="absolute left-5 top-0 bottom-0 flex-col items-center hidden">
         <div className="step-number w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 text-white rounded-full flex items-center justify-center font-bold text-lg relative z-10 border-4 border-white shadow-lg shadow-blue-200/50">
           {step.number}
         </div>
@@ -105,35 +105,36 @@ export default function MobileHiringStep({ step, index, isLast = false }: Mobile
       </div>
 
       {/* Step Content Card */}
-      <div className="hiring-step-card bg-white rounded-xl shadow-lg border border-blue-100 ml-20 hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer">
+      <div className="hiring-step-card bg-white rounded-xl border border-blue-100 transition-all duration-300 overflow-hidden cursor-pointer text-center">
         {/* Card Header - Clickable to expand/collapse */}
         <div 
-          className="card-content p-4"
+          className="card-content p-4 flex flex-col items-center text-center"
           onClick={toggleExpand}
         >
-          <div className="flex items-center gap-3 mb-3">
-            <div className="icon-container w-12 h-12 bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100 rounded-lg flex items-center justify-center border border-blue-100 shadow-sm">
-              {getIcon()}
-            </div>
-            
-            <div>
-              <h3 className="text-lg font-bold text-gray-900">{step.title}</h3>
-              <div className="inline-flex items-center mt-1">
-                <Clock className="w-3 h-3 text-blue-500 mr-1" />
-                <span className="text-xs text-blue-700 font-medium">{step.duration}</span>
-              </div>
-            </div>
-            
-            <div className="ml-auto">
-              <ChevronDown className={`w-5 h-5 text-blue-600 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
-            </div>
+          {/* Icon */}
+          <div className="icon-container w-12 h-12 bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100 rounded-lg flex items-center justify-center border border-blue-100 mb-3">
+            {getIcon()}
+          </div>
+          
+          {/* Title */}
+          <h3 className="text-lg font-bold text-gray-900 mb-2">{step.title}</h3>
+          
+          {/* Duration Badge */}
+          <div className="inline-flex items-center mb-4">
+            <Clock className="w-3 h-3 text-blue-500 mr-1" />
+            <span className="text-xs text-blue-700 font-medium">{step.duration}</span>
+          </div>
+          
+          {/* Expand/Collapse Button */}
+          <div className="mt-auto">
+            <ChevronDown className={`w-5 h-5 text-blue-600 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
           </div>
         </div>
         
         {/* Expanded Content */}
         <div 
           ref={expandedContentRef}
-          className={`expanded-content px-4 pb-4 max-h-0 overflow-hidden transition-all duration-500 ease-in-out ${isExpanded ? 'opacity-100' : 'opacity-0'}`}
+          className={`expanded-content px-4 pb-4 max-h-0 overflow-hidden transition-all duration-500 ease-in-out text-center ${isExpanded ? 'opacity-100' : 'opacity-0'}`}
         >
           <div className="border-t border-gray-100 pt-3 space-y-3">
             <div className="text-gray-600 text-sm leading-relaxed mb-2">{step.description}</div>

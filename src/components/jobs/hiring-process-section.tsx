@@ -49,7 +49,7 @@ export default function HiringProcessSection({ steps, title, description }: Hiri
       </div>
       
       {/* Mobile Hiring Steps - Vertical Layout */}
-      <div className="md:hidden space-y-0">
+      <div className="md:hidden space-y-6 px-4">
         {steps.map((step, index) => (
           <MobileHiringStep 
             key={index} 

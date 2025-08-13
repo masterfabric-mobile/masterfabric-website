@@ -17,139 +17,66 @@ interface Benefit {
 }
 
 export default function ContactBenefits() {
-  // SVG Icons for benefits
-  const getIconContent = (benefit: Benefit, index: number) => {
-    // Check for specific benefit titles first
-    if (benefit.title === "24/7 Support") {
-      // Cross icon for support - hardcoded to ensure display
-      return (
-        <svg className="w-6 h-6 transform transition-transform duration-300 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <circle cx="12" cy="12" r="10" strokeWidth="2" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6M12 9v6" />
-        </svg>
-      );
-    } else if (benefit.title === "Scalable Solutions") {
-      return (
-        <svg className="w-6 h-6 transform transition-transform duration-300 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
-        </svg>
-      );
-    }
-    
-    // If the benefit has custom SVG icon paths
-    if (benefit.icon && benefit.icon.paths) {
-      return (
-        <svg className="w-6 h-6 transform transition-transform duration-300 group-hover:rotate-12" viewBox={benefit.icon.viewBox || "0 0 24 24"} fill="currentColor">
-          {benefit.icon.paths.map((path: string, i: number) => (
-            <path key={i} d={path}></path>
-          ))}
-        </svg>
-      );
-    }
-    
-    // Default icons based on index if no custom icon is provided
-    if (index === 0) {
-      return (
-        <svg className="w-6 h-6 transform transition-transform duration-300 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-        </svg>
-      );
-    } else if (index === 1) {
-      return (
-        <svg className="w-6 h-6 transform transition-transform duration-300 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-        </svg>
-      );
-    } else if (index === 2) {
-      return (
-        <svg className="w-6 h-6 transform transition-transform duration-300 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-        </svg>
-      );
-    } else {
-      return (
-        <svg className="w-6 h-6 transform transition-transform duration-300 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path>
-        </svg>
-      );
+  // Minimal SVG Icons
+  const getIcon = (title: string) => {
+    switch (title) {
+      case "Mobile Excellence":
+        return (
+          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+          </svg>
+        );
+      case "Fast Delivery":
+        return (
+          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+        );
+      case "24/7 Support":
+        return (
+          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+          </svg>
+        );
+      case "Scalable Solutions":
+        return (
+          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+          </svg>
+        );
+      default:
+        return (
+          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+          </svg>
+        );
     }
   };
 
   return (
-    <div>
-      {/* Benefits 2x2 Grid - Matching the design with circular colored icons */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-10">
-        {contactData.benefits.map((benefit: Benefit, index: number) => {
-          const bgColor = benefit.bgColor || "bg-blue-500";
+    <div className="flex justify-start">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-w-sm">
+        {contactData.benefits.map((benefit: Benefit, index: number) => (
+        <div 
+          key={index} 
+          className="group flex flex-col items-start gap-1 p-2 rounded-lg transition-all duration-200 text-left select-none"
+        >
+          {/* Simple icon container */}
+          <div className="flex-shrink-0 w-6 h-6 bg-blue-50 rounded-lg flex items-center justify-center text-blue-600 group-hover:bg-blue-100 transition-colors duration-200 pointer-events-none">
+            {getIcon(benefit.title)}
+          </div>
           
-          // Use the gradient color if provided, otherwise create a gradient based on bgColor
-          let specialBgColor = benefit.gradientColor 
-            ? `bg-gradient-to-br ${benefit.gradientColor}` 
-            : `${bgColor}`;
-          
-          // Handle special cases for consistency
-          if (benefit.title === "Fast Delivery" && !benefit.gradientColor) {
-            specialBgColor = "bg-gradient-to-br from-yellow-400 to-orange-500";
-          } else if (benefit.title === "Scalable Solutions" && !benefit.gradientColor) {
-            specialBgColor = "bg-gradient-to-br from-purple-400 to-purple-600";
-          } else if (benefit.title === "24/7 Support") {
-            specialBgColor = "bg-gradient-to-br from-green-400 to-green-600";
-          }
-          
-          return (
-            <div key={index} className="flex items-start gap-5 group transition-all duration-300 hover:translate-y-[-2px]">
-              {/* Circular colored icon with modern hover animations */}
-              <div className={`flex-shrink-0 ${specialBgColor} w-12 h-12 rounded-full flex items-center justify-center text-white shadow-md 
-                transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg relative overflow-hidden`}>
-                {/* Icon */}
-                <div className="relative z-10">
-                  {/* Force specific icons for each benefit to ensure they display properly */}
-                  {benefit.title === "Mobile Excellence" ? (
-                    <svg className="w-6 h-6 transform transition-transform duration-300 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-                    </svg>
-                  ) : benefit.title === "Fast Delivery" ? (
-                    <svg className="w-6 h-6 transform transition-transform duration-300 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                    </svg>
-                  ) : benefit.title === "24/7 Support" ? (
-                    <svg className="w-6 h-6 transform transition-transform duration-300 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <circle cx="12" cy="12" r="10" strokeWidth="2" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6M12 9v6" />
-                    </svg>
-                  ) : benefit.title === "Scalable Solutions" ? (
-                    <svg className="w-6 h-6 transform transition-transform duration-300 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
-                    </svg>
-                  ) : (
-                    getIconContent(benefit, index)
-                  )}
-                </div>
-                
-                {/* Modern hover animation effects */}
-                <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-                
-                {/* Ripple effect */}
-                <div className="absolute inset-0 scale-0 rounded-full bg-white opacity-0 group-hover:scale-[2.5] group-hover:opacity-30 transition-all duration-700 ease-out"></div>
-                
-                {/* Glowing border */}
-                <div className="absolute inset-0 rounded-full border border-white opacity-0 scale-110 group-hover:opacity-20 group-hover:scale-125 transition-all duration-500"></div>
-              </div>
-              
-              {/* Text content with bold title and hover effects */}
-              <div className="flex flex-col transition-all duration-300">
-                <h3 className={`text-[#121826] text-lg font-bold mb-1 transition-colors duration-300 
-                  ${benefit.title === "Mobile Excellence" ? "group-hover:text-blue-600" : 
-                    benefit.title === "Fast Delivery" ? "group-hover:text-orange-500" :
-                    benefit.title === "24/7 Support" ? "group-hover:text-green-600" :
-                    benefit.title === "Scalable Solutions" ? "group-hover:text-purple-600" :
-                    "group-hover:text-blue-600"}`
-                }>{benefit.title}</h3>
-                <p className="text-gray-600 text-base group-hover:text-gray-800 transition-colors duration-300">{benefit.description}</p>
-              </div>
-            </div>
-          );
-        })}
+          {/* Content */}
+          <div className="flex-1 min-w-0 pointer-events-none">
+            <h3 className="text-gray-900 font-semibold text-xs mb-0.5">
+              {benefit.title}
+            </h3>
+            <p className="text-gray-600 text-xs leading-tight">
+              {benefit.description}
+            </p>
+          </div>
+        </div>
+      ))}
       </div>
     </div>
   )

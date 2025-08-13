@@ -21,7 +21,7 @@ interface HiringProcessSectionProps {
 
 export default function HiringProcessSection({ steps, title, description }: HiringProcessSectionProps) {
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-blue-50">
+    <section className="py-16 bg-white">
       <div className="text-center mb-12">
         <h2 className="text-3xl font-bold text-gray-900 mb-4">
           {title}
@@ -49,7 +49,7 @@ export default function HiringProcessSection({ steps, title, description }: Hiri
       </div>
       
       {/* Mobile Hiring Steps - Vertical Layout */}
-      <div className="md:hidden space-y-0">
+      <div className="md:hidden space-y-6 px-4">
         {steps.map((step, index) => (
           <MobileHiringStep 
             key={index} 

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
-import referencesData from '@/data/references.json'
+import referencesData from '../../data/references.json'
 
 interface Reference {
   id: string
@@ -11,7 +11,7 @@ interface Reference {
   website: string
 }
 
-export default function Logos() {
+const References: React.FC = () => {
   const [hoveredId, setHoveredId] = useState<string | null>(null)
   const [isVisible, setIsVisible] = useState(false)
 
@@ -21,22 +21,22 @@ export default function Logos() {
   }, [])
 
   return (
-    <section className="py-20 lg:py-28 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section className="py-16 ">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 leading-tight mb-6">
+        <div className="text-center mb-14">
+          <h2 className="text-4xl lg:text-5xl font-semibold tracking-tight text-gray-900 leading-tight mb-4">
             <span className="block">Our Works</span>
             <span className="block text-blue-600">On Companies</span>
           </h2>
-          <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base lg:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
             We&apos;ve partnered with industry leaders to deliver exceptional results. <br />
             Our reliable business partners with whom we have signed many successful projects.
           </p>
         </div>
 
         {/* Scrolling References Container */}
-        <div className="relative overflow-hidden h-32 scrolling-container">
+        <div className="relative overflow-hidden h-24 scrolling-container">
           {/* Gradient overlays for fade effect */}
           <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
@@ -44,7 +44,7 @@ export default function Logos() {
           {/* Scrolling container */}
           <div className={`flex items-center h-full transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
             {/* First set of logos */}
-            <div className="flex animate-scroll-left space-x-20 items-center min-w-max will-change-transform">
+            <div className="flex animate-scroll-left space-x-16 items-center min-w-max will-change-transform">
               {referencesData.references.map((reference: Reference) => (
                 <div
                   key={`first-${reference.id}`}
@@ -53,20 +53,13 @@ export default function Logos() {
                   onMouseLeave={() => setHoveredId(null)}
                   onClick={() => window.open(reference.website, '_blank')}
                 >
-                  <div className="relative w-48 h-28 flex items-center justify-center transition-all duration-300 transform group-hover:scale-110 group-hover:z-20">
-                    <div
-                      className={`absolute inset-0 rounded-lg transition-all duration-300 ${
-                        hoveredId === reference.id
-                          ? 'bg-gray-50 shadow-xl'
-                          : 'bg-transparent'
-                      }`}
-                    />
-                    <div className="relative z-10 w-44 h-24 flex items-center justify-center">
+                  <div className="relative w-36 h-20 flex items-center justify-center transition-colors duration-300">
+                    <div className="relative z-10 w-32 h-16 flex items-center justify-center transform transition-transform duration-300 group-hover:scale-110">
                       <Image
                         src={reference.logo}
                         alt={reference.name}
-                        width={176}
-                        height={96}
+                        width={128}
+                        height={64}
                         className={`transition-all duration-300 object-contain max-w-full max-h-full ${
                           hoveredId === reference.id
                             ? 'filter-none'
@@ -95,7 +88,7 @@ export default function Logos() {
             </div>
             
             {/* Duplicate set for seamless scrolling */}
-            <div className="flex animate-scroll-left space-x-20 items-center min-w-max ml-20 will-change-transform">
+            <div className="flex animate-scroll-left space-x-16 items-center min-w-max ml-16 will-change-transform">
               {referencesData.references.map((reference: Reference) => (
                 <div
                   key={`second-${reference.id}`}
@@ -104,20 +97,13 @@ export default function Logos() {
                   onMouseLeave={() => setHoveredId(null)}
                   onClick={() => window.open(reference.website, '_blank')}
                 >
-                  <div className="relative w-48 h-28 flex items-center justify-center transition-all duration-300 transform group-hover:scale-110 group-hover:z-20">
-                    <div
-                      className={`absolute inset-0 rounded-lg transition-all duration-300 ${
-                        hoveredId === reference.id
-                          ? 'bg-gray-50 shadow-xl'
-                          : 'bg-transparent'
-                      }`}
-                    />
-                    <div className="relative z-10 w-44 h-24 flex items-center justify-center">
+                  <div className="relative w-36 h-20 flex items-center justify-center transition-colors duration-300">
+                    <div className="relative z-10 w-32 h-16 flex items-center justify-center transform transition-transform duration-300 group-hover:scale-110">
                       <Image
                         src={reference.logo}
                         alt={reference.name}
-                        width={176}
-                        height={96}
+                        width={128}
+                        height={64}
                         className={`transition-all duration-300 object-contain max-w-full max-h-full ${
                           hoveredId === reference.id
                             ? 'filter-none'
@@ -178,3 +164,5 @@ export default function Logos() {
     </section>
   )
 }
+
+export default References

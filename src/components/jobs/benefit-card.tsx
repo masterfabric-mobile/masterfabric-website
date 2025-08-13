@@ -97,7 +97,7 @@ export default function BenefitCard({ benefit }: BenefitCardProps) {
   };
 
   return (
-    <div className="benefit-card text-center p-6 bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300">
+    <div className="benefit-card text-center p-6 bg-white rounded-2xl hover:shadow-md transition-shadow duration-300">
       <div className="benefit-icon w-16 h-16 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
         {getIcon()}
       </div>

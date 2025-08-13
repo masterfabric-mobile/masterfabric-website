@@ -1,56 +1,38 @@
 /* Hiring step animations */
 .hiring-step-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  background: linear-gradient(145deg, #ffffff, #f9fbff);
+  transition: border-color 0.3s ease;
   height: 100%;
+  min-height: 180px; /* Reduced for mobile */
+  box-shadow: none !important;
+  text-align: center;
 }
 
 .hiring-step-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  border-color: #3b82f6;
+  box-shadow: none !important;
 }
 
 /* Step number styles */
 .step-number {
-  position: relative;
-  transition: all 0.3s ease;
-  z-index: 10;
-}
-
-.step-number::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  transform: scale(0);
-  transition: transform 0.5s ease;
-  z-index: -1;
+  transition: transform 0.2s ease;
 }
 
 .step-number:hover {
-  transform: scale(1.1);
-}
-
-.step-number:hover::after {
-  transform: scale(1.5);
+  transform: scale(1.05);
 }
 
 /* Icon container animations */
 .icon-container {
-  transition: all 0.3s ease;
+  transition: transform 0.2s ease;
 }
 
 .icon-container:hover {
-  transform: translateY(-2px) scale(1.05);
+  transform: scale(1.05);
 }
 
 /* Expanded content transitions */
 .expanded-content {
-  transition: max-height 0.5s ease, opacity 0.3s ease;
+  transition: max-height 0.3s ease, opacity 0.2s ease;
 }
 
 .expanded-content.opacity-0 {
@@ -63,77 +45,56 @@
 
 /* Expand button hover effects */
 .expand-btn {
-  transition: all 0.2s ease;
+  transition: color 0.2s ease;
 }
 
 .expand-btn:hover svg {
-  transform: scale(1.2) rotate(0deg);
+  transform: scale(1.1);
 }
 
-.expand-btn:hover svg.rotate-180 {
-  transform: scale(1.2) rotate(180deg);
-}
-
-/* Card content hover effects */
-.card-content {
-  transition: background-color 0.3s ease;
-}
-
-.card-content:hover {
-  background-color: rgba(243, 244, 246, 0.5);
-}
+/* Card content hover effects - removed */
 
 /* Border styles for jobs layout */
 .border-3 {
   border-width: 3px;
 }
 
-/* Connecting line style */
-.step-connector {
-  position: absolute;
-  height: 4px;
-  background: linear-gradient(to right, #3b82f6, #60a5fa);
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 5;
-}
-
-/* Card hover effect with subtle background change */
-.hiring-step-card:hover {
-  background: linear-gradient(145deg, #ffffff, #f0f7ff);
-}
-
-/* Add numbers before steps */
+/* Step number simplified */
 .step-number {
-  position: relative;
+  transition: transform 0.2s ease;
 }
 
-/* Sequential number badges style */
-.step-number::before {
-  position: absolute;
-  content: '';
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #3b82f6, #1e40af);
-  opacity: 0.2;
-  transform: scale(1.15);
-  z-index: -1;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1.15);
-    opacity: 0.2;
+/* Mobile responsive improvements */
+@media (max-width: 767px) {
+  .hiring-step-card {
+    min-height: 160px;
+    margin: 0 auto 1.5rem auto;
+    max-width: 280px;
   }
-  50% {
-    transform: scale(1.25);
-    opacity: 0.3;
+  
+  .hiring-step {
+    padding: 0 0.5rem;
+    margin-bottom: 2rem;
+    position: relative;
   }
-  100% {
-    transform: scale(1.15);
-    opacity: 0.2;
+  
+  /* Hide step numbers and lines on mobile */
+  .step-number {
+    display: none !important;
+  }
+  
+  /* Hide any connecting lines */
+  .hiring-step::before,
+  .hiring-step::after {
+    display: none !important;
+  }
+  
+  .card-content {
+    padding: 0.75rem !important;
+  }
+  
+  .expanded-content {
+    padding: 0 0.75rem 0.75rem !important;
   }
 }
 
@@ -144,8 +105,11 @@
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1.5rem;
   }
-  
-  .hiring-step:first-child {
-    margin-left: 0;
+}
+
+/* Large mobile screens */
+@media (min-width: 480px) and (max-width: 767px) {
+  .hiring-step-card {
+    max-width: 320px;
   }
 }

@@ -51,7 +51,7 @@ const FlipStatistics: React.FC<FlipStatisticsProps> = ({
   });
 
   React.useEffect(() => {
-    // Sadece ilk yüklemede fade-in
+    
     const statCards = document.querySelectorAll('.stat-card');
     statCards.forEach((card, index) => {
       const htmlCard = card as HTMLElement;
@@ -91,21 +91,16 @@ const FlipStatistics: React.FC<FlipStatisticsProps> = ({
               onMouseEnter={() => setHovered(index)}
               onMouseLeave={() => setHovered(null)}
             >
-              {/* Sağ üstte ikon */}
+             
               <div style={{ position: 'absolute', top: 16, right: 16, zIndex: 2 }}>
-                <div style={{ width: 32, height: 32, borderRadius: '50%', background: '#2563eb', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 8px rgba(37,99,235,0.10)' }}>
+                <div style={{ width: 32, height: 32, borderRadius: '50%', background: '#2563eb', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: 'none' }}>
                   <span dangerouslySetInnerHTML={{ __html: iconSvg.replace('<svg ', '<svg class=\"w-5 h-5\" fill=\"none\" stroke=\"white\" ') }} />
                 </div>
               </div>
-              {/* Arka plan grid/desen */}
-              <div className="geometric-pattern">
-                <div className="pattern-grid"></div>
-                <div className="pattern-dots"></div>
-              </div>
-              {/* İçerik */}
+           
               <div className="flex flex-col items-center justify-center h-full w-full">
                 <div className="stat-number" style={{ fontSize: '1.5rem', fontWeight: 800, color: '#2563eb', marginBottom: 4 }}>{stat.value}</div>
-                {/* Text transition */}
+             
                 <div style={{ position: 'relative', height: 32, width: '100%' }}>
                   <span
                     style={{

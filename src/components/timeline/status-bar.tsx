@@ -102,7 +102,7 @@ const StatusBar: React.FC = () => {
         <div style={{ 
           display: 'flex',
           flexDirection: 'column',
-          padding: '14px 18px',
+          padding: '8px 12px',
           backgroundColor: 'white',
           borderRadius: '0 0 8px 8px'
         }}>
@@ -110,28 +110,28 @@ const StatusBar: React.FC = () => {
           <div style={{ 
             display: 'flex', 
             alignItems: 'center', 
-            marginBottom: '10px',
+            marginBottom: '6px',
             justifyContent: 'space-between'
           }}>
             {/* Left: Phase info */}
             <div style={{ display: 'flex', alignItems: 'center' }}>
               {/* Status icon */}
               <div style={{ 
-                fontSize: '1.25rem', 
-                marginRight: '0.75rem',
+                fontSize: '1rem', 
+                marginRight: '0.5rem',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                width: '36px',
-                height: '36px',
+                width: '28px',
+                height: '28px',
                 backgroundColor: '#f3f4f6',
                 borderRadius: '50%'
               }}>{currentPhase.icon}</div>
               
               {/* Status text */}
               <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <div style={{ fontWeight: '600', fontSize: '1rem' }}>{currentPhase.title}</div>
-                <div style={{ fontSize: '0.75rem', color: '#4b5563' }}>
+                <div style={{ fontWeight: '600', fontSize: '0.875rem' }}>{currentPhase.title}</div>
+                <div style={{ fontSize: '0.6875rem', color: '#4b5563' }}>
                   Day {Math.min(currentDay, totalDays)} of {totalDays}
                 </div>
               </div>
@@ -152,19 +152,21 @@ const StatusBar: React.FC = () => {
           
           {/* Progress bar */}
           <div style={{ 
-            height: '8px',
-            backgroundColor: '#e5e7eb',
-            borderRadius: '9999px',
-            overflow: 'hidden',
-            margin: '4px 0'
+            marginTop: '3px', 
+            height: '2px', 
+            backgroundColor: '#f3f4f6', 
+            borderRadius: '1px',
+            overflow: 'hidden'
           }}>
-            <div style={{
-              height: '100%',
-              width: `${Math.min(progressPercentage, 100)}%`,
-              backgroundColor: '#10b981',
-              borderRadius: '9999px',
-              transition: 'width 0.3s ease'
-            }}></div>
+            <div 
+              style={{ 
+                height: '100%', 
+                background: '#3b82f6',
+                borderRadius: '1px',
+                transition: 'width 0.3s ease',
+                width: `${(Math.min(currentDay, totalDays) / totalDays) * 100}%`
+              }}
+            />
           </div>
           
           {/* Status text */}

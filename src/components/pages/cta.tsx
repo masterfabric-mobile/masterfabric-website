@@ -29,7 +29,7 @@ export default function CTA() {
           </h2>
           <div className="flex gap-8 md:gap-20 items-center justify-center mt-10 flex-wrap">
             <Icon className="size-8 md:size-12 text-gray-400 hover:text-blue-600 transition-all duration-500 hover:scale-125" icon="simple-icons:flutter" />
-            <Icon className="size-8 md:size-12 text-gray-400 hover:text-green-600 transition-all duration-500 hover:scale-125" icon="simple-icons:nestjs" />
+            <Icon className="size-8 md:size-12 text-gray-400 hover:text-pink-600 transition-all duration-500 hover:scale-125" icon="simple-icons:nestjs" />
             <Icon className="size-8 md:size-12 text-gray-400 hover:text-orange-500 transition-all duration-500 hover:scale-125" icon="simple-icons:swift" />
             <Icon className="size-8 md:size-12 text-gray-400 hover:text-purple-600 transition-all duration-500 hover:scale-125" icon="simple-icons:kotlin" />
             <Icon className="size-8 md:size-16 text-gray-400 hover:text-blue-500 transition-all duration-500 hover:scale-125" icon="simple-icons:react" />

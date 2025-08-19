@@ -42,7 +42,7 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
     try {
       // Send data to Web3Forms API
       const formDataToSend = new FormData()
-      formDataToSend.append('access_key', 'WEB3FORMS_ACCESS_KEY') // Get your key from https://web3forms.com
+      formDataToSend.append('access_key', process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || '') // Web3Forms access key
       formDataToSend.append('name', formData.name)
       formDataToSend.append('email', formData.email)
       formDataToSend.append('phone', formData.phone)

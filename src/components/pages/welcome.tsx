@@ -415,7 +415,7 @@ export default function Welcome({ onTimelineDialogRequest }: WelcomeProps) {
   }, [animateScenario])
 
   return (
-    <main className="grid lg:grid-cols-2 pt-10 pb-8 md:pt-8 md:pb-12 gap-0">
+    <section className="grid lg:grid-cols-2 pt-10 pb-8 md:pt-8 md:pb-12 gap-8 md:gap-16">
       {/* Content Section */}
       <div className="md:order-1 pl-6 md:pl-8 lg:pl-12">
         <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">
@@ -435,7 +435,7 @@ export default function Welcome({ onTimelineDialogRequest }: WelcomeProps) {
       </div>
 
       {/* Animated Code Editor */}
-      <div className="md:order-2 hidden md:block w-full max-w-2xl">
+      <div className="md:order-2 w-full max-w-2xl overflow-hidden">
         <div className={styles.codeEditorContainer}>
           {/* Editor Header */}
           <div className={styles.editorHeader}>
@@ -573,6 +573,6 @@ export default function Welcome({ onTimelineDialogRequest }: WelcomeProps) {
           )}
         </div>
       </div>
-    </main>
+    </section>
   )
 }

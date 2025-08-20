@@ -9,8 +9,8 @@ export default function ContactInfo() {
       {/* Office Location */}
       <div className="flex items-start gap-6 py-4 border-b border-gray-100 group">
         <div className="flex-shrink-0">
-          <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white transition-transform duration-300 group-hover:scale-110">
-            <MapPin className="w-7 h-7" />
+          <div className="w-12 h-12 bg-blue-50 rounded-lg ring-1 ring-blue-100 flex items-center justify-center text-blue-700 group-hover:bg-blue-100 group-hover:ring-blue-200 transition-colors">
+            <MapPin className="w-6 h-6" />
           </div>
         </div>
         <div className="flex flex-col justify-center">
@@ -25,8 +25,8 @@ export default function ContactInfo() {
       {/* Email Address */}
       <div className="flex items-start gap-6 py-4 border-b border-gray-100 group">
         <div className="flex-shrink-0">
-          <div className="w-14 h-14 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center text-white transition-transform duration-300 group-hover:scale-110">
-            <Mail className="w-7 h-7" />
+          <div className="w-12 h-12 bg-blue-50 rounded-lg ring-1 ring-blue-100 flex items-center justify-center text-blue-700 group-hover:bg-blue-100 group-hover:ring-blue-200 transition-colors">
+            <Mail className="w-6 h-6" />
           </div>
         </div>
         <div className="flex flex-col justify-center">
@@ -40,8 +40,8 @@ export default function ContactInfo() {
       {/* Business Hours */}
       <div className="flex items-start gap-6 py-4 group">
         <div className="flex-shrink-0">
-          <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center text-white transition-transform duration-300 group-hover:scale-110">
-            <Clock className="w-7 h-7" />
+          <div className="w-12 h-12 bg-blue-50 rounded-lg ring-1 ring-blue-100 flex items-center justify-center text-blue-700 group-hover:bg-blue-100 group-hover:ring-blue-200 transition-colors">
+            <Clock className="w-6 h-6" />
           </div>
         </div>
         <div className="flex flex-col justify-center">

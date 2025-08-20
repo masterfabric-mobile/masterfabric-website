@@ -370,48 +370,48 @@ function PhoneShowcase() {
 
 export default function RefactorApplication() {
   return (
-    <section className="relative py-16 lg:py-24 bg-white overflow-hidden">
+    <section className="relative py-12 md:py-16 lg:py-24 bg-white overflow-hidden">
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header Section - Consistent with codebase patterns */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl lg:text-5xl xl:text-5xl font-bold text-gray-900 leading-tight mb-6">
+        <div className="text-center mb-12 md:mb-16">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-5xl font-bold text-gray-900 leading-tight mb-4 md:mb-6">
             <span className="block">App Design,</span>
             <span className="block text-blue-600">Optimization</span>
             <span className="block">and Growth</span>
           </h1>
-          <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base md:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed px-4">
             Already have an app? We can help refresh its look and enhance its performance. 
             We focus on improving user experience and applying the latest technologies.
           </p>
         </div>
 
         {/* Main Content Grid */}
-        <div className="grid lg:grid-cols-2 gap-12 xl:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 xl:gap-16 items-center">
           {/* Services Column */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4 md:gap-6">
             {serviceCards.map((service, index) => (
               <div
                 key={index}
-                className={`service-card service-${service.color} group relative p-3 rounded-lg border-2 transition-all duration-500 hover:scale-[1.02] cursor-pointer bg-white shadow-sm hover:shadow-xl`}
+                className={`service-card service-${service.color} group relative p-3 md:p-4 rounded-lg border-2 transition-all duration-500 hover:scale-[1.02] cursor-pointer bg-white shadow-sm hover:shadow-xl`}
               >
                 <div className="absolute top-0 right-0 w-10 h-10 opacity-5 overflow-hidden rounded-tr-lg">
                   <div className={`w-full h-full ${colorBgMap[service.color]} transform rotate-45 translate-x-2.5 -translate-y-2.5`}></div>
                 </div>
-                <div className="inline-flex items-center justify-center w-8 h-8 rounded-md bg-white border-2 border-gray-100 mb-3 group-hover:scale-110 transition-transform duration-300">
+                <div className="inline-flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-md bg-white border-2 border-gray-100 mb-3 group-hover:scale-110 transition-transform duration-300">
                   {service.icon}
                 </div>
-                <h3 className="text-base font-bold text-gray-900 mb-2 group-hover:text-gray-800 transition-colors leading-tight">
+                <h3 className="text-sm md:text-base font-bold text-gray-900 mb-2 group-hover:text-gray-800 transition-colors leading-tight">
                   {service.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed text-sm line-clamp-3">
+                <p className="text-gray-600 leading-relaxed text-xs md:text-sm line-clamp-3">
                   {service.description}
                 </p>
               </div>
             ))}
           </div>
           {/* App Showcase Column - Centered */}
-          <div className="flex justify-center">
-            <div className="iphone-16-frame">
+          <div className="flex justify-center mt-8 lg:mt-0">
+            <div className="iphone-16-frame transform scale-75 md:scale-90 lg:scale-100">
               <div className="side-button volume-up"></div>
               <div className="side-button volume-down"></div>
               <div className="side-button action"></div>

@@ -129,13 +129,12 @@
 }
 
 .editorContent::-webkit-scrollbar-thumb {
-  background-color: #5a5a5a !important;  
-  background: none;  
+  background: #5a5a5a;  
   border-radius: 0;
 }
 
 .editorContent::-webkit-scrollbar-thumb:hover {
-  background-color: #6b6b6b !important;  
+    background: #6b6b6b;  
 }
 
 .lineNumbers {

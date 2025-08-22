@@ -13,6 +13,7 @@ import {
   Search,
   Target,
 } from "lucide-react";
+import { cn } from "@/utils";
 import styles from "../../styles/refactor-application.module.css";
 import { Icon } from "@iconify/react";
 
@@ -688,7 +689,10 @@ export default function RefactorApplication() {
             {serviceCards.map((service, index) => (
               <div
                 key={index}
-                className={`service-card w-full md:max-w-[24rem] min-h-[10rem] service-${service.color} group relative p-3 rounded-lg border-2 transition-all duration-500 hover:scale-[1.02] cursor-pointer bg-white shadow-sm hover:shadow-xl`}
+                className={cn(
+                  "service-card w-full md:max-w-[24rem] min-h-[10rem] group relative p-3 rounded-lg border-2 transition-all duration-500 hover:scale-[1.02] cursor-pointer bg-white shadow-sm hover:shadow-xl",
+                  `service-${service.color}`
+                )}
               >
                 <div className="absolute top-0 right-0 w-10 h-10 opacity-5 overflow-hidden rounded-tr-lg">
                   <div

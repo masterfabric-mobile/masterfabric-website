@@ -107,7 +107,15 @@ function Navbar() {
               "flex pt-[0.3rem] md:pt-0 items-center justify-between flex-wrap md:flex-nowrap transition-[height] duration-700 ease-in-out";
             const navBaseClasses =
               "md:items-center max-h-screen md:max-h-max overflow-hidden flex flex-col md:flex-row gap-2 md:gap-0 md:space-x-4 ml-auto w-full md:w-auto mt-[0.4rem] md:mt-0 order-last md:order-1 border-t border-gray-200 md:border-0";
-
+// Move static class strings to module scope
+const wrapperBaseClasses =
+  "flex pt-[0.3rem] md:pt-0 items-center justify-between flex-wrap md:flex-nowrap transition-[height] duration-700 ease-in-out";
+const navBaseClasses =
+  "md:items-center max-h-screen md:max-h-max overflow-hidden flex flex-col md:flex-row gap-2 md:gap-0 md:space-x-4 ml-auto w-full md:w-auto mt-[0.4rem] md:mt-0 order-last md:order-1 border-t border-gray-200 md:border-0";
+            // const wrapperBaseClasses =
+            //   "flex pt-[0.3rem] md:pt-0 items-center justify-between flex-wrap md:flex-nowrap transition-[height] duration-700 ease-in-out";
+            // const navBaseClasses =
+            //   "md:items-center max-h-screen md:max-h-max overflow-hidden flex flex-col md:flex-row gap-2 md:gap-0 md:space-x-4 ml-auto w-full md:w-auto mt-[0.4rem] md:mt-0 order-last md:order-1 border-t border-gray-200 md:border-0";
             return (
               <div
                 className={cn(

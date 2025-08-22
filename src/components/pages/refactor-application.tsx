@@ -643,30 +643,6 @@ function PhoneShowcase() {
 export default function RefactorApplication() {
   return (
     <section className="relative py-16 lg:py-24 bg-white overflow-hidden">
-      {/* Subtle geometric background */}
-      <div className="absolute inset-0 pointer-events-none select-none">
-        <svg
-          className="absolute top-0 left-0 w-full h-full opacity-[0.02]"
-          viewBox="0 0 100 100"
-          preserveAspectRatio="none"
-        >
-          <defs>
-            <pattern
-              id="triangles"
-              x="0"
-              y="0"
-              width="20"
-              height="20"
-              patternUnits="userSpaceOnUse"
-            >
-              <polygon points="10,2 18,16 2,16" fill="currentColor" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#triangles)" />
-        </svg>
-      </div>
-      {/* Floating minimal elements - removed for static design */}
-
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header Section - Consistent with codebase patterns */}
         <div className="text-center mb-12 md:mb-16">

@@ -9,10 +9,10 @@ import {
 
 export default function SuperchargeExperience() {
   return (
-    <section className="py-16 lg:py-24">
+    <section className="py-4 lg:py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-  <div className="text-center mb-14">
+  <div className="text-center mb-8">
           <h2 className="text-4xl lg:text-5xl font-semibold tracking-tight text-gray-900 leading-tight mb-4">
             <span className="block">Supercharge Your</span>
             <span className="block text-blue-600">App Experience</span>

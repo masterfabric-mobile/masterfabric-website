@@ -66,8 +66,8 @@ export default function JobsClient({
 
       {/* Open Positions Section */}
       {!skipPositions && positionsData?.openPositions && positionsData.openPositions.length > 0 && (
-        <section className="py-16 lg:py-20">
-          <div className="text-center mb-16">
+        <section className="py-4 lg:py-8">
+          <div className="text-center mb-8 lg:mb-12">
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-center gap-4 mb-6">
               <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 text-center lg:text-left">Open Positions</h2>
               <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-orange-100 text-orange-800 w-fit mx-auto lg:mx-0">

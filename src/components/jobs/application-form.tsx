@@ -51,15 +51,27 @@ export default function ApplicationForm({ formData, positions, selectedPositionI
     const formElements = form.elements as HTMLFormControlsCollection;
     
     try {
-      const formData = new FormData(form);
-      const response = await fetch(form.action, {
-        method: form.method,
+      // Use Web3Forms API directly
+      const formData = new FormData();
+      formData.append('access_key', process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || '');
+      formData.append('name', (formElements.namedItem('name') as HTMLInputElement)?.value || '');
+      formData.append('email', (formElements.namedItem('email') as HTMLInputElement)?.value || '');
+      formData.append('phone', (formElements.namedItem('phone') as HTMLInputElement)?.value || '');
+      formData.append('position', (formElements.namedItem('position') as HTMLSelectElement)?.value || '');
+      formData.append('experience', (formElements.namedItem('experience') as HTMLInputElement)?.value || '');
+      formData.append('portfolio', (formElements.namedItem('portfolio') as HTMLInputElement)?.value || '');
+      formData.append('message', (formElements.namedItem('message') as HTMLTextAreaElement)?.value || '');
+      formData.append('subject', 'New Career Application - MasterFabric');
+      formData.append('botcheck', ''); // For spam protection
+
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
         body: formData,
       });
       
       const data = await response.json();
       
-      if (response.ok) {
+      if (response.ok && data.success) {
         setFormStatus({ 
           success: true, 
           message: 'Thank you! Your application has been submitted successfully.' 
@@ -99,7 +111,7 @@ export default function ApplicationForm({ formData, positions, selectedPositionI
           onSubmit={handleSubmit}
         >
           {formData.api?.accessKey && (
-            <input type="hidden" name="access_key" value={formData.api.accessKey} />
+                      <input type="hidden" name="access_key" value={process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY} />
           )}
           <input type="hidden" name="subject" value="New Career Application - MasterFabric" />
           <input type="checkbox" className="hidden" style={{display: 'none'}} name="botcheck" />

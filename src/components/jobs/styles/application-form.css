@@ -13,3 +13,27 @@
 .pulse-animation {
   animation: pulse 1.5s ease-in-out;
 }
+
+/* Limit dropdown height and add scroll */
+select[multiple],
+select[size]:not([size="1"]) {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* Webkit browsers - limit dropdown options */
+select:not([multiple]):not([size]) option:first-child ~ option:nth-child(n+8) {
+  display: none;
+}
+
+/* Modern browsers - limit dropdown height */
+select {
+  scroll-behavior: smooth;
+}
+
+@supports (field-sizing: content) {
+  select {
+    field-sizing: content;
+    max-height: 200px;
+  }
+}

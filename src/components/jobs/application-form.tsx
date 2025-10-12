@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, FormEvent } from 'react'
 import './styles/application-form.css'
+import countryCodesData from '../../data/country-codes.json'
 
 interface ApplicationFormProps {
   formData: {
@@ -19,6 +20,7 @@ interface ApplicationFormProps {
       position: { label: string, placeholder: string, required: boolean }
       experience: { label: string, placeholder: string, required: boolean }
       portfolio: { label: string, placeholder: string, required: boolean }
+      github: { label: string, placeholder: string, required: boolean }
       message: { label: string, placeholder: string, required: boolean }
     }
   }
@@ -36,6 +38,7 @@ export default function ApplicationForm({ formData, positions, selectedPositionI
   }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedPosition, setSelectedPosition] = useState(selectedPositionId || '');
+  const [consentChecked, setConsentChecked] = useState(false);
 
   useEffect(() => {
     if (selectedPositionId) {
@@ -56,11 +59,15 @@ export default function ApplicationForm({ formData, positions, selectedPositionI
       formData.append('access_key', process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || '');
       formData.append('name', (formElements.namedItem('name') as HTMLInputElement)?.value || '');
       formData.append('email', (formElements.namedItem('email') as HTMLInputElement)?.value || '');
-      formData.append('phone', (formElements.namedItem('phone') as HTMLInputElement)?.value || '');
+      const countryCode = (formElements.namedItem('countryCode') as HTMLSelectElement)?.value || '+90';
+      const phoneNumber = (formElements.namedItem('phone') as HTMLInputElement)?.value || '';
+      formData.append('phone', `${countryCode} ${phoneNumber}`);
       formData.append('position', (formElements.namedItem('position') as HTMLSelectElement)?.value || '');
       formData.append('experience', (formElements.namedItem('experience') as HTMLInputElement)?.value || '');
       formData.append('portfolio', (formElements.namedItem('portfolio') as HTMLInputElement)?.value || '');
+      formData.append('github', (formElements.namedItem('github') as HTMLInputElement)?.value || '');
       formData.append('message', (formElements.namedItem('message') as HTMLTextAreaElement)?.value || '');
+      formData.append('consent', (formElements.namedItem('consent') as HTMLInputElement)?.checked ? 'Yes' : 'No');
       formData.append('subject', 'New Career Application - MasterFabric');
       formData.append('botcheck', ''); // For spam protection
 
@@ -151,14 +158,45 @@ export default function ApplicationForm({ formData, positions, selectedPositionI
               <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-2">
                 {formData.fields.phone.label} {formData.fields.phone.required && '*'}
               </label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                required={formData.fields.phone.required}
-                placeholder={formData.fields.phone.placeholder}
-                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              />
+              <div className="flex gap-2">
+                <div className="relative">
+                  <select
+                    id="country-code"
+                    name="countryCode"
+                    className="px-3 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent min-w-[100px] bg-[length:16px_16px] bg-[position:right_8px_center] bg-no-repeat appearance-none cursor-pointer"
+                    style={{
+                      backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+                      transformOrigin: 'top left'
+                    }}
+                    size={1}
+                    onFocus={(e) => {
+                      e.target.style.transform = 'translateY(2px)';
+                    }}
+                    onBlur={(e) => {
+                      e.target.style.transform = 'translateY(0px)';
+                    }}
+                  >
+                  {countryCodesData.countryCodes.map((country, index) => (
+                    <option 
+                      key={`${country.iso}-${index}`} 
+                      value={country.code} 
+                      className="text-gray-900"
+                    >
+                      {country.flag} {country.code}
+                    </option>
+                  ))}
+                </select>
+                </div>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  required={formData.fields.phone.required}
+                  placeholder="555 123 4567"
+                  pattern="[0-9\s\-\(\)]{10,15}"
+                  className="flex-1 px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
             </div>
             
             <div>
@@ -180,11 +218,22 @@ export default function ApplicationForm({ formData, positions, selectedPositionI
             <label htmlFor="position" className="block text-sm font-medium text-gray-300 mb-2">
               {formData.fields.position.label} {formData.fields.position.required && '*'}
             </label>
-            <select
-              id="position"
-              name="position"
-              required={formData.fields.position.required}
-              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            <div className="relative">
+              <select
+                id="position"
+                name="position"
+                required={formData.fields.position.required}
+                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-[length:16px_16px] bg-[position:right_12px_center] bg-no-repeat appearance-none cursor-pointer"
+                style={{
+                  backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+                  transformOrigin: 'top left'
+                }}
+                onFocus={(e) => {
+                  e.target.style.transform = 'translateY(2px)';
+                }}
+                onBlur={(e) => {
+                  e.target.style.transform = 'translateY(0px)';
+                }}
               value={selectedPosition}
               onChange={e => setSelectedPosition(e.target.value)}
             >
@@ -200,20 +249,37 @@ export default function ApplicationForm({ formData, positions, selectedPositionI
               ))}
               <option value="Other" className="text-gray-900">Other / General Application</option>
             </select>
+            </div>
           </div>
           
-          <div>
-            <label htmlFor="portfolio" className="block text-sm font-medium text-gray-300 mb-2">
-              {formData.fields.portfolio.label} {formData.fields.portfolio.required && '*'}
-            </label>
-            <input
-              type="url"
-              id="portfolio"
-              name="portfolio"
-              required={formData.fields.portfolio.required}
-              placeholder={formData.fields.portfolio.placeholder}
-              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label htmlFor="portfolio" className="block text-sm font-medium text-gray-300 mb-2">
+                {formData.fields.portfolio.label} {formData.fields.portfolio.required && '*'}
+              </label>
+              <input
+                type="url"
+                id="portfolio"
+                name="portfolio"
+                required={formData.fields.portfolio.required}
+                placeholder={formData.fields.portfolio.placeholder}
+                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+            
+            <div>
+              <label htmlFor="github" className="block text-sm font-medium text-gray-300 mb-2">
+                {formData.fields.github.label} {formData.fields.github.required && '*'}
+              </label>
+              <input
+                type="url"
+                id="github"
+                name="github"
+                required={formData.fields.github.required}
+                placeholder={formData.fields.github.placeholder}
+                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
           </div>
           
           <div>
@@ -230,11 +296,38 @@ export default function ApplicationForm({ formData, positions, selectedPositionI
             ></textarea>
           </div>
           
+          <div className="flex items-start space-x-3">
+            <input
+              type="checkbox"
+              id="consent"
+              name="consent"
+              required
+              checked={consentChecked}
+              onChange={(e) => setConsentChecked(e.target.checked)}
+              className="mt-1 w-4 h-4 text-blue-600 bg-white/10 border-white/20 rounded focus:ring-blue-500 focus:ring-2"
+            />
+            <label htmlFor="consent" className="text-sm text-gray-300 leading-relaxed">
+              I consent to the processing of my personal data in accordance with the{' '}
+              <a href="/privacy-policy" target="_blank" className="text-blue-400 hover:text-blue-300 underline">
+                Privacy Policy
+              </a>{' '}
+              and{' '}
+              <a href="/terms-of-use" target="_blank" className="text-blue-400 hover:text-blue-300 underline">
+                Terms of Use
+              </a>
+              . I agree to receive communications regarding my application.
+            </label>
+          </div>
+          
           <div className="text-center">
             <button 
               type="submit" 
-              disabled={isSubmitting}
-              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-8 rounded-lg transition-colors duration-200 w-full md:w-auto disabled:opacity-70"
+              disabled={isSubmitting || !consentChecked}
+              className={`font-semibold py-4 px-8 rounded-lg transition-colors duration-200 w-full md:w-auto ${
+                isSubmitting || !consentChecked 
+                  ? 'bg-gray-600 cursor-not-allowed opacity-50' 
+                  : 'bg-blue-600 hover:bg-blue-700'
+              } text-white`}
             >
               {isSubmitting ? 'Submitting...' : 'Submit Application'}
             </button>

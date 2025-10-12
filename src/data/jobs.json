@@ -190,6 +190,13 @@
         "placeholder": "Share your portfolio or LinkedIn profile",
         "required": false
       },
+
+      "github": {
+        "label": "GitHub URL",
+        "placeholder": "Share your GitHub profile",
+        "required": false
+      },
+
       "resume": {
         "label": "Resume/CV",
         "placeholder": "Upload your resume (PDF format preferred)",

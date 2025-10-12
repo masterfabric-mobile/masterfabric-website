@@ -1,0 +1,244 @@
+{
+  "countryCodes": [
+    {
+      "code": "+90",
+      "country": "Turkey",
+      "flag": "🇹🇷",
+      "iso": "TR"
+    },
+    {
+      "code": "+1",
+      "country": "United States",
+      "flag": "🇺🇸",
+      "iso": "US"
+    },
+    {
+      "code": "+1",
+      "country": "Canada",
+      "flag": "🇨🇦",
+      "iso": "CA"
+    },
+    {
+      "code": "+44",
+      "country": "United Kingdom",
+      "flag": "🇬🇧",
+      "iso": "GB"
+    },
+    {
+      "code": "+49",
+      "country": "Germany",
+      "flag": "🇩🇪",
+      "iso": "DE"
+    },
+    {
+      "code": "+33",
+      "country": "France",
+      "flag": "🇫🇷",
+      "iso": "FR"
+    },
+    {
+      "code": "+39",
+      "country": "Italy",
+      "flag": "🇮🇹",
+      "iso": "IT"
+    },
+    {
+      "code": "+34",
+      "country": "Spain",
+      "flag": "🇪🇸",
+      "iso": "ES"
+    },
+    {
+      "code": "+31",
+      "country": "Netherlands",
+      "flag": "🇳🇱",
+      "iso": "NL"
+    },
+    {
+      "code": "+41",
+      "country": "Switzerland",
+      "flag": "🇨🇭",
+      "iso": "CH"
+    },
+    {
+      "code": "+43",
+      "country": "Austria",
+      "flag": "🇦🇹",
+      "iso": "AT"
+    },
+    {
+      "code": "+32",
+      "country": "Belgium",
+      "flag": "🇧🇪",
+      "iso": "BE"
+    },
+    {
+      "code": "+45",
+      "country": "Denmark",
+      "flag": "🇩🇰",
+      "iso": "DK"
+    },
+    {
+      "code": "+46",
+      "country": "Sweden",
+      "flag": "🇸🇪",
+      "iso": "SE"
+    },
+    {
+      "code": "+47",
+      "country": "Norway",
+      "flag": "🇳🇴",
+      "iso": "NO"
+    },
+    {
+      "code": "+358",
+      "country": "Finland",
+      "flag": "🇫🇮",
+      "iso": "FI"
+    },
+    {
+      "code": "+7",
+      "country": "Russia",
+      "flag": "🇷🇺",
+      "iso": "RU"
+    },
+    {
+      "code": "+86",
+      "country": "China",
+      "flag": "🇨🇳",
+      "iso": "CN"
+    },
+    {
+      "code": "+81",
+      "country": "Japan",
+      "flag": "🇯🇵",
+      "iso": "JP"
+    },
+    {
+      "code": "+82",
+      "country": "South Korea",
+      "flag": "🇰🇷",
+      "iso": "KR"
+    },
+    {
+      "code": "+91",
+      "country": "India",
+      "flag": "🇮🇳",
+      "iso": "IN"
+    },
+    {
+      "code": "+61",
+      "country": "Australia",
+      "flag": "🇦🇺",
+      "iso": "AU"
+    },
+    {
+      "code": "+55",
+      "country": "Brazil",
+      "flag": "🇧🇷",
+      "iso": "BR"
+    },
+    {
+      "code": "+52",
+      "country": "Mexico",
+      "flag": "🇲🇽",
+      "iso": "MX"
+    },
+    {
+      "code": "+54",
+      "country": "Argentina",
+      "flag": "🇦🇷",
+      "iso": "AR"
+    },
+    {
+      "code": "+27",
+      "country": "South Africa",
+      "flag": "🇿🇦",
+      "iso": "ZA"
+    },
+    {
+      "code": "+62",
+      "country": "Indonesia",
+      "flag": "🇮🇩",
+      "iso": "ID"
+    },
+    {
+      "code": "+60",
+      "country": "Malaysia",
+      "flag": "🇲🇾",
+      "iso": "MY"
+    },
+    {
+      "code": "+65",
+      "country": "Singapore",
+      "flag": "🇸🇬",
+      "iso": "SG"
+    },
+    {
+      "code": "+66",
+      "country": "Thailand",
+      "flag": "🇹🇭",
+      "iso": "TH"
+    },
+    {
+      "code": "+84",
+      "country": "Vietnam",
+      "flag": "🇻🇳",
+      "iso": "VN"
+    },
+    {
+      "code": "+63",
+      "country": "Philippines",
+      "flag": "🇵🇭",
+      "iso": "PH"
+    },
+    {
+      "code": "+971",
+      "country": "United Arab Emirates",
+      "flag": "🇦🇪",
+      "iso": "AE"
+    },
+    {
+      "code": "+966",
+      "country": "Saudi Arabia",
+      "flag": "🇸🇦",
+      "iso": "SA"
+    },
+    {
+      "code": "+20",
+      "country": "Egypt",
+      "flag": "🇪🇬",
+      "iso": "EG"
+    },
+    {
+      "code": "+212",
+      "country": "Morocco",
+      "flag": "🇲🇦",
+      "iso": "MA"
+    },
+    {
+      "code": "+234",
+      "country": "Nigeria",
+      "flag": "🇳🇬",
+      "iso": "NG"
+    },
+    {
+      "code": "+254",
+      "country": "Kenya",
+      "flag": "🇰🇪",
+      "iso": "KE"
+    },
+    {
+      "code": "+351",
+      "country": "Portugal",
+      "flag": "🇵🇹",
+      "iso": "PT"
+    },
+    {
+      "code": "+30",
+      "country": "Greece",
+      "flag": "🇬🇷",
+      "iso": "GR"
+    }
+  ]
+}

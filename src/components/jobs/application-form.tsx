@@ -37,6 +37,7 @@ export default function ApplicationForm({ formData, positions, selectedPositionI
   }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedPosition, setSelectedPosition] = useState(selectedPositionId || '');
+  const [consentChecked, setConsentChecked] = useState(false);
 
   useEffect(() => {
     if (selectedPositionId) {
@@ -63,6 +64,7 @@ export default function ApplicationForm({ formData, positions, selectedPositionI
       formData.append('portfolio', (formElements.namedItem('portfolio') as HTMLInputElement)?.value || '');
       formData.append('github', (formElements.namedItem('github') as HTMLInputElement)?.value || '');
       formData.append('message', (formElements.namedItem('message') as HTMLTextAreaElement)?.value || '');
+      formData.append('consent', (formElements.namedItem('consent') as HTMLInputElement)?.checked ? 'Yes' : 'No');
       formData.append('subject', 'New Career Application - MasterFabric');
       formData.append('botcheck', ''); // For spam protection
 
@@ -248,11 +250,38 @@ export default function ApplicationForm({ formData, positions, selectedPositionI
             ></textarea>
           </div>
           
+          <div className="flex items-start space-x-3">
+            <input
+              type="checkbox"
+              id="consent"
+              name="consent"
+              required
+              checked={consentChecked}
+              onChange={(e) => setConsentChecked(e.target.checked)}
+              className="mt-1 w-4 h-4 text-blue-600 bg-white/10 border-white/20 rounded focus:ring-blue-500 focus:ring-2"
+            />
+            <label htmlFor="consent" className="text-sm text-gray-300 leading-relaxed">
+              I consent to the processing of my personal data in accordance with the{' '}
+              <a href="/privacy-policy" target="_blank" className="text-blue-400 hover:text-blue-300 underline">
+                Privacy Policy
+              </a>{' '}
+              and{' '}
+              <a href="/terms-of-use" target="_blank" className="text-blue-400 hover:text-blue-300 underline">
+                Terms of Use
+              </a>
+              . I agree to receive communications regarding my application.
+            </label>
+          </div>
+          
           <div className="text-center">
             <button 
               type="submit" 
-              disabled={isSubmitting}
-              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-8 rounded-lg transition-colors duration-200 w-full md:w-auto disabled:opacity-70"
+              disabled={isSubmitting || !consentChecked}
+              className={`font-semibold py-4 px-8 rounded-lg transition-colors duration-200 w-full md:w-auto ${
+                isSubmitting || !consentChecked 
+                  ? 'bg-gray-600 cursor-not-allowed opacity-50' 
+                  : 'bg-blue-600 hover:bg-blue-700'
+              } text-white`}
             >
               {isSubmitting ? 'Submitting...' : 'Submit Application'}
             </button>

@@ -19,6 +19,7 @@ interface ApplicationFormProps {
       position: { label: string, placeholder: string, required: boolean }
       experience: { label: string, placeholder: string, required: boolean }
       portfolio: { label: string, placeholder: string, required: boolean }
+      github: { label: string, placeholder: string, required: boolean }
       message: { label: string, placeholder: string, required: boolean }
     }
   }
@@ -60,6 +61,7 @@ export default function ApplicationForm({ formData, positions, selectedPositionI
       formData.append('position', (formElements.namedItem('position') as HTMLSelectElement)?.value || '');
       formData.append('experience', (formElements.namedItem('experience') as HTMLInputElement)?.value || '');
       formData.append('portfolio', (formElements.namedItem('portfolio') as HTMLInputElement)?.value || '');
+      formData.append('github', (formElements.namedItem('github') as HTMLInputElement)?.value || '');
       formData.append('message', (formElements.namedItem('message') as HTMLTextAreaElement)?.value || '');
       formData.append('subject', 'New Career Application - MasterFabric');
       formData.append('botcheck', ''); // For spam protection
@@ -202,18 +204,34 @@ export default function ApplicationForm({ formData, positions, selectedPositionI
             </select>
           </div>
           
-          <div>
-            <label htmlFor="portfolio" className="block text-sm font-medium text-gray-300 mb-2">
-              {formData.fields.portfolio.label} {formData.fields.portfolio.required && '*'}
-            </label>
-            <input
-              type="url"
-              id="portfolio"
-              name="portfolio"
-              required={formData.fields.portfolio.required}
-              placeholder={formData.fields.portfolio.placeholder}
-              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label htmlFor="portfolio" className="block text-sm font-medium text-gray-300 mb-2">
+                {formData.fields.portfolio.label} {formData.fields.portfolio.required && '*'}
+              </label>
+              <input
+                type="url"
+                id="portfolio"
+                name="portfolio"
+                required={formData.fields.portfolio.required}
+                placeholder={formData.fields.portfolio.placeholder}
+                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+            
+            <div>
+              <label htmlFor="github" className="block text-sm font-medium text-gray-300 mb-2">
+                {formData.fields.github.label} {formData.fields.github.required && '*'}
+              </label>
+              <input
+                type="url"
+                id="github"
+                name="github"
+                required={formData.fields.github.required}
+                placeholder={formData.fields.github.placeholder}
+                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
           </div>
           
           <div>

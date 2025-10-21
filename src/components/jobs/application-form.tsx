@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, FormEvent } from 'react'
 import './styles/application-form.css'
-import countryCodesData from '../../data/country-codes.json'
 
 interface ApplicationFormProps {
   formData: {
@@ -16,7 +15,6 @@ interface ApplicationFormProps {
     fields: {
       name: { label: string, placeholder: string, required: boolean }
       email: { label: string, placeholder: string, required: boolean }
-      phone: { label: string, placeholder: string, required: boolean }
       position: { label: string, placeholder: string, required: boolean }
       experience: { label: string, placeholder: string, required: boolean }
       portfolio: { label: string, placeholder: string, required: boolean }
@@ -59,9 +57,6 @@ export default function ApplicationForm({ formData, positions, selectedPositionI
       formData.append('access_key', process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || '');
       formData.append('name', (formElements.namedItem('name') as HTMLInputElement)?.value || '');
       formData.append('email', (formElements.namedItem('email') as HTMLInputElement)?.value || '');
-      const countryCode = (formElements.namedItem('countryCode') as HTMLSelectElement)?.value || '+90';
-      const phoneNumber = (formElements.namedItem('phone') as HTMLInputElement)?.value || '';
-      formData.append('phone', `${countryCode} ${phoneNumber}`);
       formData.append('position', (formElements.namedItem('position') as HTMLSelectElement)?.value || '');
       formData.append('experience', (formElements.namedItem('experience') as HTMLInputElement)?.value || '');
       formData.append('portfolio', (formElements.namedItem('portfolio') as HTMLInputElement)?.value || '');
@@ -153,65 +148,18 @@ export default function ApplicationForm({ formData, positions, selectedPositionI
             </div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-2">
-                {formData.fields.phone.label} {formData.fields.phone.required && '*'}
-              </label>
-              <div className="flex gap-2">
-                <div className="relative">
-                  <select
-                    id="country-code"
-                    name="countryCode"
-                    className="px-3 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent min-w-[100px] bg-[length:16px_16px] bg-[position:right_8px_center] bg-no-repeat appearance-none cursor-pointer"
-                    style={{
-                      backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
-                      transformOrigin: 'top left'
-                    }}
-                    size={1}
-                    onFocus={(e) => {
-                      e.target.style.transform = 'translateY(2px)';
-                    }}
-                    onBlur={(e) => {
-                      e.target.style.transform = 'translateY(0px)';
-                    }}
-                  >
-                  {countryCodesData.countryCodes.map((country, index) => (
-                    <option 
-                      key={`${country.iso}-${index}`} 
-                      value={country.code} 
-                      className="text-gray-900"
-                    >
-                      {country.flag} {country.code}
-                    </option>
-                  ))}
-                </select>
-                </div>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  required={formData.fields.phone.required}
-                  placeholder="555 123 4567"
-                  pattern="[0-9\s\-\(\)]{10,15}"
-                  className="flex-1 px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-              </div>
-            </div>
-            
-            <div>
-              <label htmlFor="experience" className="block text-sm font-medium text-gray-300 mb-2">
-                {formData.fields.experience.label} {formData.fields.experience.required && '*'}
-              </label>
-              <input
-                type="text"
-                id="experience"
-                name="experience"
-                required={formData.fields.experience.required}
-                placeholder={formData.fields.experience.placeholder}
-                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              />
-            </div>
+          <div>
+            <label htmlFor="experience" className="block text-sm font-medium text-gray-300 mb-2">
+              {formData.fields.experience.label} {formData.fields.experience.required && '*'}
+            </label>
+            <input
+              type="text"
+              id="experience"
+              name="experience"
+              required={formData.fields.experience.required}
+              placeholder={formData.fields.experience.placeholder}
+              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
           </div>
           
           <div>

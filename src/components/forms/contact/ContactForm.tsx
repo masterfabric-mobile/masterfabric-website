@@ -16,7 +16,6 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: '',
     projectType: '',
     message: '',
     budget: ''
@@ -45,7 +44,6 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
       formDataToSend.append('access_key', process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || '') // Web3Forms access key
       formDataToSend.append('name', formData.name)
       formDataToSend.append('email', formData.email)
-      formDataToSend.append('phone', formData.phone)
       formDataToSend.append('project_type', formData.projectType)
       formDataToSend.append('message', formData.message)
       formDataToSend.append('budget', formData.budget)
@@ -74,11 +72,10 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
         setIsFromSendAgain(false) // Reset the flag
         setIsFormOpen(false) // Close the form
         
-        // Reset form data
+        {/* Reset form data */}
         setFormData({
           name: '',
           email: '',
-          phone: '',
           projectType: '',
           message: '',
           budget: ''
@@ -207,22 +204,7 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
           />
         </div>
         
-        {/* Phone Field */}
-        <div>
-          <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-            {contactData.form.fields.phone.label}
-          </label>
-          <input
-            type={contactData.form.fields.phone.type}
-            id="phone"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            placeholder={contactData.form.fields.phone.placeholder}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-blue-500 outline-none transition-colors duration-200 placeholder:text-gray-400"
-            required={contactData.form.fields.phone.required}
-          />
-        </div>
+
 
         {/* Project Type Field */}
         <div>

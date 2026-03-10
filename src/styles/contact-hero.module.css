@@ -1,0 +1,18 @@
+/* Contact hero section – band background, codebase-consistent */
+.contactHeroBand {
+  background: linear-gradient(165deg, rgb(248 250 252) 0%, rgb(241 245 249) 40%, rgb(255 255 255) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.contactHeroBand::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.2), transparent);
+  opacity: 0.85;
+  z-index: 0;
+}

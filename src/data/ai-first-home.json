@@ -1,0 +1,44 @@
+{
+  "badge": "AI & Agentic",
+  "title": "AI-First Approach",
+  "subtitle": "Agentic Coding & Sector Solutions",
+  "lead": "We build AI-native products and sector solutions with an agentic, platform-based approach.",
+  "projectOverlays": [
+    "AI-native products and sector solutions",
+    "Agentic coding and human-in-the-loop workflows",
+    "Healthcare, fintech, e-commerce, education, logistics",
+    "Chatbots, copilots, RAG, and custom AI",
+    "Platform-based approach for faster delivery"
+  ],
+  "sectors": [
+    { "id": "healthcare", "label": "Healthcare", "description": "Compliance-aware AI, patient insights, clinical workflows" },
+    { "id": "fintech", "label": "Fintech", "description": "Risk scoring, fraud detection, personalized finance" },
+    { "id": "ecommerce", "label": "E-commerce", "description": "Recommendations, search, demand forecasting" },
+    { "id": "education", "label": "Education", "description": "Adaptive learning, content curation, assessment" },
+    { "id": "logistics", "label": "Logistics", "description": "Routing, inventory, demand and capacity planning" }
+  ],
+  "cards": [
+    {
+      "id": "ai-projects",
+      "icon": "sparkles",
+      "title": "AI-First Projects",
+      "description": "AI built in from day one—intelligent features and data-driven decisions."
+    },
+    {
+      "id": "agentic",
+      "icon": "bot",
+      "title": "Agentic Coding",
+      "description": "AI-assisted development and human-in-the-loop workflows for faster delivery."
+    },
+    {
+      "id": "integrations",
+      "icon": "cpu",
+      "title": "AI Integrations",
+      "description": "Chatbots, copilots, RAG, and custom AI solutions for your domain."
+    }
+  ],
+  "cta": {
+    "buttonLabel": "Start a conversation",
+    "buttonHref": "/contact"
+  }
+}

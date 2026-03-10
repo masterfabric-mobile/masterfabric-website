@@ -3,17 +3,17 @@
     "title": "About",
     "description": [
       {
-        "paragraph": "We are a team of <strong>mobile application development experts</strong> who excel in creating innovative solutions across multiple industries. We build <strong>AI-first</strong> and <strong>agentic</strong> products: from AI-powered features and agentic coding workflows to full AI product development. Our expertise spans <strong>cross-platform development</strong>, <strong>seamless backend integrations</strong>, and <strong>enterprise-grade mobile solutions</strong>. We <del>don't limit ourselves to specific sectors</del> - instead, we <strong>embrace diverse challenges</strong> and deliver exceptional results in <strong>healthcare</strong>, <strong>fintech</strong>, <strong>e-commerce</strong>, <strong>education</strong>, and <strong>logistics</strong>."
+        "paragraph": "We are a <strong>platform-based application studio</strong> and <strong>AI-first partner</strong>. We build <strong>AI-first</strong> and <strong>agentic</strong> products on top of solid, reusable platform foundations: shared modules, common services, and opinionated architecture that accelerates every new project."
       },
       {
-        "paragraph": "Our <strong>Flutter-based cross-platform approach</strong> ensures consistent performance across iOS and Android, while our <strong>robust backend architectures</strong> guarantee scalability and reliability. We adopt <strong>agentic coding</strong> practices and <strong>AI-first</strong> design so that intelligence is built into the process and the product. What sets us apart is our <strong>commitment to quality</strong>, <strong>attention to detail</strong>, and <strong>innovative problem-solving approach</strong>. We <del>don't compromise on standards</del> and <del>never settle for mediocrity</del>. Every project receives our full dedication to ensure <strong>optimal performance</strong>, <strong>user satisfaction</strong>, and <strong>business success</strong>."
+        "paragraph": "Our expertise spans <strong>cross-platform development</strong>, <strong>seamless backend integrations</strong>, and <strong>enterprise-grade mobile solutions</strong> across industries like <strong>healthcare</strong>, <strong>fintech</strong>, <strong>e-commerce</strong>, <strong>education</strong>, and <strong>logistics</strong>. By combining our <strong>platform-based approach</strong> with <strong>AI-first</strong> and <strong>agentic coding</strong> practices, we deliver applications that are faster to build, easier to maintain, and ready for intelligent features from day one."
       }
     ]
   },
   "hero": {
-    "title": "Modern Mobile Application Development Company",
-    "subtitle": "AI-first products, agentic coding, and mobile solutions that simplify lives",
-    "description": "We are a <strong>dynamic</strong> and <strong>innovative</strong> company that builds <strong>AI-first</strong> and <strong>agentic</strong> projects. We develop with AI at the core—from agentic coding workflows to AI-powered products—and continuously learn and teach. Our mission extends beyond just creating applications: we foster <strong>continuous growth</strong>, where every project is a learning opportunity and every challenge drives us to <strong>push boundaries</strong>. As a team that believes in <strong>knowledge sharing</strong> and <strong>collaborative innovation</strong>, we don't just adapt to the rapidly evolving tech landscape; we help shape it."
+    "title": "Platform-Based & AI-First Studio",
+    "subtitle": "We design platforms and products where AI is native, not an afterthought.",
+    "description": "MasterFabric is a <strong>platform-based application studio</strong> with an <strong>AI-first</strong> mindset. We combine reusable platform capabilities (auth, analytics, payments, messaging, DevOps pipelines) with <strong>agentic coding workflows</strong> and <strong>AI-native product design</strong>. Every project benefits from the same foundation: shared components, common infrastructure, and AI-powered tooling that help us ship faster while keeping quality and maintainability high."
   },
   "activities": [
     { "flag": "🇺🇸", "country": "USA", "city": "New York", "category": "E-commerce" },
@@ -62,12 +62,17 @@
   "processSteps": [
     { "icon": "💡", "title": "Ideation", "description": "Creative solutions" },
     { "icon": "🎨", "title": "Design", "description": "User-centered UI/UX" },
-    { "icon": "⚙️", "title": "Development", "description": "Modern technologies" },
+    { "icon": "⚙️", "title": "Development", "description": "Platform & AI-native" },
+    { "icon": "🤖", "title": "AI & Agentic", "description": "Intelligent tooling" },
     { "icon": "🚀", "title": "Launch", "description": "Successful deployments" }
   ],
   "passion": {
     "title": "We Approach Applications with Passion.",
-    "description": "We are a team of dedicated developers, designers, and strategists who love creating mobile apps. Our passion drives us to deliver exceptional results for our clients, combining technical excellence with creative innovation."
+    "description": "We are a team of dedicated developers, designers, and strategists who love creating mobile and AI-powered products. Our <strong>platform-based</strong> and <strong>AI-first</strong> approach drives exceptional results: we combine technical excellence with agentic workflows and intelligent features that scale."
+  },
+  "aiCallout": {
+    "text": "From ideation to launch we work platform-based and AI-first.",
+    "pillars": ["Platform", "Agentic", "AI-native"]
   },
   "statistics": [
     {

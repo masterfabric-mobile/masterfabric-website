@@ -11,7 +11,7 @@ import React, { useState } from 'react';
 import ProcessSteps from '@/components/about/ProcessSteps'
 import FlipStatistics from '@/components/about/FlipStatistics'
 import GitHubProjects from '@/components/about/github-projects'
-import AiFirstSection from '@/components/pages/ai-first-section'
+import AiFirstSectionAbout from '@/components/pages/ai-first-section-about'
 import aboutData from '@/data/about.json'
 import FlowTimeline from '@/components/timeline/flow-timeline'
 
@@ -57,7 +57,7 @@ export default function AboutPage() {
         description={aboutData.passion.description} 
       />
 
-      <AiFirstSection />
+      <AiFirstSectionAbout />
 
       <GitHubProjects />
     </Container>

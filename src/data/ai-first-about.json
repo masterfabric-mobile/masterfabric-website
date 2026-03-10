@@ -1,0 +1,29 @@
+{
+  "headline": "Platform-Based & AI-First",
+  "tagline": "One foundation. Agentic workflow. AI-native products.",
+  "story": [
+    {
+      "title": "Platform",
+      "sentence": "We start from a shared base—auth, analytics, CI/CD, observability—so every product ships faster and stays maintainable."
+    },
+    {
+      "title": "Agentic",
+      "sentence": "We work with AI-assisted development, automated reviews, and clear processes so we iterate fast without dropping quality."
+    },
+    {
+      "title": "AI-native",
+      "sentence": "When we add intelligence—copilots, RAG, recommendations—it’s designed in from day one, not bolted on later."
+    }
+  ],
+  "pillarTitle": "What we bring together",
+  "pillars": [
+    { "label": "Platform", "items": "Auth · Analytics · CI/CD · APIs" },
+    { "label": "How we build", "items": "Agentic workflows · AI-assisted review · Fast iteration" },
+    { "label": "What we ship", "items": "Copilots · RAG · Recommendations · Automation" }
+  ],
+  "cta": {
+    "text": "Let's build something intelligent together.",
+    "buttonLabel": "Get in touch",
+    "buttonHref": "/contact"
+  }
+}

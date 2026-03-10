@@ -23,7 +23,7 @@ const stepColors = [
 
 const ProcessSteps: React.FC<ProcessStepsProps> = ({ processSteps, currentColor }) => {
   return (
-    <div className="grid md:grid-cols-4 gap-6 max-w-3xl mx-auto process-steps-grid">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-4xl mx-auto process-steps-grid">
       {processSteps.map((step, index) => (
         <div key={index} className="text-center process-step">
           <div className="text-3xl mb-2">{step.icon}</div>

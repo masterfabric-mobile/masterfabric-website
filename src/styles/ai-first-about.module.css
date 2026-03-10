@@ -1,0 +1,127 @@
+/* AI First About – compact story and pillars */
+
+.aboutBand {
+  background: linear-gradient(180deg, rgb(248 250 252) 0%, rgb(255 255 255) 50%, rgb(248 250 252) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.aboutBand::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.2), transparent);
+  z-index: 0;
+}
+
+/* Story flow: 3 steps with connector */
+.storyFlow {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  gap: 0;
+  align-items: start;
+}
+
+@media (max-width: 1023px) {
+  .storyFlow {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .storyConnector {
+    display: none;
+  }
+
+  .storyConnectorVertical {
+    display: block;
+    width: 2px;
+    height: 1.5rem;
+    margin: 0 auto;
+    background: linear-gradient(180deg, rgb(59 130 246), rgb(147 197 253));
+    border-radius: 2px;
+  }
+}
+
+.storyConnector {
+  width: 24px;
+  height: 2px;
+  margin-top: 2.25rem;
+  background: linear-gradient(90deg, rgb(147 197 253), rgb(99 102 241));
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.storyConnectorVertical {
+  display: none;
+}
+
+.storyStep {
+  background: white;
+  border: 1px solid rgb(226 232 240);
+  border-radius: 1rem;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.storyStep:hover {
+  border-color: rgb(191 219 254);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.08);
+}
+
+.storyStepNumber {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 0.5rem;
+  background: linear-gradient(135deg, rgb(59 130 246), rgb(99 102 241));
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+}
+
+/* Pillar row – compact */
+.pillarRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 639px) {
+  .pillarRow {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pillarItem {
+  text-align: center;
+  padding: 1rem 1.25rem;
+  background: white;
+  border: 1px solid rgb(229 231 235);
+  border-radius: 0.75rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pillarItem:hover {
+  border-color: rgb(191 219 254);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.06);
+}
+
+.pillarLabel {
+  font-weight: 600;
+  color: rgb(17 24 39);
+  font-size: 0.875rem;
+  margin-bottom: 0.375rem;
+}
+
+.pillarItems {
+  font-size: 0.75rem;
+  color: rgb(107 114 128);
+  line-height: 1.4;
+}

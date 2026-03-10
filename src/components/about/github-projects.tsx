@@ -1,7 +1,7 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
-import { Github, Star, GitFork, ExternalLink } from 'lucide-react'
+import React, { useState, useEffect, useRef } from 'react'
+import { Github, Star, GitFork, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react'
 
 interface GitHubProject {
   name: string;
@@ -17,6 +17,7 @@ interface GitHubProject {
 export default function GitHubProjects() {
   const [githubProjects, setGithubProjects] = useState<GitHubProject[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const carouselRef = useRef<HTMLDivElement>(null);
   
   // Fetch repositories from GitHub API
   useEffect(() => {
@@ -87,10 +88,18 @@ export default function GitHubProjects() {
     "Nextjs": "#ff5d01"
   }
 
+  const scrollCarousel = (direction: 'left' | 'right') => {
+    const el = carouselRef.current
+    if (!el) return
+    const cardWidth = 380
+    const gap = 24
+    const step = cardWidth + gap
+    el.scrollBy({ left: direction === 'left' ? -step : step, behavior: 'smooth' })
+  }
+
   return (
-    <section className="py-16 lg:py-20 bg-gray-50">
+    <section className="py-16 lg:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
@@ -98,7 +107,7 @@ export default function GitHubProjects() {
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
             We believe in giving back to the developer community. Here are our{' '}
-            <span className="font-semibold text-blue-600">open source projects</span> that help developers 
+            <span className="font-semibold text-blue-600">open source projects</span> that help developers{' '}
             build better mobile applications faster.
           </p>
         </div>
@@ -110,100 +119,111 @@ export default function GitHubProjects() {
           </div>
         )}
 
-        {/* Vertical List of Horizontal Project Cards */}
-        {!isLoading && (
-          <div className="space-y-6 max-w-4xl mx-auto">
-            {githubProjects.map((project, index) => (
-              <div 
-                key={index}
-                className="group bg-white rounded-xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-              >
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                  {/* Left Side: Project Info */}
-                  <div className="flex-1">
-                    <div className="flex items-start gap-4">
-                      {/* GitHub Icon */}
-                      <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center group-hover:bg-blue-50 transition-colors duration-300 flex-shrink-0">
-                        <Github className="w-6 h-6 text-gray-600 group-hover:text-blue-600 transition-colors duration-300" />
-                      </div>
-                      
-                      {/* Project Details */}
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-3 mb-2">
-                          <h3 className="text-xl font-semibold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
-                            {project.name}
-                          </h3>
-                          {/* Language Badge */}
-                          <div className="flex items-center space-x-1 text-sm text-gray-500">
-                            <div 
-                              className="w-3 h-3 rounded-full" 
-                              style={{backgroundColor: languageColors[project.language] || '#888'}}
-                            ></div>
-                            <span>{project.language}</span>
-                          </div>
-                        </div>
-                        
-                        <p className="text-gray-600 text-sm leading-relaxed mb-3">
-                          {project.description}
-                        </p>
-                        
-                        {/* Topics */}
-                        <div className="flex flex-wrap gap-2 mb-3">
-                          {project.topics.slice(0, 4).map((topic, topicIndex) => (
-                            <span 
-                              key={topicIndex}
-                              className="px-2 py-1 bg-blue-50 text-blue-700 text-xs rounded-md font-medium"
-                            >
-                              {topic}
-                            </span>
-                          ))}
-                          {project.topics.length > 4 && (
-                            <span className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-md font-medium">
-                              +{project.topics.length - 4}
-                            </span>
-                          )}
-                        </div>
-                        
-                        {/* Stats */}
-                        <div className="flex items-center space-x-4 text-sm text-gray-500">
-                          <div className="flex items-center space-x-1">
-                            <Star className="w-3 h-3" />
-                            <span>{project.stars} stars</span>
-                          </div>
-                          <div className="flex items-center space-x-1">
-                            <GitFork className="w-3 h-3" />
-                            <span>{project.forks} forks</span>
-                          </div>
+        {/* Carousel */}
+        {!isLoading && githubProjects.length > 0 && (
+          <div className="relative">
+            {/* Prev/Next buttons */}
+            <button
+              type="button"
+              onClick={() => scrollCarousel('left')}
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 z-10 w-10 h-10 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors disabled:opacity-40 disabled:pointer-events-none"
+              aria-label="Previous projects"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollCarousel('right')}
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 z-10 w-10 h-10 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors disabled:opacity-40 disabled:pointer-events-none"
+              aria-label="Next projects"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+
+            <div
+              ref={carouselRef}
+              className="flex gap-6 overflow-x-auto overflow-y-hidden pb-4 scroll-smooth snap-x snap-mandatory scrollbar-hide"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
+              {githubProjects.map((project, index) => (
+                <div
+                  key={index}
+                  className="group flex-shrink-0 w-[320px] sm:w-[360px] snap-center bg-white rounded-xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 flex flex-col"
+                >
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center group-hover:bg-blue-50 transition-colors flex-shrink-0">
+                      <Github className="w-6 h-6 text-gray-600 group-hover:text-blue-600 transition-colors" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1 flex-wrap">
+                        <h3 className="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors truncate">
+                          {project.name}
+                        </h3>
+                        <div className="flex items-center gap-1 text-xs text-gray-500">
+                          <div
+                            className="w-2.5 h-2.5 rounded-full flex-shrink-0"
+                            style={{ backgroundColor: languageColors[project.language] || '#888' }}
+                          />
+                          <span>{project.language}</span>
                         </div>
                       </div>
                     </div>
                   </div>
-                  
-                  {/* Right Side: Action Button */}
-                  <div className="flex-shrink-0">
-                    <a 
-                      href={project.url} 
-                      target="_blank" 
+
+                  <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3 flex-1">
+                    {project.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-1.5 mb-4">
+                    {project.topics.slice(0, 3).map((topic, topicIndex) => (
+                      <span
+                        key={topicIndex}
+                        className="px-2 py-0.5 bg-blue-50 text-blue-700 text-xs rounded font-medium"
+                      >
+                        {topic}
+                      </span>
+                    ))}
+                    {project.topics.length > 3 && (
+                      <span className="px-2 py-0.5 bg-gray-100 text-gray-500 text-xs rounded font-medium">
+                        +{project.topics.length - 3}
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="flex items-center justify-between mt-auto pt-3 border-t border-gray-100">
+                    <div className="flex items-center gap-3 text-xs text-gray-500">
+                      <span className="flex items-center gap-1">
+                        <Star className="w-3.5 h-3.5" />
+                        {project.stars}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <GitFork className="w-3.5 h-3.5" />
+                        {project.forks}
+                      </span>
+                    </div>
+                    <a
+                      href={project.url}
+                      target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center space-x-2 bg-gray-100 hover:bg-blue-50 text-gray-700 hover:text-blue-700 px-4 py-2 rounded-lg font-medium transition-all duration-300 group-hover:scale-105"
+                      className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-600 hover:text-blue-700"
                     >
-                      <span>View Project</span>
-                      <ExternalLink className="w-4 h-4" />
+                      View
+                      <ExternalLink className="w-3.5 h-3.5" />
                     </a>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         )}
 
         {/* GitHub Organization Link */}
         <div className="text-center mt-12">
-          <a 
-            href="https://github.com/masterfabric-mobile" 
-            target="_blank" 
+          <a
+            href="https://github.com/masterfabric-mobile"
+            target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center space-x-2 bg-gray-900 hover:bg-gray-800 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg"
+            className="inline-flex items-center gap-2 bg-gray-900 hover:bg-gray-800 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg"
           >
             <Github className="w-5 h-5" />
             <span>View All Projects on GitHub</span>
@@ -214,20 +234,3 @@ export default function GitHubProjects() {
     </section>
   )
 }
-
-// Add CSS styles equivalent to those in the Nextjs file
-const styles = {
-  lineClamp3: {
-    display: '-webkit-box',
-    WebkitLineClamp: 3,
-    WebkitBoxOrient: 'vertical',
-    overflow: 'hidden',
-  },
-  scrollbarHide: {
-    msOverflowStyle: 'none',
-    scrollbarWidth: 'none',
-    '::-webkit-scrollbar': {
-      display: 'none',
-    }
-  }
-};

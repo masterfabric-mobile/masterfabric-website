@@ -72,7 +72,7 @@ const FlipStatistics: React.FC<FlipStatisticsProps> = ({
     <div className="stats-section">
       <div className="stats-header">
         <h3 className="text-xl font-semibold text-gray-800 mb-6">{title}</h3>
-        <p className="text-slate-600 leading-relaxed max-w-4xl mx-auto">{description}</p>
+        <p className="text-slate-600 leading-relaxed max-w-4xl mx-auto" dangerouslySetInnerHTML={description ? { __html: description } : { __html: '' }} />
       </div>
       <div
         className="statistics-grid"

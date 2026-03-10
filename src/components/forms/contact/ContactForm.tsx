@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import contactData from '@/data/contact-section.json'
-import { ChevronDown, ChevronUp, Send } from 'lucide-react'
+import { Send } from 'lucide-react'
 import { getCookie, setCookie } from '@/utils/cookies'
 
 interface ContactFormProps {
-  onSubmit?: (formData: any) => void;
+  onSubmit?: (formData: any) => void
+  initialOpen?: boolean
 }
 
-export default function ContactForm({ onSubmit }: ContactFormProps) {
-  const [isFormOpen, setIsFormOpen] = useState(false)
+export default function ContactForm({ onSubmit, initialOpen = false }: ContactFormProps) {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isFromSendAgain, setIsFromSendAgain] = useState(false)
@@ -29,6 +29,13 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
     const wasSubmitted = getCookie(FORM_SUBMISSION_COOKIE)
     if (wasSubmitted === 'true') {
       setIsSubmitted(true)
+    }
+  }, [])
+
+  // Optional: open form when hash is #get-in-touch (e.g. from /contact page)
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.location.hash === '#get-in-touch') {
+      window.dispatchEvent(new Event('openContactModal'))
     }
   }, [])
 
@@ -70,7 +77,6 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
         // Show success message
         setIsSubmitted(true)
         setIsFromSendAgain(false) // Reset the flag
-        setIsFormOpen(false) // Close the form
         
         {/* Reset form data */}
         setFormData({
@@ -100,17 +106,8 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
     })
   }
 
-  const toggleForm = () => {
-    setIsFormOpen(!isFormOpen)
-    
-    // If form is being closed and was previously submitted, return to "already sent" message
-    if (isFormOpen && isSubmitted) {
-      setIsFromSendAgain(false)
-    }
-  }
-
   return (
-    <div className="bg-white rounded-2xl border border-gray-200 p-8">
+    <div className="rounded-2xl border border-gray-100 bg-white p-6 sm:p-8 shadow-sm">
       {isSubmitted && !isFromSendAgain ? (
         <div className="py-6 text-center space-y-4">
           <div className="mx-auto w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
@@ -120,11 +117,7 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
           </div>
           <h4 className="text-lg font-semibold text-gray-900">You have already sent a message!</h4>
           <button
-            onClick={() => {
-              // When Send Again button is clicked, only change the flag
-              setIsFromSendAgain(true)
-              setIsFormOpen(true) // Show form directly as open
-            }}
+            onClick={() => setIsFromSendAgain(true)}
             className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
           >
             <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -139,25 +132,9 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
           <div className="text-center mb-8">
             <h3 className="text-2xl font-bold text-gray-900 mb-2">Get in Touch</h3>
             <p className="text-gray-600 mb-6">Ready to start your project? Fill out the form below and we&apos;ll get back to you within 24 hours.</p>
-            
-            <Button 
-              onClick={toggleForm}
-              className="flex items-center justify-center gap-2 mx-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"
-            >
-              {isFormOpen ? 'Hide Form' : (isFromSendAgain ? 'Send Again' : 'Start Your Project')} 
-              {isFormOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
-            </Button>
           </div>
 
-          {/* Collapsible Form */}
-          <div 
-            className={`overflow-hidden transition-all duration-500 ease-in-out ${
-              isFormOpen 
-                ? 'max-h-[2000px] opacity-100 transform scale-y-100' 
-                : 'max-h-0 opacity-0 transform scale-y-95'
-            }`}
-          >
-            <form onSubmit={handleSubmit} className="space-y-6 transform transition-all duration-300">
+          <form onSubmit={handleSubmit} className="space-y-6">
               {/* Form separator */}
               <div className="border-t border-gray-200 pt-6"></div>
 
@@ -282,7 +259,6 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
             )}
           </Button>
           </form>
-          </div>
         </>
       )}
     </div>

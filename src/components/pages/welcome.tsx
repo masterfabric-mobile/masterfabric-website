@@ -418,12 +418,15 @@ export default function Welcome({ onTimelineDialogRequest }: WelcomeProps) {
     <section className="grid lg:grid-cols-2 pt-10 pb-8 md:pt-8 md:pb-12 gap-8 md:gap-16">
       {/* Content Section */}
       <div className="md:order-1 pl-6 md:pl-8 lg:pl-12">
+        <span className="inline-block px-3 py-1.5 text-sm font-medium text-blue-700 bg-blue-100 rounded-full mb-4" aria-hidden>
+          AI-first development & agentic coding
+        </span>
         <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">
           Custom App Development
         </h2>
         <p className="text-lg mt-4 text-slate-600 max-w-xl">
-          Take your business to the next level in the mobile world! Reach your customers anytime, 
-          anywhere with custom, user-friendly, and innovative mobile apps tailored to your needs.
+          Take your business to the next level in the mobile world with <span className="font-semibold text-blue-600">AI-first</span> and agentic approaches. 
+          Reach your customers anytime, anywhere with custom, user-friendly, and innovative mobile apps tailored to your needs.
         </p>
         <div className="mt-4">
           <div className="flex gap-8 md:gap-20 items-center mt-10 flex-wrap justify-start">

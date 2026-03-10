@@ -1,13 +1,23 @@
 {
   "hero": {
+    "badge": "AI-first development & agentic coding",
     "title": {
       "line1": "Grow Your Business with,",
       "line2": "Save Your Time,",
       "line3": "Easy Manage"
     },
-    "description": "We Develop <strong>Tomorrow's Applications</strong> Today. We specialize in <strong>mobile</strong> and <u>business application development</u>; We turn your <strong>ideas</strong> into <u>reality</u>."
+    "description": "We develop <strong>tomorrow's applications</strong> today with an <strong>AI-first</strong> approach. We specialize in <strong>mobile</strong> and <u>business application development</u> and <u>agentic coding</u>; we turn your <strong>ideas</strong> into <u>reality</u>."
   },
   "benefits": [
+    {
+      "emoji": "✨",
+      "bgColor": "bg-indigo-500",
+      "gradientColor": "from-indigo-400 to-indigo-600",
+      "hoverGradient": "from-indigo-500 to-indigo-700",
+      "rippleColor": "rgba(99, 102, 241, 0.4)",
+      "title": "AI & Agentic",
+      "description": "AI-first projects & agentic workflows"
+    },
     {
       "emoji": "📱",
       "bgColor": "bg-blue-500",
@@ -50,6 +60,15 @@
       "rippleColor": "rgba(147, 51, 234, 0.4)",
       "title": "Scalable Solutions",
       "description": "Built for growth"
+    },
+    {
+      "emoji": "🛡️",
+      "bgColor": "bg-emerald-500",
+      "gradientColor": "from-emerald-400 to-emerald-600",
+      "hoverGradient": "from-emerald-500 to-emerald-700",
+      "rippleColor": "rgba(16, 185, 129, 0.4)",
+      "title": "Quality & Security",
+      "description": "Clean code, tests & secure practices"
     }
   ],
   "form": {

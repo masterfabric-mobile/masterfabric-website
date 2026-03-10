@@ -76,6 +76,20 @@ body {
   display: none;
 }
 
+/* Infinite scroll carousel */
+@keyframes scroll-infinite {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-scroll-infinite {
+  animation: scroll-infinite 50s linear infinite;
+}
+
+.group:hover .animate-scroll-infinite {
+  animation-play-state: paused;
+}
+
 /* Line clamp utilities */
 .line-clamp-2 {
   display: -webkit-box;

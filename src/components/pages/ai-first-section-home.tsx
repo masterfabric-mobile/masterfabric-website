@@ -1,8 +1,7 @@
 'use client'
 
 import React from 'react'
-import Link from 'next/link'
-import { Sparkles, Bot, Cpu, ArrowRight } from 'lucide-react'
+import { Sparkles, Bot, Cpu } from 'lucide-react'
 import homeData from '@/data/ai-first-home.json'
 
 const iconMap = { sparkles: Sparkles, bot: Bot, cpu: Cpu } as const
@@ -27,7 +26,6 @@ type AiFirstHomeData = {
   lead: string
   sectors: AiFirstHomeSector[]
   cards: AiFirstHomeCard[]
-  cta: { buttonLabel: string; buttonHref: string }
 }
 
 export default function AiFirstSectionHome() {
@@ -77,28 +75,22 @@ export default function AiFirstSectionHome() {
           })}
         </div>
 
-        {/* Sectors – simple pills, codebase-aligned */}
-        <div className="flex flex-wrap justify-center gap-2 mb-10">
-          {data.sectors.map((sector) => (
-            <span
-              key={sector.id}
-              className="inline-flex items-center px-3 py-1.5 text-xs font-medium text-gray-600 bg-gray-100 rounded-full border border-gray-200/80 hover:bg-gray-200/80 hover:border-gray-300 transition-colors"
-              title={sector.description}
-            >
-              {sector.label}
-            </span>
-          ))}
-        </div>
-
-        {/* CTA – same as other sections */}
-        <div className="text-center">
-          <Link
-            href={data.cta.buttonHref}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-200 hover:shadow-lg"
-          >
-            {data.cta.buttonLabel}
-            <ArrowRight className="w-4 h-4" aria-hidden />
-          </Link>
+        {/* Sectors – codebase-aligned pills, more spacing */}
+        <div className="text-center max-w-3xl mx-auto">
+          <p className="text-sm text-gray-500 mb-4">
+            We deliver AI-first and agentic solutions across sectors
+          </p>
+          <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
+            {data.sectors.map((sector) => (
+              <span
+                key={sector.id}
+                className="inline-flex items-center rounded-full border border-blue-100 bg-blue-50/80 px-4 py-2 text-sm font-medium text-blue-800 shadow-sm hover:bg-blue-50 hover:border-blue-200 transition-colors"
+                title={sector.description}
+              >
+                {sector.label}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </section>

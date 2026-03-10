@@ -14,25 +14,21 @@ export default function ContactSectionText({ showBadge = true }: ContactSectionT
   const { badge, title, description } = hero
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-4">
       {showBadge && badge && (
         <span
-          className="inline-block px-3 py-1.5 text-sm font-medium text-blue-700 bg-blue-100 rounded-full"
+          className="inline-block px-2.5 py-1 text-xs font-medium text-blue-600 bg-blue-50 rounded-full"
           aria-hidden
         >
           {badge}
         </span>
       )}
-      {/* Section Heading with different styling */}
-      <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">
+      <h2 className="text-2xl lg:text-3xl font-semibold text-gray-900 leading-tight">
         <span className="block">{title.line1}</span>
-        <span className="block">{title.line2}</span>
-        <span className="block text-blue-600">{title.line3}</span>
+        <span className="block text-blue-600">{title.line2}, {title.line3}</span>
       </h2>
-
-      {/* Section Description - Using dangerouslySetInnerHTML to render HTML tags */}
       <p
-        className="text-base lg:text-lg text-gray-600 leading-relaxed max-w-xl"
+        className="text-sm text-gray-600 leading-relaxed"
         dangerouslySetInnerHTML={{ __html: description }}
       />
     </div>

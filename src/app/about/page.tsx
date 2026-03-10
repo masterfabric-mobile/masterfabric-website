@@ -59,7 +59,10 @@ export default function AboutPage() {
 
       <AiFirstSectionAbout />
 
-      <GitHubProjects />
+      {/* Full-width area so carousel can be 100vw without page scroll */}
+      <div className="overflow-x-hidden" style={{ width: '100vw', marginLeft: '50%', transform: 'translateX(-50%)' }}>
+        <GitHubProjects />
+      </div>
     </Container>
   )
 }

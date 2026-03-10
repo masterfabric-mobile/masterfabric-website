@@ -22,14 +22,13 @@ export default function AiFirstSectionAbout() {
   return (
     <section className="mt-16" aria-labelledby="ai-first-about-headline">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Same divider as AboutHeader */}
+        {/* Divider – same as AboutHeader */}
         <div className="flex items-center justify-center mb-8 px-8">
           <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent min-w-[20px]" />
           <div className="mx-6 w-3 h-3 bg-green-500 rounded-full" />
           <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent min-w-[20px]" />
         </div>
 
-        {/* Title + subtitle – same as AboutHeader -->
         <h2
           id="ai-first-about-headline"
           className="text-xl font-semibold text-gray-800 mb-4 text-center sm:text-lg"
@@ -40,7 +39,7 @@ export default function AiFirstSectionAbout() {
           {tagline}
         </p>
 
-        {/* 3 steps – ProcessSteps style: text-center, icon + title + description, no cards */}
+        {/* 3 steps – ProcessSteps style: text-center, icon + title + description */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
           {story.map((step, index) => {
             const Icon = storyIcons[index] ?? Sparkles
@@ -49,7 +48,7 @@ export default function AiFirstSectionAbout() {
                 key={step.title}
                 className="text-center transition-transform duration-300 ease-out hover:-translate-y-1"
               >
-                <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-slate-100 text-slate-600 mb-4">
+                <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-blue-100 text-blue-600 mb-4">
                   <Icon className="w-7 h-7" />
                 </div>
                 <h3 className="font-medium text-gray-800 mb-2">{step.title}</h3>
@@ -61,7 +60,7 @@ export default function AiFirstSectionAbout() {
           })}
         </div>
 
-        {/* What we bring together – same pattern, compact */}
+        {/* What we bring together – same pattern as ProcessSteps */}
         <p className="text-sm font-medium text-gray-500 uppercase tracking-wider text-center mb-6">
           {pillarTitle}
         </p>
@@ -73,7 +72,7 @@ export default function AiFirstSectionAbout() {
                 key={pillar.label}
                 className="text-center transition-transform duration-300 ease-out hover:-translate-y-1"
               >
-                <div className="inline-flex items-center justify-center w-11 h-11 rounded-full bg-slate-100 text-slate-600 mb-3">
+                <div className="inline-flex items-center justify-center w-11 h-11 rounded-full bg-blue-100 text-blue-600 mb-3">
                   <Icon className="w-5 h-5" />
                 </div>
                 <h4 className="font-medium text-gray-800 text-sm mb-1">{pillar.label}</h4>

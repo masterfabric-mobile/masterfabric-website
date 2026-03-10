@@ -1,0 +1,36 @@
+{
+  "section": {
+    "badge": "AI & Agentic",
+    "title": "AI-First Approach",
+    "subtitle": "Agentic Coding & AI Projects",
+    "description": "We build products and solutions with an AI-first mindset: from agentic development workflows to full AI-powered applications. We don't just use AI tools—we design systems and products where AI is at the core."
+  },
+  "pillars": [
+    {
+      "id": "ai-first",
+      "icon": "sparkles",
+      "title": "AI-First Projects",
+      "description": "We design and deliver projects where AI is a first-class citizen: intelligent features, ML pipelines, and product decisions driven by data and models from day one.",
+      "highlights": ["Product strategy with AI in mind", "ML/AI integration from design phase", "Data-driven product evolution"]
+    },
+    {
+      "id": "agentic",
+      "icon": "bot",
+      "title": "Agentic Coding",
+      "description": "We adopt agentic development: AI-assisted coding, autonomous tool use, and human-in-the-loop workflows that accelerate delivery without sacrificing quality.",
+      "highlights": ["AI pair programming & code review", "Automated testing and refactoring", "Agent-augmented development pipelines"]
+    },
+    {
+      "id": "ai-products",
+      "icon": "cpu",
+      "title": "AI Product Development",
+      "description": "We ship AI products: chatbots, copilots, recommendation systems, and custom AI solutions tailored to your domain and users.",
+      "highlights": ["LLM integration & fine-tuning", "RAG and knowledge systems", "End-to-end AI product delivery"]
+    }
+  ],
+  "cta": {
+    "text": "Want to build AI-first or agentic with us?",
+    "buttonLabel": "Start a conversation",
+    "buttonHref": "/contact"
+  }
+}

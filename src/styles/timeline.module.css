@@ -31,26 +31,9 @@
   gap: 1.25rem;
   padding: 1rem 0;
   overflow-x: auto;
-  scrollbar-width: thin;
-  scrollbar-color: #cbd5e1 #f1f5f9;
   margin: 0 auto;
   max-width: 90vw;
   padding: 1rem 2rem;
-}
-
-.timelineTrack::-webkit-scrollbar {
-  height: 8px;
-}
-
-.timelineTrack::-webkit-scrollbar-track {
-  background: #f1f5f9;
-  border-radius: 10px;
-}
-
-.timelineTrack::-webkit-scrollbar-thumb {
-  background-color: #cbd5e1;
-  border-radius: 10px;
-  border: 2px solid #f1f5f9;
 }
 
 /* Timeline Card Animations */

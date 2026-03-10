@@ -283,19 +283,6 @@
   min-height: 0;
 }
 
-.cookie-modal-body::-webkit-scrollbar {
-  width: 6px;
-}
-
-.cookie-modal-body::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 3px;
-}
-
-.cookie-modal-body::-webkit-scrollbar-track {
-  background: #f1f5f9;
-}
-
 .cookie-modal-description {
   color: #6b7280;
   margin-bottom: 24px;

@@ -8,6 +8,7 @@ import Welcome from '@/components/pages/welcome'
 import Logos from '@/components/pages/logos'
 import References from '@/components/pages/references'
 import SuperchargeExperience from '@/components/pages/supercharge-experience'
+import AiFirstSection from '@/components/pages/ai-first-section'
 import RefactorApplication from '@/components/pages/refactor-application'
 import ProjectFlowTimeline, { TimelineRefType } from '@/components/pages/project-flow-timeline'
 import CTA from '@/components/pages/cta'
@@ -20,6 +21,7 @@ export default function Home() {
       <Welcome />
       <References />
       <SuperchargeExperience />
+      <AiFirstSection />
       
       {/* Refactor Application Section */}
       <RefactorApplication />

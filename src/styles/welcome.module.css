@@ -120,23 +120,6 @@
   padding-left: 50px;
 }
 
-.editorContent::-webkit-scrollbar {
-  height: 10px;                
-}
-
-.editorContent::-webkit-scrollbar-track {
-  background: transparent;      
-}
-
-.editorContent::-webkit-scrollbar-thumb {
-  background: #5a5a5a;  
-  border-radius: 0;
-}
-
-.editorContent::-webkit-scrollbar-thumb:hover {
-    background: #6b6b6b;  
-}
-
 .lineNumbers {
   position: absolute;
   bottom: 0;

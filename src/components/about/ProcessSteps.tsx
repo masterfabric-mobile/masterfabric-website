@@ -90,26 +90,6 @@ const ProcessSteps: React.FC<ProcessStepsProps> = ({ processSteps }) => {
           </div>
         </div>
 
-        {/* Flow indicator: Step 1 → 2 → 3 → 4 */}
-        <div className="flex items-center justify-center gap-1 sm:gap-2 mb-8 flex-wrap" role="list" aria-label="Process phases">
-          {steps.map((step, index) => (
-            <React.Fragment key={step.title}>
-              <span
-                className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2.5 text-sm font-medium text-slate-700 shadow-sm ring-1 ring-slate-100 transition-colors hover:border-blue-200 hover:bg-blue-50/50 hover:text-blue-800"
-                aria-hidden
-              >
-                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-slate-100 text-slate-600 font-mono text-xs font-bold">
-                  {index + 1}
-                </span>
-                {step.title}
-              </span>
-              {index < steps.length - 1 && (
-                <Icon icon="mdi:chevron-right" className="size-4 sm:size-5 text-slate-300 shrink-0" aria-hidden />
-              )}
-            </React.Fragment>
-          ))}
-        </div>
-
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
           {steps.map((zone, index) => (
             <motion.article

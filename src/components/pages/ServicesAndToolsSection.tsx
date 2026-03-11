@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useState } from 'react'
-import Link from 'next/link'
 import { Icon } from '@iconify/react'
 
 // --- Services types ---
@@ -28,6 +27,8 @@ export interface ToolItem {
   icon: string
   category?: string
   usage?: string
+  /** If set, tool is only shown for these areas (e.g. ["Mobile", "Web"]). Omit = show for all. */
+  areas?: string[]
 }
 
 export interface PlatformItem {
@@ -39,6 +40,7 @@ export interface PlatformItem {
 export interface TargetPlatformsBlockProps {
   eyebrow?: string
   title?: string
+  description?: string
   platforms?: PlatformItem[]
 }
 
@@ -103,22 +105,24 @@ export default function ServicesAndToolsSection({
 }: ServicesAndToolsSectionProps) {
   const [selectedIndex, setSelectedIndex] = useState(0)
 
-  const {
-    eyebrow: servicesEyebrow = 'Services',
-    title: servicesTitle = 'From mobile and web to backend, AI, CI/CD, and test',
-    description: servicesDescription,
-    ctaText = 'View all services',
-    ctaHref = '/contact',
-    cells = [],
-  } = services
+  const { cells = [] } = services
+  const sortedCells = React.useMemo(
+    () => [...cells].sort((a, b) => a.title.localeCompare(b.title, 'en')),
+    [cells]
+  )
 
   const {
+    eyebrow: platformsEyebrow = 'Platforms',
     title: platformsTitle = 'We build for',
+    description: platformsDescription,
     platforms = [],
   } = targetPlatforms
 
   const {
+    label: toolsLabel = 'Technology & tools',
+    title: toolsTitle = 'Technologies',
     titleAccent = 'we use',
+    subtitle: toolsSubtitle,
     tools = [],
   } = toolsSection
 
@@ -129,7 +133,7 @@ export default function ServicesAndToolsSection({
     return acc
   }, [])
 
-  const selectedCell = cells[selectedIndex]
+  const selectedCell = sortedCells[selectedIndex]
   const selectedCategories = selectedCell?.toolCategories?.length
     ? CATEGORY_ORDER.filter((c) =>
         selectedCell.toolCategories!.includes(c)
@@ -142,169 +146,147 @@ export default function ServicesAndToolsSection({
       aria-labelledby="services-and-tools-heading"
     >
       <div className="mx-auto max-w-7xl">
-        <div className="mb-6 sm:mb-8 text-center">
+        {/* Section header: codebase pattern — title + accent, stronger subtitle */}
+        <div className="text-center mb-8 sm:mb-10">
           <p className="text-xs font-medium uppercase tracking-widest text-slate-400 mb-2">
-            {servicesEyebrow}
+            {toolsLabel}
           </p>
           <h2
             id="services-and-tools-heading"
-            className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-slate-900 tracking-tight"
+            className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-slate-900 tracking-tight leading-tight mb-3"
           >
-            {servicesTitle}
+            <span className="block">{toolsTitle}</span>
+            <span className="block text-blue-600">{titleAccent}</span>
           </h2>
-          {servicesDescription && (
-            <p className="mt-3 text-sm sm:text-base text-slate-500 max-w-xl mx-auto leading-relaxed">
-              {servicesDescription}
+          {toolsSubtitle && (
+            <p className="text-sm sm:text-base text-slate-500 max-w-2xl mx-auto leading-relaxed">
+              {toolsSubtitle}
             </p>
           )}
-          <Link
-            href={ctaHref}
-            className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors"
-            aria-label={ctaText}
-          >
-            {ctaText}
-            <svg
-              className="w-4 h-4"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden
-            >
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
-          </Link>
         </div>
 
-        {/* Combined: left = area selector, right = technologies for selected area */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
-          {/* Left: service area selector */}
-          <div className="lg:col-span-4">
-            <p className="text-xs font-medium uppercase tracking-widest text-slate-400 mb-3">
-              Choose an area
+        {/* We build for — codebase title pattern + improved platform cards */}
+        {platforms.length > 0 && (
+          <div className="mb-8 sm:mb-10">
+            <p className="text-xs font-medium uppercase tracking-widest text-slate-400 mb-2">
+              {platformsEyebrow}
             </p>
-            <div className="flex flex-col gap-2 sm:gap-3">
-              {cells.map((cell, index) => (
-                <button
-                  key={index}
-                  type="button"
-                  onClick={() => setSelectedIndex(index)}
-                  className={`text-left rounded-xl border px-4 py-3 sm:px-5 sm:py-4 transition-all duration-200 ${
-                    selectedIndex === index
-                      ? 'border-blue-200 bg-blue-50/80 shadow-sm ring-1 ring-blue-100'
-                      : 'border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50/50'
-                  }`}
-                  aria-pressed={selectedIndex === index}
-                  aria-label={`Show technologies for ${cell.title}`}
+            <h3 className="text-2xl sm:text-3xl font-semibold text-slate-900 tracking-tight leading-tight mb-3">
+              <span className="block">We build</span>
+              <span className="block text-blue-600">for</span>
+            </h3>
+            {platformsDescription && (
+              <p className="text-sm sm:text-base text-slate-500 max-w-2xl mb-6 leading-relaxed">
+                {platformsDescription}
+              </p>
+            )}
+            <div className="flex flex-wrap gap-3 sm:gap-4">
+              {platforms.map((platform) => (
+                <div
+                  key={platform.name}
+                  className="group flex items-center gap-3 rounded-xl border border-slate-200/80 bg-white px-4 py-3 sm:px-5 sm:py-3.5 transition-all duration-200 hover:border-blue-200 hover:bg-blue-50/30 hover:shadow-sm"
                 >
-                  <span
-                    className={`text-sm sm:text-base font-semibold ${
-                      selectedIndex === index
-                        ? 'text-blue-700'
-                        : 'text-slate-800'
-                    }`}
-                  >
-                    {cell.title}
-                  </span>
-                </button>
+                  <div className="shrink-0 flex h-10 w-10 items-center justify-center rounded-xl bg-slate-50 text-slate-600 ring-1 ring-slate-100 group-hover:bg-blue-100 group-hover:text-blue-600 group-hover:ring-blue-100 transition-colors">
+                    <Icon icon={platform.icon} className="size-5" aria-hidden />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold text-slate-900">
+                      {platform.name}
+                    </p>
+                    {platform.description && (
+                      <p className="text-xs text-slate-500 mt-0.5">
+                        {platform.description}
+                      </p>
+                    )}
+                  </div>
+                </div>
               ))}
             </div>
           </div>
+        )}
 
-          {/* Right: selected area detail + platforms + technologies */}
-          <div className="lg:col-span-8 min-w-0">
-            {selectedCell && (
-              <>
-                <div className="rounded-xl border border-slate-200 bg-slate-50/50 p-4 sm:p-6 mb-6">
-                  <h3 className="text-lg font-semibold text-slate-900 mb-2">
-                    {selectedCell.title}
-                  </h3>
-                  {selectedCell.detail && (
-                    <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-                      {selectedCell.detail}
-                    </p>
-                  )}
+        {/* Grid: static size (Web = max), fixed height ~30rem so all 6 areas visible without cutting off */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 lg:h-[30rem] lg:min-h-[30rem]">
+          {/* Left: area list — scrollable so Web (last) is never cut off */}
+          <div className="lg:col-span-4 flex flex-col min-h-0 lg:h-full">
+            <div className="rounded-2xl border border-slate-200/80 bg-white flex-1 min-h-0 flex flex-col h-full overflow-hidden">
+              <div className="px-4 pt-4 pb-3 sm:px-6 sm:pt-5 sm:pb-4 shrink-0">
+                <p className="text-xs font-medium uppercase tracking-widest text-slate-400 mb-1.5">
+                  Choose an area
+                </p>
+                <p className="text-sm text-slate-500 mb-4 leading-snug">
+                  Choose the area that fits your needs.
+                </p>
+              </div>
+              <div className="flex-1 min-h-0 overflow-y-auto px-4 pb-4 sm:px-6 sm:pb-5">
+                <div className="flex flex-col gap-0">
+                  {sortedCells.map((cell, index) => (
+                    <React.Fragment key={cell.title}>
+                      <button
+                        type="button"
+                        onClick={() => setSelectedIndex(index)}
+                        className={`min-h-[2.75rem] w-full text-left py-2.5 sm:py-3 px-3 rounded-lg text-sm font-medium transition-colors ${
+                          selectedIndex === index
+                            ? 'bg-blue-50 text-blue-700'
+                            : 'text-slate-700 hover:bg-slate-50 hover:text-slate-900'
+                        }`}
+                        aria-pressed={selectedIndex === index}
+                        aria-label={`Show technologies for ${cell.title}`}
+                      >
+                        {cell.title}
+                      </button>
+                      {index < sortedCells.length - 1 && (
+                        <div className="shrink-0 border-b border-slate-100" aria-hidden />
+                      )}
+                    </React.Fragment>
+                  ))}
                 </div>
+              </div>
+            </div>
+          </div>
 
-                {platforms.length > 0 && (
-                  <div className="mb-6">
-                    <p className="text-xs font-medium uppercase tracking-widest text-slate-400 mb-3">
-                      {platformsTitle}
-                    </p>
-                    <div className="flex flex-wrap gap-2 sm:gap-3">
-                      {platforms.map((platform) => (
-                        <div
-                          key={platform.name}
-                          className="flex items-center gap-2 rounded-lg border border-slate-100 bg-white px-3 py-2 sm:px-4 sm:py-2.5 transition-all duration-200 hover:border-blue-100 hover:shadow-sm"
-                        >
-                          <div className="shrink-0 flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 text-blue-600 ring-1 ring-blue-100">
-                            <Icon
-                              icon={platform.icon}
-                              className="size-4"
-                              aria-hidden
-                            />
-                          </div>
-                          <div className="min-w-0">
-                            <p className="text-sm font-semibold text-slate-900">
-                              {platform.name}
-                            </p>
-                            {platform.description && (
-                              <p className="text-xs text-slate-500">
-                                {platform.description}
-                              </p>
-                            )}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                <div>
-                  <p className="text-xs font-medium uppercase tracking-widest text-slate-400 mb-3">
+          {/* Right: fixed height on lg, content scrolls if needed */}
+          <div className="lg:col-span-8 min-w-0 flex flex-col lg:h-full">
+            {selectedCell && (
+              <div className="rounded-2xl border border-slate-200/80 bg-white overflow-hidden w-full max-w-full h-full flex flex-col min-h-0">
+                <div className="px-4 pt-4 pb-3 sm:px-6 sm:pt-5 sm:pb-4 border-b border-slate-100 shrink-0">
+                  <p className="text-xs font-medium uppercase tracking-widest text-slate-400 mb-1.5">
                     Technologies {titleAccent} for {selectedCell.title}
                   </p>
+                  <p className="text-sm text-slate-600 leading-relaxed max-w-2xl">
+                    We combine these tools with an <strong className="text-slate-800">agentic development workflow</strong>—AI-assisted coding, iterative refinement, and automated quality checks—so we ship faster without sacrificing quality.
+                  </p>
+                </div>
+                <div className="px-4 py-4 sm:px-6 sm:py-5 w-full max-w-full flex-1 min-h-0 overflow-y-auto">
                   {selectedCategories.length > 0 ? (
-                    <div className="flex flex-col gap-4 sm:gap-5">
+                    <div className="flex flex-col gap-4 w-full max-w-full">
                       {selectedCategories.map((category) => {
-                        const items = byCategory[category] ?? []
+                        const rawItems = byCategory[category] ?? []
+                        const items = selectedCell
+                          ? rawItems.filter(
+                              (tool) =>
+                                !tool.areas || tool.areas.includes(selectedCell.title)
+                            )
+                          : rawItems
+                        if (items.length === 0) return null
                         return (
                           <div
                             key={category}
-                            className="rounded-xl border border-slate-100 bg-white p-4 sm:p-5 transition-all duration-200 hover:border-slate-200 hover:shadow-sm"
+                            className="flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-slate-100 pb-3 last:border-0 last:pb-0 w-full max-w-full"
                           >
-                            <div className="flex items-center gap-3 mb-3">
-                              <div className="shrink-0 flex h-9 w-9 items-center justify-center rounded-lg bg-slate-50 text-blue-600 border border-slate-100">
-                                <Icon
-                                  icon={
-                                    CATEGORY_ICONS[category] ??
-                                    'mdi:toolbox-outline'
-                                  }
-                                  className="size-5"
-                                  aria-hidden
-                                />
-                              </div>
-                              <div className="min-w-0">
-                                <h4 className="text-sm font-semibold text-slate-900">
-                                  {category}
-                                </h4>
-                                <p className="text-xs text-slate-500 leading-snug">
-                                  {CATEGORY_DESC[category] ?? ''}
-                                </p>
-                              </div>
-                            </div>
-                            <div className="flex flex-wrap gap-2">
+                            <span className="text-xs font-medium text-slate-500 uppercase tracking-wide shrink-0 w-28 sm:w-32">
+                              {category}
+                            </span>
+                            <div className="flex flex-wrap gap-1.5 min-w-0 flex-1">
                               {items.map((tool) => (
                                 <span
                                   key={tool.name}
                                   title={tool.usage ?? tool.name}
-                                  className="inline-flex items-center gap-1.5 rounded-lg bg-slate-50 px-2.5 py-1.5 text-xs font-medium text-slate-700 border border-slate-100 hover:border-slate-200 hover:bg-slate-100 transition-colors"
+                                  className="inline-flex items-center gap-1 rounded-md bg-slate-50 px-2 py-1 text-xs font-medium text-slate-700 border border-slate-100"
                                 >
                                   <Icon
                                     icon={tool.icon}
-                                    className="size-3.5 shrink-0 text-slate-400"
+                                    className="size-3 shrink-0 text-slate-400"
                                   />
                                   {tool.name}
                                 </span>
@@ -315,12 +297,12 @@ export default function ServicesAndToolsSection({
                       })}
                     </div>
                   ) : (
-                    <p className="text-sm text-slate-500 rounded-xl border border-dashed border-slate-200 bg-slate-50/50 p-6 text-center">
+                    <p className="text-sm text-slate-500 rounded-lg border border-dashed border-slate-200 bg-slate-50/50 p-6 text-center">
                       No technology categories defined for this area.
                     </p>
                   )}
                 </div>
-              </>
+              </div>
             )}
           </div>
         </div>

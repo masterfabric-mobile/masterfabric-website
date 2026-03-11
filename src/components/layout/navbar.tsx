@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import Container from "./container";
-import { Menu, X } from "lucide-react";
+import { Menu, X, RefreshCw } from "lucide-react";
 import { SocialIcon } from "@/components/ui/SocialIcon";
 import { cn } from "@/utils";
 
@@ -67,17 +67,47 @@ import navData from "@/data/navigation.json";
 // Type assertion
 const navigationData = navData as unknown as NavData;
 
+/** [X] Development Studio – baştaki değişir, hepsi ilk harfleri büyük; Development Studio tek başına yazılmaz */
+const TAGLINE_PREFIXES = [
+  "Ai First",
+  "Backend First",
+  "Platform Based",
+  "Design First",
+];
+const TAGLINE_SUFFIX = " Development Studio";
+const TAGLINE_INTERVAL_MS = 2800;
+
 const wrapperBaseClasses = "flex pt-[0.3rem] md:pt-0 items-center justify-between flex-wrap md:flex-nowrap transition-[height] duration-700 ease-in-out";
 const navBaseClasses = "md:items-center max-h-screen md:max-h-max overflow-hidden flex flex-col md:flex-row gap-2 md:gap-0 md:space-x-4 ml-auto w-full md:w-auto mt-[0.4rem] md:mt-0 order-last md:order-1 border-t border-gray-200 md:border-0";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
+  const [taglineIndex, setTaglineIndex] = useState(0);
+  const [taglineOpacity, setTaglineOpacity] = useState(1);
+  const [taglineTransform, setTaglineTransform] = useState("translateY(0)");
+  const [refreshPulsing, setRefreshPulsing] = useState(false);
 
   // Ensure menu is closed when route changes
   useEffect(() => {
     setIsMenuOpen(false);
   }, [pathname]);
+
+  // Rotating tagline and refresh icon pulse
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setTaglineOpacity(0);
+      setTaglineTransform("translateY(-8px)");
+      setRefreshPulsing(true);
+      setTimeout(() => {
+        setTaglineIndex((prev) => (prev + 1) % TAGLINE_PREFIXES.length);
+        setTaglineOpacity(1);
+        setTaglineTransform("translateY(0)");
+        setTimeout(() => setRefreshPulsing(false), 500);
+      }, 220);
+    }, TAGLINE_INTERVAL_MS);
+    return () => clearInterval(intervalId);
+  }, []);
 
   // Sort menu items by order
   const sortedMenuItems = [...navigationData.menuItems].sort(
@@ -134,24 +164,32 @@ function Navbar() {
                       <span className="font-bold font-mono text-lg sm:text-xl text-slate-800">
                         {navigationData.brand.text.main}
                       </span>
-                      <span className="font-mono text-slate-500 text-lg sm:text-xl">
+                      <span className="font-mono text-slate-500 text-lg sm:text-xl inline-flex items-center gap-1">
                         {navigationData.brand.text.secondary}
+                        <RefreshCw
+                          className={cn(
+                            "w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0 text-slate-400 navbar-refresh-icon",
+                            refreshPulsing && "navbar-refresh-pulse"
+                          )}
+                          aria-hidden
+                        />
                       </span>
                       <span className="font-mono text-slate-300 text-lg sm:text-xl">
                         {navigationData.brand.text.tertiary}
                       </span>
                     </div>
 
-                      {/* Company tagline */}
-                    <div className="font-mono text-xs sm:text-sm text-slate-400 sm:mt-1 leading-tight navbar-brand-tagline">
-                      <div className="flex flex-col sm:flex-row sm:gap-1">
-                        <span className="whitespace-nowrap">
-                          {navigationData.brand.description.platform}
-                        </span>
-                        <span className="font-bold text-slate-500 whitespace-nowrap">
-                          {navigationData.brand.description.studio}
-                        </span>
-                      </div>
+                      {/* Hepsi ilk harfleri büyük; Development Studio tek başına gelmez */}
+                    <div className="font-mono text-xs sm:text-sm text-slate-400 sm:mt-1 leading-tight navbar-brand-tagline min-h-[1.25rem] flex items-center flex-wrap gap-x-1">
+                      <span
+                        className="whitespace-nowrap font-bold text-slate-500 normal-case transition-all duration-300 ease-out inline-block"
+                        style={{ opacity: taglineOpacity, transform: taglineTransform }}
+                      >
+                        {TAGLINE_PREFIXES[taglineIndex]}
+                      </span>
+                      <span className="whitespace-nowrap font-extrabold text-slate-600 normal-case">
+                        {TAGLINE_SUFFIX}
+                      </span>
                     </div>
                   </div>
                 </Link>

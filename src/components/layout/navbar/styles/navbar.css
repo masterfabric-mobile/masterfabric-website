@@ -132,6 +132,43 @@
   font-weight: bold;
 }
 
+/* Refresh icon – normalde gri, pulse anında yeşil */
+.navbar-refresh-icon {
+  color: rgb(148 163 184); /* slate-400, gri */
+}
+
+@keyframes navbarRefreshPulse {
+  0% {
+    transform: scale(1) rotate(0deg);
+    color: rgb(148 163 184); /* gri */
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  25% {
+    transform: scale(1.25) rotate(90deg);
+    color: rgb(16 185 129); /* emerald-500, yeşil */
+    filter: drop-shadow(0 0 6px rgba(16, 185, 129, 0.6));
+  }
+  50% {
+    transform: scale(1.35) rotate(180deg);
+    color: rgb(5 150 105); /* emerald-600 */
+    filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.7));
+  }
+  75% {
+    transform: scale(1.1) rotate(270deg);
+    color: rgb(16 185 129);
+    filter: drop-shadow(0 0 4px rgba(16, 185, 129, 0.4));
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+    color: rgb(148 163 184); /* tekrar gri */
+    filter: drop-shadow(0 0 0 transparent);
+  }
+}
+
+.navbar-refresh-pulse {
+  animation: navbarRefreshPulse 0.5s ease-out forwards;
+}
+
 /* Active dropdown item border */
 .active-dropdown-item {
   border-left: 4px solid #3b82f6;

@@ -54,10 +54,10 @@ const FlowTimeline: React.FC = () => {
   const currentPhase = phases[currentStep]
 
   return (
-    <section className="px-4 sm:px-8 lg:px-[4rem] pt-12 sm:pt-16 lg:pt-[3.125rem] pb-16 lg:pb-24 bg-white content-start">
+    <section className="px-4 sm:px-8 lg:px-[4rem] pt-10 sm:pt-12 pb-10 sm:pb-12 bg-white content-start border-b border-slate-100">
       <div className="mx-auto max-w-6xl">
         {/* Header — minimal */}
-        <div className="mb-10 sm:mb-12 lg:mb-14 text-center">
+        <div className="mb-6 sm:mb-8 text-center">
           <p className="text-xs font-medium uppercase tracking-widest text-slate-400 mb-2">
             {timelineData.subtitle}
           </p>

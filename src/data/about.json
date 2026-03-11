@@ -59,39 +59,63 @@
     "colors": ["text-blue-600", "text-green-600", "text-purple-600", "text-red-600"],
     "interval": 2500
   },
-  "processSteps": [
-    { "icon": "💡", "title": "Ideation", "description": "Creative solutions" },
-    { "icon": "🎨", "title": "Design", "description": "User-centered UI/UX" },
-    { "icon": "⚙️", "title": "Development", "description": "Platform & AI-native" },
-    { "icon": "🤖", "title": "AI & Agentic", "description": "Intelligent tooling" },
-    { "icon": "🚀", "title": "Launch", "description": "Successful deployments" }
-  ],
-  "passion": {
-    "title": "We Approach Applications with Passion.",
-    "description": "We are a team of dedicated developers, designers, and strategists who love creating mobile and AI-powered products. Our <strong>platform-based</strong> and <strong>AI-first</strong> approach drives exceptional results: we combine technical excellence with agentic workflows and intelligent features that scale."
+  "processSteps": {
+    "intro": "We run projects in four phases—Ideation, Design, Build, and Launch—with AI and agentic practices embedded in each. This keeps scope clear, reduces rework, and speeds delivery while keeping quality high.",
+    "subintro": "Below is how each phase works and what you can expect: goals, deliverables, and where AI or agentic tooling is used.",
+    "steps": [
+      { "icon": "mdi:lightbulb-outline", "title": "Ideation", "description": "We start by framing the problem, defining scope and constraints, and aligning on outcomes with you. Success criteria and priorities are set before any design or code. AI helps with research synthesis, competitive analysis, and option generation so we narrow in on the right direction faster.", "outcomes": ["Clear problem statement and success criteria", "Scope and constraints agreed", "AI-assisted options and trade-offs"] },
+      { "icon": "mdi:palette-outline", "title": "Design", "description": "User-centered UI/UX and information architecture: interfaces and flows that match how people actually work. We use design systems and component libraries so the build phase stays consistent. AI supports wireframing, copy suggestions, and accessibility checks.", "outcomes": ["UI/UX and flows defined", "Design system and components", "Agentic flow design for automation"] },
+      { "icon": "mdi:code-tags", "title": "Build", "description": "Platform-first development with shared modules and APIs. We use AI-native tooling and agentic workflows from day one—assistive coding, generated tests, and automated refactors—so the codebase stays maintainable and feature work moves quickly. Development and AI/agentic work happen together, not as an afterthought.", "outcomes": ["Platform modules and APIs", "AI-assisted and agentic coding", "Tests and quality gates"] },
+      { "icon": "mdi:rocket-launch-outline", "title": "Launch", "description": "CI/CD, monitoring, and handover. We set up repeatable deployments, observability, and documentation so you can run and extend the system. AI is used for monitoring, anomaly detection, and operational automation where it adds value.", "outcomes": ["CI/CD and deployment pipeline", "Monitoring and alerts", "Handover and runbooks"] }
+    ]
+  },
+  "weUse": {
+    "label": "Technology & tools",
+    "title": "Technologies",
+    "titleAccent": "we use",
+    "subtitle": "From editors and version control to cloud, frameworks, and AI—here’s the stack and our own CLIs we use to build and ship platform-based, AI-first products.",
+    "tools": [
+      { "name": "Cursor", "icon": "simple-icons:cursor", "category": "Editors & IDEs", "usage": "Primary IDE, AI-assisted coding" },
+      { "name": "VS Code", "icon": "simple-icons:visualstudiocode", "category": "Editors & IDEs", "usage": "Lightweight editing, extensions" },
+      { "name": "Visual Studio", "icon": "simple-icons:visualstudio", "category": "Editors & IDEs", "usage": "Enterprise .NET & C#" },
+      { "name": "JetBrains", "icon": "simple-icons:jetbrains", "category": "Editors & IDEs", "usage": "Kotlin, Swift, IDEs" },
+      { "name": "GitHub", "icon": "simple-icons:github", "category": "Version control", "usage": "Repos, Actions, Copilot" },
+      { "name": "GitLab", "icon": "simple-icons:gitlab", "category": "Version control", "usage": "CI/CD, self-hosted option" },
+      { "name": "Azure DevOps", "icon": "simple-icons:azuredevops", "category": "Version control", "usage": "Pipelines, boards" },
+      { "name": "Bitbucket", "icon": "simple-icons:bitbucket", "category": "Version control", "usage": "Git, Jira integration" },
+      { "name": "Azure", "icon": "simple-icons:microsoftazure", "category": "Cloud & DevOps", "usage": "Hosting, APIs, identity" },
+      { "name": "Firebase", "icon": "simple-icons:firebase", "category": "Cloud & DevOps", "usage": "Auth, Firestore, hosting" },
+      { "name": "Vercel", "icon": "simple-icons:vercel", "category": "Cloud & DevOps", "usage": "Next.js, edge, previews" },
+      { "name": "Docker", "icon": "simple-icons:docker", "category": "Cloud & DevOps", "usage": "Containers, local dev" },
+      { "name": "GitHub Actions", "icon": "simple-icons:githubactions", "category": "Cloud & DevOps", "usage": "CI/CD, automation" },
+      { "name": "Flutter", "icon": "simple-icons:flutter", "category": "Frameworks", "usage": "Cross-platform mobile & web" },
+      { "name": "React", "icon": "simple-icons:react", "category": "Frameworks", "usage": "Web UI, Next.js" },
+      { "name": "Next.js", "icon": "simple-icons:nextdotjs", "category": "Frameworks", "usage": "SSR, SSG, App Router" },
+      { "name": "Node.js", "icon": "simple-icons:nodedotjs", "category": "Frameworks", "usage": "Backend, tooling" },
+      { "name": "NestJS", "icon": "simple-icons:nestjs", "category": "Frameworks", "usage": "API services, TypeScript" },
+      { "name": "TypeScript", "icon": "simple-icons:typescript", "category": "Languages", "usage": "Type-safe JS, backend" },
+      { "name": "Dart", "icon": "simple-icons:dart", "category": "Languages", "usage": "Flutter apps" },
+      { "name": "Swift", "icon": "simple-icons:swift", "category": "Languages", "usage": "Native iOS" },
+      { "name": "Kotlin", "icon": "simple-icons:kotlin", "category": "Languages", "usage": "Native Android" },
+      { "name": "Python", "icon": "simple-icons:python", "category": "Languages", "usage": "Scripts, ML tooling" },
+      { "name": "Tailwind CSS", "icon": "simple-icons:tailwindcss", "category": "Frontend & tooling", "usage": "Utility-first CSS" },
+      { "name": "Iconify", "icon": "simple-icons:iconify", "category": "Frontend & tooling", "usage": "Icons" },
+      { "name": "Jest", "icon": "simple-icons:jest", "category": "Frontend & tooling", "usage": "Unit & integration tests" },
+      { "name": "Sharp", "icon": "simple-icons:sharp", "category": "Frontend & tooling", "usage": "Image optimization" },
+      { "name": "MDX", "icon": "simple-icons:mdx", "category": "Frontend & tooling", "usage": "Content, docs" },
+      { "name": "OpenAI", "icon": "simple-icons:openai", "category": "AI", "usage": "GPT, embeddings, APIs" },
+      { "name": "Anthropic", "icon": "simple-icons:anthropic", "category": "AI", "usage": "Claude, long context" },
+      { "name": "Google Gemini", "icon": "simple-icons:gemini", "category": "AI", "usage": "Multimodal, code" },
+      { "name": "Ollama", "icon": "simple-icons:ollama", "category": "AI", "usage": "Local LLMs" },
+      { "name": "Hugging Face", "icon": "simple-icons:huggingface", "category": "AI", "usage": "Models, inference" },
+      { "name": "GitHub Copilot", "icon": "simple-icons:github", "category": "AI", "usage": "In-editor completion" },
+      { "name": "Masterfabric CLI", "icon": "mdi:console", "category": "Our tools", "usage": "Unified CLI, MVVM & scaffolds" },
+      { "name": "Mobile CLI", "icon": "mdi:cellphone", "category": "Our tools", "usage": "Flutter/Dart codegen, features" },
+      { "name": "Web CLI", "icon": "mdi:web", "category": "Our tools", "usage": "Next.js, API & page scaffolds" }
+    ]
   },
   "aiCallout": {
     "text": "From ideation to launch we work platform-based and AI-first.",
     "pillars": ["Platform", "Agentic", "AI-native"]
-  },
-  "statistics": [
-    {
-      "value": 0,
-      "label": "Active Projects",
-      "tooltip": "Currently ongoing mobile and web application projects in development phase across various industries.",
-      "icon": "trending-up"
-    },
-    {
-      "value": 0,
-      "label": "Completed Projects", 
-      "tooltip": "Successfully delivered and deployed applications that are live in production and serving users worldwide.",
-      "icon": "trophy"
-    },
-    {
-      "value": 0,
-      "label": "Hybrid & Touched Developers",
-      "tooltip": "Total network of hybrid developers and touched professionals including our partner companies working together.",
-      "icon": "users"
-    }
-  ]
+  }
 }

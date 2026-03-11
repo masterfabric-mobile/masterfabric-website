@@ -1,0 +1,39 @@
+{
+  "eyebrow": "Services",
+  "title": "From mobile and web to backend, AI, CI/CD, and test",
+  "description": "We help you ship across the full stack — design, build, deploy, and scale.",
+  "ctaText": "View all services",
+  "ctaHref": "/contact",
+  "cells": [
+    {
+      "title": "Mobile",
+      "detail": "iOS & Android native and cross‑platform apps with Flutter, React Native.",
+      "toolCategories": ["Editors & IDEs", "Version control", "Frameworks", "Languages", "Testing", "Our tools"]
+    },
+    {
+      "title": "Web",
+      "detail": "Responsive SPAs, dashboards, and web apps with React and Next.js.",
+      "toolCategories": ["Editors & IDEs", "Version control", "Cloud & DevOps", "Frameworks", "Languages", "Frontend & tooling", "Testing", "Our tools"]
+    },
+    {
+      "title": "Backend",
+      "detail": "APIs, microservices, and serverless with Node, Nest, and cloud.",
+      "toolCategories": ["Editors & IDEs", "Version control", "Cloud & DevOps", "Frameworks", "Languages", "Our tools"]
+    },
+    {
+      "title": "AI",
+      "detail": "AI-first features, agents, and integrations for your product.",
+      "toolCategories": ["Editors & IDEs", "Version control", "Cloud & DevOps", "AI", "Languages", "Our tools"]
+    },
+    {
+      "title": "CI/CD",
+      "detail": "Pipelines, automated tests, and deployment from code to production.",
+      "toolCategories": ["Editors & IDEs", "Version control", "Cloud & DevOps", "Testing", "Our tools"]
+    },
+    {
+      "title": "Test",
+      "detail": "E2E, integration, and performance testing for quality and speed.",
+      "toolCategories": ["Editors & IDEs", "Version control", "Testing", "Frameworks", "Our tools"]
+    }
+  ]
+}

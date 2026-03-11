@@ -9,7 +9,6 @@ import AboutTimeline from '@/components/about/AboutTimeline'
 import DynamicText from '@/components/about/DynamicText'
 import React, { useState } from 'react';
 import ProcessSteps from '@/components/about/ProcessSteps'
-import FlipStatistics from '@/components/about/FlipStatistics'
 import GitHubProjects from '@/components/about/github-projects'
 import AiFirstSectionAbout from '@/components/pages/ai-first-section-about'
 import aboutData from '@/data/about.json'
@@ -41,21 +40,13 @@ export default function AboutPage() {
       <Globe activities={aboutData.activities} />
 
       <AboutTimeline timeline={aboutData.timeline} />
-      <FlowTimeline />
 
-      <DynamicText dynamicText={aboutData.dynamicText} 
-        onIndexChange={setCurrentIndex}
-      />
-      
-      <ProcessSteps processSteps={aboutData.processSteps} 
-        currentColor={dynamicColors[currentIndex]}
-      />
-
-      <FlipStatistics 
-        statistics={aboutData.statistics} 
-        title={aboutData.passion.title} 
-        description={aboutData.passion.description} 
-      />
+      {/* Single block: timeline, what we deliver, how we work — unified spacing and colors */}
+      <div className="bg-white">
+        <FlowTimeline />
+        <DynamicText dynamicText={aboutData.dynamicText} onIndexChange={setCurrentIndex} />
+        <ProcessSteps processSteps={aboutData.processSteps} currentColor={dynamicColors[currentIndex]} />
+      </div>
 
       <AiFirstSectionAbout />
 

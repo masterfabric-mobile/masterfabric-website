@@ -1,0 +1,48 @@
+{
+  "targetPlatforms": {
+    "eyebrow": "Platforms",
+    "title": "We build for",
+    "description": "Mobile, web, desktop, and backend—we ship native and cross-platform apps and services.",
+    "platforms": [
+      { "name": "iOS", "icon": "simple-icons:apple", "description": "Native and cross-platform" },
+      { "name": "Android", "icon": "simple-icons:android", "description": "Native and cross-platform" },
+      { "name": "Web", "icon": "mdi:web", "description": "SPA, SSR, PWA" },
+      { "name": "Desktop", "icon": "mdi:monitor", "description": "Windows, macOS, Linux" },
+      { "name": "Backend & API", "icon": "mdi:server", "description": "Services and integrations" }
+    ]
+  },
+  "toolsSection": {
+    "label": "Technology & tools",
+    "title": "Technologies",
+    "titleAccent": "we use",
+    "subtitle": "From editors and version control to cloud, frameworks, and AI—here's the stack and our own CLIs we use to build and ship platform-based, AI-first products.",
+    "tools": [
+      { "name": "Cursor", "icon": "simple-icons:cursor", "category": "Editors & IDEs", "usage": "Primary IDE, AI-assisted coding" },
+      { "name": "VS Code", "icon": "simple-icons:visualstudiocode", "category": "Editors & IDEs", "usage": "Lightweight editing, extensions" },
+      { "name": "JetBrains", "icon": "simple-icons:jetbrains", "category": "Editors & IDEs", "usage": "Kotlin, Swift, IDEs" },
+      { "name": "GitHub", "icon": "simple-icons:github", "category": "Version control", "usage": "Repos, Actions, Copilot" },
+      { "name": "GitLab", "icon": "simple-icons:gitlab", "category": "Version control", "usage": "CI/CD, self-hosted" },
+      { "name": "Azure", "icon": "simple-icons:microsoftazure", "category": "Cloud & DevOps", "usage": "Hosting, APIs" },
+      { "name": "Firebase", "icon": "simple-icons:firebase", "category": "Cloud & DevOps", "usage": "Auth, Firestore, hosting" },
+      { "name": "Vercel", "icon": "simple-icons:vercel", "category": "Cloud & DevOps", "usage": "Next.js, edge" },
+      { "name": "Docker", "icon": "simple-icons:docker", "category": "Cloud & DevOps", "usage": "Containers" },
+      { "name": "Flutter", "icon": "simple-icons:flutter", "category": "Frameworks", "usage": "Cross-platform mobile & web" },
+      { "name": "React", "icon": "simple-icons:react", "category": "Frameworks", "usage": "Web UI" },
+      { "name": "Next.js", "icon": "simple-icons:nextdotjs", "category": "Frameworks", "usage": "SSR, App Router" },
+      { "name": "Node.js", "icon": "simple-icons:nodedotjs", "category": "Frameworks", "usage": "Backend" },
+      { "name": "TypeScript", "icon": "simple-icons:typescript", "category": "Languages", "usage": "Type-safe JS" },
+      { "name": "Dart", "icon": "simple-icons:dart", "category": "Languages", "usage": "Flutter" },
+      { "name": "Swift", "icon": "simple-icons:swift", "category": "Languages", "usage": "Native iOS" },
+      { "name": "Kotlin", "icon": "simple-icons:kotlin", "category": "Languages", "usage": "Native Android" },
+      { "name": "Python", "icon": "simple-icons:python", "category": "Languages", "usage": "Scripts, ML" },
+      { "name": "Tailwind CSS", "icon": "simple-icons:tailwindcss", "category": "Frontend & tooling", "usage": "Utility CSS" },
+      { "name": "Jest", "icon": "simple-icons:jest", "category": "Testing", "usage": "Unit & integration" },
+      { "name": "Playwright", "icon": "simple-icons:playwright", "category": "Testing", "usage": "E2E, cross-browser" },
+      { "name": "OpenAI", "icon": "simple-icons:openai", "category": "AI", "usage": "GPT, APIs" },
+      { "name": "Anthropic", "icon": "simple-icons:anthropic", "category": "AI", "usage": "Claude" },
+      { "name": "Masterfabric CLI", "icon": "mdi:console", "category": "Our tools", "usage": "Unified CLI, MVVM & scaffolds" },
+      { "name": "Mobile CLI", "icon": "mdi:cellphone", "category": "Our tools", "usage": "Flutter/Dart codegen" },
+      { "name": "Web CLI", "icon": "mdi:web", "category": "Our tools", "usage": "Next.js, API & page scaffolds" }
+    ]
+  }
+}

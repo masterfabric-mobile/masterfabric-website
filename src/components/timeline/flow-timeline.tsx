@@ -54,7 +54,7 @@ const FlowTimeline: React.FC = () => {
   const currentPhase = phases[currentStep]
 
   return (
-    <section className="min-h-[100vh] px-4 sm:px-8 lg:px-[4rem] pt-12 sm:pt-16 lg:pt-[3.125rem] pb-16 lg:pb-24 bg-white content-start">
+    <section className="px-4 sm:px-8 lg:px-[4rem] pt-12 sm:pt-16 lg:pt-[3.125rem] pb-16 lg:pb-24 bg-white content-start">
       <div className="mx-auto max-w-6xl">
         {/* Header — minimal */}
         <div className="mb-10 sm:mb-12 lg:mb-14 text-center">

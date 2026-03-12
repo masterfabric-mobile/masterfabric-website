@@ -1,7 +1,16 @@
 'use client'
 
 import React, { useState } from 'react'
-import { Icon } from '@iconify/react'
+import {
+  Boxes,
+  Code2,
+  Cog,
+  Cloud,
+  FlaskConical,
+  Sparkles,
+  SquareKanban,
+  Wrench,
+} from 'lucide-react'
 
 // --- Services types ---
 export interface ServiceCell {
@@ -71,17 +80,17 @@ const CATEGORY_ORDER = [
   'Our tools',
 ] as const
 
-const CATEGORY_ICONS: Record<string, string> = {
-  'Editors & IDEs': 'mdi:monitor-edit',
-  'Version control': 'mdi:source-branch',
-  'Cloud & DevOps': 'mdi:cloud-outline',
-  'Frameworks': 'mdi:package-variant',
-  'Languages': 'mdi:code-tags',
-  'Frontend & tooling': 'mdi:palette-outline',
-  'Testing': 'mdi:test-tube',
-  'AI': 'mdi:robot-outline',
-  'Our tools': 'mdi:console-line',
-}
+const CATEGORY_ICONS = {
+  'Editors & IDEs': Boxes,
+  'Version control': SquareKanban,
+  'Cloud & DevOps': Cloud,
+  'Frameworks': Wrench,
+  'Languages': Code2,
+  'Frontend & tooling': Cog,
+  Testing: FlaskConical,
+  AI: Sparkles,
+  'Our tools': Boxes,
+} as const
 
 const CATEGORY_DESC: Record<string, string> = {
   'Editors & IDEs': 'AI-assisted editing and multi-file context.',
@@ -96,7 +105,7 @@ const CATEGORY_DESC: Record<string, string> = {
 }
 
 const SECTION_CLASS =
-  'px-4 sm:px-8 lg:px-[4rem] pt-8 sm:pt-10 pb-10 sm:pb-12 sm:pt-12 sm:pb-16 bg-white border-b border-slate-100 overflow-hidden'
+  'px-4 sm:px-8 lg:px-[4rem] pt-10 sm:pt-12 pb-12 sm:pb-16 bg-white border-b border-slate-100'
 
 export default function ServicesAndToolsSection({
   services,
@@ -165,146 +174,146 @@ export default function ServicesAndToolsSection({
           )}
         </div>
 
-        {/* We build for — codebase title pattern + improved platform cards */}
-        {platforms.length > 0 && (
-          <div className="mb-8 sm:mb-10">
-            <p className="text-xs font-medium uppercase tracking-widest text-slate-400 mb-2">
-              {platformsEyebrow}
-            </p>
-            <h3 className="text-2xl sm:text-3xl font-semibold text-slate-900 tracking-tight leading-tight mb-3">
-              <span className="block">We build</span>
-              <span className="block text-blue-600">for</span>
-            </h3>
-            {platformsDescription && (
-              <p className="text-sm sm:text-base text-slate-500 max-w-2xl mb-6 leading-relaxed">
-                {platformsDescription}
-              </p>
-            )}
-            <div className="flex flex-wrap gap-3 sm:gap-4">
-              {platforms.map((platform) => (
-                <div
-                  key={platform.name}
-                  className="group flex items-center gap-3 rounded-xl border border-slate-200/80 bg-white px-4 py-3 sm:px-5 sm:py-3.5 transition-all duration-200 hover:border-blue-200 hover:bg-blue-50/30 hover:shadow-sm"
-                >
-                  <div className="shrink-0 flex h-10 w-10 items-center justify-center rounded-xl bg-slate-50 text-slate-600 ring-1 ring-slate-100 group-hover:bg-blue-100 group-hover:text-blue-600 group-hover:ring-blue-100 transition-colors">
-                    <Icon icon={platform.icon} className="size-5" aria-hidden />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-sm font-semibold text-slate-900">
-                      {platform.name}
-                    </p>
-                    {platform.description && (
-                      <p className="text-xs text-slate-500 mt-0.5">
-                        {platform.description}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Grid: static size (Web = max), fixed height ~30rem so all 6 areas visible without cutting off */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 lg:h-[30rem] lg:min-h-[30rem]">
-          {/* Left: area list — scrollable so Web (last) is never cut off */}
-          <div className="lg:col-span-4 flex flex-col min-h-0 lg:h-full">
-            <div className="rounded-2xl border border-slate-200/80 bg-white flex-1 min-h-0 flex flex-col h-full overflow-hidden">
-              <div className="px-4 pt-4 pb-3 sm:px-6 sm:pt-5 sm:pb-4 shrink-0">
-                <p className="text-xs font-medium uppercase tracking-widest text-slate-400 mb-1.5">
+        {/* Yeni tasarım: üstte yatay sekmeler, altta kart grid — daha sade ve hizalı */}
+        <div className="border border-gray-200/80 rounded-2xl bg-white shadow-sm">
+          {/* Tabs bar */}
+          <div className="border-b border-slate-100 px-3 sm:px-4 pt-4 pb-3">
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex flex-col">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-400">
                   Choose an area
                 </p>
-                <p className="text-sm text-slate-500 mb-4 leading-snug">
-                  Choose the area that fits your needs.
+                <p className="text-xs text-gray-500 mt-1">
+                  Select the product area to see the tools we rely on.
                 </p>
               </div>
-              <div className="flex-1 min-h-0 overflow-y-auto px-4 pb-4 sm:px-6 sm:pb-5">
-                <div className="flex flex-col gap-0">
-                  {sortedCells.map((cell, index) => (
-                    <React.Fragment key={cell.title}>
-                      <button
-                        type="button"
-                        onClick={() => setSelectedIndex(index)}
-                        className={`min-h-[2.75rem] w-full text-left py-2.5 sm:py-3 px-3 rounded-lg text-sm font-medium transition-colors ${
-                          selectedIndex === index
-                            ? 'bg-blue-50 text-blue-700'
-                            : 'text-slate-700 hover:bg-slate-50 hover:text-slate-900'
-                        }`}
-                        aria-pressed={selectedIndex === index}
-                        aria-label={`Show technologies for ${cell.title}`}
-                      >
-                        {cell.title}
-                      </button>
-                      {index < sortedCells.length - 1 && (
-                        <div className="shrink-0 border-b border-slate-100" aria-hidden />
-                      )}
-                    </React.Fragment>
-                  ))}
-                </div>
+            </div>
+            <div className="mt-3">
+              <div className="flex flex-wrap gap-2 pb-1">
+                {sortedCells.map((cell, index) => {
+                  const isActive = selectedIndex === index
+                  return (
+                    <button
+                      key={cell.title}
+                      type="button"
+                      onClick={() => setSelectedIndex(index)}
+                      className={`inline-flex items-center rounded-lg px-4 py-2 text-xs sm:text-sm font-medium transition-colors ${
+                        isActive
+                          ? 'bg-blue-600 text-white shadow-sm'
+                          : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                      }`}
+                      aria-pressed={isActive}
+                      aria-label={`Show technologies for ${cell.title}`}
+                    >
+                      <span className="truncate">{cell.title}</span>
+                    </button>
+                  )
+                })}
               </div>
             </div>
           </div>
 
-          {/* Right: fixed height on lg, content scrolls if needed */}
-          <div className="lg:col-span-8 min-w-0 flex flex-col lg:h-full">
-            {selectedCell && (
-              <div className="rounded-2xl border border-slate-200/80 bg-white overflow-hidden w-full max-w-full h-full flex flex-col min-h-0">
-                <div className="px-4 pt-4 pb-3 sm:px-6 sm:pt-5 sm:pb-4 border-b border-slate-100 shrink-0">
-                  <p className="text-xs font-medium uppercase tracking-widest text-slate-400 mb-1.5">
+          {/* Content */}
+          {selectedCell && (
+            <div className="px-4 sm:px-6 py-4 sm:py-5">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between mb-4">
+                <div className="space-y-2">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-500 mb-1.5">
                     Technologies {titleAccent} for {selectedCell.title}
                   </p>
-                  <p className="text-sm text-slate-600 leading-relaxed max-w-2xl">
-                    We combine these tools with an <strong className="text-slate-800">agentic development workflow</strong>—AI-assisted coding, iterative refinement, and automated quality checks—so we ship faster without sacrificing quality.
+                  <p className="text-sm text-gray-600 leading-relaxed max-w-2xl">
+                    We combine these tools with an{' '}
+                    <strong className="text-slate-800">agentic development workflow</strong>—AI-assisted
+                    coding, iterative refinement, and automated quality checks—so we ship faster without
+                    sacrificing quality.
                   </p>
-                </div>
-                <div className="px-4 py-4 sm:px-6 sm:py-5 w-full max-w-full flex-1 min-h-0 overflow-y-auto">
-                  {selectedCategories.length > 0 ? (
-                    <div className="flex flex-col gap-4 w-full max-w-full">
-                      {selectedCategories.map((category) => {
-                        const rawItems = byCategory[category] ?? []
-                        const items = selectedCell
-                          ? rawItems.filter(
-                              (tool) =>
-                                !tool.areas || tool.areas.includes(selectedCell.title)
-                            )
-                          : rawItems
-                        if (items.length === 0) return null
+                  {platforms.length > 0 && (
+                    <p className="pt-1 text-[11px] sm:text-xs text-slate-500">
+                      We build for{' '}
+                      {platforms.map((platform, index) => {
+                        const isLast = index === platforms.length - 1
+                        const isSecondLast = index === platforms.length - 2
+                        const separator = isLast ? '' : isSecondLast ? ' and ' : ', '
                         return (
-                          <div
-                            key={category}
-                            className="flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-slate-100 pb-3 last:border-0 last:pb-0 w-full max-w-full"
-                          >
-                            <span className="text-xs font-medium text-slate-500 uppercase tracking-wide shrink-0 w-28 sm:w-32">
-                              {category}
-                            </span>
-                            <div className="flex flex-wrap gap-1.5 min-w-0 flex-1">
-                              {items.map((tool) => (
-                                <span
-                                  key={tool.name}
-                                  title={tool.usage ?? tool.name}
-                                  className="inline-flex items-center gap-1 rounded-md bg-slate-50 px-2 py-1 text-xs font-medium text-slate-700 border border-slate-100"
-                                >
-                                  <Icon
-                                    icon={tool.icon}
-                                    className="size-3 shrink-0 text-slate-400"
-                                  />
-                                  {tool.name}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
+                          <span key={platform.name}>
+                            <span className="font-medium text-slate-700">{platform.name}</span>
+                            {separator}
+                          </span>
                         )
                       })}
-                    </div>
-                  ) : (
-                    <p className="text-sm text-slate-500 rounded-lg border border-dashed border-slate-200 bg-slate-50/50 p-6 text-center">
-                      No technology categories defined for this area.
+                      .
                     </p>
                   )}
                 </div>
+                {selectedCell.detail && (
+                  <div className="mt-1 sm:mt-0">
+                    <span className="inline-flex items-center rounded-full border border-gray-200 bg-gray-50 px-3 py-1 text-[11px] font-medium text-gray-600">
+                      {selectedCell.detail}
+                    </span>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
+
+              {selectedCategories.length > 0 ? (
+                <div className="mt-2 grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+                  {selectedCategories.map((category) => {
+                    const rawItems = byCategory[category] ?? []
+                    const items = selectedCell
+                      ? rawItems.filter(
+                          (tool) => !tool.areas || tool.areas.includes(selectedCell.title)
+                        )
+                      : rawItems
+                    if (items.length === 0) return null
+
+                    const iconName = CATEGORY_ICONS[category] ?? 'mdi:folder-outline'
+                    const description = CATEGORY_DESC[category]
+
+                    return (
+                      <div
+                        key={category}
+                        className="rounded-xl border border-slate-200/80 bg-white px-3.5 py-3.5 sm:px-4 sm:py-4 flex flex-col gap-2"
+                      >
+                        <div className="flex items-start gap-3">
+                          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-700 ring-1 ring-blue-100">
+                            {(() => {
+                              const IconCmp = CATEGORY_ICONS[category] ?? Boxes
+                              return <IconCmp className="size-4" aria-hidden />
+                            })()}
+                          </div>
+                          <div className="min-w-0">
+                            <p className="text-xs font-semibold uppercase tracking-wide text-slate-800">
+                              {category}
+                            </p>
+                            {description && (
+                              <p className="mt-0.5 text-[11px] text-slate-500 line-clamp-2">
+                                {description}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                        <div className="flex flex-wrap gap-1.5 mt-2">
+                          {items.map((tool) => (
+                            <span
+                              key={tool.name}
+                              title={tool.usage ?? tool.name}
+                              className="inline-flex items-center gap-1 rounded-full bg-white px-2.5 py-1 text-[11px] font-medium text-gray-800 border border-gray-200"
+                            >
+                              <span className="h-1.5 w-1.5 rounded-full bg-blue-400" />
+                              <span>{tool.name}</span>
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              ) : (
+                <p className="mt-4 text-sm text-slate-500 rounded-lg border border-dashed border-slate-200 bg-slate-50/50 p-6 text-center">
+                  No technology categories defined for this area.
+                </p>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </section>

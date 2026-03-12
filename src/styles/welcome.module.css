@@ -516,22 +516,24 @@
   --ide-muted: #8b92a0;
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
   font-size: 13px;
-  border-radius: 12px;
+  border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
-  border: 1px solid var(--ide-border);
+  box-shadow: 0 20px 48px rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(148, 163, 184, 0.35);
   display: flex;
   flex-direction: column;
-  min-height: 380px;
+  min-height: 360px;
   max-height: 520px;
   position: relative;
+  background: radial-gradient(circle at top left, rgba(148, 163, 184, 0.18), transparent 55%),
+    linear-gradient(145deg, #020617, #020617 38%, #020617);
 }
 
 .ideSection {
   flex-shrink: 0;
-  background: var(--ide-bg);
-  border-bottom: 1px solid var(--ide-border);
-  max-height: 380px;
+  background: #020617;
+  border-bottom: 1px solid rgba(30, 41, 59, 0.9);
+  max-height: 320px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -542,8 +544,8 @@
   align-items: center;
   gap: 12px;
   padding: 8px 12px;
-  background: var(--ide-surface);
-  border-bottom: 1px solid var(--ide-border);
+  background: #020617;
+  border-bottom: 1px solid rgba(30, 41, 59, 0.9);
 }
 
 .ideControls {
@@ -571,9 +573,9 @@
 .ideTabBar {
   display: flex;
   align-items: stretch;
-  background: #252b34;
-  border-bottom: 1px solid var(--ide-border);
-  padding: 0 8px 0 0;
+  background: #020617;
+  border-bottom: 1px solid rgba(30, 41, 59, 0.9);
+  padding: 0 10px 0 10px;
   gap: 2px;
   flex-shrink: 0;
 }
@@ -581,9 +583,9 @@
 .ideTab {
   display: flex;
   align-items: center;
-  padding: 8px 14px;
+  padding: 7px 14px;
   font-size: 12px;
-  color: var(--ide-muted);
+  color: #64748b;
   background: transparent;
   border: none;
   border-radius: 6px 6px 0 0;
@@ -593,25 +595,79 @@
 }
 
 .ideTab:hover {
-  color: var(--ide-text);
+  color: #e2e8f0;
 }
 
 .ideTabActive {
-  color: var(--ide-text);
-  background: var(--ide-bg);
-  border: 1px solid var(--ide-border);
-  border-bottom-color: var(--ide-bg);
+  color: #e2e8f0;
+  background: #020617;
+  border: 1px solid rgba(30, 41, 59, 0.9);
+  border-bottom-color: #020617;
   margin-bottom: -1px;
   cursor: default;
 }
 
 .ideContent {
   display: flex;
-  min-height: 294px;  /* 15 lines × 18px + 24px padding */
-  max-height: 294px;
+  min-height: 260px;
+  max-height: 260px;
   overflow: hidden;
+  position: relative;
+  background: #020617;
+}
+
+.fileExplorerPane {
+  width: 160px;
+  padding: 10px 10px 10px 14px;
+  border-right: 1px solid rgba(30, 41, 59, 0.9);
+  background: #020617;
+  color: #64748b;
+  font-size: 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fileExplorerTitle {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 10px;
+  color: #64748b;
+  margin-bottom: 4px;
+}
+
+.fileExplorerItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.16s ease, color 0.16s ease;
+}
+
+.fileExplorerItemActive {
+  background: rgba(37, 99, 235, 0.2);
+  color: #e5e7eb;
+}
+
+.fileExplorerDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #4b5563;
+}
+
+.fileExplorerItemActive .fileExplorerDot {
+  background: #60a5fa;
+}
+
+.ideEditorPane {
+  flex: 1;
+  display: flex;
   padding-left: 44px;
   position: relative;
+  background: #020617;
 }
 
 .ideSection .lineNumbers {
@@ -659,7 +715,9 @@
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
-  padding: 6px 0;
+  padding: 8px 12px 4px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+  background: radial-gradient(circle at top left, rgba(96, 165, 250, 0.16), transparent 55%);
 }
 
 .scenarioBarLabel {
@@ -672,9 +730,9 @@
   display: inline-flex;
   align-items: stretch;
   background: rgba(0, 0, 0, 0.06);
-  border-radius: 8px;
+  border-radius: 999px;
   padding: 3px;
-  gap: 2px;
+  gap: 4px;
 }
 
 .scenarioBar .scenarioBtn {
@@ -1182,7 +1240,11 @@
 .stepOverlayContent {
   text-align: center;
   color: #c9d1d9;
-  padding: 1.25rem;
+  padding: 1.5rem 1.75rem;
+  background: rgba(13, 17, 23, 0.98);
+  border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+  max-width: 360px;
 }
 
 .stepOverlayMessage {
@@ -1192,10 +1254,38 @@
   color: #e6edf3;
 }
 
+.stepOverlayDescription {
+  font-size: 0.85rem;
+  color: var(--term-muted);
+  margin-bottom: 0.75rem;
+}
+
 .stepOverlayCountdown {
   font-size: 0.875rem;
   color: var(--term-muted);
   margin-bottom: 1rem;
+}
+
+.stepOverlayBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: 999px;
+  background: rgba(88, 166, 255, 0.16);
+  color: #58a6ff;
+  margin-bottom: 0.75rem;
+}
+
+.stepOverlayActions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 0.25rem;
 }
 
 .stepOverlayContinue {

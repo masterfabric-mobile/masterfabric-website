@@ -98,7 +98,7 @@ export default function TargetPlatformsAndTools({
     if (!acc[cat]) acc[cat] = []
     acc[cat].push(tool)
     return acc
-  }, [])
+  }, {})
 
   const categories = CATEGORY_ORDER.filter((c) => byCategory[c]?.length)
 

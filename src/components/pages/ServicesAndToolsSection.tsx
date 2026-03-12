@@ -131,7 +131,7 @@ export default function ServicesAndToolsSection({
     if (!acc[cat]) acc[cat] = []
     acc[cat].push(tool)
     return acc
-  }, [])
+  }, {})
 
   const selectedCell = sortedCells[selectedIndex]
   const selectedCategories = selectedCell?.toolCategories?.length

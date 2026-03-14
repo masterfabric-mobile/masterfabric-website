@@ -82,11 +82,21 @@ body {
   100% { transform: translateX(-50%); }
 }
 
-.animate-scroll-infinite {
-  animation: scroll-infinite 50s linear infinite;
+@keyframes scroll-infinite-reverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
 }
 
-.group:hover .animate-scroll-infinite {
+.animate-scroll-infinite {
+  animation: scroll-infinite 48s linear infinite;
+}
+
+.animate-scroll-infinite-reverse {
+  animation: scroll-infinite-reverse 52s linear infinite;
+}
+
+.group:hover .animate-scroll-infinite,
+.group:hover .animate-scroll-infinite-reverse {
   animation-play-state: paused;
 }
 

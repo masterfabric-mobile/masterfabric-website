@@ -15,6 +15,7 @@ import homeToolsData from '@/data/home-tools.json'
 
 export default function Home() {
   return (
+    <>
     <Container>
       <ContactSection />
 
@@ -36,7 +37,8 @@ export default function Home() {
         toolsSection={homeToolsData.toolsSection}
       />
       <RefactorApplication />
-      <CTA />
     </Container>
+    <CTA tools={homeToolsData.toolsSection.tools} />
+    </>
   )
 }

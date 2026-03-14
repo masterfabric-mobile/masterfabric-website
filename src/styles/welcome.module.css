@@ -499,6 +499,88 @@
   100% { transform: scale(1); opacity: 1; }
 }
 
+/* Wizard terminal (cursor.ist-style card) */
+.wizardTerminal {
+  --term-bg: #0d1117;
+  --term-border: #30363d;
+  --term-text: #1f2937;
+  --term-muted: #6b7280;
+  --term-success: #059669;
+  --term-info: #2563eb;
+  --term-error: #dc2626;
+  --term-code: #4b5563;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  min-height: 180px;
+  max-height: 220px;
+  overflow-y: auto;
+  overflow-x: auto;
+  padding: 10px 12px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+
+.wizardTerminal .terminalLine {
+  color: var(--term-text);
+  padding: 2px 0;
+  word-break: break-word;
+}
+
+.wizardTerminal .terminalLineSuccess { color: var(--term-success); }
+.wizardTerminal .terminalLineInfo { color: var(--term-info); }
+.wizardTerminal .terminalLineError { color: var(--term-error); }
+.wizardTerminal .terminalLineCode {
+  color: var(--term-code);
+  padding-left: 8px;
+  border-left: 2px solid #e2e8f0;
+  margin-left: 4px;
+}
+
+.wizardTerminal .terminalLinePrompt {
+  color: var(--term-muted);
+  font-style: italic;
+}
+
+.wizardTerminal .terminalLineCommand {
+  color: var(--term-success);
+  font-weight: 500;
+}
+
+.wizardTerminal .terminalPromptLine {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 2px 0;
+  margin-top: 4px;
+  min-height: 1.5em;
+}
+
+.wizardTerminal .terminalPromptPrefix {
+  color: var(--term-success);
+  user-select: none;
+  margin-right: 2px;
+}
+
+.wizardTerminal .terminalPromptCommand {
+  color: var(--term-text);
+}
+
+.wizardTerminal .terminalCursor {
+  display: inline-block;
+  width: 8px;
+  height: 1em;
+  background: var(--term-text);
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: terminalBlink 1s step-end infinite;
+}
+
+.deploymentTerminal {
+  min-height: 60px;
+}
+
 /* —— IDE (top) + Terminal (bottom) —— */
 .ideAndTerminal {
   --term-bg: #0d1117;
@@ -611,6 +693,7 @@
   display: flex;
   min-height: 260px;
   max-height: 260px;
+  min-width: 0;
   overflow: hidden;
   position: relative;
   background: #020617;
@@ -692,7 +775,8 @@
 
 .ideSection .codeContent {
   flex: 1;
-  padding: 10px 12px;
+  min-width: 0;
+  padding: 10px 12px 10px 56px;
   overflow: auto;
   font-size: 12px;
   line-height: 1.5;
@@ -701,8 +785,9 @@
 
 .ideSection .codeLine {
   min-height: 18px;
-  white-space: pre;
-  word-break: break-all;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .ideSection .codeLineEmpty {
@@ -909,6 +994,7 @@
 .terminalSection .terminalOutput {
   flex: 1;
   min-height: 0;
+  min-width: 0;
   padding: 10px 12px;
   overflow-y: auto;
   overflow-x: auto;
@@ -1229,29 +1315,85 @@
 .stepOverlay {
   position: absolute;
   inset: 0;
-  background: rgba(13, 17, 23, 0.85);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(4px);
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
   border-radius: 12px;
   z-index: 5;
 }
 
+.stepOverlayHeader {
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 1rem 1.25rem;
+  background: #eff6ff;
+  border-bottom: 1px solid #dbeafe;
+  border-radius: 12px 12px 0 0;
+}
+
+.stepOverlayHeaderIcon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #3b82f6;
+  color: white;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.stepOverlayHeaderTitle {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1e40af;
+  margin: 0 0 2px 0;
+}
+
+.stepOverlayHeaderDesc {
+  font-size: 0.8rem;
+  color: #3b82f6;
+  margin: 0;
+  line-height: 1.4;
+}
+
 .stepOverlayContent {
-  text-align: center;
-  color: #c9d1d9;
-  padding: 1.5rem 1.75rem;
-  background: rgba(13, 17, 23, 0.98);
-  border-radius: 14px;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
-  max-width: 360px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 1.5rem 1.25rem;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.stepOverlayActions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.25rem 1.5rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e5e7eb;
+  max-width: 320px;
+  width: 100%;
 }
 
 .stepOverlayMessage {
   font-size: 1rem;
   font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: #e6edf3;
+  margin: 0;
+  color: #111827;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .stepOverlayDescription {
@@ -1262,8 +1404,8 @@
 
 .stepOverlayCountdown {
   font-size: 0.875rem;
-  color: var(--term-muted);
-  margin-bottom: 1rem;
+  color: #6b7280;
+  margin: 0;
 }
 
 .stepOverlayBadge {
@@ -1276,16 +1418,8 @@
   text-transform: uppercase;
   letter-spacing: 0.08em;
   border-radius: 999px;
-  background: rgba(88, 166, 255, 0.16);
-  color: #58a6ff;
-  margin-bottom: 0.75rem;
-}
-
-.stepOverlayActions {
-  display: flex;
-  gap: 0.5rem;
-  justify-content: center;
-  margin-top: 0.25rem;
+  background: #dbeafe;
+  color: #2563eb;
 }
 
 .stepOverlayContinue {
@@ -1301,8 +1435,7 @@
   transition: filter 0.2s;
 }
 
-.stepOverlayContinue:hover,
-.stepOverlayRevise:hover {
+.stepOverlayContinue:hover {
   filter: brightness(1.1);
 }
 
@@ -1313,17 +1446,21 @@
   border-radius: 8px;
   border: none;
   cursor: pointer;
-  background: #58a6ff;
-  color: #0d1117;
+  background: #3b82f6;
+  color: white;
   font-family: inherit;
-  transition: filter 0.2s;
+  transition: background 0.2s;
+}
+
+.stepOverlayRevise:hover {
+  background: #2563eb;
 }
 
 /* Revise suggestions panel */
 .reviseSuggestionsOverlay {
   position: absolute;
   inset: 0;
-  background: rgba(13, 17, 23, 0.92);
+  background: rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1332,18 +1469,19 @@
 }
 
 .reviseSuggestionsContent {
-  background: #161b22;
-  border: 1px solid #30363d;
+  background: white;
+  border: 1px solid #e5e7eb;
   border-radius: 12px;
   padding: 1.25rem 1.5rem;
   max-width: 320px;
   width: 90%;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
 }
 
 .reviseSuggestionsTitle {
   font-size: 0.9rem;
   font-weight: 600;
-  color: #e6edf3;
+  color: #111827;
   margin-bottom: 1rem;
 }
 
@@ -1359,25 +1497,25 @@
   font-size: 0.85rem;
   text-align: left;
   border-radius: 8px;
-  border: 1px solid #30363d;
-  background: #21262d;
-  color: #c9d1d9;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  color: #374151;
   cursor: pointer;
   font-family: inherit;
   transition: background 0.15s, border-color 0.15s;
 }
 
 .reviseSuggestionBtn:hover {
-  background: #30363d;
-  border-color: #58a6ff;
-  color: #e6edf3;
+  background: #f3f4f6;
+  border-color: #3b82f6;
+  color: #111827;
 }
 
 .reviseSuggestionsClose {
   width: 100%;
   padding: 8px;
   font-size: 0.8rem;
-  color: #8b949e;
+  color: #6b7280;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -1386,6 +1524,6 @@
 }
 
 .reviseSuggestionsClose:hover {
-  color: #c9d1d9;
-  background: rgba(255, 255, 255, 0.06);
+  color: #374151;
+  background: #f3f4f6;
 }

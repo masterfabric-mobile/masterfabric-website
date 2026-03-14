@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react'
-import { Icon } from '@iconify/react'
 import styles from '../../styles/welcome.module.css'
 
 interface CliOutputLine {
@@ -33,6 +32,11 @@ interface WelcomeProps {
 }
 
 const CODE_LINES_VISIBLE = 15
+
+const REVIZE_OUTPUT_LINES: CliOutputLine[] = [
+  { text: 'Applying revision...', type: 'info' },
+  { text: '✓ Revision applied. auth_viewmodel.dart updated.', type: 'success' },
+]
 
 export default function Welcome({ onTimelineDialogRequest }: WelcomeProps) {
   const [currentScenario, setCurrentScenario] = useState<string>('auth')
@@ -334,6 +338,7 @@ export default function Welcome({ onTimelineDialogRequest }: WelcomeProps) {
 
     const delay = line.type === 'code' ? 80 : line.text ? 320 : 160
     animationTimeoutRef.current = setTimeout(typeNextOutputLine, delay)
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- animateScenario/resumeAfterStep omitted to avoid circular ref
   }, [scenarios, revealNextEditorLineInCurrentTab])
 
   useEffect(() => {
@@ -394,11 +399,6 @@ export default function Welcome({ onTimelineDialogRequest }: WelcomeProps) {
     { label: 'Improve error handling', prompt: 'Improve error handling and validation messages' },
   ]
 
-  const revizeOutputLines: CliOutputLine[] = [
-    { text: 'Applying revision...', type: 'info' },
-    { text: '✓ Revision applied. auth_viewmodel.dart updated.', type: 'success' },
-  ]
-
   const typeReviseChar = useCallback(() => {
     const revizeCmd = `masterfabric revize "${revisePromptRef.current}"`
     const current = reviseCmdRef.current
@@ -408,10 +408,10 @@ export default function Welcome({ onTimelineDialogRequest }: WelcomeProps) {
         setCommittedLines((prev) => [...prev, { text: `$ ${revizeCmd}`, type: 'command' }])
         setReviseCommand('')
         reviseCmdRef.current = ''
-        revizeOutputLines.forEach((line, i) => {
+        REVIZE_OUTPUT_LINES.forEach((line, i) => {
           reviseTimeoutRef.current = setTimeout(() => {
             setCommittedLines((prev) => [...prev, line])
-            if (i === revizeOutputLines.length - 1 && reviseFromStepRef.current) {
+            if (i === REVIZE_OUTPUT_LINES.length - 1 && reviseFromStepRef.current) {
               reviseFromStepRef.current = false
               setTimeout(resumeAfterStep, 600)
             }
@@ -515,9 +515,9 @@ export default function Welcome({ onTimelineDialogRequest }: WelcomeProps) {
     if (!isAnimatingRef.current) animateScenario(name)
   }
 
-  const handleRefresh = () => {
+  const handleRefresh = useCallback(() => {
     if (!isAnimatingRef.current) animateScenario(currentScenario)
-  }
+  }, [currentScenario, animateScenario])
 
   useEffect(() => {
     terminalScrollRef.current?.scrollTo({ top: terminalScrollRef.current?.scrollHeight ?? 0, behavior: 'smooth' })
@@ -559,186 +559,229 @@ export default function Welcome({ onTimelineDialogRequest }: WelcomeProps) {
   const displayLineCount = CODE_LINES_VISIBLE
   const paddingLines = Math.max(0, CODE_LINES_VISIBLE - visibleEditorLines.length)
 
-  return (
-    <section className="flex flex-col lg:flex-row lg:items-start pt-8 pb-6 md:pt-6 md:pb-8 gap-8 lg:gap-10 w-full max-w-5xl mx-auto">
-      <div className="lg:order-1 px-4 md:px-0 min-w-0 w-full lg:max-w-[28rem] lg:shrink-0">
-        <article className="rounded-2xl border border-slate-200 bg-white p-6 md:p-8 shadow-sm">
-          <span className="inline-block px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-blue-700 bg-blue-50 rounded-full mb-4" aria-hidden>
-            Masterfabric CLI · masterfabric_core
-          </span>
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight">
-            Your project, start to finish, from the terminal
-          </h2>
+  const authStages = [
+    { label: 'Generating code', key: 'code' },
+    { label: 'Writing tests', key: 'tests' },
+    { label: 'Running analysis', key: 'lint' },
+    { label: 'Preparing deploy', key: 'deploy' },
+    { label: 'Preparing deployment', key: 'done' },
+  ]
+  const totalLines = scenario?.terminalLines.length ?? 1
+  const progressPercent = showSuccess ? 100 : Math.min(100, Math.round((committedLines.length / Math.max(totalLines, 1)) * 100))
+  const currentStageIdx = showSuccess ? 4 : Math.min(4, Math.floor((progressPercent / 100) * 5))
 
-          <div className="mt-5 space-y-4 text-slate-600 leading-relaxed">
-            <p>
-              With sector- and technology-specific <strong className="text-slate-800">CLI tools and pipelines</strong>, your project is built, tested, and deployed from start to finish. One command drives code generation, analysis, fixes, and pipeline—all from the terminal.
-            </p>
-            <p>
-              In the demo, the <strong className="text-slate-800">IDE</strong> tabs show generated code step by step; the <strong className="text-slate-800">terminal</strong> shows the command, the prompt being typed, and CLI output. After deploy, use <strong>View code</strong> to inspect files or <strong>Revise</strong> to run another revision via the CLI.
-            </p>
-          </div>
-        </article>
+  const deployCmd = scenario?.cliCommand?.replace('gen auth --mvvm', 'deploy') ?? 'masterfabric deploy'
+
+  return (
+    <section className="px-4 md:px-0 pt-8 pb-6 md:pt-6 md:pb-8 w-full max-w-5xl mx-auto">
+      <div className="mb-8 max-w-3xl">
+        <span className="inline-block px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-blue-700 bg-blue-50 dark:text-blue-300 dark:bg-blue-900/30 rounded-full mb-3" aria-hidden>
+          Masterfabric CLI · masterfabric_core
+        </span>
+        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white leading-tight">
+          Your project, start to finish, from the terminal
+        </h2>
+        <p className="mt-3 text-slate-600 dark:text-slate-400">
+          Sector-specific CLI tools drive code generation, tests, fixes, and deploy. One command from start to finish.
+        </p>
       </div>
 
-      <div className="lg:order-2 w-full min-w-0 flex flex-col gap-3 lg:max-w-[32rem]">
-        <div className={styles.ideAndTerminal}>
-          <div className={styles.ideSection}>
-            <div className={styles.ideHeader}>
-              <div className={styles.ideControls}>
-                <span className={styles.controlDot} />
-                <span className={styles.controlDot} />
-                <span className={styles.controlDot} />
-              </div>
-              <span className={styles.ideTitle}>Editor</span>
-            </div>
-
-            {tabs.length > 0 && (
-              <div className={styles.ideTabBar}>
-                {tabs.map((tab, i) => (
-                  <button
-                    key={tab.id}
-                    type="button"
-                    className={`${styles.ideTab} ${activeTabIndex === i ? styles.ideTabActive : ''}`}
-                    onClick={() => !isAnimatingRef.current && setActiveTabIndex(i)}
-                    aria-pressed={activeTabIndex === i}
-                  >
-                    {tab.label}
-                  </button>
-                ))}
-              </div>
-            )}
-
-            <div className={styles.ideContent}>
-              <div className={styles.lineNumbers}>
-                {Array.from({ length: displayLineCount }, (_, i) => (
-                  <span key={i}>{i + 1}</span>
-                ))}
-              </div>
-              <div className={styles.codeContent}>
-                {visibleEditorLines.length === 0 && paddingLines <= 0 ? (
-                  <div className={styles.codeLineEmpty} />
-                ) : (
-                  <>
-                    {visibleEditorLines.map((line, i) => (
-                      <div key={i} className={styles.codeLine}>
-                        {line}
-                      </div>
-                    ))}
-                    {paddingLines > 0 && Array.from({ length: paddingLines }, (_, i) => (
-                      <div key={`p-${i}`} className={styles.codeLineEmpty} />
-                    ))}
-                  </>
-                )}
-              </div>
-            </div>
+      <div className="grid gap-4 lg:grid-cols-2">
+          <div className="rounded-lg border border-gray-200 bg-white p-4 text-left relative shadow-sm">
+          <div className="flex items-center justify-between mb-3">
+            <h3 className="text-base font-semibold text-gray-900 dark:text-white">
+              Masterfabric Wizard — {scenario?.title ?? 'Auth'}
+            </h3>
+            <button
+              type="button"
+              onClick={handleRefresh}
+              className="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline"
+            >
+              Next
+            </button>
           </div>
-
-          <div className={styles.terminalSection}>
-            <div className={styles.terminalHeader}>
-              <span className={styles.terminalHeaderTitle}>Terminal</span>
-            </div>
-            <div className={styles.terminalOutput} ref={terminalScrollRef}>
-              {committedLines.map((line, i) => (
-                <div
-                  key={i}
-                  className={`${styles.terminalLine} ${
-                    line.type === 'success' ? styles.terminalLineSuccess :
-                    line.type === 'info' ? styles.terminalLineInfo :
-                    line.type === 'error' ? styles.terminalLineError :
-                    line.type === 'code' ? styles.terminalLineCode :
-                    line.type === 'prompt' ? styles.terminalLinePrompt :
-                    line.type === 'command' ? styles.terminalLineCommand : ''
-                  }`}
-                >
-                  {line.text}
-                </div>
-              ))}
-              <div className={styles.terminalPromptLine}>
-                <span className={styles.terminalPromptPrefix}>{promptTypingText ? '' : '$ '}</span>
-                <span className={styles.terminalPromptCommand}>{showReviseFlow ? reviseCommand : (promptTypingText || promptCommand)}</span>
-                {showCursor && <span className={styles.terminalCursor} aria-hidden />}
+          <p className="text-sm text-gray-600 mb-4">
+            Build {scenario?.title?.toLowerCase() ?? 'auth'} flow step by step
+          </p>
+          <p className="text-xs font-medium text-gray-500 mb-2">
+            Stage {currentStageIdx + 1}/5 — {authStages[currentStageIdx]?.label}
+          </p>
+          <div className="h-2 bg-gray-100 rounded-full overflow-hidden mb-4">
+            <div
+              className="h-full bg-blue-500 transition-all duration-300"
+              style={{ width: `${progressPercent}%` }}
+            />
+          </div>
+          <div className={styles.wizardTerminal} ref={terminalScrollRef}>
+            {committedLines.map((line, i) => (
+              <div
+                key={i}
+                className={`${styles.terminalLine} ${
+                  line.type === 'success' ? styles.terminalLineSuccess :
+                  line.type === 'info' ? styles.terminalLineInfo :
+                  line.type === 'error' ? styles.terminalLineError :
+                  line.type === 'code' ? styles.terminalLineCode :
+                  line.type === 'prompt' ? styles.terminalLinePrompt :
+                  line.type === 'command' ? styles.terminalLineCommand : ''
+                }`}
+              >
+                {line.text}
               </div>
+            ))}
+            <div className={styles.terminalPromptLine}>
+              <span className={styles.terminalPromptPrefix}>{promptTypingText ? '' : '$ '}</span>
+              <span className={styles.terminalPromptCommand}>{showReviseFlow ? reviseCommand : (promptTypingText || promptCommand)}</span>
+              {showCursor && <span className={styles.terminalCursor} aria-hidden />}
             </div>
           </div>
 
           {stepOverlay && (
             <div className={styles.stepOverlay}>
+              <div className={styles.stepOverlayHeader}>
+                <span className={styles.stepOverlayHeaderIcon} aria-hidden>ℹ</span>
+                <div>
+                  <p className={styles.stepOverlayHeaderTitle}>Milestone reached</p>
+                  <p className={styles.stepOverlayHeaderDesc}>A step in the flow has completed. Review below or continue automatically.</p>
+                </div>
+              </div>
               <div className={styles.stepOverlayContent}>
-                <p className={styles.stepOverlayMessage}>{stepOverlay.message}</p>
-                <p className={styles.stepOverlayCountdown}>Next in {stepOverlay.countdown}s</p>
-                <button type="button" className={styles.stepOverlayRevise} onClick={() => handleRevizeClick(true)}>
-                  Revise
-                </button>
-              </div>
-            </div>
-          )}
-
-          {showReviseSuggestions && (
-            <div className={styles.reviseSuggestionsOverlay}>
-              <div className={styles.reviseSuggestionsContent}>
-                <p className={styles.reviseSuggestionsTitle}>Choose a revision</p>
-                <div className={styles.reviseSuggestionsList}>
-                  {REVIZE_SUGGESTIONS.map((opt) => (
-                    <button
-                      key={opt.label}
-                      type="button"
-                      className={styles.reviseSuggestionBtn}
-                      onClick={() => handleRevizeSuggestion(opt.prompt)}
-                    >
-                      {opt.label}
-                    </button>
-                  ))}
-                </div>
-                <button
-                  type="button"
-                  className={styles.reviseSuggestionsClose}
-                  onClick={() => {
-                    setShowReviseSuggestions(false)
-                    if (reviseFromStepRef.current) {
-                      reviseFromStepRef.current = false
-                      resumeAfterStep()
-                    }
-                  }}
-                >
-                  Cancel
-                </button>
-              </div>
-            </div>
-          )}
-
-          {showSuccess && (
-            <div className={styles.successOverlayTerminal}>
-              <div className={styles.successContent}>
-                <div className={styles.successIconContainer}>
-                  <svg className={styles.successIcon} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="12" cy="12" r="10" fill="#22c55e" />
-                    <path d="M9 12l2 2 4-4" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </div>
-                <h3>{scenarios[currentScenario]?.successTitle}</h3>
-                <p className={styles.successDescription}>
-                  Code written · Tests passed · Deploy complete. View code, run a revision, or restart the flow.
-                </p>
-                {successCountdown !== null && successCountdown > 0 && (
-                  <p className={styles.successCountdownText}>Restarting in {successCountdown}s</p>
-                )}
-                <div className={styles.successActions}>
-                  <button type="button" className={styles.successBtnSecondary} onClick={handleViewCode}>
-                    View code
-                  </button>
-                  <button type="button" className={styles.successBtnPrimary} onClick={() => handleRevizeClick(false)}>
+                <div className={styles.stepOverlayActions}>
+                  <span className={styles.stepOverlayBadge}>Milestone</span>
+                  <p className={styles.stepOverlayMessage}>{stepOverlay.message}</p>
+                  <p className={styles.stepOverlayCountdown}>Next in {stepOverlay.countdown}s</p>
+                  <button type="button" className={styles.stepOverlayRevise} onClick={() => handleRevizeClick(true)}>
                     Revise
-                  </button>
-                  <button type="button" className={styles.successBtnRestart} onClick={handleRefresh}>
-                    Restart
                   </button>
                 </div>
               </div>
             </div>
           )}
         </div>
+
+        <div className="space-y-3">
+          <div className="rounded-lg border border-gray-200 bg-white p-3">
+            <h4 className="text-xs font-semibold text-gray-700 mb-2">Files</h4>
+            <p className="text-xs text-gray-500 mb-2">Click to preview</p>
+            <div className="font-mono text-xs text-gray-600 space-y-0.5">
+              <div>project-root/</div>
+              <div className="pl-2">lib/</div>
+              <div className="pl-4">auth/</div>
+              <div className="pl-6">{tabs[0]?.label}</div>
+              {tabs.length > 1 && (
+                <>
+                  <div className="pl-2">test/</div>
+                  <div className="pl-4">{tabs[1]?.label}</div>
+                </>
+              )}
+              {tabs.length > 2 && (
+                <>
+                  <div className="pl-2">.github/</div>
+                  <div className="pl-4">workflows/</div>
+                  <div className="pl-6">{tabs[2]?.label}</div>
+                </>
+              )}
+            </div>
+          </div>
+
+          <div className="rounded-lg border border-gray-200 overflow-hidden">
+            <div className="flex items-center justify-between border-b border-gray-200 bg-gray-100 px-3 py-1.5">
+              <span className="text-xs font-medium text-gray-700">{activeTab?.label ?? 'untitled'}</span>
+              <span className="text-xs text-gray-500">
+                {activeTab?.label?.endsWith('.dart') ? 'Dart' : activeTab?.label?.endsWith('.yml') ? 'YAML' : 'Dart'}
+              </span>
+            </div>
+            <div className="min-h-[200px] max-h-[200px] overflow-y-auto bg-slate-50 p-3 font-mono text-xs leading-5 text-gray-800">
+              {visibleEditorLines.length === 0 ? (
+                <div className="text-gray-400">{'// Select a file from the tree or wait for the wizard...'}</div>
+              ) : (
+                visibleEditorLines.map((line, i) => (
+                  <div key={i}>{line || '\u00A0'}</div>
+                ))
+              )}
+            </div>
+          </div>
+
+          <div className="rounded-lg border border-gray-200 bg-white p-3">
+            <h4 className="text-xs font-semibold text-gray-700 mb-2">Deploy Command</h4>
+            <button
+              type="button"
+              className="text-xs text-blue-600 dark:text-blue-400 hover:underline mb-1"
+              onClick={() => navigator.clipboard?.writeText(`$ ${deployCmd}`)}
+            >
+              Copy
+            </button>
+            <pre className="font-mono text-xs text-gray-800 bg-gray-50 p-2 rounded overflow-x-auto border border-gray-100">
+              $ {deployCmd}
+            </pre>
+          </div>
+        </div>
       </div>
+
+      <div className="mt-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+        <h4 className="text-sm font-semibold text-gray-900 mb-2">
+          Deployment Terminal
+          {showSuccess && <span className="ml-2 text-green-600">Completed</span>}
+        </h4>
+        <div className={styles.deploymentTerminal}>
+          <div className="font-mono text-xs text-gray-700 space-y-0.5">
+            <div className="text-green-600 dark:text-green-400">$ masterfabric deploy</div>
+            {showSuccess && (
+              <>
+                <div className="text-green-600 dark:text-green-400">✓ validating plugin manifest</div>
+                <div className="text-green-600 dark:text-green-400">✓ uploading assets to Masterfabric</div>
+                <div className="text-green-600 dark:text-green-400">✓ publishing stable version</div>
+                <div className="text-gray-500">Deploy complete. View code, run a revision, or restart.</div>
+              </>
+            )}
+          </div>
+        </div>
+        {showSuccess && (
+          <div className="flex gap-2 mt-3">
+            <button type="button" className="px-3 py-1.5 text-xs font-medium rounded bg-gray-100 text-gray-700 hover:bg-gray-200" onClick={handleViewCode}>
+              View code
+            </button>
+            <button type="button" className="px-3 py-1.5 text-xs font-medium rounded bg-blue-600 text-white hover:bg-blue-700" onClick={() => handleRevizeClick(false)}>
+              Revise
+            </button>
+            <button type="button" className="px-3 py-1.5 text-xs font-medium rounded border border-gray-200 text-gray-700 hover:bg-gray-50" onClick={handleRefresh}>
+              Restart
+            </button>
+          </div>
+        )}
+      </div>
+
+      {showReviseSuggestions && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/40 backdrop-blur-sm" onClick={() => { setShowReviseSuggestions(false); if (reviseFromStepRef.current) { reviseFromStepRef.current = false; resumeAfterStep(); } }}>
+          <div className={styles.reviseSuggestionsContent} onClick={(e) => e.stopPropagation()}>
+            <p className={styles.reviseSuggestionsTitle}>Choose a revision</p>
+            <div className={styles.reviseSuggestionsList}>
+              {REVIZE_SUGGESTIONS.map((opt) => (
+                <button
+                  key={opt.label}
+                  type="button"
+                  className={styles.reviseSuggestionBtn}
+                  onClick={() => handleRevizeSuggestion(opt.prompt)}
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+            <button
+              type="button"
+              className={styles.reviseSuggestionsClose}
+              onClick={() => {
+                setShowReviseSuggestions(false)
+                if (reviseFromStepRef.current) {
+                  reviseFromStepRef.current = false
+                  resumeAfterStep()
+                }
+              }}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
     </section>
   )
 }

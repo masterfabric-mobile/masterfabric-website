@@ -158,6 +158,7 @@ export const TimelineProvider: React.FC<TimelineProviderProps> = ({ children }) 
         advanceDay()
       }
     }, timeline.settings.stepDuration)
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- advanceDay defined later, ref used in interval
   }, [isPaused, timeline.settings.stepDuration])
   
   // Initialize timeline

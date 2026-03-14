@@ -575,7 +575,7 @@ export default function Welcome({ onTimelineDialogRequest }: WelcomeProps) {
   return (
     <section className="px-4 md:px-0 pt-8 pb-6 md:pt-6 md:pb-8 w-full max-w-5xl mx-auto">
       <div className="mb-8 max-w-3xl">
-        <span className="inline-block px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-blue-700 bg-blue-50 dark:text-blue-300 dark:bg-blue-900/30 rounded-full mb-3" aria-hidden>
+        <span className="inline-block px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-white bg-blue-600 rounded-full mb-3" aria-hidden>
           Masterfabric CLI · masterfabric_core
         </span>
         <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white leading-tight">

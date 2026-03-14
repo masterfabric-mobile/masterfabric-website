@@ -97,7 +97,7 @@ export default function CTA({ tools = [] }: CTAProps) {
           WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%)',
         }}
       >
-        <div className="flex w-max gap-6 sm:gap-8 will-change-transform cta-scroll-reverse-float">
+        <div className="flex w-max gap-6 sm:gap-8 will-change-transform animate-scroll-infinite-reverse">
           {[...techList, ...techList].map((tool, index) => {
             const hoverColor = TECH_COLOR[tool.name] ?? '#64748b';
             return (
@@ -113,7 +113,7 @@ export default function CTA({ tools = [] }: CTAProps) {
             );
           })}
         </div>
-        <div className="flex w-max gap-5 sm:gap-7 mt-5 sm:mt-6 will-change-transform cta-scroll-float">
+        <div className="flex w-max gap-5 sm:gap-7 mt-5 sm:mt-6 will-change-transform animate-scroll-infinite">
           {[...techList].reverse().concat([...techList].reverse()).map((tool, index) => {
             const hoverColor = TECH_COLOR[tool.name] ?? '#64748b';
             return (

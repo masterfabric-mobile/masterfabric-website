@@ -70,7 +70,7 @@
         "type": "code",
         "category": "web",
         "displayCount": 2,
-        "codeSnippet": "platform: 'web'\nstack: ['Next.js', 'TypeScript', 'API']\noutput: 'SSR + PWA ready'"
+        "codeSnippet": "// Web & e-commerce stack\nconst config = {\n  framework: 'Next.js',\n  language: 'TypeScript',\n  features: ['SSR', 'PWA', 'API routes'],\n  output: 'SEO-friendly storefronts & dashboards'\n};"
       },
       {
         "number": 3,

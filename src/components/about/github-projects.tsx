@@ -28,11 +28,29 @@ const languageColors: Record<string, string> = {
   Nextjs: '#ff5d01',
 }
 
-/** Open source manifesto — same structure as SectionHead / AboutHeader for consistent about flow */
-export function OpenSourceManifesto() {
+/** Open source manifesto — intro to GitHub section; compact when used above project list */
+export function OpenSourceManifesto({ compact = false }: { compact?: boolean }) {
+  if (compact) {
+    return (
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-6 sm:pt-12 sm:pb-8" aria-labelledby="open-source-heading">
+        <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500 mb-2">
+          Open source
+        </p>
+        <h2 id="open-source-heading" className="text-lg sm:text-xl font-semibold text-slate-900 tracking-tight mb-2">
+          We support open source and ship for the community
+        </h2>
+        <p className="text-slate-600 text-sm sm:text-base max-w-3xl leading-relaxed">
+          Public repositories, libraries, and demos—beyond our sectoral and client work. We release
+          reusable packages, demo apps, and tooling so the wider community can build better, faster.
+          Everything below is under <strong className="text-slate-800">MasterFabric Mobile</strong> and{' '}
+          <strong className="text-slate-800">MasterFabric</strong> on GitHub.
+        </p>
+      </section>
+    )
+  }
+
   return (
     <section className="text-center mt-12" aria-labelledby="open-source-heading">
-      {/* Same decorative divider as AboutHeader */}
       <div className="flex items-center justify-center mb-8 mt-8 px-8">
         <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent min-w-[20px]" />
         <div className="mx-6 w-3 h-3 bg-green-500 rounded-full" />

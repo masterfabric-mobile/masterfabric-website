@@ -2,8 +2,7 @@
 
 import { Metadata } from 'next'
 import Container from '@/components/layout/container'
-import SectionHead from '@/components/layout/section-head'
-import AboutHeader from '@/components/about/AboutHeader'
+import AboutIntro from '@/components/about/AboutIntro'
 import ProjectShowcase from '@/components/about/ProjectShowcase'
 import LiveActivityStream from '@/components/about/LiveActivityStream'
 import AboutTimeline from '@/components/about/AboutTimeline'
@@ -36,26 +35,24 @@ export default function AboutPage() {
     return live
   }, [sharedProjects])
 
+  const introData = useMemo(
+    () => ({
+      sectionTitle: aboutData.sectionHeader.title,
+      sectionDescription: aboutData.sectionHeader.description,
+      heroTitle: aboutData.hero.title,
+      heroSubtitle: aboutData.hero.subtitle,
+      heroDescription: aboutData.hero.description,
+    }),
+    []
+  )
+
   return (
     <>
     <Container>
-      <SectionHead
-        title={aboutData.sectionHeader.title}
-        description={
-          <div className="max-w-4xl mx-auto text-center space-y-4">
-            {aboutData.sectionHeader.description.map((item, index) => (
-              <p key={index} className="mb-4" dangerouslySetInnerHTML={{ __html: item.paragraph }}></p>
-            ))}
-          </div>
-        }
-      />
+      <section className="pt-10 pb-12 sm:pt-12 sm:pb-14 lg:pt-14 lg:pb-16">
+        <AboutIntro data={introData} />
+      </section>
 
-      <AboutHeader 
-        title={aboutData.hero.title}
-        subtitle={aboutData.hero.subtitle}
-        description={aboutData.hero.description}
-      />
-      
       {aboutData.projectShowcase && aboutData.liveActivity ? (
         <div className="relative mb-6 max-w-4xl mx-auto">
           {/* Unified section header */}
@@ -105,12 +102,11 @@ export default function AboutPage() {
       </div>
 
       <AiFirstSectionAbout />
-
-      <OpenSourceManifesto />
     </Container>
 
-    {/* Open source section: white background, no horizontal overflow */}
-    <div className="w-full bg-white overflow-x-hidden">
+    {/* Open source: manifesto + projects in one block */}
+    <div className="w-full bg-white overflow-x-hidden border-t border-slate-100">
+      <OpenSourceManifesto compact />
       <GitHubProjects />
     </div>
     </>

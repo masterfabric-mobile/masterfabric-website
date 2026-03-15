@@ -107,14 +107,14 @@ function resolvePanelItems(panel: Panel, sharedProjects?: SharedProjectsPool): P
 function AttributeBar({ value, max = 10 }: { value: number; max?: number }) {
   const pct = Math.min(100, (value / max) * 100)
   return (
-    <div className="flex items-center gap-2">
-      <div className="flex-1 h-1.5 bg-slate-200 rounded-full overflow-hidden">
+    <div className="flex items-center gap-2 min-w-0 flex-1">
+      <div className="flex-1 min-w-0 h-1.5 bg-slate-200 rounded-full overflow-hidden">
         <div
           className="h-full bg-emerald-500 rounded-full transition-all duration-500"
           style={{ width: `${pct}%` }}
         />
       </div>
-      <span className="text-[10px] font-medium text-slate-500 tabular-nums w-4">{value}/{max}</span>
+      <span className="text-[10px] font-medium text-slate-500 tabular-nums shrink-0 w-7 text-right">{value}/{max}</span>
     </div>
   )
 }
@@ -209,8 +209,8 @@ function ProjectShowcase({ data, sharedProjects, showSectionHeader = true, compa
                           if (typeof val !== 'number') return null
                           const label = (panel as AttributesPanel).attributeLabels?.[key as 'ux' | 'performance' | 'scale'] ?? key
                           return (
-                            <div key={key} className="flex items-center gap-2">
-                              <span className="text-[10px] text-slate-400 uppercase tracking-wider w-16 shrink-0">{label}</span>
+                            <div key={key} className="flex items-center gap-2 min-w-0">
+                              <span className="text-[10px] text-slate-400 uppercase tracking-wider w-16 shrink-0 truncate" title={label}>{label}</span>
                               <AttributeBar value={val} />
                             </div>
                           )
@@ -233,13 +233,6 @@ function ProjectShowcase({ data, sharedProjects, showSectionHeader = true, compa
                       </div>
                     ))}
                   </div>
-                  {(panel as CodePanel).codeSnippet && (
-                    <div className="rounded-lg bg-slate-800 text-slate-100 p-3 font-mono text-[11px] leading-relaxed overflow-x-auto mt-2">
-                      <pre className="whitespace-pre-wrap break-all">
-                        {(panel as CodePanel).codeSnippet}
-                      </pre>
-                    </div>
-                  )}
                 </div>
               )}
 
@@ -257,29 +250,8 @@ function ProjectShowcase({ data, sharedProjects, showSectionHeader = true, compa
                       </div>
                     ))}
                   </div>
-                  {(panel as MetricsPanel).metricsLabel && (
-                    <div className="mt-3 pt-3 border-t border-slate-200 rounded-lg bg-white/80 p-3">
-                      <div className="text-[10px] font-medium uppercase tracking-wider text-emerald-600 mb-1">
-                        {(panel as MetricsPanel).metricsLabel}
-                      </div>
-                      <p className="text-xs text-slate-600 leading-relaxed">
-                        {(panel as MetricsPanel).metricsNote}
-                      </p>
-                    </div>
-                  )}
                 </div>
               )}
-            </div>
-
-            {/* Bottom dot indicator (like reference image) */}
-            <div className={`flex justify-center gap-1 ${compact ? 'pb-1' : 'pb-2'}`}>
-              {panels.map((_, i) => (
-                <span
-                  key={i}
-                  className={`w-1.5 h-1.5 rounded-full transition-colors ${i + 1 === panel.number ? 'bg-slate-400' : 'bg-slate-200'}`}
-                  aria-hidden
-                />
-              ))}
             </div>
           </div>
         )

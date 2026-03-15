@@ -147,16 +147,16 @@ export default function LiveActivityStream({ data, showSectionHeader = true, com
 
       {/* File-area style stream container */}
       <div className={`rounded-lg border border-slate-200 bg-slate-50/50 overflow-hidden shadow-sm flex flex-col ${fillHeight ? 'flex-1 min-h-0' : ''} ${!fillHeight && compact ? 'min-h-[200px]' : ''} ${!fillHeight && !compact ? 'min-h-[280px]' : ''}`}>
-        <div className={`flex items-center gap-2 bg-white border-b border-slate-200 ${compact ? 'px-3 py-1.5' : 'px-4 py-2.5'}`}>
-          <div className="flex gap-1">
+        <div className={`flex items-center gap-2 bg-white border-b border-slate-200 min-w-0 ${compact ? 'px-3 py-1.5' : 'px-4 py-2.5'}`}>
+          <div className="flex gap-1 shrink-0">
             <span className={`rounded-full bg-slate-300 ${compact ? 'w-1.5 h-1.5' : 'w-2 h-2'}`} />
             <span className={`rounded-full bg-slate-300 ${compact ? 'w-1.5 h-1.5' : 'w-2 h-2'}`} />
             <span className={`rounded-full bg-slate-300 ${compact ? 'w-1.5 h-1.5' : 'w-2 h-2'}`} />
           </div>
-          <span className={`font-medium text-slate-500 ml-1 ${compact ? 'text-[10px]' : 'text-xs'}`}>
+          <span className={`font-medium text-slate-500 ml-1 truncate min-w-0 flex-1 ${compact ? 'text-[10px]' : 'text-xs'}`}>
             Activity stream • Projects & automations
           </span>
-          <span className="ml-auto text-[10px] text-slate-400 uppercase tracking-wider">
+          <span className="shrink-0 text-[10px] text-slate-400 uppercase tracking-wider">
             Live
           </span>
         </div>
@@ -203,16 +203,6 @@ export default function LiveActivityStream({ data, showSectionHeader = true, com
           </AnimatePresence>
         </div>
 
-        <div className={`border-t border-slate-200 bg-white/80 flex items-center justify-between ${compact ? 'px-2 py-1.5' : 'px-3 py-2'}`}>
-          <span className="text-[10px] text-slate-400">
-            Events loop infinitely • MasterFabric platform
-          </span>
-          <div className="flex gap-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="w-1.5 h-1.5 rounded-full bg-slate-200" />
-            <span className="w-1.5 h-1.5 rounded-full bg-slate-200" />
-          </div>
-        </div>
       </div>
     </div>
   )

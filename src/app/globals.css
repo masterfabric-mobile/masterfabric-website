@@ -76,28 +76,43 @@ body {
   display: none;
 }
 
-/* Infinite scroll carousel */
+/* Infinite scroll carousel — translate3d for GPU, no visible loop jump */
 @keyframes scroll-infinite {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
 }
 
 @keyframes scroll-infinite-reverse {
-  0% { transform: translateX(-50%); }
-  100% { transform: translateX(0); }
+  0% { transform: translate3d(-50%, 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
 }
 
 .animate-scroll-infinite {
-  animation: scroll-infinite 48s linear infinite;
+  animation: scroll-infinite 60s linear infinite;
+  backface-visibility: hidden;
 }
 
 .animate-scroll-infinite-reverse {
-  animation: scroll-infinite-reverse 52s linear infinite;
+  animation: scroll-infinite-reverse 64s linear infinite;
+  backface-visibility: hidden;
 }
 
 .group:hover .animate-scroll-infinite,
 .group:hover .animate-scroll-infinite-reverse {
   animation-play-state: paused;
+}
+
+/* Isolate carousel block so page layout/animations don't affect infinite scroll */
+.carousel-isolate {
+  isolation: isolate;
+  contain: layout paint;
+  transform: translateZ(0);
+}
+
+/* Her carousel satırı kendi döngüsünde, dışarıdan etkilenmez */
+.carousel-track-wrap {
+  overflow: hidden;
+  contain: layout paint;
 }
 
 /* Line clamp utilities */

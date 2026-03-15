@@ -27,6 +27,93 @@
     { "flag": "🇹🇷", "country": "Turkey", "city": "Istanbul", "category": "Food" },
     { "flag": "🇧🇷", "country": "Brazil", "city": "São Paulo", "category": "Music" }
   ],
+  "sharedProjects": {
+    "mobile": [
+      { "flag": "🇬🇧", "location": "UK • London", "name": "UK Finance App", "detail": "Secure banking, payments, and compliance", "ux": 9, "performance": 9, "scale": 8 },
+      { "flag": "🇦🇺", "location": "Australia • Sydney", "name": "Sydney Fitness App", "detail": "Workouts, tracking, and social challenges", "ux": 9, "performance": 8, "scale": 7 },
+      { "flag": "🇰🇷", "location": "Korea • Seoul", "name": "Seoul Social App", "detail": "Real-time feeds, messaging, and discovery", "ux": 10, "performance": 8, "scale": 9 },
+      { "flag": "🇹🇷", "location": "Turkey • Istanbul", "name": "Istanbul Food App", "detail": "Delivery, menus, and orders", "ux": 9, "performance": 8, "scale": 7 },
+      { "flag": "🇧🇷", "location": "Brazil • São Paulo", "name": "São Paulo Music App", "detail": "Streaming and playlists", "ux": 8, "performance": 9, "scale": 8 }
+    ],
+    "web": [
+      { "flag": "🇺🇸", "location": "USA • New York", "name": "E-commerce platform", "detail": "Catalog, cart, checkout, and admin" },
+      { "flag": "🇨🇦", "location": "Canada • Toronto", "name": "Education platform", "detail": "Courses, progress, and certifications" },
+      { "flag": "🇩🇪", "location": "Germany • Berlin", "name": "Berlin Healthcare", "detail": "Patient portal and bookings" },
+      { "flag": "🇫🇷", "location": "France • Paris", "name": "Paris Travel", "detail": "Bookings and itineraries" }
+    ],
+    "backend": [
+      { "flag": "🇩🇪", "location": "Germany • Berlin", "name": "Healthcare API", "detail": "FHIR, appointments, and secure data" },
+      { "flag": "🇫🇷", "location": "France • Paris", "name": "Travel & booking", "detail": "Inventory, pricing, and reservations" },
+      { "flag": "🇯🇵", "location": "Japan • Tokyo", "name": "Gaming backend", "detail": "Matchmaking, leaderboards, and live ops" },
+      { "flag": "🇺🇸", "location": "USA • New York", "name": "New York E-commerce", "detail": "Orders, inventory, and payments" },
+      { "flag": "🇨🇦", "location": "Canada • Toronto", "name": "Toronto Education", "detail": "LMS and progress APIs" }
+    ]
+  },
+  "projectShowcase": {
+    "label": "PROJECTS WE DELIVER GLOBALLY",
+    "title": "From mobile apps to web platforms and backend services",
+    "subtitle": "One platform foundation, multiple project types—with clear outcomes and scalable architecture.",
+    "panels": [
+      {
+        "number": 1,
+        "title": "Mobile applications",
+        "description": "Cross-platform apps with a single codebase. Flutter delivers native performance on iOS and Android while keeping one codebase to maintain.",
+        "type": "attributes",
+        "category": "mobile",
+        "displayCount": 3,
+        "attributeLabels": { "ux": "UX", "performance": "Performance", "scale": "Scale" }
+      },
+      {
+        "number": 2,
+        "title": "Web & e-commerce",
+        "description": "Modern web apps and online stores. Next.js and TypeScript for SEO-friendly, fast storefronts and dashboards.",
+        "type": "code",
+        "category": "web",
+        "displayCount": 2,
+        "codeSnippet": "platform: 'web'\nstack: ['Next.js', 'TypeScript', 'API']\noutput: 'SSR + PWA ready'"
+      },
+      {
+        "number": 3,
+        "title": "Backend & platform APIs",
+        "description": "Scalable services and APIs. Healthcare, travel, and logistics backends that integrate with mobile and web clients.",
+        "type": "metrics",
+        "category": "backend",
+        "displayCount": 3,
+        "metricsLabel": "Deploy at scale",
+        "metricsNote": "Every service runs on shared platform infra—CI/CD, monitoring, and scaling built in."
+      }
+    ]
+  },
+  "liveActivity": {
+    "label": "LIVE ACTIVITY",
+    "title": "We track our projects and automations",
+    "subtitle": "Deploys, builds, agent fixes, and open source releases—continuously monitored and reflected here.",
+    "useSharedProjects": true,
+    "openSourceRepos": [
+      "mf-cli",
+      "masterfabric-mobile-cli",
+      "masterfabric-web-cli",
+      "platform-templates",
+      "agent-workflows"
+    ],
+    "eventTemplates": [
+      { "type": "deploy", "icon": "🚀", "variant": "success", "message": "{{project}} deployed to production" },
+      { "type": "deploy", "icon": "✅", "variant": "success", "message": "{{project}} — release v{{version}} live" },
+      { "type": "agent_fix", "icon": "🤖", "variant": "agent", "message": "{{project}} — error detected, fixed by MasterFabric agent" },
+      { "type": "agent_fix", "icon": "🔧", "variant": "agent", "message": "{{project}} — regression fixed automatically (MasterFabric agent)" },
+      { "type": "open_source", "icon": "📦", "variant": "info", "message": "New open source project live: {{repo}}" },
+      { "type": "open_source", "icon": "🌐", "variant": "info", "message": "Open source {{repo}} — first public release" },
+      { "type": "automation", "icon": "⚙️", "variant": "neutral", "message": "Nightly build passed • {{project}}" },
+      { "type": "automation", "icon": "🔄", "variant": "neutral", "message": "CI pipeline completed • {{project}}" },
+      { "type": "test", "icon": "🧪", "variant": "success", "message": "E2E tests passed • {{project}}" },
+      { "type": "test", "icon": "✔", "variant": "success", "message": "{{project}} — all checks green" },
+      { "type": "monitor", "icon": "📊", "variant": "neutral", "message": "Health check OK • {{project}}" },
+      { "type": "monitor", "icon": "👁", "variant": "neutral", "message": "{{project}} — metrics within SLO" }
+    ],
+    "intervalMinMs": 2200,
+    "intervalMaxMs": 3800,
+    "maxVisibleEvents": 8
+  },
   "timeline": {
     "title": "Project Development Timeline",
     "cycleDuration": 120000,

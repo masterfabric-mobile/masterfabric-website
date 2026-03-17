@@ -30,20 +30,28 @@
       "style": "inverted"
     },
     {
-      "id": "jobs",
-      "title": "Jobs",
-      "path": "/jobs",
-      "order": 3,
-      "icon": "work",
-      "style": "outline"
-    },
-    {
       "id": "about",
       "title": "About",
       "path": "/about",
-      "order": 4,
+      "order": 3,
       "icon": "about",
       "style": "inverted"
+    },
+    {
+      "id": "docs",
+      "title": "Docs",
+      "path": "https://catalogs.masterfabric.co/",
+      "order": 4,
+      "icon": "docs",
+      "style": "inverted"
+    },
+    {
+      "id": "jobs",
+      "title": "Jobs",
+      "path": "/jobs",
+      "order": 5,
+      "icon": "work",
+      "style": "outline"
     }
 
   ],

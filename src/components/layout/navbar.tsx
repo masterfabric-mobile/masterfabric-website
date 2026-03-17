@@ -210,6 +210,15 @@ function Navbar() {
                           currentPath={pathname}
                           isActive={isCurrentPage(item.path)}
                         />
+                      ) : item.path.startsWith("http") ? (
+                        <a
+                          href={item.path}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm font-medium px-4 md:px-2 py-2 rounded-lg transition-colors focus:outline-none text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+                        >
+                          {item.title}
+                        </a>
                       ) : (
                         <Link
                           href={item.path}

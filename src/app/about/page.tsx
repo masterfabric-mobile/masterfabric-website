@@ -3,8 +3,8 @@
 import { Metadata } from 'next'
 import Container from '@/components/layout/container'
 import AboutIntro from '@/components/about/AboutIntro'
-import ProjectShowcase from '@/components/about/ProjectShowcase'
-import LiveActivityStream from '@/components/about/LiveActivityStream'
+import ProjectShowcase, { type ProjectShowcaseData, type SharedProjectsPool } from '@/components/about/ProjectShowcase'
+import LiveActivityStream, { type LiveActivityData } from '@/components/about/LiveActivityStream'
 import AboutTimeline from '@/components/about/AboutTimeline'
 import DynamicText from '@/components/about/DynamicText'
 import React, { useState, useMemo } from 'react';
@@ -26,7 +26,10 @@ export default function AboutPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const dynamicColors = aboutData.dynamicText.colors;
 
-  const sharedProjects = useMemo(() => (aboutData as { sharedProjects?: typeof aboutData.projectShowcase }).sharedProjects ?? null, [])
+  const sharedProjects = useMemo(
+    () => (aboutData as unknown as { sharedProjects?: SharedProjectsPool }).sharedProjects ?? null,
+    []
+  )
   const liveActivityData = useMemo(() => {
     const live = aboutData.liveActivity as { useSharedProjects?: boolean; projects?: string[]; [k: string]: unknown }
     if (live?.useSharedProjects && sharedProjects) {
@@ -75,20 +78,20 @@ export default function AboutPage() {
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-5 items-start">
             <div className="min-w-0 flex flex-col gap-4 lg:gap-5">
-              <ProjectShowcase data={aboutData.projectShowcase} sharedProjects={sharedProjects ?? undefined} showSectionHeader={false} compact panelIndices={[0, 1]} />
+              <ProjectShowcase data={aboutData.projectShowcase as ProjectShowcaseData} sharedProjects={sharedProjects ?? undefined} showSectionHeader={false} compact panelIndices={[0, 1]} />
             </div>
             <div className="min-w-0 flex flex-col gap-4 lg:gap-5">
               <div className="w-full h-[400px] flex flex-col shrink-0">
-                <LiveActivityStream data={liveActivityData} showSectionHeader={false} compact fillHeight />
+                <LiveActivityStream data={liveActivityData as unknown as LiveActivityData} showSectionHeader={false} compact fillHeight />
               </div>
-              <ProjectShowcase data={aboutData.projectShowcase} sharedProjects={sharedProjects ?? undefined} showSectionHeader={false} compact panelIndices={[2]} />
+              <ProjectShowcase data={aboutData.projectShowcase as ProjectShowcaseData} sharedProjects={sharedProjects ?? undefined} showSectionHeader={false} compact panelIndices={[2]} />
             </div>
           </div>
         </div>
       ) : (
         <>
-          {aboutData.projectShowcase && <ProjectShowcase data={aboutData.projectShowcase} sharedProjects={sharedProjects ?? undefined} />}
-          {aboutData.liveActivity && <LiveActivityStream data={liveActivityData} />}
+          {aboutData.projectShowcase && <ProjectShowcase data={aboutData.projectShowcase as ProjectShowcaseData} sharedProjects={sharedProjects ?? undefined} />}
+          {aboutData.liveActivity && <LiveActivityStream data={liveActivityData as unknown as LiveActivityData} />}
         </>
       )}
 

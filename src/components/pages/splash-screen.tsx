@@ -8,58 +8,42 @@ import React, { useEffect, useRef } from 'react'
 import Image from 'next/image'
 import styles from '../../styles/splash-screen.module.css'
 
-const SplashScreen: React.FC = () => {
+const SplashScreen: React.FC<{ onReady?: () => void }> = ({ onReady }) => {
   const splashScreenRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    let isActive = true;
-    
+    let isActive = true
+
+    const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+
     const init = async () => {
       console.log('Starting app initialization...')
-      
-      // Wait for minimum display time
       await wait(2000)
-      
-      // Only proceed if component is still mounted
-      if (isActive) {
-        hideSplashScreen()
-      }
-    }
 
-    const hideSplashScreen = () => {
+      if (!isActive || !splashScreenRef.current) return
+
       console.log('Hiding splash screen...')
-      
-      if (splashScreenRef.current && isActive) {
-        // Add fadeOut class for animation
-        splashScreenRef.current.classList.add(styles.fadeOut)
-        
-        // Trigger custom event for app ready after transition
-        setTimeout(() => {
-          // Only dispatch event if component is still mounted
-          if (isActive) {
-            try {
-              document.dispatchEvent(new CustomEvent('app-ready'))
-              console.log('Splash screen animation completed, app is ready')
-            } catch (error) {
-              console.error('Error dispatching app-ready event:', error)
-            }
-          }
-        }, 500)
+      splashScreenRef.current.classList.add(styles.fadeOut)
+
+      const done = () => {
+        if (!isActive) return
+        try {
+          document.dispatchEvent(new CustomEvent('app-ready'))
+          onReady?.()
+          console.log('Splash screen animation completed, app is ready')
+        } catch (e) {
+          console.error('Error finishing splash:', e)
+        }
       }
+
+      setTimeout(done, 500)
     }
 
-    const wait = (ms: number) => {
-      return new Promise(resolve => setTimeout(resolve, ms))
-    }
-
-    // Initialize splash screen
     init()
-    
-    // Cleanup function to prevent memory leaks and DOM errors
     return () => {
-      isActive = false;
+      isActive = false
     }
-  }, [])
+  }, [onReady])
 
   return (
     <div id="splash-screen" ref={splashScreenRef} className={styles.splashScreen}>

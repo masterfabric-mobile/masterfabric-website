@@ -1,15 +1,12 @@
 'use client'
 
-import { Metadata } from 'next'
 import Container from '@/components/layout/container'
 import SectionHead from '@/components/layout/section-head'
 import AboutHeader from '@/components/about/AboutHeader'
 import Globe from '@/components/about/Globe'
-import AboutTimeline from '@/components/about/AboutTimeline'
 import DynamicText from '@/components/about/DynamicText'
 import React, { useState } from 'react';
 import ProcessSteps from '@/components/about/ProcessSteps'
-import FlipStatistics from '@/components/about/FlipStatistics'
 import GitHubProjects from '@/components/about/github-projects'
 import aboutData from '@/data/about.json'
 import FlowTimeline from '@/components/timeline/flow-timeline'
@@ -39,7 +36,6 @@ export default function AboutPage() {
       
       <Globe activities={aboutData.activities} />
 
-      <AboutTimeline timeline={aboutData.timeline} />
       <FlowTimeline />
 
       <DynamicText dynamicText={aboutData.dynamicText} 
@@ -48,12 +44,6 @@ export default function AboutPage() {
       
       <ProcessSteps processSteps={aboutData.processSteps} 
         currentColor={dynamicColors[currentIndex]}
-      />
-
-      <FlipStatistics 
-        statistics={aboutData.statistics} 
-        title={aboutData.passion.title} 
-        description={aboutData.passion.description} 
       />
 
       <GitHubProjects />

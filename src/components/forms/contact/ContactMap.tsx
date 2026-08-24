@@ -36,7 +36,7 @@ export default function ContactMap() {
 
       try {
         // Define the office location coordinates
-        const officeLocation: [number, number] = [41.03245, 28.97748]; // Istanbul coordinates
+        const officeLocation: [number, number] = [39.94227, 32.85668]; // Altındağ, Ankara
         
         // Add Leaflet CSS if not already added
         if (!document.querySelector('link[href*="leaflet.css"]') && !cssLoadedRef.current) {
@@ -95,7 +95,7 @@ export default function ContactMap() {
         
         // Add a marker for the office location with custom icon
         const marker = L.marker(officeLocation).addTo(map);
-        marker.bindPopup("<strong>MasterFabric Inc.</strong><br>Şehit Muhtar Mahallesi<br>Mis Sokak. No. 24/28<br>Beyoğlu / İstanbul").openPopup();
+        marker.bindPopup("<strong>MasterFabric Inc.</strong><br>Hacı Bayram Mah. Mahmut Atalay Sk.<br>L Blok No: 6 İç Kapı No: 227<br>Altındağ / Ankara").openPopup();
         
         // Add reset view button functionality
         const resetMapView = () => {

@@ -419,11 +419,12 @@ export default function Welcome({ onTimelineDialogRequest }: WelcomeProps) {
       {/* Content Section */}
       <div className="md:order-1 pl-6 md:pl-8 lg:pl-12">
         <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">
-          Custom App Development
+          Custom Software &amp; App Development
         </h2>
         <p className="text-lg mt-4 text-slate-600 max-w-xl">
-          Take your business to the next level in the mobile world! Reach your customers anytime, 
-          anywhere with custom, user-friendly, and innovative mobile apps tailored to your needs.
+          Institutions and private clients hire us for the software they actually need — including
+          requested AI transformations. We write bespoke products, then put them in your customers&apos;
+          hands on iOS, Android, and HarmonyOS.
         </p>
         <div className="mt-4">
           <div className="flex gap-8 md:gap-20 items-center mt-10 flex-wrap justify-start">

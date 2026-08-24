@@ -47,7 +47,7 @@ export default function CTA() {
           </h2>
 
           <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8 animate-slide-in-up-more-delayed">
-            Let&apos;s build something amazing together.
+            Custom software and AI transformation for institutions and private clients.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-in-up-final">

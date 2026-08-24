@@ -326,3 +326,36 @@ body {
     animation: none !important;
   }
 }
+
+.academy-rgb-ring {
+  overflow: hidden;
+}
+
+.academy-rgb-ring::before {
+  content: '';
+  position: absolute;
+  inset: -55%;
+  background: conic-gradient(
+    from 0deg,
+    #1d4ed8,
+    #38bdf8,
+    #22d3ee,
+    #6366f1,
+    #3b82f6,
+    #60a5fa,
+    #1d4ed8
+  );
+  animation: academy-rgb-spin 2.4s linear infinite;
+}
+
+@keyframes academy-rgb-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .academy-rgb-ring::before {
+    animation: none;
+  }
+}

@@ -29,7 +29,7 @@ export default function Footer() {
                 Custom software and AI transformation for institutions and private clients.
               </p>
               {/* Compact Tech Credit */}
-              <div className="nextjs-credit mt-3 flex items-center text-sm">
+              <div className="nextjs-credit mt-3 flex flex-wrap items-center text-sm">
                 <span className="built-with mr-1 text-gray-500">Built with</span>
                 <a
                   href="https://nextjs.org"
@@ -40,6 +40,23 @@ export default function Footer() {
                 >
                   <Icon icon="simple-icons:nextdotjs" width={22} height={22} color="#18181b" style={{ display: 'inline-block', verticalAlign: 'middle' }} />
                   <span className="nextjs-text font-semibold text-gray-700 ml-1">Next.js</span>
+                </a>
+                <span className="built-with ml-2 mr-1 text-gray-500">Agent with</span>
+                <a
+                  href="https://cursor.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="nextjs-link flex items-center px-2 py-1 rounded-lg transition-all duration-200 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-200"
+                  style={{ gap: '0.5rem' }}
+                >
+                  <img
+                    src="/assets/cursor-logo.svg"
+                    alt=""
+                    width={22}
+                    height={22}
+                    style={{ display: 'inline-block', verticalAlign: 'middle' }}
+                  />
+                  <span className="nextjs-text font-semibold text-gray-700 ml-1">Cursor</span>
                 </a>
                 <a
                   href="/llm.txt"

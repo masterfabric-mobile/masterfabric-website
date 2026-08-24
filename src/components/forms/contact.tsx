@@ -4,6 +4,7 @@ import React from 'react'
 
 import ContactInfo from './contact/ContactInfo'
 import ContactForm from './contact/ContactForm'
+import ContactAcademy from './contact/ContactAcademy'
 import ContactMap from './contact/ContactMap'
 import ContactText from './contact/ContactText'
 
@@ -33,6 +34,7 @@ export default function Contact() {
           <div className="space-y-8">
             {/* Contact Form */}
             <ContactForm onSubmit={handleFormSubmit} />
+            <ContactAcademy />
             
             {/* Interactive Map */}
             <ContactMap />

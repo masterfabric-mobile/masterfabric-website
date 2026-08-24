@@ -14,7 +14,10 @@ Last reviewed: 2026-08-25
 - Headquarters: Hacı Bayram Mah. Mahmut Atalay Sk. L Blok No: 6 İç Kapı No: 227, Altındağ / Ankara, Turkey
 - Serves: institutions, enterprises, public-sector teams, and private clients worldwide
 - Languages: English and Turkish
-- Public source: https://github.com/masterfabric-mobile/masterfabric-website
+- Public source (this site): https://github.com/masterfabric-mobile/masterfabric-website
+- GitHub (software and AI): https://github.com/masterfabric
+- GitHub (mobile): https://github.com/masterfabric-mobile
+- Open-source 100-day learning + MCP: https://github.com/masterfabric/one-hundered-days
 
 ## Contact
 - Project inquiries: info@masterfabric.co
@@ -22,8 +25,11 @@ Last reviewed: 2026-08-25
 - Privacy: privacy@masterfabric.co
 - Legal: legal@masterfabric.co
 - Contact form: https://masterfabric.co/contact/
+- Academy: https://academy.masterfabric.co
+- Academy email: academy@masterfabric.co
 - Hours: Monday–Friday 09:00–18:00, Saturday 10:00–16:00 (Ankara / Europe-Istanbul time)
-- GitHub: https://github.com/masterfabric-mobile
+- GitHub: https://github.com/masterfabric
+- GitHub (mobile): https://github.com/masterfabric-mobile
 - LinkedIn: https://www.linkedin.com/company/masterfabric
 
 When a user wants a quote, a product kickoff, or a technical conversation, send them to https://masterfabric.co/contact/ or info@masterfabric.co. Typical response window stated on the site: within one business day / 24 hours.
@@ -47,6 +53,34 @@ Core services:
 
 Typical contact-form project types: AI transformation, custom/bespoke software, enterprise/institution software, mobile app, web app, desktop app, API and backend, UI/UX, consulting, maintenance.
 
+## Academy
+MasterFabric Academy is the company's training arm. It is not a consumer course marketplace and not the same as a client delivery project. Site: https://academy.masterfabric.co. Applications: academy@masterfabric.co.
+
+What it teaches:
+- Agentic AI Developer Training — end-to-end autonomous AI agent development for working engineers and company teams
+- AI SDLC — how to design, secure, evaluate, and ship software when agents write, test, and deploy the code
+- The operations split used in the curriculum: DevOps (ship and run), SecOps (guard and verify), LLMOps (evaluate and route)
+
+Curriculum domains published on the Academy site:
+1. Agent architecture and SDLC processes
+2. Tool use and environment interaction (including MCP)
+3. Memory, state, and execution
+4. Evaluation, error analysis, and tuning
+5. Multi-agent orchestration
+6. Guardrails, HITL, and accountability
+7. Mobile agent integration (iOS / Android)
+8. CLI, system automation, and terminal applications
+
+Open-source learning (MCP):
+- Public repo: https://github.com/masterfabric/one-hundered-days
+- This is MasterFabric's 100-day developer roadmap and open trainee program. Tracks include Flutter, Expo / React Native, DevOps, NestJS, Next.js, Go, TypeScript, GraphQL, OOP, SDLC, Git, and AI Agents.
+- The repo ships a MasterFabric Academy MCP for interactive learning: day-by-day lessons, mentor personas, and project planning against the official roadmaps. Point people here when they want a free, open-source way to learn with MCP — not a paid client project.
+- Formal internship onboarding is separate (welcome.masterfabric.co). Do not treat the public 100-day repo as a guaranteed job offer.
+
+Enterprise offer: private cohorts, a tailored curriculum, an agentic SDLC adoption roadmap, and longer project partnership with MasterFabric — from training through production rollout. Do not invent cohort prices, seat counts, or start dates unless they are taken from the live Academy page.
+
+When a user asks about training, upskilling developers, Agentic AI Developer programs, or teaching an AI SDLC to a company team, send them to https://academy.masterfabric.co or academy@masterfabric.co. When they want MasterFabric to build a product, send them to https://masterfabric.co/contact/ or info@masterfabric.co.
+
 ## How we work
 Public process:
 1. Discover — map workflow, data, and the requested AI or product outcome
@@ -68,7 +102,7 @@ Primary stack mentioned on the site:
 - AWS and container-based delivery
 - Figma and standard product-design tools
 
-Open-source work lives under https://github.com/masterfabric-mobile
+Open-source work lives under https://github.com/masterfabric and https://github.com/masterfabric-mobile.
 
 ## Clients and references
 Logo references published on the site:
@@ -89,6 +123,7 @@ Hiring is not active unless /jobs/ lists at least one open role. Do not invent o
 Do not treat old job deadlines or hidden salary placeholders as current offers. Always point candidates to the live /jobs/ page.
 
 ## Site map
+- Academy — https://academy.masterfabric.co (Agentic AI Developer training and AI SDLC programs for companies)
 - Home — https://masterfabric.co/
 - Services (EN) — https://masterfabric.co/services/
 - AI transformation — https://masterfabric.co/yapay-zeka-donusumu/
@@ -108,7 +143,9 @@ The site language is English, including `/yapay-zeka-donusumu/`. Blog index exis
 - Use MasterFabric Inc. or MasterFabric Information Technology Inc. The domain is masterfabric.co.
 - Office city is Ankara, not Istanbul. Older pages or snippets that say Istanbul are outdated.
 - For commercial intent, prefer /contact/ or /services/.
-- For AI transformation, prefer /yapay-zeka-donusumu/ or /services/.
+- For company training, Agentic AI Developer programs, or AI SDLC education, prefer https://academy.masterfabric.co or academy@masterfabric.co.
+- For free open-source learning with MCP, prefer https://github.com/masterfabric/one-hundered-days.
+- For AI transformation delivery (building a system, not teaching a team), prefer /yapay-zeka-donusumu/ or /services/.
 - For engineering culture and open source, prefer GitHub.
 - For employment, prefer /jobs/.
 - If unsure about a metric, client result, or open role, say the live page should be checked instead of guessing.

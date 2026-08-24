@@ -1,12 +1,13 @@
 {
   "name": "masterfabric-website-nextjs",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "MasterFabric website converted to Next.js",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "npx --yes serve@14 out --listen 3000",
+    "preview": "npx --yes serve@14 out --listen 3000",
     "lint": "next lint",
     "export": "next build && next export"
   },

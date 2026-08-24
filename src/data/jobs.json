@@ -6,13 +6,21 @@
   "sectionHeader": {
     "title": "Careers",
     "description": [
-      "Join our dynamic team of innovators and creators who are passionate about building the future of mobile applications. At MasterFabric, we believe in fostering talent, embracing challenges, and creating solutions that matter."
+      "Open roles appear on this page when we are hiring. There are no active openings right now."
     ]
   },
   "hero": {
-    "title": "Build Your Career With Us",
-    "subtitle": "Join the MasterFabric Family",
-    "description": "We are a <strong>growing team</strong> of passionate developers, designers, and strategists who love creating <strong>mobile applications</strong>. Our company culture is built on <strong>continuous learning</strong>, <strong>innovation</strong>, and <strong>collaboration</strong>. We don't just hire employees – we welcome <strong>new family members</strong> who share our vision of transforming ideas into impactful digital solutions."
+    "title": "Careers at MasterFabric",
+    "subtitle": "Hiring when a role is open",
+    "description": "We are a team of developers, designers, and product people building <strong>custom software</strong> and <strong>AI systems</strong>. When we have an opening, it is listed here. We are <strong>not hiring</strong> at the moment."
+  },
+  "hiringStatus": {
+    "openBadge": "Hiring",
+    "openTitle": "Open Positions",
+    "openDescription": "Join the team and help ship custom software and AI systems for institutions and private clients.",
+    "closedBadge": "Not hiring",
+    "closedTitle": "No open positions",
+    "closedDescription": "We are not actively hiring right now. New roles will be published on this page when hiring opens."
   },
   "companyStructure": {
     "title": "How We Work",

@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import '../styles/refactor-application.css'
@@ -7,41 +7,73 @@ import Navbar from '@/components/layout/navbar'
 import Footer from '@/components/layout/footer'
 import CookieBanner from '@/components/cookie/CookieBanner'
 import SplashScreenWrapper from '@/components/wrapper/splash-screen-wrapper'
-// import { ThemeProvider } from 'next-themes'
-import Script from 'next/script';
+import JsonLd from '@/components/seo/json-ld'
+import { DEFAULT_TITLE, getSiteJsonLd, SEO, SITE_NAME, SITE_URL } from '@/lib/seo'
+import Script from 'next/script'
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
 })
 
+export const viewport: Viewport = {
+  themeColor: '#ffffff',
+  width: 'device-width',
+  initialScale: 1,
+  colorScheme: 'light',
+}
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://masterfabric.co'),
-  title: 'MasterFabric Inc. - Custom Mobile App Development',
-  description: 'MasterFabric Co. is a mobile app agency specializing in developing innovative cross-platform applications for businesses.',
-  keywords: ['mobile app development', 'custom apps', 'cross-platform', 'iOS', 'Android', 'React Native', 'Flutter'],
-  authors: [{ name: 'MasterFabric Inc.' }],
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: `${SITE_NAME} — ${DEFAULT_TITLE}`,
+    template: `%s | ${SITE_NAME}`,
+  },
+  description: SEO.description,
+  keywords: [...SEO.keywords],
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SEO.legalName,
+  publisher: SEO.legalName,
+  category: 'technology',
+  classification: 'Custom Software and AI Transformation',
+  applicationName: SITE_NAME,
+  referrer: 'origin-when-cross-origin',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  alternates: {
+    canonical: SITE_URL,
+    languages: {
+      en: SITE_URL,
+      'x-default': SITE_URL,
+    },
+    types: {
+      'text/plain': `${SITE_URL}/llm.txt`,
+    },
+  },
   openGraph: {
-    title: 'MasterFabric Inc. - Custom Mobile App Development',
-    description: 'MasterFabric Co. is a mobile app agency specializing in developing innovative cross-platform applications for businesses.',
-    url: 'https://masterfabric.co',
-    siteName: 'MasterFabric Inc.',
+    type: 'website',
+    locale: SEO.locale,
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    title: `${SITE_NAME} — ${DEFAULT_TITLE}`,
+    description: SEO.description,
     images: [
       {
-        url: '/opengraph.png',
+        url: '/opengraph-image',
         width: 1200,
         height: 630,
-        alt: 'MasterFabric Inc.',
+        alt: `${SITE_NAME} — ${DEFAULT_TITLE}`,
       },
     ],
-    locale: 'en_US',
-    type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'MasterFabric Inc. - Custom Mobile App Development',
-    description: 'MasterFabric Co. is a mobile app agency specializing in developing innovative cross-platform applications for businesses.',
-    images: ['/opengraph.png'],
+    title: `${SITE_NAME} — ${DEFAULT_TITLE}`,
+    description: SEO.description,
+    images: ['/opengraph-image'],
   },
   robots: {
     index: true,
@@ -58,6 +90,12 @@ export const metadata: Metadata = {
     icon: '/favicon.svg',
     apple: '/favicon.svg',
   },
+  other: {
+    'geo.region': 'TR-06',
+    'geo.placename': 'Ankara',
+    'geo.position': `${SEO.geo.latitude};${SEO.geo.longitude}`,
+    ICBM: `${SEO.geo.latitude}, ${SEO.geo.longitude}`,
+  },
 }
 
 export default function RootLayout({
@@ -68,6 +106,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="describedby" href={`${SITE_URL}/llms.txt`} />
+        <link rel="alternate" type="text/plain" href={`${SITE_URL}/llm.txt`} title="LLM context" />
+        <JsonLd data={getSiteJsonLd()} />
         <Script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-2VN4H4QK6S"

@@ -1,13 +1,22 @@
 import { Metadata } from 'next'
+import { createPageMetadata } from '@/lib/seo'
 import Container from '@/components/layout/container'
 import SectionHead from '@/components/layout/section-head'
 import Link from 'next/link'
 import { getFormattedDate } from '@/utils/utils'
 
-export const metadata: Metadata = {
-  title: 'Blog - MasterFabric Inc.',
-  description: 'Read our latest thoughts and insights about mobile app development.',
-}
+export const metadata: Metadata = createPageMetadata({
+  title: 'Blog',
+  description:
+    'Notes from MasterFabric on mobile product development, cross-platform engineering, and shipping production apps.',
+  path: '/blog/',
+  keywords: [
+    'mobile app development blog',
+    'Flutter insights',
+    'cross-platform vs native',
+    'MasterFabric blog',
+  ],
+})
 
 // This would typically fetch from a CMS or markdown files
 const blogPosts = [

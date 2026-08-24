@@ -7,11 +7,11 @@ export default function ContactSectionText() {
   return (
     <div className="space-y-5">
       {/* Section Heading with different styling */}
-      <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">
+      <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">
         <span className="block">{title.line1}</span>
         <span className="block">{title.line2}</span>
         <span className="block text-blue-600">{title.line3}</span>
-      </h2>
+      </h1>
       
       {/* Section Description - Using dangerouslySetInnerHTML to render HTML tags */}
       <p 

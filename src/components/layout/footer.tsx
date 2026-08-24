@@ -3,7 +3,7 @@
 import React from 'react'
 import Link from 'next/link'
 import Container from './container'
-import { Github, Twitter, Mail } from 'lucide-react'
+import { Github, Twitter, Mail, Bot } from 'lucide-react'
 import '../../styles/footer.css'
 import { Icon } from '@iconify/react';
 
@@ -26,10 +26,10 @@ export default function Footer() {
             <div className="text-center md:text-left max-w-md">
               <h3 className="text-lg font-semibold text-gray-900 mb-2">MasterFabric Information Technology Inc.</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
-                Crafting exceptional mobile applications with cutting-edge technology.
+                Custom software and AI transformation for institutions and private clients.
               </p>
               {/* Compact Tech Credit */}
-              <div className="nextjs-credit mt-3 flex items-center text-sm">
+              <div className="nextjs-credit mt-3 flex flex-wrap items-center text-sm">
                 <span className="built-with mr-1 text-gray-500">Built with</span>
                 <a
                   href="https://nextjs.org"
@@ -41,13 +41,48 @@ export default function Footer() {
                   <Icon icon="simple-icons:nextdotjs" width={22} height={22} color="#18181b" style={{ display: 'inline-block', verticalAlign: 'middle' }} />
                   <span className="nextjs-text font-semibold text-gray-700 ml-1">Next.js</span>
                 </a>
+                <span className="built-with ml-2 mr-1 text-gray-500">Agent with</span>
+                <a
+                  href="https://cursor.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="nextjs-link flex items-center px-2 py-1 rounded-lg transition-all duration-200 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-200"
+                  style={{ gap: '0.5rem' }}
+                >
+                  <img
+                    src="/assets/cursor-logo.svg"
+                    alt=""
+                    width={22}
+                    height={22}
+                    style={{ display: 'inline-block', verticalAlign: 'middle' }}
+                  />
+                  <span className="nextjs-text font-semibold text-gray-700 ml-1">Cursor</span>
+                </a>
+                <a
+                  href="/llm.txt"
+                  className="nextjs-link flex items-center px-2 py-1 rounded-lg transition-all duration-200 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-200"
+                  title="LLM context"
+                  aria-label="Open llm.txt"
+                >
+                  <Bot className="w-5 h-5 text-gray-700" />
+                </a>
               </div>
             </div>
             {/* Compact Navigation and Legal */}
             <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
               {/* Quick Links */}
               <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+                <Link href="/services" className="footer-link">Services</Link>
+                <Link href="/yapay-zeka-donusumu" className="footer-link">AI Transformation</Link>
                 <Link href="/about" className="footer-link">About</Link>
+                <a
+                  href="https://catalogs.masterfabric.co/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="footer-link"
+                >
+                  Docs
+                </a>
                 <Link href="/contact" className="footer-link">Contact</Link>
                 <a
                   href="https://github.com/masterfabric-mobile/masterfabric-website"

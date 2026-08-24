@@ -25,6 +25,16 @@ export default function JobsClient({
 }: JobsClientProps) {
   const [selectedPosition, setSelectedPosition] = useState<any | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const openPositions = positionsData?.openPositions || []
+  const isHiring = openPositions.length > 0
+  const status = jobsData?.hiringStatus || {
+    openBadge: 'Hiring',
+    openTitle: 'Open Positions',
+    openDescription: 'Current openings at MasterFabric.',
+    closedBadge: 'Not hiring',
+    closedTitle: 'No open positions',
+    closedDescription: 'We are not actively hiring right now. New roles will be published on this page when hiring opens.',
+  }
 
   // Format today's date for displaying as "today"
   const today = new Date().toLocaleDateString('en-US', { 
@@ -65,37 +75,49 @@ export default function JobsClient({
       )}
 
       {/* Open Positions Section */}
-      {!skipPositions && positionsData?.openPositions && positionsData.openPositions.length > 0 && (
+      {!skipPositions && (
         <section className="py-4 lg:py-8">
-          <div className="text-center mb-8 lg:mb-12">
-            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-center gap-4 mb-6">
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 text-center lg:text-left">Open Positions</h2>
-              <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-orange-100 text-orange-800 w-fit mx-auto lg:mx-0">
-                On Development
-              </span>
-            </div>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Join our team and help shape the future of mobile application development
-            </p>
-          </div>
-          
-          {/* Desktop/Tablet - Table View */}
-          <JobPositionsTable 
-            positions={positionsData.openPositions} 
-            onApply={handleApply}
-          />
-          
-          {/* Mobile - Card View */}
-          <div className="lg:hidden space-y-6">
-            {positionsData.openPositions.map((job: any, index: number) => (
-              <JobPositionCard 
-                key={index} 
-                position={job} 
-                onApply={handleApply} 
-                showDetails={false}
+          {isHiring ? (
+            <>
+              <div className="text-center mb-8 lg:mb-12">
+                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-center gap-4 mb-6">
+                  <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 text-center lg:text-left">
+                    {status.openTitle}
+                  </h2>
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800 w-fit mx-auto lg:mx-0">
+                    {status.openBadge}
+                  </span>
+                </div>
+                <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                  {status.openDescription}
+                </p>
+              </div>
+              <JobPositionsTable
+                positions={openPositions}
+                onApply={handleApply}
               />
-            ))}
-          </div>
+              <div className="lg:hidden space-y-6">
+                {openPositions.map((job: any, index: number) => (
+                  <JobPositionCard
+                    key={job.id || index}
+                    position={job}
+                    onApply={handleApply}
+                    showDetails={false}
+                  />
+                ))}
+              </div>
+            </>
+          ) : (
+            <div className="mx-auto max-w-2xl rounded-2xl border border-gray-200 bg-slate-50 px-6 py-12 text-center">
+              <span className="inline-flex items-center rounded-full bg-gray-200 px-3 py-1 text-sm font-medium text-gray-700">
+                {status.closedBadge}
+              </span>
+              <h2 className="mt-4 text-3xl font-bold text-gray-900">{status.closedTitle}</h2>
+              <p className="mt-3 text-lg leading-relaxed text-gray-600">
+                {status.closedDescription}
+              </p>
+            </div>
+          )}
         </section>
       )}
 
@@ -108,7 +130,7 @@ export default function JobsClient({
       />
 
       {/* Application Form Section */}
-      {!skipApplicationForm && jobsData?.applicationForm && (
+      {!skipApplicationForm && isHiring && jobsData?.applicationForm && (
         <ApplicationForm 
           formData={{
             ...jobsData.applicationForm,

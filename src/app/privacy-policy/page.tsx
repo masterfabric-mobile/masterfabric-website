@@ -1,11 +1,14 @@
 import { Metadata } from 'next'
+import { createPageMetadata } from '@/lib/seo'
 import Container from '@/components/layout/container'
 import SectionHead from '@/components/layout/section-head'
 
-export const metadata: Metadata = {
-  title: 'Privacy Policy - MasterFabric Inc.',
-  description: 'Privacy Policy for MasterFabric Inc. Learn how we protect your data.',
-}
+export const metadata: Metadata = createPageMetadata({
+  title: 'Privacy Policy',
+  description:
+    'How MasterFabric Information Technology Inc. collects, uses, and protects personal information submitted through masterfabric.co.',
+  path: '/privacy-policy/',
+})
 
 export default function PrivacyPolicyPage() {
   return (
@@ -72,7 +75,7 @@ export default function PrivacyPolicyPage() {
         </p>
         <p>
           <strong>Email:</strong> privacy@masterfabric.co<br />
-          <strong>Address:</strong> MasterFabric Information Technology Inc., Turkey
+          <strong>Address:</strong> Hacı Bayram Mah. Mahmut Atalay Sk. L Blok No: 6 İç Kapı No: 227, Altındağ / Ankara
         </p>
 
         <h2>8. Changes to This Policy</h2>

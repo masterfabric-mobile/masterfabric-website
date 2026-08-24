@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "npx --yes serve@14 out --listen 3000",
+    "preview": "npx --yes serve@14 out --listen 3000",
     "lint": "next lint",
     "export": "next build && next export"
   },

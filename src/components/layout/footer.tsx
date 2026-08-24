@@ -75,6 +75,14 @@ export default function Footer() {
                 <Link href="/services" className="footer-link">Services</Link>
                 <Link href="/yapay-zeka-donusumu" className="footer-link">AI Transformation</Link>
                 <Link href="/about" className="footer-link">About</Link>
+                <a
+                  href="https://catalogs.masterfabric.co/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="footer-link"
+                >
+                  Docs
+                </a>
                 <Link href="/contact" className="footer-link">Contact</Link>
                 <a
                   href="https://github.com/masterfabric-mobile/masterfabric-website"

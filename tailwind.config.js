@@ -34,6 +34,8 @@ module.exports = {
         'ai-spin-reverse': 'ai-spin 22s linear infinite reverse',
         'ai-pulse': 'ai-pulse 2.4s ease-in-out infinite',
         'ai-glow': 'ai-glow 3.2s ease-in-out infinite',
+        'scroll-infinite': 'scroll-infinite 48s linear infinite',
+        'scroll-infinite-reverse': 'scroll-infinite 56s linear infinite reverse',
       },
       keyframes: {
         float: {
@@ -50,6 +52,10 @@ module.exports = {
         'ai-glow': {
           '0%, 100%': { opacity: '0.45', filter: 'blur(10px)' },
           '50%': { opacity: '0.9', filter: 'blur(6px)' },
+        },
+        'scroll-infinite': {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(-50%)' },
         },
       }
     },

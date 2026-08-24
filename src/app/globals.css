@@ -354,8 +354,29 @@ body {
   }
 }
 
+.carousel-isolate {
+  isolation: isolate;
+  contain: layout paint;
+  transform: translateZ(0);
+}
+
+.carousel-track-wrap {
+  overflow: hidden;
+  contain: layout paint;
+}
+
+.carousel-track-wrap.group:hover .animate-scroll-infinite,
+.carousel-track-wrap.group:hover .animate-scroll-infinite-reverse {
+  animation-play-state: paused;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .academy-rgb-ring::before {
+    animation: none;
+  }
+
+  .animate-scroll-infinite,
+  .animate-scroll-infinite-reverse {
     animation: none;
   }
 }

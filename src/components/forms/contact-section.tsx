@@ -5,6 +5,7 @@ import ContactBenefits from './contact/ContactBenefits'
 import ContactSectionText from './contact/ContactSectionText'
 import ContactForm from './contact/ContactForm'
 import ContactAcademy from './contact/ContactAcademy'
+import ContactAiFirstPanel from './contact/ContactAiFirstPanel'
 
 export default function ContactSection() {
   const handleFormSubmit = (formData: any) => {
@@ -24,6 +25,7 @@ export default function ContactSection() {
             
             {/* Benefits section */}
             <ContactBenefits />
+            <ContactAiFirstPanel />
           </div>
 
           {/* RIGHT COLUMN - CONTACT FORM */}

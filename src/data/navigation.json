@@ -52,6 +52,14 @@
       "order": 5,
       "icon": "about",
       "style": "inverted"
+    },
+    {
+      "id": "docs",
+      "title": "Docs",
+      "path": "https://catalogs.masterfabric.co/",
+      "order": 6,
+      "icon": "docs",
+      "style": "inverted"
     }
 
   ],

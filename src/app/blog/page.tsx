@@ -4,7 +4,7 @@ import SectionHead from '@/components/layout/section-head'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Blog - MasterFabric Inc.',
+  title: 'Blog | MasterFabric Inc.',
   description:
     'The MasterFabric blog is currently offline. Older posts were removed because they were outdated.',
   robots: {
@@ -21,7 +21,7 @@ export default function BlogPage() {
         description="This section is not actively used right now. Previous posts were removed because they were outdated."
       />
 
-      <main className="mt-12 max-w-2xl mx-auto text-center space-y-6 pb-20">
+      <main className="mt-12 max-w-2xl mx-auto text-center space-y-6 pb-20 text-gray-800">
         <p className="text-gray-600 leading-relaxed">
           We took the blog front offline and cleared the old articles so visitors
           are not directed to stale or incomplete content. Fresh writing will

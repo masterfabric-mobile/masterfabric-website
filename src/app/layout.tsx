@@ -6,6 +6,7 @@ import '../styles/iphone-frame.css'
 import Navbar from '@/components/layout/navbar'
 import Footer from '@/components/layout/footer'
 import CookieBanner from '@/components/cookie/CookieBanner'
+import ClaudePartnerPrompt from '@/components/pages/claude-partner-prompt'
 import SplashScreenWrapper from '@/components/wrapper/splash-screen-wrapper'
 import JsonLd from '@/components/seo/json-ld'
 import { DEFAULT_TITLE, getSiteJsonLd, SEO, SITE_NAME, SITE_URL } from '@/lib/seo'
@@ -137,6 +138,7 @@ export default function RootLayout({
             </div>
           </SplashScreenWrapper>
           <CookieBanner />
+          <ClaudePartnerPrompt />
         {/* </ThemeProvider> */}
       </body>
     </html>

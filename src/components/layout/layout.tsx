@@ -5,6 +5,7 @@ import Head from 'next/head'
 import Navbar from './navbar'
 import Footer from './footer'
 import Script from 'next/script';
+import { SITE_VERSION } from '@/lib/version'
 
 interface LayoutProps {
   children: React.ReactNode
@@ -27,7 +28,7 @@ export default function Layout({
         <meta name="description" content={description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="masterfabric-repository" content="https://github.com/masterfabric/masterfabric-website" />
-        <meta name="masterfabric-version" content="1.2.0" />
+        <meta name="masterfabric-version" content={SITE_VERSION} />
         <meta name="masterfabric-author" content="Gürkan Fikret Günak" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="canonical" href={canonicalURL} />

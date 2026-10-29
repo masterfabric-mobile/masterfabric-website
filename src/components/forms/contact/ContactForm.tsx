@@ -6,10 +6,21 @@ import { getCookie, setCookie } from '@/utils/cookies'
 
 interface ContactFormProps {
   onSubmit?: (formData: any) => void;
+  /** Keeps field ids unique when another copy of this form is on the page. */
+  idPrefix?: string;
+  /** Opens the fields immediately instead of waiting for the toggle. */
+  defaultOpen?: boolean;
+  /** Drops the standalone card and intro when this form sits inside another panel. */
+  embedded?: boolean;
 }
 
-export default function ContactForm({ onSubmit }: ContactFormProps) {
-  const [isFormOpen, setIsFormOpen] = useState(false)
+export default function ContactForm({
+  onSubmit,
+  idPrefix = '',
+  defaultOpen = false,
+  embedded = false,
+}: ContactFormProps) {
+  const [isFormOpen, setIsFormOpen] = useState(defaultOpen)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isFromSendAgain, setIsFromSendAgain] = useState(false)
@@ -23,6 +34,7 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
 
   // Cookie key for tracking form submission
   const FORM_SUBMISSION_COOKIE = 'masterfabric_contact_form_submitted'
+  const fieldId = (field: string) => `${idPrefix}${field}`
 
   // Check if form was previously submitted on component mount
   useEffect(() => {
@@ -110,7 +122,10 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
   }
 
   return (
-    <div id="contact-form" className="bg-white rounded-2xl border border-gray-200 p-8">
+    <div
+      id={idPrefix ? undefined : 'contact-form'}
+      className={embedded ? 'bg-white' : 'bg-white rounded-2xl border border-gray-200 p-8'}
+    >
       {isSubmitted && !isFromSendAgain ? (
         <div className="py-6 text-center space-y-4">
           <div className="mx-auto w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
@@ -136,7 +151,7 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
       ) : (
         <>
           {/* Form Header */}
-          <div className="text-center mb-8">
+          {!embedded && <div className="text-center mb-8">
             <h3 className="text-2xl font-bold text-gray-900 mb-2">Get in Touch</h3>
             <p className="text-gray-600 mb-6">Ready to start your project? Fill out the form below and we&apos;ll get back to you within 24 hours.</p>
             
@@ -147,19 +162,18 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
               {isFormOpen ? 'Hide Form' : (isFromSendAgain ? 'Send Again' : 'Start Your Project')} 
               {isFormOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
             </Button>
-          </div>
+          </div>}
 
           {/* Collapsible Form */}
-          <div 
-            className={`overflow-hidden transition-all duration-500 ease-in-out ${
-              isFormOpen 
-                ? 'max-h-[2000px] opacity-100 transform scale-y-100' 
+          <div
+            className={embedded ? '' : `overflow-hidden transition-all duration-500 ease-in-out ${
+              isFormOpen
+                ? 'max-h-[2000px] opacity-100 transform scale-y-100'
                 : 'max-h-0 opacity-0 transform scale-y-95'
             }`}
           >
             <form onSubmit={handleSubmit} className="space-y-6 transform transition-all duration-300">
-              {/* Form separator */}
-              <div className="border-t border-gray-200 pt-6"></div>
+              {!embedded && <div className="border-t border-gray-200 pt-6"></div>}
 
               {/* Honeypot field for spam protection - hidden from users */}
               <input 
@@ -172,13 +186,14 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
 
         {/* Name Field */}
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor={fieldId('name')} className="block text-sm font-medium text-gray-700 mb-2">
             {contactData.form.fields.name.label}
           </label>
           <input
             type={contactData.form.fields.name.type}
-            id="name"
+            id={fieldId('name')}
             name="name"
+            autoFocus={embedded}
             value={formData.name}
             onChange={handleChange}
             placeholder={contactData.form.fields.name.placeholder}
@@ -189,12 +204,12 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
 
         {/* Email Field */}
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor={fieldId('email')} className="block text-sm font-medium text-gray-700 mb-2">
             {contactData.form.fields.email.label}
           </label>
           <input
             type={contactData.form.fields.email.type}
-            id="email"
+            id={fieldId('email')}
             name="email"
             value={formData.email}
             onChange={handleChange}
@@ -208,11 +223,11 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
 
         {/* Project Type Field */}
         <div>
-          <label htmlFor="projectType" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor={fieldId('projectType')} className="block text-sm font-medium text-gray-700 mb-2">
             {contactData.form.fields.projectType.label}
           </label>
           <select
-            id="projectType"
+            id={fieldId('projectType')}
             name="projectType"
             value={formData.projectType}
             onChange={handleChange}
@@ -229,11 +244,11 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
 
         {/* Message Field */}
         <div>
-          <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor={fieldId('message')} className="block text-sm font-medium text-gray-700 mb-2">
             {contactData.form.fields.message.label}
           </label>
           <textarea
-            id="message"
+            id={fieldId('message')}
             name="message"
             value={formData.message}
             onChange={handleChange}
@@ -244,11 +259,11 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
           />
         </div>          {/* Budget Field */}
           <div>
-            <label htmlFor="budget" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor={fieldId('budget')} className="block text-sm font-medium text-gray-700 mb-2">
               {contactData.form.fields.budget.label}
             </label>
             <select
-              id="budget"
+              id={fieldId('budget')}
               name="budget"
               onChange={handleChange}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-blue-500 outline-none transition-colors duration-200"

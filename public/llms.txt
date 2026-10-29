@@ -1,11 +1,18 @@
+Version: 1.5.0
+Author: gurkanfikretgunak
+Last updated: 2026-10-29
+
 # MasterFabric Inc.
-> Ankara-based studio that builds custom software and AI transformation systems for institutions and private clients.
+> Ankara-based studio that builds custom software and AI transformation systems for institutions and private clients. MasterFabric is a Claude Partner Network partner. It delivers projects through business partnerships in Turkey and Europe, is a stakeholder in the digital transformation of public institutions in Turkey (especially education and military), and delivers qualified energy-transformation projects.
 
 Use this index to find the right MasterFabric page. For a single-file company brief, start with llm.txt.
 
 ## Company
-- [LLM brief](https://masterfabric.co/llm.txt): Full company, services, contact, and assistant guidance
+- [LLM brief](https://masterfabric.co/llm.txt): Full company, services, Claude Partner Network membership, Turkey and Europe partnerships, public-sector digital transformation (education and military), energy-transformation projects, contact, and assistant guidance
+- Partnerships and sectors: business partnerships and delivered projects in Turkey and Europe; in Turkey, a stakeholder in the digital transformation of public institutions, especially education and military; qualified projects in energy transformation. Detail is in the LLM brief. Do not invent institution names or figures.
 - [Home](https://masterfabric.co/): Custom software and AI transformation studio
+- [Claude Partner Network on the site](https://masterfabric.co/#claude-partner-title): MasterFabric is a Claude Partner Network partner in the AI transformation flow; meeting requests use the contact form
+- [Claude Partner Network](https://claude.com/partners): Official network page
 - [Services](https://masterfabric.co/services/): English services page for enterprises and private clients
 - [AI transformation](https://masterfabric.co/yapay-zeka-donusumu/): English AI transformation and custom software page
 - [About](https://masterfabric.co/about/): Team, process, and open-source work

@@ -6,6 +6,7 @@
  */
 import React, { useEffect, useRef } from 'react'
 import Image from 'next/image'
+import { SITE_VERSION_LABEL } from '@/lib/version'
 import styles from '../../styles/splash-screen.module.css'
 
 const SplashScreen: React.FC = () => {
@@ -78,7 +79,7 @@ const SplashScreen: React.FC = () => {
 
         {/* Version */}
         <div className={styles.versionSection}>
-          <div className={styles.versionInfo}>v1.2</div>
+          <div className={styles.versionInfo}>{SITE_VERSION_LABEL}</div>
         </div>
       </div>
     </div>

@@ -20,17 +20,72 @@
   display: none;
 }
 
-/* Nextjs credit styling - more compact */
+/* Credit row: one height, one type size, chips wrap as a group */
 .nextjs-credit {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.35rem 0.85rem;
   font-size: 0.75rem;
   color: #9ca3af;
 }
 
+.footer-credit {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  white-space: nowrap;
+}
+
 .built-with {
   color: #9ca3af;
+}
+
+.footer-credit-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.45rem;
+  border-radius: 0.5rem;
+  background: transparent;
+  line-height: 1;
+  color: #6b7280;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.footer-credit-link:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.footer-credit-link:focus-visible {
+  outline: 2px solid #bfdbfe;
+  outline-offset: 2px;
+}
+
+.footer-credit-name {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.footer-credit-meta {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #9ca3af;
+}
+
+.footer-credit-mark {
+  width: 1.05rem;
+  height: 1.05rem;
+  display: block;
+  flex-shrink: 0;
+}
+
+.footer-credit-bot {
+  width: 1.05rem;
+  height: 1.05rem;
+  color: #374151;
 }
 
 .nextjs-link {
@@ -55,6 +110,7 @@
 .nextjs-text {
   font-size: 0.75rem;
 }
+
 
 /* Modern footer link styles */
 .footer-link {
@@ -90,7 +146,7 @@
   
   .nextjs-credit {
     justify-content: center;
-    margin-top: 0.75rem;
+    margin-top: 1.25rem;
   }
   
   .footer-link {

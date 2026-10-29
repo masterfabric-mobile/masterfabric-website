@@ -39,6 +39,10 @@ module.exports = {
         'tap-nudge': 'tap-nudge 1.4s ease-in-out infinite',
       },
       keyframes: {
+        screenIn: {
+          from: { opacity: '0', transform: 'translateX(12px)' },
+          to: { opacity: '1', transform: 'translateX(0)' },
+        },
         'tap-nudge': {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-4px)' },

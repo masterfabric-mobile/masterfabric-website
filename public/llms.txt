@@ -1,0 +1,27 @@
+# MasterFabric Inc.
+> Ankara-based studio that builds custom software and AI transformation systems for institutions and private clients.
+
+Use this index to find the right MasterFabric page. For a single-file company brief, start with llm.txt.
+
+## Company
+- [LLM brief](https://masterfabric.co/llm.txt): Full company, services, contact, and assistant guidance
+- [Home](https://masterfabric.co/): Custom software and AI transformation studio
+- [Services](https://masterfabric.co/services/): English services page for enterprises and private clients
+- [AI transformation](https://masterfabric.co/yapay-zeka-donusumu/): English AI transformation and custom software page
+- [About](https://masterfabric.co/about/): Team, process, and open-source work
+- [Docs](https://catalogs.masterfabric.co/): Product and catalog documentation
+- [Contact](https://masterfabric.co/contact/): Project inquiries and Ankara office details
+
+## Work
+- [Careers](https://masterfabric.co/jobs/): Roles when hiring is open; currently no active openings
+- [MasterFabric Academy](https://academy.masterfabric.co): Agentic AI Developer training, AI SDLC (DevOps / SecOps / LLMOps), private company cohorts — academy@masterfabric.co
+- [100-day open-source learning + MCP](https://github.com/masterfabric/one-hundered-days): Public roadmaps and MasterFabric Academy MCP for interactive learning
+- [GitHub organization](https://github.com/masterfabric): Software, AI, and platform repositories
+- [GitHub mobile](https://github.com/masterfabric-mobile): Public mobile repositories and this website
+- [LinkedIn](https://www.linkedin.com/company/masterfabric): Company profile
+
+## Optional
+- [Blog](https://masterfabric.co/blog/): Engineering notes
+- [Privacy Policy](https://masterfabric.co/privacy-policy/): Data handling
+- [Terms of Use](https://masterfabric.co/terms-of-use/): Website and service terms
+- [Sitemap](https://masterfabric.co/sitemap.xml): Crawlable page list

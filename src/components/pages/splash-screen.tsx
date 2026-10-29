@@ -78,7 +78,7 @@ const SplashScreen: React.FC = () => {
 
         {/* Version */}
         <div className={styles.versionSection}>
-          <div className={styles.versionInfo}>v1.0</div>
+          <div className={styles.versionInfo}>v1.2</div>
         </div>
       </div>
     </div>

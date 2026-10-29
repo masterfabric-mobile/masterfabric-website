@@ -36,8 +36,13 @@ module.exports = {
         'ai-glow': 'ai-glow 3.2s ease-in-out infinite',
         'scroll-infinite': 'scroll-infinite 48s linear infinite',
         'scroll-infinite-reverse': 'scroll-infinite 56s linear infinite reverse',
+        'tap-nudge': 'tap-nudge 1.4s ease-in-out infinite',
       },
       keyframes: {
+        'tap-nudge': {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-4px)' },
+        },
         float: {
           '0%, 100%': { transform: 'translateY(0px)' },
           '50%': { transform: 'translateY(-20px)' },

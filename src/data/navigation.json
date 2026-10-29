@@ -46,10 +46,18 @@
       "style": "outline"
     },
     {
+      "id": "blog",
+      "title": "Blog",
+      "path": "/blog",
+      "order": 5,
+      "icon": "blog",
+      "style": "inverted"
+    },
+    {
       "id": "about",
       "title": "About",
       "path": "/about",
-      "order": 5,
+      "order": 6,
       "icon": "about",
       "style": "inverted"
     },
@@ -57,11 +65,10 @@
       "id": "docs",
       "title": "Docs",
       "path": "https://catalogs.masterfabric.co/",
-      "order": 6,
+      "order": 7,
       "icon": "docs",
       "style": "inverted"
     }
-
   ],
   "socialLinks": [
     {

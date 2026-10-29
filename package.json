@@ -8,8 +8,7 @@
     "build": "next build",
     "start": "npx --yes serve@14 out --listen 3000",
     "preview": "npx --yes serve@14 out --listen 3000",
-    "lint": "next lint",
-    "export": "next build && next export"
+    "lint": "next lint"
   },
   "dependencies": {
     "@iconify/react": "^6.0.0",
@@ -19,38 +18,20 @@
     "@types/react": "^18.2.45",
     "@types/react-dom": "^18.2.18",
     "autoprefixer": "^10.4.16",
-    "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
-    "framer-motion": "^10.16.16",
-    "iconify": "^1.4.0",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.298.0",
     "next": "14.2.35",
-    "next-themes": "^0.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tailwindcss": "^3.3.6",
     "typescript": "^5.3.3"
   },
   "devDependencies": {
-    "@tailwindcss/language-server": "^0.14.24",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.3.0",
-    "@types/fs-extra": "^11.0.4",
-    "css-loader": "^7.1.2",
     "eslint": "^8.56.0",
     "eslint-config-next": "14.2.35",
-    "fs-extra": "^11.2.0",
-    "jest": "^30.0.4",
     "mini-css-extract-plugin": "^2.9.2",
-    "postcss": "8.5.31",
-    "postcss-flexbugs-fixes": "^5.0.2",
-    "postcss-loader": "^8.1.1",
-    "postcss-normalize": "^13.0.1",
-    "postcss-preset-env": "^10.2.4",
-    "style-loader": "^4.0.0",
-    "stylelint": "^16.21.1",
-    "stylelint-config-standard": "^38.0.0"
+    "postcss": "8.5.31"
   },
   "overrides": {
     "postcss": "8.5.31"

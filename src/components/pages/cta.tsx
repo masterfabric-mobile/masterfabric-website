@@ -119,33 +119,53 @@ export default function CTA({ tools = [] }: CTAProps) {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center animate-slide-in-up">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl mb-6 animate-pulse-gentle">
-            <Icon className="w-10 h-10 text-blue-600" icon="bx:rocket" />
-          </div>
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-gradient-to-br from-blue-50 via-white to-indigo-50 p-8 sm:p-12 shadow-sm animate-slide-in-up">
+          <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-blue-200/40 blur-3xl" aria-hidden="true" />
+          <div className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-indigo-200/30 blur-3xl" aria-hidden="true" />
 
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 animate-slide-in-up-delayed">
-            Ready to Start Your Project?
-          </h2>
+          <div className="relative grid gap-10 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] lg:items-center">
+            <div className="text-left">
+              <span className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-wider text-blue-700">
+                <Icon className="h-4 w-4" icon="bx:rocket" aria-hidden />
+                Start a project
+              </span>
+              <h2 className="mt-5 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+                Ready to start your project?
+              </h2>
+              <p className="mt-4 max-w-xl text-lg leading-relaxed text-slate-600">
+                Custom software and AI transformation for institutions and private clients.
+                Send us the brief — we plan it, build it, and hand it over.
+              </p>
+              <ul className="mt-6 grid gap-2 text-sm text-slate-700 sm:grid-cols-2">
+                {['Planned around your brief', 'Built with Claude in the loop', 'Reviewed by engineers', 'Software you own'].map((item) => (
+                  <li key={item} className="flex items-center gap-2">
+                    <Icon className="h-5 w-5 shrink-0 text-blue-600" icon="bx:check-circle" aria-hidden />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8 animate-slide-in-up-more-delayed">
-            Custom software and AI transformation for institutions and private clients.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-in-up-final">
-            <a
-              href="/contact"
-              className="group inline-flex items-center justify-center px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg"
-            >
-              Get Started
-            </a>
-            <a
-              href="/about"
-              className="group inline-flex items-center justify-center px-8 py-3 border border-gray-300 hover:border-gray-400 text-gray-700 font-medium rounded-lg transition-all duration-300 hover:scale-105 hover:bg-gray-50"
-            >
-              Learn More
-            </a>
+            <div className="rounded-2xl border border-white/80 bg-white/80 p-6 shadow-lg backdrop-blur">
+              <p className="text-sm font-semibold text-slate-900">Tell us what you need</p>
+              <p className="mt-1 text-sm text-slate-600">A short brief is enough to get the conversation going.</p>
+              <div className="mt-5 flex flex-col gap-3">
+                <a
+                  href="/contact"
+                  className="group inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 font-semibold text-white shadow-md transition-all duration-300 hover:bg-blue-700 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                >
+                  Get started
+                  <Icon className="h-5 w-5 transition-transform group-hover:translate-x-1" icon="bx:right-arrow-alt" aria-hidden />
+                </a>
+                <a
+                  href="/about"
+                  className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-6 py-3.5 font-medium text-slate-700 transition-colors hover:border-slate-300 hover:bg-slate-50"
+                >
+                  Learn more about us
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>

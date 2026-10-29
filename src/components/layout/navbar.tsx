@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -12,6 +12,7 @@ import { cn } from "@/utils";
 
 // Import dropdown from the navbar folder
 import Dropdown from "./navbar/dropdown";
+import BrandAssetsMenu from "./navbar/brand-assets-menu";
 import "./navbar/styles/navbar.css";
 // Define types for the navigation data
 interface DropdownItem {
@@ -86,6 +87,8 @@ function Navbar() {
   const [taglineOpacity, setTaglineOpacity] = useState(1);
   const [taglineTransform, setTaglineTransform] = useState("translateY(0)");
   const [refreshPulsing, setRefreshPulsing] = useState(false);
+  const [brandMenu, setBrandMenu] = useState<{ x: number; y: number } | null>(null);
+  const closeBrandMenu = useCallback(() => setBrandMenu(null), []);
 
   // Ensure menu is closed when route changes
   useEffect(() => {
@@ -130,9 +133,15 @@ function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white border-b border-gray-200 overflow-hidden">
+    <header className="sticky top-0 z-50 pt-3 sm:pt-4">
+      <BrandAssetsMenu position={brandMenu} onClose={closeBrandMenu} />
       <Container>
-        <div className="flex flex-col">
+        <div
+          className={cn(
+            "flex flex-col overflow-hidden border border-gray-200/80 bg-white/85 px-4 shadow-lg shadow-slate-900/5 backdrop-blur-md transition-[border-radius] duration-300 sm:px-6",
+            isMenuOpen ? "rounded-3xl md:rounded-full" : "rounded-full"
+          )}
+        >
           {/* Top navbar section */}
             <div
                 className={cn(
@@ -144,6 +153,11 @@ function Navbar() {
                 <Link
                   href="/"
                   className="flex items-center group flex-shrink-0 navbar-brand"
+                  title="Right-click to download the logo"
+                  onContextMenu={(event) => {
+                    event.preventDefault();
+                    setBrandMenu({ x: event.clientX, y: event.clientY });
+                  }}
                 >
                   {/* Logo with hover animation */}
                   <span className="inline-block mr-2 sm:mr-3 transition-transform duration-200 group-hover:scale-110 flex-shrink-0 navbar-logo">

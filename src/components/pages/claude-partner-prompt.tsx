@@ -141,7 +141,7 @@ export default function ClaudePartnerPrompt() {
   return (
     <div className="fixed inset-0 z-[10050] flex items-end justify-center p-4 sm:items-center">
       <div
-        className="absolute inset-0 bg-slate-900/20"
+        className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
         onClick={dismiss}
         aria-hidden="true"
       />
@@ -153,33 +153,34 @@ export default function ClaudePartnerPrompt() {
         aria-labelledby="claude-partner-prompt-title"
         aria-describedby="claude-partner-prompt-body"
         tabIndex={-1}
-        className="relative z-10 flex max-h-[min(90vh,44rem)] w-full max-w-lg flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white outline-none"
+        className="relative z-10 flex max-h-[min(90vh,44rem)] w-full max-w-lg flex-col overflow-hidden rounded-2xl bg-white shadow-2xl ring-1 ring-slate-900/5 outline-none"
       >
-        <div className="flex justify-end px-4 pt-4">
+        <div className="relative bg-gradient-to-br from-[#FBF1EC] via-white to-white px-6 pb-6 pt-6 sm:px-8 sm:pt-8">
+          <div className="absolute inset-x-0 top-0 h-1 bg-[#C45C3E]" aria-hidden="true" />
           <button
             type="button"
             onClick={dismiss}
             aria-label="Close"
-            className="flex h-9 w-9 items-center justify-center rounded-full text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+            className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
           >
             <X className="h-5 w-5" aria-hidden="true" />
           </button>
-        </div>
 
-        <div className="overflow-y-auto overscroll-contain px-6 pb-6 sm:px-8 sm:pb-8">
-          <img
-            src="/assets/claude-mark.svg"
-            alt=""
-            width={32}
-            height={30}
-            className="h-8 w-8 bg-white"
-          />
-          <p className="mt-4 text-sm font-medium tracking-wide text-[#C45C3E]">
-            Claude Partner Network
-          </p>
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#C45C3E]/20 bg-white px-3 py-1">
+            <img
+              src="/assets/claude-mark.svg"
+              alt=""
+              width={16}
+              height={15}
+              className="h-4 w-4"
+            />
+            <span className="text-xs font-medium tracking-wide text-[#C45C3E]">
+              Claude Partner Network
+            </span>
+          </div>
           <h2
             id="claude-partner-prompt-title"
-            className="mt-2 text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl"
+            className="mt-4 pr-8 text-2xl font-semibold tracking-tight text-slate-900"
           >
             We can help with AI transformation
           </h2>
@@ -190,23 +191,32 @@ export default function ClaudePartnerPrompt() {
             MasterFabric is a Claude Partner Network partner in the AI transformation flow.
             We can help with that work. Request a meeting to get the information.
           </p>
+        </div>
 
+        <div className="overflow-y-auto overscroll-contain border-t border-gray-100 px-6 py-5 sm:px-8">
           {showForm ? (
-            <div className="mt-6">
-              <ContactForm
-                idPrefix="claude-partner-prompt-"
-                defaultOpen
-                embedded
-              />
-            </div>
+            <ContactForm
+              idPrefix="claude-partner-prompt-"
+              defaultOpen
+              embedded
+            />
           ) : (
-            <Button
-              type="button"
-              onClick={() => setShowForm(true)}
-              className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-5 rounded-lg"
-            >
-              Request a meeting
-            </Button>
+            <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-end">
+              <button
+                type="button"
+                onClick={dismiss}
+                className="rounded-lg px-4 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+              >
+                Maybe later
+              </button>
+              <Button
+                type="button"
+                onClick={() => setShowForm(true)}
+                className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-5 rounded-lg"
+              >
+                Request a meeting
+              </Button>
+            </div>
           )}
         </div>
       </div>

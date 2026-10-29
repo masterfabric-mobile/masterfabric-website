@@ -1,4 +1,6 @@
 import Link from 'next/link'
+import ClaudeCodeSimulation from './claude-code-simulation'
+import ClaudePartnerDisclosure from './claude-partner-disclosure'
 
 const STEPS = [
   {
@@ -23,22 +25,18 @@ const STEPS = [
   },
 ] as const
 
-const CLAUDE_CODE_LOOP = [
+const SDLC_OUTCOMES = [
   {
-    label: 'Plan',
-    text: 'The brief becomes a task in Claude Code. The repository and the constraints are read before files change.',
+    title: 'Faster from brief to diff',
+    text: 'Routine work is drafted by the agent, so engineers spend their time on the hard calls.',
   },
   {
-    label: 'Build',
-    text: 'Claude Code drafts the diff in the working tree. The engineer stays on the decision.',
+    title: 'Every change reviewed',
+    text: 'Plans, diffs, and test runs stay visible. Nothing reaches production unseen.',
   },
   {
-    label: 'Prove',
-    text: 'Tests and checks run in that same session, not as a later handoff.',
-  },
-  {
-    label: 'Review',
-    text: 'Nothing ships because the agent wrote it. An engineer accepts the diff.',
+    title: 'Your team keeps the skill',
+    text: 'We work inside your repositories and train your engineers on the same flow.',
   },
 ] as const
 
@@ -64,13 +62,15 @@ export default function ClaudePartnerSection() {
       aria-labelledby="claude-partner-title"
     >
       <div className="border-t border-gray-100 pt-10 md:pt-14">
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:gap-8">
+        <div className="relative overflow-hidden rounded-3xl border border-[#C45C3E]/15 bg-gradient-to-br from-[#FBF1EC] via-white to-white p-6 sm:p-10">
+          <div className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-[#D97757]/10 blur-3xl" aria-hidden="true" />
+          <div className="relative flex flex-col gap-6 sm:flex-row sm:items-start sm:gap-8">
           <img
             src="/assets/claude-mark.svg"
             alt=""
             width={72}
             height={68}
-            className="h-16 w-16 shrink-0 rounded-2xl bg-white"
+            className="h-16 w-16 shrink-0 rounded-2xl bg-white p-2 shadow-sm ring-1 ring-[#C45C3E]/10"
           />
           <div className="min-w-0 text-left">
             <p className="text-sm font-medium tracking-wide text-[#C45C3E]">
@@ -98,7 +98,13 @@ export default function ClaudePartnerSection() {
               About the partner network
             </a>
           </div>
+          </div>
         </div>
+
+        <ClaudePartnerDisclosure
+          title="How we work with Claude"
+          description="The engagement, the AI-native SDLC with Claude Code, and what it looks like in our work."
+        >
 
         <div className="mt-10">
           <h3 className="text-sm font-semibold uppercase tracking-wide text-slate-500">
@@ -108,10 +114,10 @@ export default function ClaudePartnerSection() {
             {STEPS.map((step) => (
               <li
                 key={step.n}
-                className="rounded-xl border border-gray-200 bg-white p-4"
+                className="group relative rounded-xl border border-gray-200 bg-white p-5 transition hover:-translate-y-0.5 hover:border-[#C45C3E]/30 hover:shadow-md"
               >
-                <span className="text-xs font-semibold tracking-wide text-[#C45C3E]">{step.n}</span>
-                <p className="mt-2 text-sm font-semibold text-slate-900">{step.title}</p>
+                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#FBF1EC] text-xs font-semibold text-[#C45C3E] group-hover:bg-[#C45C3E] group-hover:text-white">{step.n}</span>
+                <p className="mt-3 text-sm font-semibold text-slate-900">{step.title}</p>
                 <p className="mt-1 text-sm leading-relaxed text-gray-600">{step.text}</p>
               </li>
             ))}
@@ -125,40 +131,49 @@ export default function ClaudePartnerSection() {
           >
             AI-native SDLC with Claude
           </h3>
-          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-gray-600 md:text-base">
-            The lifecycle runs in the terminal with{' '}
-            <span className="font-semibold text-slate-900">Claude Code</span>.
-            An engineer states the task. Claude Code reads the repository, drafts the change, and
-            runs the checks. The review stays with the engineer.
-          </p>
-          <div className="mt-4 grid items-stretch gap-4 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
-            <div className="rounded-xl border border-gray-200 bg-white p-4">
-              <p className="text-xs font-semibold tracking-wide text-[#C45C3E]">Claude Code</p>
-              <div className="mt-3 space-y-2 font-mono text-[13px] leading-relaxed text-slate-700">
-                <p>
-                  <span className="text-gray-400">$ </span>claude
-                </p>
-                <p className="text-slate-900">
-                  <span className="text-[#C45C3E]">&gt; </span>
-                  Plan the change from the brief, then implement it in review.
-                </p>
-                <ul className="space-y-1 border-t border-gray-100 pt-2 text-gray-600">
-                  <li>Read the repository</li>
-                  <li>Wrote the plan</li>
-                  <li>Edited the implementation</li>
-                  <li>Ran the tests</li>
-                  <li className="text-slate-900">Ready for review</li>
-                </ul>
-              </div>
+          <div className="mt-3 grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-end">
+            <div>
+              <p className="text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
+                Your team ships like an AI-native team,{' '}
+                <span className="text-[#C45C3E]">without giving up control.</span>
+              </p>
+              <p className="mt-3 max-w-2xl text-sm leading-relaxed text-gray-600 md:text-base">
+                We bring the same lifecycle into your organization with{' '}
+                <span className="font-semibold text-slate-900">Claude Code</span>. An engineer
+                states the task. Claude Code reads the repository, drafts the change, and runs the
+                checks. The review — and every decision that matters — stays with your people.
+              </p>
             </div>
-            <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
-              {CLAUDE_CODE_LOOP.map((item) => (
-                <li key={item.label} className="rounded-xl bg-slate-50 px-4 py-3">
-                  <p className="text-sm font-semibold text-slate-900">{item.label}</p>
-                  <p className="mt-1 text-sm leading-relaxed text-gray-600">{item.text}</p>
-                </li>
-              ))}
-            </ol>
+            <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+              >
+                Start your transformation
+              </Link>
+              <a
+                href="https://claude.com/product/claude-code"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-lg border border-gray-200 px-5 py-3 text-sm font-semibold text-slate-900 hover:border-slate-300 hover:bg-slate-50"
+              >
+                About Claude Code
+              </a>
+            </div>
+          </div>
+          <ul className="mt-6 grid gap-3 sm:grid-cols-3">
+            {SDLC_OUTCOMES.map((item) => (
+              <li key={item.title} className="flex gap-3 rounded-xl border border-gray-100 bg-white p-4">
+                <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#FBF1EC] text-xs text-[#C45C3E]" aria-hidden="true">✓</span>
+                <span>
+                  <span className="block text-sm font-semibold text-slate-900">{item.title}</span>
+                  <span className="mt-0.5 block text-sm leading-relaxed text-gray-600">{item.text}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-6">
+            <ClaudeCodeSimulation />
           </div>
         </div>
 
@@ -168,7 +183,7 @@ export default function ClaudePartnerSection() {
           </h3>
           <ul className="mt-4 grid gap-4 md:grid-cols-3">
             {PRACTICE.map((item) => (
-              <li key={item.title} className="rounded-xl bg-slate-50 p-5">
+              <li key={item.title} className="rounded-xl border-l-2 border-[#C45C3E] bg-slate-50 p-5">
                 <p className="text-sm font-semibold text-slate-900">{item.title}</p>
                 <p className="mt-2 text-sm leading-relaxed text-gray-600">{item.text}</p>
               </li>
@@ -181,6 +196,33 @@ export default function ClaudePartnerSection() {
             </Link>
             .
           </p>
+        </div>
+
+        </ClaudePartnerDisclosure>
+
+        <div className="relative mt-12 overflow-hidden rounded-3xl bg-[#1F1E1D] px-6 py-10 sm:px-10">
+          <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-[#D97757]/20 blur-3xl" aria-hidden="true" />
+          <div className="relative flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+            <div className="max-w-2xl">
+              <p className="text-sm font-medium tracking-wide text-[#D97757]">
+                MasterFabric × Claude
+              </p>
+              <h3 className="mt-2 text-2xl font-light tracking-tight text-white sm:text-3xl">
+                Many projects shipped with <span className="font-bold">MasterFabric</span> expertise.{' '}
+                <span className="font-semibold text-[#D97757]">Now it&apos;s your turn.</span>
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-white/70 md:text-base">
+                Institutions and private clients already run software we planned, built, and
+                reviewed with Claude in the loop. Bring us your brief and we will start yours.
+              </p>
+            </div>
+            <Link
+              href="/contact"
+              className="inline-flex shrink-0 items-center justify-center rounded-lg bg-[#D97757] px-6 py-3 text-sm font-semibold text-white hover:bg-[#C45C3E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D97757] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1F1E1D]"
+            >
+              Start your project
+            </Link>
+          </div>
         </div>
       </div>
     </section>

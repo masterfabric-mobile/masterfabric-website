@@ -275,13 +275,13 @@ EOF
     # Build static export
     case $PKG_MANAGER in
         "pnpm")
-            pnpm run build && pnpm run export
+            pnpm run build
             ;;
         "yarn")
             yarn build && yarn export
             ;;
         *)
-            npm run build && npm run export
+            npm run build
             ;;
     esac
     # Firebase login check

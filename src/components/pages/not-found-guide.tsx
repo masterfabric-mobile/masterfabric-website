@@ -23,7 +23,7 @@ const DESTINATIONS: Destination[] = [
   { href: '/about/', title: 'About', hint: 'The company', keys: ['about', 'aboutus', 'team', 'company', 'studio'] },
   { href: '/contact/', title: 'Contact', hint: 'Request a meeting', keys: ['contact', 'contactus', 'meeting', 'hello', 'mail'] },
   { href: '/jobs/', title: 'Jobs', hint: 'Open roles', keys: ['job', 'jobs', 'career', 'careers', 'hiring', 'join'] },
-  { href: '/blog/', title: 'Blog', hint: 'Notes are offline', keys: ['blog', 'post', 'posts', 'article', 'news'] },
+  { href: '/blog/', title: 'Blog', hint: 'Notes on AI-native delivery', keys: ['blog', 'post', 'posts', 'article', 'news'] },
   { href: '/privacy-policy/', title: 'Privacy', hint: 'How we handle data', keys: ['privacy', 'gdpr', 'cookie', 'cookies'] },
   { href: '/terms-of-use/', title: 'Terms', hint: 'Site terms', keys: ['terms', 'term', 'legal', 'tos'] },
   {

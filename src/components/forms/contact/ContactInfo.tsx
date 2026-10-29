@@ -16,8 +16,8 @@ export default function ContactInfo() {
         <div className="flex flex-col justify-center">
           <h3 className="font-semibold text-gray-900 group-hover:text-gray-700 transition-colors duration-300 mb-1">Office Location</h3>
           <p className="text-gray-600 text-base group-hover:text-gray-500 transition-colors duration-300">
-            Şehit Muhtar Mahallesi Mis Sokak. No. 24/28<br/>
-            Beyoğlu / İstanbul, Turkey
+            Hacı Bayram Mah. Mahmut Atalay Sk. L Blok No: 6<br/>
+            İç Kapı No: 227, Altındağ / Ankara
           </p>
         </div>
       </div>

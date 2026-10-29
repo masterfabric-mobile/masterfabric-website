@@ -96,6 +96,25 @@
   margin-top: 0.25rem;
 }
 
+.navbar-refresh-icon {
+  transform-origin: center;
+  transition: transform 0.4s ease, color 0.3s ease;
+}
+
+.navbar-refresh-pulse {
+  animation: navbarRefreshSpin 0.5s ease-out;
+  color: #64748b;
+}
+
+@keyframes navbarRefreshSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(180deg);
+  }
+}
+
 /* Brand section */
 .navbar-brand {
   display: flex;

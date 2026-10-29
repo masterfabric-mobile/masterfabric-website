@@ -1,11 +1,14 @@
 import { Metadata } from 'next'
+import { createPageMetadata } from '@/lib/seo'
 import Container from '@/components/layout/container'
 import SectionHead from '@/components/layout/section-head'
 
-export const metadata: Metadata = {
-  title: 'Terms of Use - MasterFabric Inc.',
-  description: 'Terms of Use for MasterFabric Inc. services and website.',
-}
+export const metadata: Metadata = createPageMetadata({
+  title: 'Terms of Use',
+  description:
+    'Terms of use for the MasterFabric website and services operated by MasterFabric Information Technology Inc.',
+  path: '/terms-of-use/',
+})
 
 export default function TermsOfUsePage() {
   return (
@@ -77,7 +80,7 @@ export default function TermsOfUsePage() {
         </p>
         <p>
           <strong>Email:</strong> legal@masterfabric.co<br />
-          <strong>Address:</strong> MasterFabric Information Technology Inc., Turkey
+          <strong>Address:</strong> Hacı Bayram Mah. Mahmut Atalay Sk. L Blok No: 6 İç Kapı No: 227, Altındağ / Ankara
         </p>
       </div>
     </Container>

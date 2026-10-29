@@ -47,8 +47,7 @@ export const initializationStates = [
 // Preload critical resources
 export function preloadCriticalResources(): Promise<void[]> {
   const criticalResources = [
-    '/assets/masterfabric-logo.svg',
-    '/styles/timeline.module.css'
+    '/assets/masterfabric-logo.svg'
   ];
 
   const preloadPromises = criticalResources.map(resource => {

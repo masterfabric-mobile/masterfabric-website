@@ -15,11 +15,11 @@ export default function SuperchargeExperience() {
   <div className="text-center mb-8">
           <h2 className="text-4xl lg:text-5xl font-semibold tracking-tight text-gray-900 leading-tight mb-4">
             <span className="block">Supercharge Your</span>
-            <span className="block text-blue-600">App Experience</span>
+            <span className="block text-blue-600">Service Experience</span>
           </h2>
           <p className="text-base lg:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Join hundreds of successful companies that have optimized their applications with MasterFabric. <br />
-            Let&apos;s discuss how we can enhance your app&apos;s <span className="font-semibold text-blue-600">performance</span> and <span className="font-semibold text-gray-600">user experience</span>.
+            Join companies that have optimized their products and services with MasterFabric. <br />
+            Let&apos;s discuss how we can enhance your product&apos;s <span className="font-semibold text-blue-600">performance</span> and <span className="font-semibold text-gray-600">user experience</span>.
           </p>
           {/* Divider removed for a cleaner, more minimal header */}
         </div>
@@ -33,7 +33,7 @@ export default function SuperchargeExperience() {
             </div>
             <div className="space-y-1">
               <h4 className="text-lg font-semibold text-gray-900">Fast Implementation</h4>
-              <p className="text-gray-600 leading-relaxed">Get your optimized app within 2-4 weeks with our proven development process.</p>
+              <p className="text-gray-600 leading-relaxed">Get your optimized product or service live within 2-4 weeks with our proven delivery process.</p>
             </div>
           </div>
 

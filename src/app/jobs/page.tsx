@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { createPageMetadata } from '@/lib/seo'
 import Container from '@/components/layout/container'
 import SectionHead from '@/components/layout/section-head'
 import DepartmentCard from '@/components/jobs/department-card'
@@ -8,10 +9,19 @@ import JobsClient from '@/components/jobs/jobs-client'
 import jobsData from '@/data/jobs.json'
 import positionsData from '@/data/positions.json'
 
-export const metadata: Metadata = {
-  title: 'Careers - Join Our Team | MasterFabric',
-  description: 'Join our team at MasterFabric and help shape the future of mobile application development.',
-}
+export const metadata: Metadata = createPageMetadata({
+  title: 'Careers',
+  description:
+    'MasterFabric careers. Open roles are listed on this page when hiring is active. There are no open positions right now.',
+  path: '/jobs/',
+  keywords: [
+    'MasterFabric careers',
+    'mobile developer jobs Ankara',
+    'Flutter jobs',
+    'NestJS jobs',
+    'remote mobile engineering',
+  ],
+})
 
 export default function JobsPage() {
   return (
@@ -98,7 +108,8 @@ export default function JobsPage() {
           jobsData={{
             applicationForm: jobsData.applicationForm,
             quote: jobsData.quote,
-            api: jobsData.api
+            api: jobsData.api,
+            hiringStatus: jobsData.hiringStatus,
           }} 
           positionsData={positionsData}
           skipHero={true}

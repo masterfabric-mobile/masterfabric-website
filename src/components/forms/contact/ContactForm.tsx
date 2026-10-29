@@ -110,7 +110,7 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
   }
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-200 p-8">
+    <div id="contact-form" className="bg-white rounded-2xl border border-gray-200 p-8">
       {isSubmitted && !isFromSendAgain ? (
         <div className="py-6 text-center space-y-4">
           <div className="mx-auto w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">

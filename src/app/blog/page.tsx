@@ -1,12 +1,17 @@
 import { Metadata } from 'next'
+import { createPageMetadata } from '@/lib/seo'
 import Container from '@/components/layout/container'
 import SectionHead from '@/components/layout/section-head'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Blog | MasterFabric Inc.',
-  description:
-    'The MasterFabric blog is currently offline. Older posts were removed because they were outdated.',
+  ...createPageMetadata({
+    title: 'Blog',
+    description:
+      'The MasterFabric blog is currently offline. Older posts were removed because they were outdated.',
+    path: '/blog/',
+    noIndex: true,
+  }),
   robots: {
     index: false,
     follow: true,

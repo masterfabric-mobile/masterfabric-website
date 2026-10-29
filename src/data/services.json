@@ -1,0 +1,336 @@
+{
+  "en": {
+    "lang": "en",
+    "path": "/services/",
+    "alternatePath": "/yapay-zeka-donusumu/",
+    "alternateLabel": "Türkçe",
+    "meta": {
+      "title": "Custom Software & AI Transformation for Enterprises and Private Clients",
+      "description": "MasterFabric builds custom software and AI transformation systems for institutions and private clients. Bespoke products, not off-the-shelf tools — designed around your workflow.",
+      "keywords": [
+        "custom software development",
+        "AI transformation",
+        "bespoke software",
+        "enterprise AI",
+        "private client software",
+        "custom software company",
+        "enterprise software",
+        "AI software studio"
+      ]
+    },
+    "hero": {
+      "eyebrow": "Services",
+      "title": "Custom software and AI transformation",
+      "subtitle": "For institutions and private clients",
+      "description": "MasterFabric designs and ships the software you actually need — custom products for enterprises, public institutions, and private clients. When the request is an AI transformation, we build it as a working system, not a slide deck."
+    },
+    "audiences": [
+      {
+        "title": "Institutions & enterprises",
+        "description": "We replace fragmented tools with custom platforms: internal operations, customer channels, data pipelines, and AI assistants that sit inside your existing stack.",
+        "points": [
+          "Enterprise and public-sector workflows",
+          "Secure integrations with current systems",
+          "AI copilots trained on your processes",
+          "Long-term ownership — the product is yours"
+        ]
+      },
+      {
+        "title": "Private clients",
+        "description": "Private companies and founders come to us when a ready-made product is not enough. We build the exact software they asked for, including AI features that match their business.",
+        "points": [
+          "Bespoke products from a clear brief",
+          "Mobile, web, and backend in one team",
+          "AI features only where they create value",
+          "Direct communication, no agency layers"
+        ]
+      }
+    ],
+    "offerings": [
+      {
+        "title": "AI transformation",
+        "description": "We turn requested AI capabilities into production software: document intelligence, assistants, automation, and decision support — scoped to your data and operations."
+      },
+      {
+        "title": "Custom / bespoke software",
+        "description": "Software written for one organization. Not a generic SaaS you adapt to. We specify, design, and deliver the product your team asked for."
+      },
+      {
+        "title": "Mobile & web products",
+        "description": "Cross-platform apps and web systems for iOS, Android, and the browser — the client layer on top of your custom backend and AI services."
+      },
+      {
+        "title": "Integrations & platforms",
+        "description": "APIs, admin consoles, and data layers that connect departments, partners, and customers without forcing another off-the-shelf stack."
+      }
+    ],
+    "why": {
+      "title": "Built for the brief you send us",
+      "description": "Most companies sell a platform and ask you to fit it. We do the opposite: institutions and private clients describe the transformation they need, and we produce the custom software that makes it real."
+    },
+    "process": [
+      { "title": "Discover", "description": "Map the institution or private client workflow, data, and the AI or product outcome they requested." },
+      { "title": "Design", "description": "Define the custom system: architecture, interfaces, and where AI belongs versus where it does not." },
+      { "title": "Build", "description": "Ship working software in short cycles — mobile, web, backend, and models in one delivery." },
+      { "title": "Operate", "description": "Handover, training, and ongoing improvement so the product stays yours after launch." }
+    ],
+    "processCompare": {
+      "title": "How we work",
+      "intro": "Same delivery stages — two different operating systems. Switch the tab to see a classic software project versus a new-generation AI-SDLC.",
+      "glanceTitle": "The difference at a glance",
+      "glance": [
+        { "label": "Rhythm", "classic": "Sequential: specify, then design, then code, then test.", "ai": "Short cycles: software and models move together." },
+        { "label": "AI role", "classic": "Usually none — or added as a feature at the end.", "ai": "Designed in from day one, only where it creates value." },
+        { "label": "After launch", "classic": "Handover, then change requests and tickets.", "ai": "Training, evaluation, and continuous improvement." }
+      ],
+      "tabs": {
+        "classic": {
+          "label": "Classic SDLC",
+          "kicker": "Document-first, sequential",
+          "summary": "A traditional software project locks the spec first. Design waits on sign-off. Code starts late. Testing arrives near the end. This works when the product is already fully known and no learning from data is required.",
+          "steps": [
+            {
+              "title": "Requirements",
+              "description": "Collect a complete specification and freeze scope before anyone builds.",
+              "contrast": "AI-SDLC starts from live workflow and data, not a locked document."
+            },
+            {
+              "title": "Design",
+              "description": "Draw screens and architecture, then wait for approval before coding.",
+              "contrast": "AI-SDLC also draws a line: where a model belongs, and where it must not."
+            },
+            {
+              "title": "Build & test",
+              "description": "Engineers implement after design is signed. QA usually happens near the end.",
+              "contrast": "AI-SDLC ships working software and models in the same short cycle."
+            },
+            {
+              "title": "Launch",
+              "description": "Deploy, hand over, then treat later change as tickets.",
+              "contrast": "AI-SDLC stays in operate mode: handover, training, and evaluation."
+            }
+          ]
+        },
+        "ai": {
+          "label": "AI-SDLC",
+          "kicker": "New-generation, data in the loop",
+          "summary": "We still discover, design, build, and ship — but data, models, and product software move in one loop. AI is placed only where it helps. After launch the system is trained and improved, not just ticketed.",
+          "steps": [
+            {
+              "title": "Discover",
+              "description": "Map the institution or private client workflow, the data, and the AI or product outcome they asked for.",
+              "contrast": "Classic SDLC freezes a paper spec before the first working slice."
+            },
+            {
+              "title": "Design the system",
+              "description": "Define architecture, interfaces, and a clear boundary: AI here, deterministic software there.",
+              "contrast": "Classic SDLC designs screens and architecture — not model boundaries."
+            },
+            {
+              "title": "Build together",
+              "description": "Ship working software in short cycles — mobile, web, backend, and models in one delivery.",
+              "contrast": "Classic SDLC codes after design is locked, and tests late."
+            },
+            {
+              "title": "Operate",
+              "description": "Handover, training, and ongoing evaluation so the product stays yours after launch.",
+              "contrast": "Classic SDLC treats go-live as the finish line."
+            }
+          ]
+        }
+      }
+    },
+    "faq": [
+      {
+        "question": "Do you build custom software for both enterprises and private clients?",
+        "answer": "Yes. MasterFabric works with institutions, enterprises, and private clients. We build the requested custom software — including AI transformation projects — rather than selling a one-size-fits-all product."
+      },
+      {
+        "question": "What does AI transformation mean in your work?",
+        "answer": "It means turning an AI request into a production system: assistants, automation, document processing, or decision support, connected to your data and operations. We deliver software, not only strategy."
+      },
+      {
+        "question": "Is this off-the-shelf software or bespoke development?",
+        "answer": "Bespoke. We write custom software for a single client or institution. If a ready-made tool already solves the problem, we say so. If it does not, we build the product."
+      },
+      {
+        "question": "Which languages and markets do you work in?",
+        "answer": "We work with Turkish and international clients. Delivery is in English or Turkish. The engineering team is based in Ankara and ships worldwide."
+      }
+    ],
+    "cta": {
+      "title": "Tell us the software you need built",
+      "description": "Share the institution, team, or private project — and the AI or product outcome you want. We reply within one business day.",
+      "primary": "Start a project",
+      "secondary": "About MasterFabric"
+    }
+  },
+  "tr": {
+    "lang": "tr",
+    "path": "/yapay-zeka-donusumu/",
+    "alternatePath": "/services/",
+    "alternateLabel": "English",
+    "meta": {
+      "title": "Yapay Zeka Dönüşümü ve Özel Yazılım | Kurumlar & Özel Müşteriler",
+      "description": "MasterFabric, kurumlara ve özel müşterilere yönelik yapay zeka dönüşümü ve talep edilen has yazılımları geliştiren bir teknoloji şirketidir. Hazır paket değil, size özel yazılım.",
+      "keywords": [
+        "yapay zeka dönüşümü",
+        "özel yazılım",
+        "has yazılım",
+        "kurumsal yapay zeka",
+        "özel müşteri yazılım",
+        "kurumsal yazılım geliştirme",
+        "yapay zeka yazılım şirketi",
+        "özel yazılım şirketi",
+        "AI transformation",
+        "custom software"
+      ]
+    },
+    "hero": {
+      "eyebrow": "Hizmetler",
+      "title": "Kurumlar ve özel müşteriler için yapay zeka dönüşümü",
+      "subtitle": "Talep edilen has yazılımları üreten bir şirket",
+      "description": "MasterFabric; kurumlara, kamu ve özel sektör kuruluşlarına ve özel müşterilere yönelik yapay zeka dönüşümleri ile talep edilen özel yazılımları geliştirir. Hazır bir ürünü uyarlamayız — istenen sistemi baştan yazarız."
+    },
+    "audiences": [
+      {
+        "title": "Kurumlar",
+        "description": "Dağınık araçların yerine kurumun işleyişine yazılmış platformlar koyarız: operasyon, müşteri kanalları, veri akışları ve mevcut sistemin içine oturan yapay zeka asistanları.",
+        "points": [
+          "Kurumsal ve kamu süreçlerine özel yazılım",
+          "Mevcut sistemlerle güvenli entegrasyon",
+          "Süreçlerinize göre kurgulanmış AI destekleri",
+          "Ürünün mülkiyeti sizde kalır"
+        ]
+      },
+      {
+        "title": "Özel müşteriler",
+        "description": "Hazır yazılım yetmediğinde özel müşteriler bize gelir. İstenen has yazılımı — yapay zeka özelliği dahil — net bir briften üretiriz.",
+        "points": [
+          "Brife göre özel / has yazılım",
+          "Mobil, web ve backend tek ekipte",
+          "Yapay zekayı yalnızca değer ürettiği yerde",
+          "Doğrudan iletişim, ara katman yok"
+        ]
+      }
+    ],
+    "offerings": [
+      {
+        "title": "Yapay zeka dönüşümü",
+        "description": "Talep edilen AI kabiliyetini canlı yazılıma çeviririz: evrak zekası, asistanlar, otomasyon ve karar desteği — sizin veriniz ve operasyonunuz üzerinden."
+      },
+      {
+        "title": "Özel / has yazılım",
+        "description": "Tek bir kurum veya özel müşteri için yazılan yazılım. Uyum sağlamanız beklenen genel bir SaaS değil; istenen ürünü belirtir, tasarlar ve teslim ederiz."
+      },
+      {
+        "title": "Mobil ve web ürünleri",
+        "description": "iOS, Android ve tarayıcı için çapraz platform uygulamalar — özel backend ve yapay zeka servislerinin üzerindeki müşteri katmanı."
+      },
+      {
+        "title": "Entegrasyon ve platformlar",
+        "description": "Departmanları, iş ortaklarını ve müşterileri bağlayan API’ler, yönetim panelleri ve veri katmanları."
+      }
+    ],
+    "why": {
+      "title": "Gönderdiğiniz brife göre üretiriz",
+      "description": "Çoğu şirket bir platform satıp sizi ona uydurur. Biz tersini yaparız: kurum veya özel müşteri ihtiyaç duyduğu dönüşümü tarif eder; biz bunu gerçekleyen özel yazılımı üretiriz."
+    },
+    "process": [
+      { "title": "Keşif", "description": "Kurum veya özel müşteri sürecini, veriyi ve talep edilen yapay zeka / ürün sonucunu çıkarırız." },
+      { "title": "Tasarım", "description": "Özel sistemi tanımlarız: mimari, arayüzler ve yapay zekanın durması gereken yer." },
+      { "title": "Geliştirme", "description": "Kısa döngülerle çalışan yazılım teslim ederiz — mobil, web, backend ve modeller birlikte." },
+      { "title": "Devreye alma", "description": "Teslim, eğitim ve sürekli iyileştirme; ürün yayın sonrası da sizin kalır." }
+    ],
+    "processCompare": {
+      "title": "Nasıl çalışırız",
+      "intro": "Aynı teslimat aşamaları — iki farklı çalışma biçimi. Sekmeyi değiştirerek klasik bir yazılım projesi ile yeni nesil AI-SDLC arasındaki farkı görün.",
+      "glanceTitle": "Fark tek bakışta",
+      "glance": [
+        { "label": "Ritim", "classic": "Sıralı: önce spesifikasyon, sonra tasarım, sonra kod, sonra test.", "ai": "Kısa döngü: yazılım ve modeller birlikte ilerler." },
+        { "label": "Yapay zeka", "classic": "Genelde yok — ya da en sonda bir özellik olarak eklenir.", "ai": "İlk günden tasarlanır; yalnızca değer ürettiği yerde durur." },
+        { "label": "Yayın sonrası", "classic": "Teslim, ardından değişiklik talepleri ve ticket’lar.", "ai": "Eğitim, ölçüm ve sürekli iyileştirme." }
+      ],
+      "tabs": {
+        "classic": {
+          "label": "Klasik SDLC",
+          "kicker": "Belge önce, sıra sıra",
+          "summary": "Klasik yazılım projesinde kapsam önce kilitlenir. Tasarım onayı bekler. Kod geç başlar. Test çoğunlukla sonda gelir. Ürün baştan netse ve veriden öğrenmeye ihtiyaç yoksa bu model yeter.",
+          "steps": [
+            {
+              "title": "Gereksinim",
+              "description": "Eksiksiz spesifikasyon toplanır, geliştirme başlamadan kapsam dondurulur.",
+              "contrast": "AI-SDLC kilit belgeden değil, canlı süreç ve veriden başlar."
+            },
+            {
+              "title": "Tasarım",
+              "description": "Ekranlar ve mimari çizilir; kod için onay beklenir.",
+              "contrast": "AI-SDLC ayrıca çizer: modelin duracağı yer ve durmaması gereken yer."
+            },
+            {
+              "title": "Geliştirme ve test",
+              "description": "Tasarım onayından sonra kod yazılır. QA genelde sürecin sonuna kalır.",
+              "contrast": "AI-SDLC yazılımı ve modelleri aynı kısa döngüde teslim eder."
+            },
+            {
+              "title": "Yayın",
+              "description": "Canlıya alınır, teslim edilir; sonraki değişiklik ticket olur.",
+              "contrast": "AI-SDLC işletme modunda kalır: teslim, eğitim ve ölçüm."
+            }
+          ]
+        },
+        "ai": {
+          "label": "AI-SDLC",
+          "kicker": "Yeni nesil, veri döngüde",
+          "summary": "Yine keşfeder, tasarlar, üretir ve teslim ederiz — ama veri, model ve ürün yazılımı tek döngüde ilerler. Yapay zeka yalnızca işe yaradığı yere konur. Yayın sonrası sistem ticket’lanmaz; eğitilir ve iyileştirilir.",
+          "steps": [
+            {
+              "title": "Keşif",
+              "description": "Kurum veya özel müşteri sürecini, veriyi ve talep edilen yapay zeka / ürün sonucunu çıkarırız.",
+              "contrast": "Klasik SDLC ilk çalışan parçadan önce kağıt spesifikasyonu kilitler."
+            },
+            {
+              "title": "Sistemi tasarla",
+              "description": "Mimari, arayüzler ve net sınır: burada AI, orada deterministik yazılım.",
+              "contrast": "Klasik SDLC ekran ve mimari çizer — model sınırını değil."
+            },
+            {
+              "title": "Birlikte üret",
+              "description": "Kısa döngülerle çalışan yazılım teslim ederiz — mobil, web, backend ve modeller birlikte.",
+              "contrast": "Klasik SDLC tasarım kilitlendikten sonra kodlar, testi sona bırakır."
+            },
+            {
+              "title": "İşlet",
+              "description": "Teslim, eğitim ve sürekli ölçüm; ürün yayın sonrası da sizin kalır.",
+              "contrast": "Klasik SDLC canlıya almayı bitiş çizgisi sayar."
+            }
+          ]
+        }
+      }
+    },
+    "faq": [
+      {
+        "question": "Kurumlara ve özel müşterilere özel yazılım yapıyor musunuz?",
+        "answer": "Evet. MasterFabric kurumlar, işletmeler ve özel müşteriler için talep edilen has yazılımları geliştirir. Tek beden ürün satmayız; ihtiyaç duyulan sistemi yazarız."
+      },
+      {
+        "question": "Yapay zeka dönüşümü sizin işinizde ne anlama geliyor?",
+        "answer": "Bir AI talebini canlı sisteme çevirmek: asistanlar, otomasyon, evrak işleme veya karar desteği — verinize ve operasyonunuza bağlı. Strateji sunumu değil, yazılım teslim ederiz."
+      },
+      {
+        "question": "Hazır paket mi, özel yazılım mı?",
+        "answer": "Özel yazılım. Tek bir kurum veya özel müşteri için has yazılım yazarız. Hazır araç sorunu çözüyorsa bunu söyleriz. Çözmüyorsa ürünü biz üretiriz."
+      },
+      {
+        "question": "Türkiye’de ve yurt dışında çalışıyor musunuz?",
+        "answer": "Evet. Türkiye ve uluslararası müşterilerle çalışırız. Teslimat Türkçe veya İngilizce olabilir. Ekip Ankara merkezlidir, teslimat küreseldir."
+      }
+    ],
+    "cta": {
+      "title": "İhtiyacınız olan yazılımı anlatın",
+      "description": "Kurumu, ekibi veya özel projeyi — ve istediğiniz yapay zeka ya da ürün sonucunu — yazın. Bir iş günü içinde dönüş yaparız.",
+      "primary": "Projeyi başlat",
+      "secondary": "Hakkımızda"
+    }
+  }
+}

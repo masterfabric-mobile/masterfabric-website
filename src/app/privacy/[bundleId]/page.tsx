@@ -7,25 +7,25 @@ import Container from '@/components/layout/container'
 import SectionHead from '@/components/layout/section-head'
 import { apps, getApp, publishedApps } from '@/data/apps'
 
-type Params = { params: { slug: string } }
+type Params = { params: { bundleId: string } }
 
 export function generateStaticParams() {
-  return apps.map((a) => ({ slug: a.slug }))
+  return apps.map((a) => ({ bundleId: a.bundleId }))
 }
 
 export function generateMetadata({ params }: Params): Metadata {
-  const app = getApp(params.slug)
+  const app = getApp(params.bundleId)
   if (!app) return {}
   const meta = createPageMetadata({
     title: `${app.name} Privacy Policy`,
     description: `How ${app.name} collects, uses and protects your information.`,
-    path: `/privacy/${app.slug}/`,
+    path: `/privacy/${app.bundleId}/`,
   })
   return app.draft ? { ...meta, robots: { index: false, follow: false } } : meta
 }
 
 export default function AppPrivacyPage({ params }: Params) {
-  const app = getApp(params.slug)
+  const app = getApp(params.bundleId)
   if (!app) notFound()
   const sections = buildPolicy(app)
 
@@ -36,9 +36,9 @@ export default function AppPrivacyPage({ params }: Params) {
       <nav className="mx-auto max-w-4xl mt-8 flex flex-wrap gap-2 text-sm" aria-label="Apps">
         {publishedApps.map((a) => (
           <Link
-            key={a.slug}
-            href={`/privacy/${a.slug}/`}
-            className={`rounded-full border px-3 py-1 ${a.slug === app.slug ? 'bg-black text-white' : 'border-gray-300'}`}
+            key={a.bundleId}
+            href={`/privacy/${a.bundleId}/`}
+            className={`rounded-full border px-3 py-1 ${a.bundleId === app.bundleId ? 'bg-black text-white' : 'border-gray-300'}`}
           >
             {a.name}
           </Link>
@@ -47,7 +47,7 @@ export default function AppPrivacyPage({ params }: Params) {
 
       <div className="mx-auto max-w-4xl mt-10 prose prose-lg">
         <p className="text-sm text-gray-600">
-          <strong>Version {app.version}</strong> · <strong>Last updated:</strong> {app.effectiveDate}
+          <strong>Bundle ID:</strong> {app.bundleId} · <strong>Version {app.version}</strong> · <strong>Last updated:</strong> {app.effectiveDate}
         </p>
         {sections.map((s, i) => (
           <section key={s.title}>

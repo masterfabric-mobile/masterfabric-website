@@ -1,6 +1,6 @@
 /**
  * Registry of mobile apps published by MasterFabric.
- * Each entry generates /privacy/<slug>/ automatically (see src/lib/privacy-policy.ts).
+ * Each entry generates /privacy/<bundleId>/ automatically (see src/lib/privacy-policy.ts).
  *
  * To add an app: append one object below, fill the factual fields honestly
  * (they drive the generated policy text), and set `draft: false` when legal has reviewed it.
@@ -27,7 +27,8 @@ export type AppThirdParty = {
 }
 
 export type AppConfig = {
-  slug: string
+  /** Bundle ID (iOS) / package name (Android). Used directly as the URL: /privacy/<bundleId>/ */
+  bundleId: string
   name: string
   tagline: string
   platforms: ('ios' | 'android')[]
@@ -61,7 +62,7 @@ export const DEFAULT_OPERATOR = 'MasterFabric Information Technology Inc.'
 
 export const apps: AppConfig[] = [
   {
-    slug: 'stacktowerplus',
+    bundleId: 'co.masterfabric.stacktower',
     name: 'Stack Tower',
     tagline: 'Stack the blocks, build the tallest tower. Your progress stays on your device.',
     platforms: ['ios'],
@@ -100,7 +101,7 @@ export const apps: AppConfig[] = [
     ],
   },
   {
-    slug: 'example-app',
+    bundleId: 'co.masterfabric.exampleapp',
     name: 'Example App',
     tagline: 'Template entry — copy this object for each new app.',
     platforms: ['ios', 'android'],
@@ -134,4 +135,4 @@ export const apps: AppConfig[] = [
 ]
 
 export const publishedApps = apps.filter((a) => !a.draft)
-export const getApp = (slug: string) => apps.find((a) => a.slug === slug)
+export const getApp = (bundleId: string) => apps.find((a) => a.bundleId === bundleId)

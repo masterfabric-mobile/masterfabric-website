@@ -22,13 +22,13 @@ export default function PrivacyIndexPage() {
       <div className="mx-auto max-w-4xl mt-12 grid gap-4 sm:grid-cols-2">
         {publishedApps.map((app) => (
           <Link
-            key={app.slug}
-            href={`/privacy/${app.slug}/`}
+            key={app.bundleId}
+            href={`/privacy/${app.bundleId}/`}
             className="rounded-xl border border-gray-200 p-6 hover:shadow-md transition"
           >
             <h3 className="text-lg font-semibold">{app.name}</h3>
             <p className="text-sm text-gray-600 mt-1">{app.tagline}</p>
-            <p className="text-xs text-gray-500 mt-3">Updated {app.effectiveDate}</p>
+            <p className="text-xs text-gray-500 mt-3">{app.bundleId} · Updated {app.effectiveDate}</p>
           </Link>
         ))}
         {publishedApps.length === 0 && <p className="text-gray-600">No apps published yet.</p>}

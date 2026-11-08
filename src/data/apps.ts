@@ -85,7 +85,7 @@ export const apps: AppConfig[] = [
     thirdParties: [
       {
         name: 'Firebase (Google)',
-        purpose: 'Delivers remote game-balance settings (Remote Config). The app also works fully offline',
+        purpose: 'Delivers remote game-balance settings (Remote Config); the app also works fully offline',
         policyUrl: 'https://policies.google.com/privacy',
       },
     ],

@@ -5,7 +5,7 @@ import { createPageMetadata } from '@/lib/seo'
 import { buildPolicy } from '@/lib/privacy-policy'
 import Container from '@/components/layout/container'
 import SectionHead from '@/components/layout/section-head'
-import { apps, getApp, publishedApps } from '@/data/apps'
+import { apps, getApp } from '@/data/apps'
 
 type Params = { params: { bundleId: string } }
 
@@ -24,6 +24,17 @@ export function generateMetadata({ params }: Params): Metadata {
   return app.draft ? { ...meta, robots: { index: false, follow: false } } : meta
 }
 
+/** Turns bare URLs in policy text into links. */
+function linkify(text: string) {
+  return text.split(/(https?:\/\/\S+?)(?=[.,;)]?(?:\s|$))/g).map((part, i) =>
+    /^https?:\/\//.test(part) ? (
+      <a key={i} href={part} target="_blank" rel="noopener noreferrer">{part}</a>
+    ) : (
+      part
+    )
+  )
+}
+
 export default function AppPrivacyPage({ params }: Params) {
   const app = getApp(params.bundleId)
   if (!app) notFound()
@@ -33,17 +44,6 @@ export default function AppPrivacyPage({ params }: Params) {
     <Container>
       <SectionHead title={`${app.name} Privacy Policy`} description={app.tagline} />
 
-      <nav className="mx-auto max-w-4xl mt-8 flex flex-wrap gap-2 text-sm" aria-label="Apps">
-        {publishedApps.map((a) => (
-          <Link
-            key={a.bundleId}
-            href={`/privacy/${a.bundleId}/`}
-            className={`rounded-full border px-3 py-1 ${a.bundleId === app.bundleId ? 'bg-black text-white' : 'border-gray-300'}`}
-          >
-            {a.name}
-          </Link>
-        ))}
-      </nav>
 
       <div className="mx-auto max-w-4xl mt-10 prose prose-lg">
         <p className="text-sm text-gray-600">
@@ -53,7 +53,7 @@ export default function AppPrivacyPage({ params }: Params) {
           <section key={s.title}>
             <h2>{`${i + 1}. ${s.title}`}</h2>
             {s.paragraphs?.map((p) => <p key={p}>{p}</p>)}
-            {s.bullets && <ul>{s.bullets.map((b) => <li key={b}>{b}</li>)}</ul>}
+            {s.bullets && <ul>{s.bullets.map((b) => <li key={b}>{linkify(b)}</li>)}</ul>}
           </section>
         ))}
         <p>
@@ -63,7 +63,7 @@ export default function AppPrivacyPage({ params }: Params) {
         <ul>
           {app.history.map((h) => (
             <li key={h.version}>
-              <strong>v{h.version}</strong> ({h.date}){h.minAppVersion ? ` — app ${h.minAppVersion}+` : ''}: {h.summary}
+              <strong>v{h.version}</strong> ({h.date}): {h.summary}
             </li>
           ))}
         </ul>

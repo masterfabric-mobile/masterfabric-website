@@ -71,6 +71,7 @@ export default function Footer() {
               <div className="flex flex-wrap justify-center gap-4">
                 <Link href="/terms-of-use" className="footer-legal-link">Terms</Link>
                 <Link href="/privacy-policy" className="footer-legal-link">Privacy</Link>
+                <Link href="/privacy" className="footer-legal-link">App Privacy</Link>
               </div>
             </div>
           </div>

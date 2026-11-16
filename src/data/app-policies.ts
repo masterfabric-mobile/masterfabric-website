@@ -933,5 +933,400 @@ export const appPolicies: Record<string, PolicySection[]> = {
         "See also the [General Privacy Notice](/privacy/) that applies to all MasterFabric apps."
       ]
     }
+  ],
+  "com.masterfabric.archeryhero": [
+    {
+      "title": "About this policy",
+      "paragraphs": [
+        "This Privacy Policy explains how MasterFabric Information Technology Inc. (\"we\", \"us\") handles information when you use Arx Hero (the \"App\"). By using the App you agree to the practices described here. If you do not agree, please do not use the App."
+      ]
+    },
+    {
+      "title": "Information we collect",
+      "paragraphs": [
+        "Arx Hero keeps your game data on your device and does not send it to our servers. The App handles:"
+      ],
+      "bullets": [
+        "Content — Game progress: unlocked levels, coins, gems, stars, upgrades, owned bows and arrows, missions and tutorial flags (stored on your device)",
+        "Content — Settings: language, sound, music and haptics (stored on your device)"
+      ]
+    },
+    {
+      "title": "How we use information",
+      "paragraphs": [
+        "We use information only to:"
+      ],
+      "bullets": [
+        "Provide and maintain the features of the App",
+        "Fix bugs, keep the App secure and improve performance",
+        "Respond to your support requests",
+        "Comply with legal obligations"
+      ]
+    },
+    {
+      "title": "Third-party services",
+      "paragraphs": [
+        "The App does not share data with third-party services.",
+        "The App is built with Firebase software libraries (Core, Authentication, Firestore and Remote Config) that are not started in this version: it has no Firebase configuration, creates no identifier and makes no network requests. Game-balance settings come from a file bundled with the App."
+      ]
+    },
+    {
+      "title": "Sharing and disclosure",
+      "paragraphs": [
+        "We do not sell your personal information and do not use it for third-party advertising. We share information only when required by law or to protect rights and safety, or in a merger or sale of our business (you would be notified)."
+      ]
+    },
+    {
+      "title": "Data retention",
+      "paragraphs": [
+        "Your game progress and settings stay on your device and are removed when you delete the app."
+      ]
+    },
+    {
+      "title": "Your choices and rights",
+      "paragraphs": [
+        "Depending on where you live (including under KVKK, GDPR and CCPA) you may request access, correction, deletion or portability of your data, or withdraw consent. Use Settings → Reset to erase your progress (your language, sound, music and haptics settings are kept), or delete the app to remove all local data. We hold no server-side copy of your game.",
+        "You can also write to privacy@masterfabric.co. We reply within 30 days."
+      ]
+    },
+    {
+      "title": "Security",
+      "paragraphs": [
+        "Your game data is kept in the app's protected storage on your device, secured by the operating system. We cannot guarantee absolute security, since no method of storage or transmission is completely secure."
+      ]
+    },
+    {
+      "title": "Children's privacy",
+      "paragraphs": [
+        "Arx Hero is not directed to children under 13. We do not knowingly collect their data. If you believe a child has provided us information, contact privacy@masterfabric.co and we will delete it."
+      ]
+    },
+    {
+      "title": "No accounts, no tracking, no ads",
+      "paragraphs": [
+        "Arx Hero has no accounts, analytics, crash reporting, advertising or in-app purchases, sends no game data to us and does not track you. It requests no camera, photos, microphone, location, notification or tracking permission. Its Apple privacy manifest declares no tracking and no collected data. If a future version adds online features such as accounts, leaderboards or analytics, we will update this policy before they are released."
+      ]
+    },
+    {
+      "title": "Changes to this policy",
+      "paragraphs": [
+        "We may update this policy. The \"Last updated\" date above shows the latest version, and material changes will be announced in the App or on this page."
+      ]
+    },
+    {
+      "title": "Contact us",
+      "paragraphs": [
+        "MasterFabric Information Technology Inc.",
+        "Email: privacy@masterfabric.co",
+        "Address: Hacı Bayram Mah. Mahmut Atalay Sk. L Blok No: 6 İç Kapı No: 227, Altındağ / Ankara, Türkiye"
+      ]
+    }
+  ],
+  "com.masterfabric.idlemine": [
+    {
+      "title": "About this policy",
+      "paragraphs": [
+        "This Privacy Policy explains how MasterFabric Information Technology Inc. (\"we\", \"us\") handles information when you use Idle Mine Tycoon (the \"App\"). By using the App you agree to the practices described here. If you do not agree, please do not use the App."
+      ]
+    },
+    {
+      "title": "Information we collect",
+      "paragraphs": [
+        "Idle Mine Tycoon keeps your game data on your device and does not send it to our servers. The App handles:"
+      ],
+      "bullets": [
+        "Content — Game progress: cash, gems, mine shafts, managers, prestige, achievements, daily login streak, missions, timed events and statistics (saved in a file on your device)",
+        "Content — Settings: language, buy amount, sound, music, haptics, notification and analytics preferences (stored on your device)",
+        "Purchases — Product identifiers and entitlements for in-app purchases, received from Apple after you buy or restore (we never see your payment details)",
+        "Gameplay events — Anonymous events such as upgrades or purchases, written only to a log on your device and never sent to us. You can turn this off with \"Share anonymous analytics\" in Settings"
+      ]
+    },
+    {
+      "title": "How we use information",
+      "paragraphs": [
+        "We use information only to:"
+      ],
+      "bullets": [
+        "Provide and maintain the features of the App",
+        "Fix bugs, keep the App secure and improve performance",
+        "Verify purchases and unlock paid items",
+        "Respond to your support requests",
+        "Comply with legal obligations"
+      ]
+    },
+    {
+      "title": "Third-party services",
+      "paragraphs": [
+        "The App uses the following provider. It processes data under its own privacy policy:",
+        "The App contains placeholder hooks for rewarded ads and analytics. In this version they are local stubs: no ad SDK, Firebase or other third-party SDK is included, no ad is shown and nothing is sent off your device."
+      ],
+      "bullets": [
+        "Apple App Store — Processes in-app purchases (gem packs, starter pack, Remove Ads and the double-hour boost) and restore requests. We never see your payment details. Privacy policy: https://www.apple.com/legal/privacy/"
+      ]
+    },
+    {
+      "title": "Sharing and disclosure",
+      "paragraphs": [
+        "We do not sell your personal information and do not use it for third-party advertising. We share information only with the service providers listed above, when required by law or to protect rights and safety, or in a merger or sale of our business (you would be notified)."
+      ]
+    },
+    {
+      "title": "Data retention",
+      "paragraphs": [
+        "Your game save stays on your device until you reset your progress or delete the app. If you back up your device with iCloud or Finder, the save file may be included in that Apple backup. Apple keeps purchase records according to its policy."
+      ]
+    },
+    {
+      "title": "Your choices and rights",
+      "paragraphs": [
+        "Depending on where you live (including under KVKK, GDPR and CCPA) you may request access, correction, deletion or portability of your data, or withdraw consent. Use Settings → Reset progress to start a new mine (your settings are kept), or delete the app to remove all local data. Restore Purchases in Settings asks Apple to restore entitlements you already bought. We hold no server-side copy of your game.",
+        "You can also write to privacy@masterfabric.co. We reply within 30 days."
+      ]
+    },
+    {
+      "title": "Security",
+      "paragraphs": [
+        "Your game data is kept in the app's protected storage on your device, secured by the operating system. We cannot guarantee absolute security, since no method of storage or transmission is completely secure.",
+        "Payments are handled by Apple; we never see or store your card number."
+      ]
+    },
+    {
+      "title": "Children's privacy",
+      "paragraphs": [
+        "Idle Mine Tycoon is not directed to children under 13. We do not knowingly collect their data. If you believe a child has provided us information, contact privacy@masterfabric.co and we will delete it."
+      ]
+    },
+    {
+      "title": "Notifications",
+      "paragraphs": [
+        "Reminders such as \"Daily reward ready\" or \"Your mine is full\" are local notifications scheduled on your device. They are off by default, and permission is requested only when you turn them on in Settings. We do not use push notifications."
+      ]
+    },
+    {
+      "title": "No accounts, no tracking",
+      "paragraphs": [
+        "Idle Mine Tycoon has no accounts, sends no game data to us, uses no advertising identifier, shows no App Tracking Transparency prompt and does not track you across other companies' apps. It requests no camera, photos, microphone, location or contacts permission. If a future version adds a real ad network or cloud analytics, we will update this policy first and ask for any required consent."
+      ]
+    },
+    {
+      "title": "Changes to this policy",
+      "paragraphs": [
+        "We may update this policy. The \"Last updated\" date above shows the latest version, and material changes will be announced in the App or on this page."
+      ]
+    },
+    {
+      "title": "Contact us",
+      "paragraphs": [
+        "MasterFabric Information Technology Inc.",
+        "Email: privacy@masterfabric.co",
+        "Address: Hacı Bayram Mah. Mahmut Atalay Sk. L Blok No: 6 İç Kapı No: 227, Altındağ / Ankara, Türkiye"
+      ]
+    }
+  ],
+  "com.masterfabric.notch": [
+    {
+      "title": "About this policy",
+      "paragraphs": [
+        "This Privacy Policy explains how MasterFabric Information Technology Inc. (\"we\", \"us\") handles information when you use MasterFabric Notch (the \"App\"). By using the App you agree to the practices described here. If you do not agree, please do not use the App."
+      ]
+    },
+    {
+      "title": "Information we collect",
+      "paragraphs": [
+        "MasterFabric Notch runs on your Mac and does not send your data to our servers. The App handles:"
+      ],
+      "bullets": [
+        "Agent activity — Events received from the coding tools you enable, such as tool names, files touched, prompts and status. They are processed on your Mac to show the island and approval prompts",
+        "Decisions and settings — Your Allow / Deny choices, settings and local usage counters (stored on your Mac)",
+        "Configuration files — The hook configuration of the agents you enable, which the app edits on your Mac to connect them",
+        "Update check — Your IP address and app version, sent to GitHub only when you check for updates"
+      ]
+    },
+    {
+      "title": "How we use information",
+      "paragraphs": [
+        "We use information only to:"
+      ],
+      "bullets": [
+        "Provide and maintain the features of the App",
+        "Fix bugs, keep the App secure and improve performance",
+        "Show live agent status and let you approve or deny actions",
+        "Check for new versions when you ask it to",
+        "Respond to your support requests",
+        "Comply with legal obligations"
+      ]
+    },
+    {
+      "title": "Third-party services",
+      "paragraphs": [
+        "The App uses the following provider. It processes data under its own privacy policy:",
+        "Agent events travel only over a local Unix socket on your Mac and are not sent to us or to anyone else. The App contains no analytics, telemetry or advertising SDK."
+      ],
+      "bullets": [
+        "GitHub — Update check and DMG download from GitHub Releases. GitHub receives your IP address and request metadata. Privacy policy: https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
+      ]
+    },
+    {
+      "title": "Sharing and disclosure",
+      "paragraphs": [
+        "We do not sell your personal information and do not use it for third-party advertising. We share information only with the service providers listed above, when required by law or to protect rights and safety, or in a merger or sale of our business (you would be notified)."
+      ]
+    },
+    {
+      "title": "Data retention",
+      "paragraphs": [
+        "All data stays on your Mac until you uninstall the hooks and delete the app. Backups such as Time Machine may include the app folder. GitHub keeps request logs according to its own policy."
+      ]
+    },
+    {
+      "title": "Your choices and rights",
+      "paragraphs": [
+        "Depending on where you live (including under KVKK, GDPR and CCPA) you may request access, correction, deletion or portability of your data, or withdraw consent. To remove everything, use Settings → Hooks → Uninstall, delete the app and remove ~/Library/Application Support/MasterFabricNotch. We hold no server-side copy.",
+        "You can also write to privacy@masterfabric.co. We reply within 30 days."
+      ]
+    },
+    {
+      "title": "Security",
+      "paragraphs": [
+        "Your data is kept on your Mac under macOS file permissions and your disk encryption (for example FileVault). Agent events stay on your device. We cannot guarantee absolute security, since no method of storage or transmission is completely secure."
+      ]
+    },
+    {
+      "title": "Children's privacy",
+      "paragraphs": [
+        "MasterFabric Notch is not directed to children under 13. We do not knowingly collect their data. If you believe a child has provided us information, contact privacy@masterfabric.co and we will delete it."
+      ]
+    },
+    {
+      "title": "Permissions",
+      "paragraphs": [
+        "Accessibility access is requested only if you enable ChatGPT Desktop support, so the app can press Allow or Deny on your behalf. You can revoke it at any time in System Settings → Privacy & Security.",
+        "Because agent events can include file paths and prompt text, they are shown on your screen in the island; the App does not store them off your device."
+      ]
+    },
+    {
+      "title": "No tracking, no analytics",
+      "paragraphs": [
+        "MasterFabric Notch contains no analytics, telemetry or advertising SDKs, does not track you and does not send agent activity to us or anyone else."
+      ]
+    },
+    {
+      "title": "Changes to this policy",
+      "paragraphs": [
+        "We may update this policy. The \"Last updated\" date above shows the latest version, and material changes will be announced in the App or on this page."
+      ]
+    },
+    {
+      "title": "Contact us",
+      "paragraphs": [
+        "MasterFabric Information Technology Inc.",
+        "Email: privacy@masterfabric.co",
+        "Address: Hacı Bayram Mah. Mahmut Atalay Sk. L Blok No: 6 İç Kapı No: 227, Altındağ / Ankara, Türkiye"
+      ]
+    }
+  ],
+  "com.masterfabric.pdf": [
+    {
+      "title": "About this policy",
+      "paragraphs": [
+        "This Privacy Policy explains how MasterFabric Information Technology Inc. (\"we\", \"us\") handles information when you use Document Scan Plus (the \"App\"). By using the App you agree to the practices described here. If you do not agree, please do not use the App."
+      ]
+    },
+    {
+      "title": "Information we collect",
+      "paragraphs": [
+        "Document Scan Plus processes your documents on your device and does not send them to our servers. The App handles:"
+      ],
+      "bullets": [
+        "Content — Photos and scans you capture with the camera or pick from your library, and the PDFs you create or open, processed only on your device",
+        "Content — Text recognised from your documents (OCR), signatures you draw and passwords you set for PDF protection, kept in memory only",
+        "Consent record — The policy version, date and choices you accepted, stored on your device and excluded from backups"
+      ]
+    },
+    {
+      "title": "How we use information",
+      "paragraphs": [
+        "We use information only to:"
+      ],
+      "bullets": [
+        "Provide and maintain the features of the App",
+        "Fix bugs, keep the App secure and improve performance",
+        "Respond to your support requests",
+        "Comply with legal obligations"
+      ]
+    },
+    {
+      "title": "Third-party services",
+      "paragraphs": [
+        "The App uses the following system components. They run on your device and process data under their own privacy policies:"
+      ],
+      "bullets": [
+        "Google ML Kit / Google Play services (Android) — On-device text recognition and document scanning. Play services may download the scanner module itself; your documents are not sent. Privacy policy: https://policies.google.com/privacy",
+        "Apple VisionKit (iOS) — On-device document scanning. Privacy policy: https://www.apple.com/legal/privacy/"
+      ]
+    },
+    {
+      "title": "Sharing and disclosure",
+      "paragraphs": [
+        "We do not sell your personal information and do not use it for third-party advertising. We share information only with the service providers listed above, when required by law or to protect rights and safety, or in a merger or sale of our business (you would be notified)."
+      ]
+    },
+    {
+      "title": "Data retention",
+      "paragraphs": [
+        "Documents are kept only while you work with them. Temporary files are cleared when the App starts and when you use \"Delete my data\". Files you shared to other apps cannot be deleted by us. The Android build excludes the App from cloud backup and device transfer."
+      ]
+    },
+    {
+      "title": "Your choices and rights",
+      "paragraphs": [
+        "Depending on where you live (including under KVKK, GDPR and CCPA) you may request access, correction, deletion or portability of your data, or withdraw consent. Use Settings → Delete my data to clear temporary files and your consent record, or delete the app to remove everything else. We hold no server-side copy of your documents.",
+        "You can also write to privacy@masterfabric.co. We reply within 30 days."
+      ]
+    },
+    {
+      "title": "Security",
+      "paragraphs": [
+        "Your documents are processed on your device and are not uploaded. PDF passwords are held in memory only. We cannot guarantee absolute security, since no method of storage or transmission is completely secure."
+      ]
+    },
+    {
+      "title": "Children's privacy",
+      "paragraphs": [
+        "Document Scan Plus is not directed to children under 13. We do not knowingly collect their data. If you believe a child has provided us information, contact privacy@masterfabric.co and we will delete it."
+      ]
+    },
+    {
+      "title": "Permissions",
+      "paragraphs": [
+        "Camera: to scan documents. Photo library (iOS): only the images you choose to import. The App does not ask for location, contacts, microphone or notifications. The Android release build removes the internet permission, so it cannot send data off your device."
+      ]
+    },
+    {
+      "title": "Consent",
+      "paragraphs": [
+        "The App asks for your consent to this policy and to KVKK processing on first use, and asks again when the policy version changes."
+      ]
+    },
+    {
+      "title": "No accounts, no tracking, no ads",
+      "paragraphs": [
+        "Document Scan Plus has no accounts, analytics, crash reporting, advertising or in-app purchases, and does not track you. It declares no tracking in its Apple privacy manifest."
+      ]
+    },
+    {
+      "title": "Changes to this policy",
+      "paragraphs": [
+        "We may update this policy. The \"Last updated\" date above shows the latest version, and material changes will be announced in the App or on this page."
+      ]
+    },
+    {
+      "title": "Contact us",
+      "paragraphs": [
+        "MasterFabric Information Technology Inc.",
+        "Email: privacy@masterfabric.co",
+        "Address: Hacı Bayram Mah. Mahmut Atalay Sk. L Blok No: 6 İç Kapı No: 227, Altındağ / Ankara, Türkiye"
+      ]
+    }
   ]
 }

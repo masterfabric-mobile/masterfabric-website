@@ -27,8 +27,9 @@ export type AppThirdParty = {
 }
 
 /**
- * Note: apps that have a reviewed full text in src/data/app-policies.ts render that text;
- * the data/thirdParties fields below then only feed the index card, not the policy body.
+ * Note: every published app has a full text in src/data/app-policies.ts, which the page renders.
+ * The data/thirdParties fields below are the structured facts behind it and feed the generated
+ * template (buildPolicy), which is only used for apps without a full text (e.g. new drafts).
  */
 export type AppConfig = {
   /** Bundle ID (iOS) / package name (Android). Used directly as the URL: /privacy/<bundleId>/ */

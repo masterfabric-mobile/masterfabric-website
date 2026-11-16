@@ -7,6 +7,7 @@ import Footer from '@/components/layout/footer'
 import CookieBanner from '@/components/cookie/CookieBanner'
 import ClaudePartnerPrompt from '@/components/pages/claude-partner-prompt'
 import SplashScreenWrapper from '@/components/wrapper/splash-screen-wrapper'
+import HideOnPrivacy from '@/components/wrapper/hide-on-privacy'
 import JsonLd from '@/components/seo/json-ld'
 import { DEFAULT_TITLE, getSiteJsonLd, SEO, SITE_NAME, SITE_URL } from '@/lib/seo'
 import Script from 'next/script'
@@ -136,8 +137,10 @@ export default function RootLayout({
               <Footer />
             </div>
           </SplashScreenWrapper>
-          <CookieBanner />
-          <ClaudePartnerPrompt />
+          <HideOnPrivacy>
+            <CookieBanner />
+            <ClaudePartnerPrompt />
+          </HideOnPrivacy>
         {/* </ThemeProvider> */}
       </body>
     </html>

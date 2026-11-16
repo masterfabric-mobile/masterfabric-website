@@ -249,7 +249,7 @@ export const apps: AppConfig[] = [
     ],
   },
   {
-    bundleId: 'com.cubeliora.puzzle',
+    bundleId: 'com.masterfabric.cubeliora',
     name: 'Cubeliora',
     tagline: 'A puzzle game. Everything stays on your device.',
     platforms: ['ios'],

@@ -262,7 +262,7 @@ export const apps: AppConfig[] = [
     ],
   },
   {
-    bundleId: 'co.masterfabric.ayso',
+    bundleId: 'com.masterfabric.ayso',
     name: 'Ayso',
     tagline: 'Cycle and pregnancy tracking. Your health data stays on your device.',
     platforms: ['ios'],
@@ -499,7 +499,7 @@ export const apps: AppConfig[] = [
     ],
   },
   {
-    bundleId: 'co.masterfabric.stacktower',
+    bundleId: 'com.masterfabric.stacktower',
     name: 'Stack Tower',
     tagline: 'Stack the blocks, build the tallest tower. Your progress stays on your device.',
     platforms: ['ios'],

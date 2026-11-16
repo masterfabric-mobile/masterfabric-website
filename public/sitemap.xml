@@ -112,7 +112,7 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://masterfabric.co/privacy/co.masterfabric.stacktower/</loc>
+    <loc>https://masterfabric.co/privacy/com.masterfabric.stacktower/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -142,7 +142,7 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://masterfabric.co/privacy/co.masterfabric.ayso/</loc>
+    <loc>https://masterfabric.co/privacy/com.masterfabric.ayso/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>

@@ -6,6 +6,7 @@ import { buildPolicy } from '@/lib/privacy-policy'
 import Container from '@/components/layout/container'
 import SectionHead from '@/components/layout/section-head'
 import { apps, getApp } from '@/data/apps'
+import { appPolicies } from '@/data/app-policies'
 
 type Params = { params: { bundleId: string } }
 
@@ -38,7 +39,8 @@ function linkify(text: string) {
 export default function AppPrivacyPage({ params }: Params) {
   const app = getApp(params.bundleId)
   if (!app) notFound()
-  const sections = buildPolicy(app)
+  // Reviewed full texts take precedence over the generated template.
+  const sections = appPolicies[app.bundleId] ?? buildPolicy(app)
 
   return (
     <Container>

@@ -26,6 +26,10 @@ export type AppThirdParty = {
   policyUrl: string
 }
 
+/**
+ * Note: apps that have a reviewed full text in src/data/app-policies.ts render that text;
+ * the data/thirdParties fields below then only feed the index card, not the policy body.
+ */
 export type AppConfig = {
   /** Bundle ID (iOS) / package name (Android). Used directly as the URL: /privacy/<bundleId>/ */
   bundleId: string

@@ -184,3 +184,13 @@
 .footer .flex > * {
   transition: transform 0.2s ease;
 } 
+.footer-version-link {
+  color: #9ca3af;
+  transition: color 0.15s ease;
+}
+
+.footer-version-link:hover {
+  color: #374151;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

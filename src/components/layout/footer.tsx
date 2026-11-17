@@ -6,6 +6,7 @@ import Container from './container'
 import { Github, Twitter, Mail, Bot } from 'lucide-react'
 import '../../styles/footer.css'
 import { Icon } from '@iconify/react';
+import { SITE_COMMIT_SHA, SITE_VERSION } from '@/lib/version'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
@@ -127,6 +128,16 @@ export default function Footer() {
           <div className="text-center mt-8 pt-6 border-t border-gray-50">
             <p className="text-xs text-gray-400">
               © {currentYear} MasterFabric Inc.
+              <span aria-hidden="true" className="mx-2">·</span>
+              <Link
+                href="/changelog"
+                className="footer-version-link"
+                title="View the changelog"
+                data-version={SITE_VERSION}
+              >
+                v{SITE_VERSION}
+                {SITE_COMMIT_SHA && <span className="font-mono"> ({SITE_COMMIT_SHA})</span>}
+              </Link>
             </p>
           </div>
         </div>

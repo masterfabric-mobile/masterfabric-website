@@ -1,8 +1,28 @@
 /** @type {import('next').NextConfig} */
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { execSync } = require('child_process');
+const { version: APP_VERSION } = require('./package.json');
+
+// Short commit SHA for the footer. Vercel exposes the SHA as an env var;
+// local builds fall back to git. Empty when neither is available.
+function resolveCommitSha() {
+  const fromEnv = process.env.VERCEL_GIT_COMMIT_SHA || process.env.GITHUB_SHA;
+  if (fromEnv) return fromEnv.slice(0, 7);
+  try {
+    return execSync('git rev-parse --short=7 HEAD', { stdio: ['ignore', 'pipe', 'ignore'] })
+      .toString()
+      .trim();
+  } catch {
+    return '';
+  }
+}
 
 const nextConfig = {
   output: 'export',
+  env: {
+    NEXT_PUBLIC_APP_VERSION: APP_VERSION,
+    NEXT_PUBLIC_COMMIT_SHA: resolveCommitSha(),
+  },
   trailingSlash: true,
   skipTrailingSlashRedirect: true,
   images: {

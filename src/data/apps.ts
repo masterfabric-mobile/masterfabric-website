@@ -26,6 +26,11 @@ export type AppThirdParty = {
   policyUrl: string
 }
 
+/**
+ * Note: every published app has a full text in src/data/app-policies.ts, which the page renders.
+ * The data/thirdParties fields below are the structured facts behind it and feed the generated
+ * template (buildPolicy), which is only used for apps without a full text (e.g. new drafts).
+ */
 export type AppConfig = {
   /** Bundle ID (iOS) / package name (Android). Used directly as the URL: /privacy/<bundleId>/ */
   bundleId: string
@@ -62,6 +67,176 @@ export const DEFAULT_OPERATOR = 'MasterFabric Information Technology Inc.'
 
 export const apps: AppConfig[] = [
   {
+    bundleId: 'com.masterfabric.cannonmerge',
+    name: 'Cannon Merge Plus',
+    tagline: 'Merge cannons and defend your castle. Your progress stays on your device.',
+    platforms: ['ios'],
+    contactEmail: 'privacy@masterfabric.co',
+    effectiveDate: '2026-11-16',
+    version: '1.0',
+    history: [{ version: '1.0', date: '2026-11-16', summary: 'Initial policy.' }],
+    minAge: 13,
+    localOnly: true,
+    data: {
+      userContent: ['Game progress: board, coins, wave, upgrades, Military Series, Codex, energy and last-played time (stored on your device)', 'Settings: language and sound; purchase product IDs and entitlements such as Remove Ads'],
+      device: ['Only if you choose to watch a rewarded ad: device and usage data processed by Google AdMob, such as advertising ID and IP address'],
+      purchases: true,
+    },
+    thirdParties: [
+      { name: 'Google AdMob (Google LLC)', purpose: 'Optional rewarded video ads that refill energy', policyUrl: 'https://policies.google.com/privacy' },
+      { name: 'Apple App Store', purpose: 'Processes in-app purchases (Remove Ads, coin packs) and restores them. We never see your payment details', policyUrl: 'https://www.apple.com/legal/privacy/' },
+    ],
+    retention: 'Progress and energy stay on your device and are removed when you delete the app. Purchase records are kept by Apple.',
+    deletion: 'Delete the app to remove all local data. Use Settings → Restore Purchases after reinstalling. We hold no server-side copy.',
+    extraSections: [
+      { title: 'No accounts, no analytics', paragraphs: ['Cannon Merge Plus has no accounts and no Firebase, analytics or crash-reporting SDK active. It requests no camera, photo, microphone, location or notification permission. Rewarded ads are optional and shown only when you choose to watch one; Google may use an advertising identifier according to its own policy and your device settings. If we add analytics in a future version, we will update this policy first.'] },
+    ],
+  },
+  {
+    bundleId: 'com.masterfabric.farmmerge',
+    name: 'Farm Merge Valley',
+    tagline: 'A cozy merge farm. Your progress stays on your device.',
+    platforms: ['ios'],
+    contactEmail: 'privacy@masterfabric.co',
+    effectiveDate: '2026-11-16',
+    version: '1.0',
+    history: [{ version: '1.0', date: '2026-11-16', summary: 'Initial policy.' }],
+    minAge: 13,
+    localOnly: true,
+    data: {
+      userContent: ['Game progress: board, coins, gems, energy, orders, fields, land, daily rewards, missions, achievements and tutorial flags (stored on your device)', 'Settings: language, sound, haptics and notification choice'],
+      purchases: true,
+    },
+    thirdParties: [
+      { name: 'Apple App Store', purpose: 'Processes in-app purchases (gem packs, starter pack, no-ads) and restores them. We never see your payment details', policyUrl: 'https://www.apple.com/legal/privacy/' },
+    ],
+    retention: 'All data stays on your device and is removed when you delete the app. Purchase records are kept by Apple.',
+    deletion: 'In the app: Settings → Reset farm (your settings can be kept). Deleting the app removes everything else. We hold no server-side copy.',
+    extraSections: [
+      { title: 'Notifications', paragraphs: ['Energy-full and crop-ready reminders are local notifications scheduled on your device, only if you turn them on. We do not use push notifications.'] },
+      { title: 'No accounts, no tracking, no ads', paragraphs: ['Farm Merge Valley has no accounts, advertising, analytics or crash-reporting SDKs and does not track you. Its analytics and rewarded-ad hooks are local stubs that write only to the device log. It requests no camera, photo, microphone or location permission.'] },
+    ],
+  },
+  {
+    bundleId: 'com.masterfabric.fitness',
+    name: 'Flex',
+    tagline: 'Train, eat and adapt with an AI coach. Your health data is stored with your account.',
+    platforms: ['ios'],
+    contactEmail: 'privacy@masterfabric.co',
+    effectiveDate: '2026-11-16',
+    version: '1.0',
+    history: [{ version: '1.0', date: '2026-11-16', summary: 'Initial policy.' }],
+    minAge: 13,
+    data: {
+      account: ['Name, username, email address, date of birth, sign-in method and unique account ID', 'Optional profile photo (stored in Firebase Cloud Storage)'],
+      userContent: [
+        'Body and goal data: height, weight, target weight, activity level, diet, allergies, equipment and rest days',
+        'Training and nutrition records: workouts, programmes, sessions, personal records, daily logs, meals, water and weight entries, progress insights',
+        'AI Coach conversations (kept in device secure storage) and meal photos (kept on your device only)',
+        'Training buddies, circle members and invite codes; notification and privacy preferences',
+      ],
+      device: ['App Check tokens; a scanned barcode is sent to Open Food Facts to look up a product', 'Optional two-factor (TOTP) secret kept in device secure storage'],
+      purchases: false,
+    },
+    thirdParties: [
+      { name: 'Firebase (Google)', purpose: 'Authentication, Firestore database, Cloud Storage, Cloud Functions and App Check', policyUrl: 'https://policies.google.com/privacy' },
+      { name: 'Firebase AI Logic / Gemini (Google)', purpose: 'Online AI Coach responses. No Gemini API key is embedded in the app', policyUrl: 'https://policies.google.com/privacy' },
+      { name: 'Google Sign-In and Sign in with Apple', purpose: 'Optional sign-in methods', policyUrl: 'https://policies.google.com/privacy' },
+      { name: 'Open Food Facts', purpose: 'Looks up food products from a scanned barcode', policyUrl: 'https://world.openfoodfacts.org/privacy' },
+      { name: 'Apple or Google speech recognition', purpose: 'Optional voice input (microphone)', policyUrl: 'https://www.apple.com/legal/privacy/' },
+    ],
+    retention: 'Account data is kept while your account is active. AI Coach history is kept until you delete it and has no automatic expiry. Uninstalling the app removes local meal photos and secure storage.',
+    deletion: 'In the app: Profile → Privacy & Data → Delete my account removes your sign-in record, profile and your weight, day, meal, workout and programme records, then clears on-device AI history and caches. You can also export a copy of your profile as JSON from the same area.',
+    extraSections: [
+      { title: 'Health data and consent', paragraphs: ['Body, nutrition and training information is health-related data, a special category under KVKK and GDPR. It is processed on the basis of your explicit consent, which you can withdraw by deleting your data or account. The current version does not connect to Apple Health or Health Connect. Flex provides general information and is not a medical device or a substitute for professional advice.'] },
+      { title: 'Permissions and notifications', paragraphs: ['Camera and photo library (meal and profile photos), microphone and speech recognition (optional voice input) and local notifications are optional and requested only when needed. The app does not request location or contacts.'] },
+      { title: 'No tracking, no ads', paragraphs: ['Flex does not track you across other apps or websites and shows no advertising. The current version has no in-app purchase SDK.'] },
+    ],
+  },
+  {
+    bundleId: 'com.masterfabric.foxie',
+    name: 'Foxie',
+    tagline: 'Study plans, practice exams and an AI tutor. Your account lives on our servers.',
+    platforms: ['ios'],
+    contactEmail: 'privacy@masterfabric.co',
+    effectiveDate: '2026-11-16',
+    version: '1.0',
+    history: [{ version: '1.0', date: '2026-11-16', summary: 'Initial policy.' }],
+    minAge: 13,
+    data: {
+      account: ['Name, email address, sign-in method and account ID', 'Role (student, teacher or parent) and settings', 'Optional profile photo (stored in Firebase Cloud Storage)'],
+      userContent: [
+        'For students: target exam, goals, tasks, calendar, practice-exam results and study-time records including Pomodoro sessions',
+        'Student–teacher and student–parent connection records and their access scope; private notes a teacher writes about a student',
+        'Assistant messages and drafts',
+      ],
+      device: ['Crash reports (device and diagnostic data, without your name, email or account ID) and App Check tokens'],
+      purchases: false,
+    },
+    thirdParties: [
+      { name: 'Firebase (Google)', purpose: 'Authentication, Firestore, Cloud Storage, Cloud Functions (europe-west1), Crashlytics and App Check', policyUrl: 'https://policies.google.com/privacy' },
+      { name: 'Google Sign-In and Sign in with Apple', purpose: 'Optional sign-in methods', policyUrl: 'https://policies.google.com/privacy' },
+      { name: 'NVIDIA API Catalog', purpose: 'Powers the Foxie assistant. It receives study context, not your name, email or account ID', policyUrl: 'https://www.nvidia.com/en-us/about-nvidia/privacy-policy/' },
+    ],
+    retention: 'Account and study data are kept while your account is active. Assistant conversations expire after 30 days, assistant proposals and turn receipts after 24 hours, and usage counters after 90 days.',
+    deletion: 'In the app: Settings → Delete account (after re-authentication) removes your profile, study records, connections, photo and sign-in record. There is no in-app export button; e-mail privacy@masterfabric.co to request a copy.',
+    extraSections: [
+      { title: 'Teachers and parents', paragraphs: ['A teacher or parent can see a student\'s data only after the student connects with them, and only within the agreed access scope. Parents have view-only access. Teachers\' private notes are not visible to students.'] },
+      { title: 'The Foxie assistant', paragraphs: ['The assistant runs on our servers and cannot change your data without your confirmation. Messages about self-harm, child safety or health risks are not sent to the model. Students preparing for exams such as LGS may be close to or above the minimum age; the app has no separate age gate or parental-consent flow.'] },
+      { title: 'Permissions and notifications', paragraphs: ['Camera and photo library are used only to set a profile photo. The app does not request location, contacts or microphone access.'] },
+      { title: 'No tracking, no ads', paragraphs: ['Foxie does not track you across other apps or websites and shows no advertising.'] },
+    ],
+  },
+  {
+    bundleId: 'com.masterfabric.holerush',
+    name: 'Hole Rush Plus',
+    tagline: 'Swallow the city and grow. Your progress stays on your device.',
+    platforms: ['ios'],
+    contactEmail: 'privacy@masterfabric.co',
+    effectiveDate: '2026-11-16',
+    version: '1.0',
+    history: [{ version: '1.0', date: '2026-11-16', summary: 'Initial policy.' }],
+    minAge: 13,
+    localOnly: true,
+    data: {
+      userContent: ['Game progress: coins, level, best score, upgrades, rims, trails, missions and daily-reward status (stored on your device)', 'Settings: language, sound, music and vibration'],
+      device: ['Only if Firebase is enabled in a future build: an anonymous user ID, coins, level and upgrade ranks for sync, and device and network information for Remote Config'],
+      purchases: false,
+    },
+    thirdParties: [
+      { name: 'Firebase (Google), only when enabled', purpose: 'Optional anonymous authentication, Firestore progress sync and Remote Config. The current release is built without a Firebase configuration, so it runs offline and sends nothing', policyUrl: 'https://policies.google.com/privacy' },
+    ],
+    retention: 'Local data is removed when you delete the app. If Firebase is enabled, the anonymous ID and synced data are kept by Google until you ask us to delete them.',
+    deletion: 'Delete the app to remove all local data. To delete any synced data, e-mail privacy@masterfabric.co.',
+    extraSections: [
+      { title: 'No tracking, no ads', paragraphs: ['Hole Rush Plus uses no advertising identifiers, shows no ads, has no in-app purchases and does not track you. Its Apple privacy manifest declares no tracking.'] },
+    ],
+  },
+  {
+    bundleId: 'com.masterfabric.videostudio',
+    name: 'MF Studio',
+    tagline: 'Capture, craft and share videos. Projects and recordings stay on your Mac.',
+    platforms: ['macos'],
+    contactEmail: 'privacy@masterfabric.co',
+    effectiveDate: '2026-11-16',
+    version: '1.0',
+    history: [{ version: '1.0', date: '2026-11-16', summary: 'Initial policy.' }],
+    minAge: 13,
+    localOnly: true,
+    data: {
+      userContent: ['Projects: video, audio, captions and style templates stored on your Mac', 'Screen, window or region recordings, microphone audio and camera or capture-device video, only when you choose them and grant permission', 'Optional captions generated locally with a whisper.cpp program and model that you supply'],
+      device: ['Language and editor preferences'],
+      purchases: false,
+    },
+    thirdParties: [],
+    retention: 'Projects, recordings and captions stay on your Mac until you delete them or uninstall the app. Temporary files go to the system temporary folder. Backups such as Time Machine may include project files.',
+    deletion: 'Delete a project in the app or in Finder. Deleting the app removes its Application Support data; files you saved elsewhere remain. We hold no server-side copy.',
+    extraSections: [
+      { title: 'Permissions', paragraphs: ['Depending on what you use, macOS asks for Screen Recording, Microphone, Camera or capture-device, and Accessibility or Input Monitoring access (for event capture). You can revoke each in System Settings → Privacy & Security. The app does not request contacts or location. Recordings can capture anything visible or audible, so you are responsible for permissions of other people or services shown in them. Files you share cannot be recalled by us.'] },
+      { title: 'No accounts, no tracking, no in-app purchases', paragraphs: ['MF Studio has no accounts, makes no network requests for these purposes, does not track you and has no in-app purchases.'] },
+    ],
+  },
+  {
     bundleId: 'com.masterfabric.archeryhero',
     name: 'Arx Hero',
     tagline: 'An archery game. Your progress stays on your device.',
@@ -92,7 +267,7 @@ export const apps: AppConfig[] = [
     ],
   },
   {
-    bundleId: 'co.masterfabric.ayso',
+    bundleId: 'com.masterfabric.ayso',
     name: 'Ayso',
     tagline: 'Cycle and pregnancy tracking. Your health data stays on your device.',
     platforms: ['ios'],
@@ -249,7 +424,7 @@ export const apps: AppConfig[] = [
     ],
   },
   {
-    bundleId: 'com.cubeliora.puzzle',
+    bundleId: 'com.masterfabric.cubeliora',
     name: 'Cubeliora',
     tagline: 'A puzzle game. Everything stays on your device.',
     platforms: ['ios'],
@@ -329,7 +504,7 @@ export const apps: AppConfig[] = [
     ],
   },
   {
-    bundleId: 'co.masterfabric.stacktower',
+    bundleId: 'com.masterfabric.stacktower',
     name: 'Stack Tower',
     tagline: 'Stack the blocks, build the tallest tower. Your progress stays on your device.',
     platforms: ['ios'],

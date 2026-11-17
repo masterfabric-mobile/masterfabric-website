@@ -112,7 +112,7 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://masterfabric.co/privacy/co.masterfabric.stacktower/</loc>
+    <loc>https://masterfabric.co/privacy/com.masterfabric.stacktower/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -122,7 +122,7 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://masterfabric.co/privacy/com.cubeliora.puzzle/</loc>
+    <loc>https://masterfabric.co/privacy/com.masterfabric.cubeliora/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -142,7 +142,37 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://masterfabric.co/privacy/co.masterfabric.ayso/</loc>
+    <loc>https://masterfabric.co/privacy/com.masterfabric.ayso/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://masterfabric.co/privacy/com.masterfabric.cannonmerge/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://masterfabric.co/privacy/com.masterfabric.farmmerge/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://masterfabric.co/privacy/com.masterfabric.fitness/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://masterfabric.co/privacy/com.masterfabric.foxie/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://masterfabric.co/privacy/com.masterfabric.holerush/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://masterfabric.co/privacy/com.masterfabric.videostudio/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>

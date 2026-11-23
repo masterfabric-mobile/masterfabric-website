@@ -1,6 +1,6 @@
 {
   "name": "masterfabric-website-nextjs",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "MasterFabric website converted to Next.js",
   "private": true,
   "scripts": {

@@ -1,0 +1,86 @@
+{
+  "slug": "onprem-llm-stack",
+  "title": "MasterFabric · On-Prem LLM Stack",
+  "tagline": "An on-prem LLM platform in one Helm chart on local Kubernetes, with RAG, guardrails and monitoring.",
+  "githubUrl": "https://github.com/masterfabric/masterfabric-onprem-llm-stack",
+  "sha": "bd383f7",
+  "shaDate": "2026-11-23",
+  "summary": "This repo packages an on-prem LLM platform into a single Helm chart running on local Kubernetes (k3d). An open-weight chat model and an embedding model are served behind OpenAI-compatible APIs, a pgvector store holds documentation from other MasterFabric labs, and a RAG API answers questions from that corpus. The API applies layered guardrails at the input, retrieved context and output: pattern rules first, then an LLM risk classifier (Granite Guardian 3.2) for paraphrased attacks the rules miss, with an optional cross-encoder reranker per request. Prometheus and Grafana monitor every component, and quality, guardrails, reranking and load are all measured against the running cluster rather than assumed.",
+  "keyResults": [
+    "Corpus of 23 documents ingested into 207 chunks, with ingest taking 57-58 s (embedding on 1 CPU thread)",
+    "Retrieval hit@4 0.933 on 30 questions with a known source, median 0.6 ms in pgvector (HNSW), 46 ms to embed the question",
+    "Answer accuracy 0.767 (exact fact in the answer), 5/5 unanswerable questions refused, 0 benign questions blocked, p50 3.56 s end to end (sequential)",
+    "Guardrails, rules only (v1.0): 22/26, with 18/18 injection/extraction/jailbreak/delimiter/encoded/exfiltration prompts blocked and 4/4 PII prompts masked, but 0/4 paraphrase evasions caught",
+    "Guardrails + LLM classifier (v1.1): 24/26, with evasions 4/4 blocked, but 2/4 PII questions now blocked too (false positives); 0/35 benign questions blocked; classifier p50 1.17 s on CPU",
+    "Held-out attacks (written before the classifier): rules 0/16 -> rules + classifier 10/16, hard benign questions blocked 1/14, threshold 0.6 fixed on the dev set",
+    "Guard v1.2 on a fresh held-out set (24 attacks, 20 hard benign questions): attacks caught 18/24 -> 22/24, benign blocked 2/20 -> 4/20; kept optional, v1.1 stays the default",
+    "Guard v1.2 (override_narrow at 0.55) on dev: 22/22 attacks caught, 2/39 benign blocked, same as v1.1; on held-out v1 (used to select it): 14/16 caught, 1/14 blocked",
+    "Guard v1.2 control, not used to choose: v1.1's definition at threshold 0.55 gets 21/24 caught and 3/20 blocked on the fresh set, so most of the gain is the lower threshold",
+    "RAG judge (Qwen2.5-7B, RAGAS-style, 30 answerable questions): faithfulness 0.967 (vector) and 0.817 (reranked), 0.917 after reading the negatives by hand; context precision 0.650 -> 0.878 with the reranker; context recall 0.967 -> 1.000",
+    "RAG judge sanity: faithfulness 0.18-0.28 against another question's contexts; recall agrees with string matching on 97-100% of questions; 3 of its 8 negative verdicts were wrong; 360 judge calls took 10 minutes",
+    "Reranker (bge-reranker-v2-m3): hit@1 0.833 -> 0.933, hit@4 0.933 -> 1.000, answer accuracy unchanged at 0.800, +3.8 s p50 on CPU",
+    "LLM load test (k6, in-cluster): 1 user 1.57 req/s at 96 output tok/s; 4 users 4.1 req/s at 160 tok/s; 8 users 174 tok/s at p95 3.05 s",
+    "RAG load test: best 3.97 req/s at 2 users (p95 0.76 s); at 8 users, 1.33 req/s with p95 9.5 s",
+    "Guardrail path alone handles about 5,000 blocked requests/s with p50 3.2 ms at 16 users"
+  ],
+  "limitations": [
+    "No GPU, no vLLM run: the Docker VM on Apple Silicon cannot reach the GPU, so the vLLM path is rendered and linted but not executed; all throughput figures are CPU figures for a 1.5B model",
+    "Small model: Qwen2.5-1.5B answers 77% of questions correctly and cites passages in only 23% of answers, even with retrieval at 93%; a 7B+ model on a GPU is the expected fix but not measured here",
+    "Evaluation size: 35 questions and 26 attacks from one corpus give a direction, not a benchmark; accuracy is string matching of an accepted fact, which can miss a correct paraphrase; the prompt was changed once after the first run (both runs reported)",
+    "Guardrails are rules plus one classifier: rules alone catch 0/4 dev evasions and 0/16 held-out attacks; with the classifier, 4/4 and 10/16, at the cost of 2/4 PII and 1/14 hard benign questions blocked; several catches are within 0.02 of the threshold and the classifier adds about 1.2 s per question on CPU; only the input is classified, answers are not, and the indirect-injection path was not exercised end to end; guard v1.2 catches 22/24 attacks of a fresh set but blocks 4/20 benign questions, and no definition change separated the two better, only shifted the trade-off; adaptive attacks were not tried",
+    "The RAG judge is a model too: 3 of its 8 negative verdicts were wrong, it is from the same family as the generator (possible self-preference, not measured), and 30 questions on one corpus is small",
+    "Guard memory limit raised, not re-tested: 4 GiB follows an OOMKill at 3 GiB; no load test since",
+    "Reranker does not help answers here: better ranking (hit@1 0.83 -> 0.93) gave the same answer accuracy on 30 questions at +3.8 s, measured on CPU with a 1.5B generator only",
+    "Run-to-run variation: the v1.1 quality run with the classifier answered 0.800 versus 0.767 for the v1.0 run with the same prompt, a difference traced to one question (q20) rather than the classifier",
+    "Memory: the guard and rerank servers add about 4.5 GiB of memory limits, so the stack now needs Docker with about 10 GB",
+    "Monitoring is a lab setup: metrics live in an emptyDir for 2 days, there are no alert rules, and Grafana allows anonymous viewers on a port-forward",
+    "Load test caveat: the question pool is small, so the prompt cache flatters low-concurrency RAG numbers; stages run 30 s on one node alongside other containers",
+    "Single node with no HA for pgvector or the model servers (PDB and HPA are defined but scaling is bounded by 6 vCPUs); the ingress is HTTP on loopback without authentication; the pgvector password is generated in-cluster and never stored in git"
+  ],
+  "images": [
+    {
+      "src": "/ai-portfolio/images/onprem-llm-stack/hero.png",
+      "alt": "MasterFabric On-Prem LLM Stack: k3d, llama.cpp or vLLM, pgvector and guardrails, with measured results"
+    },
+    {
+      "src": "/ai-portfolio/images/onprem-llm-stack/images/architecture.png",
+      "alt": "Architecture: ingress to RAG API; API calls llm, embed, guard, rerank and pgvector; Prometheus scrapes all; ingest job; network policy"
+    },
+    {
+      "src": "/ai-portfolio/images/onprem-llm-stack/images/evaluation.png",
+      "alt": "RAG quality metrics for prompt v1 and v2, and guardrail results per category"
+    },
+    {
+      "src": "/ai-portfolio/images/onprem-llm-stack/images/classifier_eval.png",
+      "alt": "Classifier risk score per evaluation item with the 0.6 threshold, and a threshold sweep"
+    },
+    {
+      "src": "/ai-portfolio/images/onprem-llm-stack/images/rerank_ab.png",
+      "alt": "Retrieval and answer metrics with and without the reranker, and median time per stage"
+    },
+    {
+      "src": "/ai-portfolio/images/onprem-llm-stack/images/guard_v2.png",
+      "alt": "Held-out v2 scores under the v1.1 and v1.2 risk definitions, and attacks caught and benign questions blocked per set"
+    },
+    {
+      "src": "/ai-portfolio/images/onprem-llm-stack/images/rag_judge.png",
+      "alt": "Faithfulness, answer relevancy, context precision and recall with and without the reranker, and the judge's scores on mismatched pairs"
+    },
+    {
+      "src": "/ai-portfolio/images/onprem-llm-stack/screenshots/grafana_rag_dashboard.png",
+      "alt": "Grafana dashboard: requests by outcome, guardrail events, stage latency, classifier score histogram, tokens per second and slots per model server"
+    },
+    {
+      "src": "/ai-portfolio/images/onprem-llm-stack/screenshots/prometheus_targets.png",
+      "alt": "Prometheus target health: rag, llm, embed, guard and rerank all up"
+    },
+    {
+      "src": "/ai-portfolio/images/onprem-llm-stack/images/load_test.png",
+      "alt": "Latency and throughput versus concurrency for the LLM and the RAG API"
+    },
+    {
+      "src": "/ai-portfolio/images/onprem-llm-stack/screenshots/rag_api_swagger_ask.png",
+      "alt": "Swagger UI of the RAG API with a live answer and citations"
+    }
+  ]
+}

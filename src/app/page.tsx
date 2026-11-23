@@ -2,6 +2,7 @@ import Container from '@/components/layout/container'
 import ContactSection from '@/components/forms/contact-section'
 import Welcome from '@/components/pages/welcome'
 import ClaudePartnerSection from '@/components/pages/claude-partner-section'
+import AiPortfolioBar from '@/components/pages/ai-portfolio-bar'
 import AiFirstSectionHome from '@/components/pages/ai-first-section-home'
 import References from '@/components/pages/references'
 import SuperchargeExperience from '@/components/pages/supercharge-experience'
@@ -17,6 +18,7 @@ export default function Home() {
     <>
       <Container>
         <ContactSection />
+        <AiPortfolioBar />
         <ClaudePartnerSection />
         <Welcome />
         <AiFirstSectionHome />

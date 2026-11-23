@@ -1,0 +1,142 @@
+{
+  "slug": "realtime-telco",
+  "title": "MasterFabric · Realtime Telco",
+  "tagline": "Streaming network monitoring for a mobile operator, small enough to run on one laptop.",
+  "githubUrl": "https://github.com/masterfabric/masterfabric-realtime-telco",
+  "sha": "456e642",
+  "shaDate": "2026-11-23",
+  "summary": "This repository simulates a radio network of 240 cells sending 10-second KPI reports into Kafka the way real mediation chains deliver them: late, out of order and sometimes duplicated. Spark Structured Streaming turns the stream into Iceberg bronze, silver and gold tables, and a per-cell stateful detector built on EWMA z-scores, hard rules and a Bernoulli CUSUM raises typed alerts for outage, sleeping cell, congestion, interference and slow degradation, each scored against the ground truth that generated the telemetry. A later addition puts Apicurio schema registry and Flink 2.2 alongside the original Spark pipeline to measure Avro schema evolution, compare Flink against Spark on the same job, and test exactly-once delivery claims under kill -9. It is positioned as the streaming companion to the masterfabric-lakehouse-lab batch repository, with decisions recorded as ADRs.",
+  "keyResults": [
+    "Live run: 240 cells over 6 simulated hours at 30x delivered 520,931 events in 12 minutes.",
+    "Detection on the held-out seed: 36/36 incidents found, 45 alerts, 2 false, precision 0.956, recall 1.0, type accuracy 1.0.",
+    "Static thresholds on the same windows: 334 alerts, 253 false, precision 0.243, 35/36 incidents found.",
+    "Latency from last report to alert: p50 9.8 s, p95 9.8 s (Kafka to watermark to silver to Iceberg stream to detector to MERGE and Kafka).",
+    "Data handling: 2,531 duplicates removed, 502 very late rows dropped by the watermark, 0 parse failures.",
+    "Throughput (drain): bronze 125,611 events/s, silver 74,689-94,561 events/s on Spark local[4] with 6 partitions.",
+    "Table maintenance: silver went from 357 files to 6 files, and a per-cell aggregate query improved from 736.9 ms to 43.5 ms.",
+    "Schema registry: BACKWARD rule accepted v2 and rejected incompatible v3 with HTTP 409; Avro records were 103 B versus 367 B for JSON.",
+    "Flink 2.2 vs Spark 3.5 on the same job: drain 3.07 s vs 10.54 s, live p50 2.6 s vs 4.1 s, CPU 12% vs 83%, with identical windows.",
+    "Exactly-once under kill -9: Flink's exactly-once sink had 0 duplicates versus 4,080 for at-least-once; Spark to Iceberg held all 521,044/521,044 offsets with 0 duplicates.",
+    "Watermark sweep (one recorded delivery, 173,701 deliveries of 172,800 reports, 2 simulated hours): reports lost were 2,999 at 10 s, 1,087 at 30 s, 190 at 1 min, 188 at the live 2 min, 178 at 5 min and 0 at 11 min; the window-end-to-emit delay at 2 min was 2.5 min versus 11.5 min at 11 min.",
+    "Late-data tests: seven watermark cases on the real silver code pass; with one watermark per query rather than per cell, a cell whose clock lags 3 minutes has every report after the first batch dropped.",
+    "Backpressure with silver alone capped at 1,000 records/s: latency p50 / max was 8.6 / 10.1 s at 0.5x input, 6.4 / 7.9 s at 1x, 18.4 / 31.6 s at 1.5x and 25.4 / 45.3 s at 1.9x; without the cap the same 1,935 events/s ran at p50 4.6 s, max 5.7 s."
+  ],
+  "limitations": [
+    "Synthetic network: incidents are clean, labelled and single-cell, so the detector's measured precision and recall are an upper bound compared to real networks with correlated failures, maintenance windows and counter resets.",
+    "Alert flapping during long degradations: the 14 degradation incidents produced 23 alert openings because the capped CUSUM can dip under the threshold mid-incident and re-open; hysteresis is planned as the next change.",
+    "Simulated clock: event time runs 30x faster than wall time, so watermark waits and detection delays measured in wall-clock seconds are 30x shorter than they would be in production.",
+    "RocksDB memory grew to 94 MiB over the 12-minute live run while state rows stayed flat, and this was not investigated further.",
+    "Single broker, PLAINTEXT, local checkpoints: Kafka runs with replication factor 1 and no authentication; production would need RF 3, TLS/SASL and checkpoints on HDFS or S3.",
+    "Spark, not Flink, runs the main pipeline; the measured comparison shows Flink faster and much cheaper in CPU on the silver step, but the detector and Iceberg pipeline were not ported to Flink.",
+    "The engine comparison is limited to one laptop and one live run, with both engines sharing 6 vCPUs and nothing tuned (trigger, state backends, Kafka sink settings).",
+    "Late-data tests run on a file source, not Kafka: the sweep's emit delays are simulated time quantised by 30-second batches, and it covers one seed and one delivery profile (3% late, 0.1% very late).",
+    "Backpressure runs are short and single: one run per rate, one simulated hour each, silver query only, with Kafka and Spark sharing 6 vCPUs; the cap was set low on purpose, and consumer lag was not sampled directly.",
+    "Object storage is RustFS rather than MinIO, because MinIO images could not be pulled from the development machine."
+  ],
+  "images": [
+    {
+      "src": "/ai-portfolio/images/realtime-telco/hero.png",
+      "alt": "MasterFabric Realtime Telco: Kafka, Spark Structured Streaming, Iceberg and anomaly detection, with measured results"
+    },
+    {
+      "src": "/ai-portfolio/images/realtime-telco/images/architecture.png",
+      "alt": "Kafka feeds two independent Spark queries (bronze, silver); the detector reads silver back as an Iceberg stream, so the contract between aggregation and detection is a table that any engine can query or replay."
+    },
+    {
+      "src": "/ai-portfolio/images/realtime-telco/images/detector_flow.png",
+      "alt": "One finalised minute for one cell passes through hard rules, adaptive z-scores and a Bernoulli CUSUM; the most severe condition wins, and the baseline learns only from calm windows."
+    },
+    {
+      "src": "/ai-portfolio/images/realtime-telco/images/cusum_sweep.png",
+      "alt": "Development seed only: false alerts against the median degradation delay for each CUSUM threshold; recall is 1.0 at every setting, and h = 14 was chosen."
+    },
+    {
+      "src": "/ai-portfolio/images/realtime-telco/images/detection_traces.png",
+      "alt": "Real silver windows from the live run around one incident of each kind; shaded is ground truth, red dashed is alert opened, green dashed is alert closed, and the flash crowd raised no alert."
+    },
+    {
+      "src": "/ai-portfolio/images/realtime-telco/images/adaptive_vs_static.png",
+      "alt": "The same 85,680 silver windows through the adaptive detector and a static rule set; static rules find almost as many incidents but bury them under 253 false alerts."
+    },
+    {
+      "src": "/ai-portfolio/images/realtime-telco/images/latency_cdf.png",
+      "alt": "Wall-clock latency from the Kafka timestamp of a window's last report to the silver commit (85,680 windows) and to the alert (45 alerts)."
+    },
+    {
+      "src": "/ai-portfolio/images/realtime-telco/images/bench_throughput.png",
+      "alt": "Draining a pre-filled topic of 1,042,065 events with availableNow triggers; each configuration reads the whole topic, so bronze plus silver processes every event twice."
+    },
+    {
+      "src": "/ai-portfolio/images/realtime-telco/images/stream_batches.png",
+      "alt": "Live run micro-batches: batch durations stay under the 2-second trigger so no backlog builds, while silver state rows stay flat but RocksDB memory kept growing."
+    },
+    {
+      "src": "/ai-portfolio/images/realtime-telco/screenshots/spark_streaming_queries.png",
+      "alt": "Spark UI during the live run: the three queries running side by side, about 724 input rows/s each for bronze and silver and 120 windows/s for the detector."
+    },
+    {
+      "src": "/ai-portfolio/images/realtime-telco/screenshots/spark_streaming_silver.png",
+      "alt": "Silver query statistics: steady input rate, batch durations around 1 s, flat state rows, and a few rows per batch dropped by the watermark."
+    },
+    {
+      "src": "/ai-portfolio/images/realtime-telco/screenshots/kafka_ui_messages.png",
+      "alt": "kafbat UI on cell.kpi: JSON payloads keyed by cell ID across six partitions."
+    },
+    {
+      "src": "/ai-portfolio/images/realtime-telco/screenshots/kafka_ui_topic_overview.png",
+      "alt": "Partition sizes at the same moment ranged from 8,334 to 11,518 messages: keying by cell keeps per-cell order but follows the hash of the keys."
+    },
+    {
+      "src": "/ai-portfolio/images/realtime-telco/screenshots/s3_console_silver_partitions.png",
+      "alt": "The silver table in object storage: Iceberg hidden partitioning by hours(window_start), one folder per simulated hour."
+    },
+    {
+      "src": "/ai-portfolio/images/realtime-telco/images/engines_flow.png",
+      "alt": "Avro producer, Apicurio registry, one Kafka topic read by Spark and by Flink, outputs compared window by window."
+    },
+    {
+      "src": "/ai-portfolio/images/realtime-telco/screenshots/registry_versions.png",
+      "alt": "Apicurio UI with two versions of cell.kpi.avro-value."
+    },
+    {
+      "src": "/ai-portfolio/images/realtime-telco/screenshots/registry_rules_backward.png",
+      "alt": "Apicurio UI with the Backward compatibility rule."
+    },
+    {
+      "src": "/ai-portfolio/images/realtime-telco/screenshots/kafka_ui_avro_messages.png",
+      "alt": "kafbat UI decodes cell.kpi.avro through the registry: v2 records with energy_kwh, keyed by cell."
+    },
+    {
+      "src": "/ai-portfolio/images/realtime-telco/images/engine_comparison.png",
+      "alt": "Drain throughput, live latency percentiles and CPU for Spark and Flink; the dashed line is the watermark floor."
+    },
+    {
+      "src": "/ai-portfolio/images/realtime-telco/screenshots/flink_job_graph.png",
+      "alt": "Flink UI: the planner turned the SQL into source, window dedupe, local and global window aggregate, Kafka writer and committer, parallelism 6."
+    },
+    {
+      "src": "/ai-portfolio/images/realtime-telco/images/exactly_once.png",
+      "alt": "Duplicate output rows after the kills; exactly-once into Kafka holds only for read_committed readers, while a default reader sees the aborted copies."
+    },
+    {
+      "src": "/ai-portfolio/images/realtime-telco/screenshots/flink_exceptions_after_kill.png",
+      "alt": "Flink exceptions tab: TaskManager no longer reachable."
+    },
+    {
+      "src": "/ai-portfolio/images/realtime-telco/screenshots/flink_checkpoints.png",
+      "alt": "Flink checkpoint history with one failed checkpoint during the kill, while following checkpoints complete again."
+    },
+    {
+      "src": "/ai-portfolio/images/realtime-telco/images/watermark_tradeoff.png",
+      "alt": "Arrival lag histogram, reports lost and emit delay per watermark delay."
+    },
+    {
+      "src": "/ai-portfolio/images/realtime-telco/images/backpressure.png",
+      "alt": "Silver latency over time and latency percentiles per input rate."
+    },
+    {
+      "src": "/ai-portfolio/images/realtime-telco/images/cloudera_mapping.png",
+      "alt": "Mapping of each lab component to its counterpart in a Cloudera CDP streaming estate."
+    }
+  ]
+}

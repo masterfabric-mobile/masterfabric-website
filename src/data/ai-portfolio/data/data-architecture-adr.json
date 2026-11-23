@@ -1,0 +1,66 @@
+{
+  "slug": "data-architecture-adr",
+  "title": "MasterFabric Data Architecture",
+  "tagline": "Ties eight MasterFabric labs into one platform with thirteen verified ADRs, C4 diagrams, and a cost model.",
+  "githubUrl": "https://github.com/masterfabric/masterfabric-data-architecture-adr",
+  "sha": "6b02e27",
+  "shaDate": "2026-11-23",
+  "summary": "This repository is a reference data and AI platform for a mobile operator that ties together eight separate MasterFabric lab repositories covering a lakehouse, streaming, MLOps, on-prem LLMs, LLM serving, data security, generative AI foundations and batch compute. It documents thirteen architecture decision records (ADRs), C4 and Mermaid diagrams of the whole platform, a cost model built on measured throughput, and a mapping to the Cloudera Data Platform. A checker tool verifies every cited number against the source READMEs of the eight labs at pinned commits, so every decision and every figure traces back to a specific lab that measured it.",
+  "keyResults": [
+    "104/104 cited claims verified against the source READMEs of the eight labs at pinned commits (make check, and make check-local offline).",
+    "Thirteen ADRs (0001-0013), each tied to measured evidence from one of eight labs.",
+    "ADR 0013 (data-subject request deadlines): 540/540 requests on time over 200,000 customers; GDPR month lands 28-31 days out; not legal advice.",
+    "ADR 0001 (Iceberg lakehouse, WAP publish): 8x the data for 2.1x the time; one-day query 67.8 to 28.9 ms after compaction; rollback in 0.057 s.",
+    "ADR 0005 (serving hardware and quantisation): CPU Q8_0 328 vs Q4_K_M 184 tok/s; GPU 381 vs 358 tok/s; TTFT 1.91 s vs 13.83 s.",
+    "ADR 0008 (two compute paths): 200M-row SQL job in 4.325 s (Polars), 4.777 s (DuckDB) vs 15.975 s (PySpark), DataFusion 5.532 s with its allocator capped; 240 of 240 results identical.",
+    "ADR 0009 cost model: on-prem beats on-demand cloud above 17% utilisation; Q8 LLM $0.207 vs $0.120 per 1M tokens at 30% utilisation.",
+    "ADR 0010 (streaming engine): Flink 3.07 s vs Spark 10.54 s, CPU 12% vs 83%; exactly-once delivery with 0 vs 4,080 duplicates.",
+    "ADR 0011 (canary release): v6 rolled back at 5%, v5 promoted (delta AUC -0.0007); 0 of 194,913 rows differ in point-in-time joins.",
+    "ADR 0007 (understand the models): DPO reward 0.749 to 0.783 with best-of-4 sampling at 0.918 (corrected on 2026-11-23); iterative DPO 0.763 to 0.792 to 0.822 on unseen prompts; classifier-free guidance puts the requested class from 23% to 100%.",
+    "ADR 0012 (held-out guard evaluation): on-prem guard stopped 0/16 to 10/16 attacks; governed stack reduced successful attacks from 7/12 to 1/12.",
+    "Second round (2026-11-23): one-day query 156.5 ms unmaintained vs 28.1 ms maintained after 60 batches; guard v1.2 caught 18/24 to 22/24 held-out attacks with benign blocked 2/20 to 4/20; clarify-instead-of-block cut legitimate questions blocked from 3/12 to 0/12 with attacks unchanged at 3/12; DataFusion at 200M rows finishes at 2,776 MiB with its allocator capped.",
+    "make test runs 10 tests covering the claim file, the checker's failure path, and the cost-model arithmetic."
+  ],
+  "limitations": [
+    "The labs are separate: each one runs on its own, and the arrows between them show the target architecture, not a deployed integration (for example, airflow-mlops generates its own snapshots rather than reading the lakehouse-lab tables).",
+    "Laptop scale: every number comes from one Apple M4 Pro, mostly inside a 6 vCPU Colima VM, with synthetic data; they show behaviour and trade-offs, not production capacity.",
+    "The checker proves sourcing, not correctness: it shows each number is what the lab reports at the pinned commit, while the labs' own tests and limitations cover whether the measurement is right.",
+    "The cost model is a model: throughput is measured, but cloud prices are list prices for one instance type and region on one date, and the on-prem figures are assumptions that leave out staff, network, licences and spare capacity; as of 2026-11-23 no real quote has been obtained and the second round changed no cost input.",
+    "C4 views show the target: containers drawn as connected (for example Flink writing to the lakehouse that the RAG API reads) actually run in separate labs today.",
+    "Not measured here: GPU serving with vLLM, multi-node Spark or Flink, and the Cloudera services in the mapping table; Flink was measured on one job on one machine."
+  ],
+  "images": [
+    {
+      "src": "/ai-portfolio/images/data-architecture-adr/hero.png",
+      "alt": "MasterFabric Data Architecture: eight labs, thirteen ADRs, 104 verified numbers"
+    },
+    {
+      "src": "/ai-portfolio/images/data-architecture-adr/images/platform.png",
+      "alt": "Layered platform diagram naming the lab behind each layer"
+    },
+    {
+      "src": "/ai-portfolio/images/data-architecture-adr/images/c4_context.png",
+      "alt": "C4 context: NOC engineer, analyst, care agent and DPO use the platform; radio network, mediation, packet core, CRM and a model hub feed it"
+    },
+    {
+      "src": "/ai-portfolio/images/data-architecture-adr/images/c4_container.png",
+      "alt": "C4 containers: Kafka and schema registry, stream processing, Iceberg lakehouse, batch compute, Trino, ML lifecycle, LLM platform, observability and governance services"
+    },
+    {
+      "src": "/ai-portfolio/images/data-architecture-adr/images/c4_component.png",
+      "alt": "C4 components of the governed RAG API: input rules, risk classifier, retriever, entitlement filter, reranker, generator, output guard, audit log"
+    },
+    {
+      "src": "/ai-portfolio/images/data-architecture-adr/images/evidence.png",
+      "alt": "Thirteen panels, each the same metric without and with a decision"
+    },
+    {
+      "src": "/ai-portfolio/images/data-architecture-adr/images/round2.png",
+      "alt": "Eight panels: Iceberg maintenance, watermark delay, drift-triggered retrain, guard v1.2, clarify instead of block, Air vs M4 Pro, DataFusion allocator cap, on-policy DPO round; each the same metric before and after"
+    },
+    {
+      "src": "/ai-portfolio/images/data-architecture-adr/images/cost.png",
+      "alt": "Left: LLM cost per million tokens against utilisation for on-demand, reserved and on-prem capacity, with break-even lines at 17, 45 and 66 percent. Right: SQL cost per 1,000 runs for Polars, DuckDB and PySpark under the four options"
+    }
+  ]
+}

@@ -1,282 +1,137 @@
-# 🚀 MasterFabric Website
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/masterfabric-logo-dark.svg">
+    <img src="public/brand/masterfabric-logo.svg" width="128" alt="MasterFabric">
+  </picture>
 
-![Version](https://img.shields.io/badge/version-1.5.0-blue.svg)
-![Next.js](https://img.shields.io/badge/Next.js-Latest-000000?logo=next.js&logoColor=white)
-![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-3.4.3-38B2AC?logo=tailwind-css&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-Latest-3178C6?logo=typescript&logoColor=white)
-![Node.js](https://img.shields.io/badge/Node.js-18+-339933?logo=node.js&logoColor=white)
-![PNPM](https://img.shields.io/badge/PNPM-Latest-F69220?logo=pnpm&logoColor=white)
-![Vercel](https://img.shields.io/badge/Vercel-Deploy-000000?logo=vercel&logoColor=white)
-![Firebase](https://img.shields.io/badge/Firebase-Hosting-FFCA28?logo=firebase&logoColor=black)
-![License](https://img.shields.io/badge/License-AGPL--3.0-blue.svg)
+  <h1>MasterFabric Inc.</h1>
 
-[![Live Site](https://img.shields.io/badge/🌐%20Live-masterfabric.co-blue?style=for-the-badge)](https://masterfabric.co)
-[![Repository](https://img.shields.io/badge/📁%20Repo-GitHub-black?style=for-the-badge&logo=github)](https://github.com/masterfabric/masterfabric-website)
+  <p><strong>Custom Software &amp; AI Development Studio</strong></p>
 
----
+  <p>
+    <a href="https://img.shields.io/github/package-json/v/masterfabric-mobile/masterfabric-website"><img src="https://img.shields.io/github/package-json/v/masterfabric-mobile/masterfabric-website?color=1E293B&label=version" alt="Version"></a>
+    <a href="https://nextjs.org/"><img src="https://img.shields.io/badge/Next.js-14.2-black?logo=nextdotjs&logoColor=white" alt="Next.js 14.2"></a>
+    <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-5.3-3178C6?logo=typescript&logoColor=white" alt="TypeScript"></a>
+    <a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/Tailwind_CSS-3.3-38B2AC?logo=tailwindcss&logoColor=white" alt="Tailwind CSS"></a>
+    <a href="https://www.masterfabric.co"><img src="https://img.shields.io/badge/Vercel-deploy-black?logo=vercel&logoColor=white" alt="Vercel"></a>
+    <a href="LICENSE"><img src="https://img.shields.io/badge/License-AGPL--3.0-blue.svg" alt="License AGPL-3.0"></a>
+  </p>
 
-## 📑 Table of Contents
-- [🎯 Project Overview](#-project-overview)
-- [⚡ Quick Start](#-quick-start)
-- [🛠️ Tech Stack](#️-tech-stack)
-- [📁 Project Structure](#-project-structure)
-- [🎨 Components Architecture](#-components-architecture)
-- [📜 Available Scripts](#-available-scripts)
-- [🔧 Configuration](#-configuration)
-- [🎨 Styling System](#-styling-system)
-- [📱 Features](#-features)
-- [🚀 Deployment](#-deployment)
-- [🧪 Testing](#-testing)
-- [📊 Performance](#-performance)
-- [🔗 Integration](#-integration)
-- [🤝 Contributing](#-contributing)
-- [📚 Resources](#-resources)
-- [📄 License](#-license)
+  <p>
+    <a href="https://www.masterfabric.co">Website</a>
+    &nbsp;·&nbsp;
+    <a href="https://www.masterfabric.co/changelog">Changelog</a>
+    &nbsp;·&nbsp;
+    <a href="https://www.masterfabric.co/ai-portfolio">AI Portfolio</a>
+    &nbsp;·&nbsp;
+    <a href="https://www.masterfabric.co/privacy">Privacy</a>
+  </p>
 
----
+  <br>
 
-## 🎯 Project Overview
+  <img src="docs/assets/hero.webp" alt="The masterfabric.co homepage" width="900">
+</div>
 
-**MasterFabric Website** is a modern, responsive web application built with Next.js to showcase mobile app development services. It features:
-- Interactive UI/UX (code editor simulation, project timeline)
-- Mobile-first, fully responsive design
-- Performance-optimized with Next.js SSR/SSG/ISR
-- Conversion-focused forms and CTAs
-- JSON-driven content management
-- GDPR-ready cookie management
+## About
 
----
+This repository is the public website of [MasterFabric Information Technology Inc.](https://www.masterfabric.co), an Ankara studio that builds custom software and AI transformation systems for institutions and private clients — including iOS, Android, and HarmonyOS apps designed around the brief you send us.
 
-## ⚡ Quick Start
+The site is a **Next.js 14** App Router app with a **static export**. Merges to `dev` are production: Vercel auto-deploys them to [www.masterfabric.co](https://www.masterfabric.co).
 
-### 🚀 Automated Setup
+## AI Portfolio
+
+<div align="center">
+  <img src="docs/assets/ai-portfolio.webp" alt="The AI Portfolio page on masterfabric.co" width="820">
+</div>
+
+[`/ai-portfolio`](https://www.masterfabric.co/ai-portfolio) presents nine public MasterFabric repositories as a measured, on-prem and local-first data and AI architecture portfolio, with simulations built from the measured results and one page per repository at `/ai-portfolio/<slug>/`. The homepage links to it from a bar above the Claude Partner Network section.
+
+## Tech stack
+
+- **[Next.js](https://nextjs.org/) 14.2** — App Router, static export (`output: 'export'`)
+- **[React](https://react.dev/) 18** and **[TypeScript](https://www.typescriptlang.org/) 5**
+- **[Tailwind CSS](https://tailwindcss.com/) 3** with `@tailwindcss/typography`
+- **[Vercel](https://vercel.com/)** — hosting and [Web Analytics](https://vercel.com/docs/analytics)
+- **[Iconify](https://iconify.design/)** and **[Lucide](https://lucide.dev/)** for icons
+- Markdown posts under `src/content/blog/`
+
+## Project structure
+
+```
+src/
+├── app/                 # App Router pages (static routes)
+│   ├── about/
+│   ├── ai-portfolio/    # /ai-portfolio and /ai-portfolio/<slug>/
+│   ├── blog/
+│   ├── changelog/       # Renders CHANGELOG.md at build time
+│   ├── contact/
+│   ├── jobs/
+│   ├── privacy/         # /privacy and /privacy/<bundleId>/
+│   ├── privacy-policy/
+│   ├── services/
+│   ├── terms-of-use/
+│   └── yapay-zeka-donusumu/
+├── components/          # Layout, forms, pages, SEO, UI
+│   └── ai-portfolio/    # AI Portfolio hero, cards, gallery, simulations
+├── content/blog/        # Markdown blog posts
+├── data/                # Apps, policies, navigation, page copy
+│   └── ai-portfolio/    # One JSON file per portfolio repository
+├── lib/                 # SEO, version, privacy-policy helpers
+├── styles/
+└── utils/
+```
+
+## Getting started
+
 ```bash
-# Clone the repository
 git clone https://github.com/masterfabric-mobile/masterfabric-website.git
 cd masterfabric-website
-chmod +x run.sh
-./run.sh setup
+npm ci
+npm run dev
 ```
 
-### 🔧 Manual Setup
+The dev server is at [http://localhost:3000](http://localhost:3000).
+
 ```bash
-node --version  # Should be 18+
-npm install     # or pnpm/yarn
-npm run dev     # or pnpm run dev / yarn dev
+npm run build      # static export to out/
+npm run preview    # serve out/ on port 3000
+npm run lint
 ```
 
-**🌍 Your site will be available at:** `http://localhost:3000`
+## Releasing
 
----
+`dev` is the production branch. A merge to `dev` is auto-deployed to [www.masterfabric.co](https://www.masterfabric.co). The footer and `/changelog` read the version from `package.json` at build time.
 
-## 🛠️ Tech Stack
+1. Bump `version` in `package.json` and the root version fields in `package-lock.json`.
+2. Add a new section at the top of `CHANGELOG.md` (Keep a Changelog).
+3. Open a pull request into `dev` and merge it.
+4. Tag the merge commit `vX.Y.Z` and publish a GitHub Release from the new changelog section.
 
-| Category         | Technology / Tool                                      | Key Features / Notes                                                                 |
-|------------------|--------------------------------------------------------|--------------------------------------------------------------------------------------|
-| **Framework**    | [Next.js](https://nextjs.org/)                         | App Router, SSR/SSG/ISR, API Routes, Image Optimization, SEO, Fast Refresh           |
-| **Styling**      | [Tailwind CSS](https://tailwindcss.com/)               | Utility-first CSS, responsive design, dark mode, typography plugin                   |
-| **Type System**  | [TypeScript](https://www.typescriptlang.org/)          | Static typing, safer code, better DX                                                 |
-| **Content**      | [MDX](https://mdxjs.com/)                              | Markdown + JSX, rich content in blog/docs                                            |
-| **Icons**        | [Iconify](https://iconify.design/)                     | 100,000+ icons, SVG, easy integration                                               |
-| **Fonts**        | [Fontsource](https://fontsource.org/)                  | Bricolage Grotesque, Inter Variable, self-hosted, performance                        |
-| **Image Tools**  | [Sharp](https://sharp.pixelplumbing.com/)              | Image optimization, resizing, fast builds                                            |
-| **Testing**      | [Jest](https://jestjs.io/)                             | Unit/integration testing, fast feedback                                              |
-| **Package Mgmt** | [PNPM](https://pnpm.io/) / npm / yarn                  | Fast, disk-efficient, monorepo support                                               |
-| **Deployment**   | [Vercel](https://vercel.com/)                          | Zero-config, edge functions, preview/production deploys                              |
-| **Hosting**      | [Firebase Hosting](https://firebase.google.com/)       | Static export, global CDN, SSL, fast delivery                                        |
-| **SEO**          | [next-seo](https://github.com/garmeeh/next-seo)        | SEO meta tags, Open Graph, Twitter cards                                             |
-| **Sitemap**      | [next-sitemap](https://github.com/iamvishnusankar/next-sitemap) | Automatic sitemap generation, robots.txt support                                     |
-| **Analytics**    | Google Analytics, Vercel Analytics                     | Traffic, performance, and engagement monitoring                                      |
-| **CI/CD**        | GitHub Actions                                         | Automated builds, tests, and deployments                                             |
+## Adding an app privacy policy
 
----
+Each published app gets a page at `/privacy/<bundleId>/`.
 
-## 📁 Project Structure
+1. Append an entry to [`src/data/apps.ts`](src/data/apps.ts). Use the real bundle ID; it becomes the URL. Fill the factual fields honestly — they drive the generated policy text. Keep `draft: true` until legal has reviewed it, then set `draft: false`.
+2. Add the reviewed full policy text to [`src/data/app-policies.ts`](src/data/app-policies.ts), keyed by the same bundle ID. When a full text exists, the page renders that instead of the generated template.
+3. Add `/privacy/<bundleId>/` to [`public/sitemap.xml`](public/sitemap.xml).
 
-```
-masterfabric-website/
-├── package.json             # Project dependencies and scripts
-├── next.config.js           # Next.js configuration
-├── tailwind.config.js       # Tailwind CSS configuration
-├── tsconfig.json            # TypeScript configuration
-├── run.sh                   # Development & deployment script
-├── README.md                # Project documentation
-├── public/                  # Static assets (favicon, images, robots.txt, etc.)
-│
-└── src/
-    ├── app/                 # Next.js App Router (routing, layouts, pages)
-    │   ├── layout.tsx
-    │   ├── page.tsx
-    │   ├── globals.css
-    │   ├── about/
-    │   ├── blog/
-    │   ├── contact/
-    │   ├── jobs/
-    │   ├── privacy-policy/
-    │   └── terms-of-use/
-    │
-    ├── assets/              # Images, SVGs, and other media
-    │
-    ├── components/          # Reusable UI and feature components
-    │   ├── about/
-    │   ├── cookie/
-    │   ├── forms/
-    │   ├── jobs/
-    │   ├── layout/
-    │   ├── navbar/
-    │   ├── pages/
-    │   ├── timeline/
-    │   ├── ui/
-    │   └── wrapper/
-    │
-    ├── data/                # JSON data files (about, contact, jobs, navigation, etc.)
-    │
-    ├── styles/              # Global and modular CSS files
-    │
-    └── utils/               # Utility functions (cookies, performance, etc.)
-```
+## Updating the AI Portfolio
 
----
+Each repository on `/ai-portfolio` is one JSON file in [`src/data/ai-portfolio/data/`](src/data/ai-portfolio/data/) (slug, title, tagline, GitHub URL, snapshot SHA and date, summary, key results, limitations, images).
 
-## 🎨 Components Architecture
+1. Edit the repository's JSON file, or add a new one and register it in [`src/data/ai-portfolio/repos.ts`](src/data/ai-portfolio/repos.ts) in the order it should appear.
+2. Put its images under `public/ai-portfolio/images/<slug>/` (`hero.png` is the card and page cover) and reference them as `/ai-portfolio/images/<slug>/...` in the JSON.
+3. Only use figures measured in the source repository, and update the snapshot SHA and date with them. The simulations in [`src/components/ai-portfolio/sims/data.ts`](src/components/ai-portfolio/sims/data.ts) quote sentences from the `keyResults` in these files, and the build fails if a quoted sentence no longer matches, so update both together.
 
-- **Layout Components:** Container, Footer, SectionHead, etc.
-- **Navigation System:** Responsive navbar, dropdowns, keyboard navigation
-- **Interactive Components:** Timeline, code editor simulation, splash screen, etc.
-- **Form Components:** Contact forms, validation, benefits
-- **About Page Components:** Animated text, globe, timeline, statistics
-- **UI Components:** Button, Link, Icon, LazyImage
-- **Privacy & Compliance:** CookieBanner, CookieSettingsDialog
+## Contributing
 
----
+Please open pull requests against `dev`. Keep changes focused, and do not invent metrics or policy text.
 
-## 📜 Available Scripts
+- Website: [www.masterfabric.co](https://www.masterfabric.co)
+- Changelog: [www.masterfabric.co/changelog](https://www.masterfabric.co/changelog)
+- Issues and PRs: [github.com/masterfabric-mobile/masterfabric-website](https://github.com/masterfabric-mobile/masterfabric-website)
+- Organization: [github.com/masterfabric-mobile](https://github.com/masterfabric-mobile)
 
-| Command                  | Description                        |
-|--------------------------|------------------------------------|
-| `./run.sh setup`         | Complete project setup              |
-| `./run.sh dev`           | Start development server            |
-| `./run.sh build`         | Production build                    |
-| `./run.sh preview`       | Preview production build            |
-| `./run.sh deploy-vercel` | Deploy to Vercel (preview)          |
-| `./run.sh deploy-vercel --prod` | Deploy to Vercel (production) |
-| `./run.sh deploy-firebase`| Deploy to Firebase                 |
-| `./run.sh deploy-all`    | Deploy to all platforms             |
-| `./run.sh test`          | Setup test environment              |
-| `./run.sh help`          | Show all available commands         |
+## License
 
----
-
-## 🔧 Configuration
-
-- **Site config:** `src/config/site-data.json`
-- **Navigation:** `src/data/navigation.json`
-- **Content:** `src/data/about.json`, `src/data/contact.json`, `src/data/project-flow.json`
-- **TypeScript paths:** `tsconfig.json`
-- **Tailwind config:** `tailwind.config.js`
-
----
-
-## 🎨 Styling System
-
-- **Tailwind CSS** for utility-first styling
-- **Design tokens** for color, typography, spacing
-- **Responsive breakpoints** for mobile-first design
-- **Animation utilities** for transitions and effects
-
----
-
-## 📱 Features
-
-- ⚡ Performance & SEO: Optimized for Core Web Vitals, SEO meta tags, sitemap
-- 📱 Responsive Design: Mobile-first, adaptive layouts
-- ♿ Accessibility: Keyboard navigation, screen reader support, color contrast
-- 🔒 Privacy & Compliance: GDPR cookie consent, privacy policy, terms of service
-- 🎨 Interactive Features: Code editor simulation, project timeline, contact forms
-- 🛠️ Technical Features: TypeScript, reusable components, asset optimization
-- 🔧 Dev Experience: HMR, import aliases, error boundaries
-
----
-
-## 🚀 Deployment
-
-- **Build:** `./run.sh build` or `npm run build`
-- **Vercel Deploy:** `./run.sh deploy-vercel` or `./run.sh deploy-vercel --prod`
-- **Firebase Deploy:** `./run.sh deploy-firebase`
-- **Static Export:** Next.js `out/` directory for static hosting
-
----
-
-## 🧪 Testing
-
-- **Manual QA:** Cross-device, cross-browser, accessibility, performance, security
-- **Automated Testing:** (Planned) Unit, integration, E2E, accessibility
-- **Test setup:** `./run.sh test`
-
----
-
-## 📊 Performance
-
-- **Lighthouse Score:** 95+
-- **Accessibility:** 100
-- **SEO:** 100
-- **PWA:** 85+
-- **Bundle Analysis:** See build output
-- **Optimization:** Tree shaking, code splitting, critical CSS, CDN delivery
-
----
-
-## 🔗 Integration
-
-- **Web3Forms** - Contact form handling
-- **Google Analytics** - Website analytics
-- **Vercel Analytics** - Performance monitoring
-- **Firebase** - Hosting and potential future features
-
----
-
-## 🤝 Contributing
-
-### File Naming Conventions
-- **Components:** `PascalCase.tsx` (e.g., `ContactForm.tsx`)
-- **Utilities:** `camelCase.ts` (e.g., `formatDate.ts`)
-- **Data Files:** `kebab-case.json` (e.g., `project-flow.json`)
-- **CSS Files:** `kebab-case.css` (e.g., `navbar-styles.css`)
-
-### Contribution Process
-1. Fork and clone the repository
-2. Install dependencies: `./run.sh setup`
-3. Create a feature branch: `git checkout -b feature/your-feature-name`
-4. Start development: `./run.sh dev`
-5. Open a pull request with a clear description
-
----
-
-## 📚 Resources
-- **[Tailwind CSS](https://tailwindcss.com/docs)** - Styling system
-- **[TypeScript Handbook](https://www.typescriptlang.org/docs/)** - Type system
-- **[Component Guidelines](./src/components/README.md)** - Internal component docs
-
----
-
-## 📄 License
-
-**© 2025 MasterFabric Information Technology Inc. All rights reserved.**
-
-This project is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**.
-
-### 🔒 Privacy & Compliance
-- **🍪 [Privacy Policy](https://masterfabric.co/privacy-policy)** - How we handle user data
-- **⚖️ [Terms of Use](https://masterfabric.co/terms-of-use)** - Website usage terms
-- **🛡️ GDPR Compliance** - EU privacy regulation compliance
-- **🔐 Data Security** - Industry-standard security practices
-
-### 🏗️ Third-Party Licenses
-This project uses open-source software under various licenses:
-- **Tailwind CSS** - MIT License  
-- **TypeScript** - Apache License 2.0
-- **Various Icon Sets** - See individual icon pack licenses
-
----
-
-**🚀 Ready to get started? Run `./run.sh setup` and begin building amazing experiences!**
+This repository is licensed under the [GNU Affero General Public License v3.0](LICENSE).

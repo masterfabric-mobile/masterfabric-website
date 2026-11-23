@@ -1,0 +1,82 @@
+{
+  "slug": "genai-foundations",
+  "title": "MasterFabric · GenAI Foundations",
+  "tagline": "From-scratch PyTorch implementations of transformer, LoRA, GAN, WGAN-GP, diffusion, classifier-free guidance and DPO with measured results.",
+  "githubUrl": "https://github.com/masterfabric/masterfabric-genai-foundations",
+  "sha": "9e3b863",
+  "shaDate": "2026-11-23",
+  "summary": "This repository implements the building blocks of generative AI from their equations in PyTorch, trained on a laptop GPU (Apple M4 Pro, MPS): an attention mechanism and GPT-style transformer, LoRA adapters compared against full fine-tuning, a GAN and its Wasserstein variant with gradient penalty on a mode-collapse-countable target, policy-gradient reinforcement learning on a from-scratch CartPole, a small DDPM/DDIM diffusion model, direct preference optimisation of the GPT (with a second, on-policy round), and classifier-free guidance on the shapes U-Net. Each component ships with tests, an executed notebook, and results saved in the results directory, and the authors state that all numbers are measured, including runs that overfit or collapsed. The training text for the language model is drawn from MasterFabric's own portfolio documentation, and architecture decisions are recorded as ADRs.",
+  "keyResults": [
+    "Attention implementation matches torch.nn.functional.scaled_dot_product_attention within 1.5e-7.",
+    "The 0.82M-parameter character-level GPT reaches a validation loss of 1.516 nats/char (uniform guess 4.72), in 48 s on MPS at 257,929 tokens/s.",
+    "LoRA r=8 (9% of weights) reaches new-corpus loss 1.758 vs 1.725 for full fine-tuning, and forgets less on the original corpus (1.642 vs 1.747).",
+    "The non-saturating GAN covers 4-6 of 8 modes with 75-78% of samples on a mode across 3 seeds.",
+    "REINFORCE on CartPole solves (mean return >= 195) after 352-560 episodes across all 6 runs.",
+    "WGAN-GP at 20,000 generator steps covers 8 of 8 modes in all 3 seeds (74-77% on a mode), versus the GAN at 20k still covering only 4-6 of 8.",
+    "DDPM diffusion on the same ring covers 8 of 8 modes at 95% on a mode (3 seeds); DDIM at 20 steps also reaches 8 of 8 at 89%.",
+    "Diffusion on 16x16 shapes (582k-parameter U-Net) gives balanced classes and a judge-feature Frechet distance of 0.75 (versus 0.80 for real vs real).",
+    "DPO on the GPT at beta=1.0 raises the reward (share of real words) from 0.749 to 0.783 +/- 0.006 at KL 1.2 nats, versus 0.773 for filtered SFT; best-of-4 sampling from the pretrained model reaches 0.918, higher than every trained method, at 4x inference cost.",
+    "Iterative DPO with beta chosen on separate selection prompts: reward on unseen test prompts goes from 0.763 (pretrained reference) to 0.792 after round 1 and 0.822 after round 2 on on-policy pairs, at the cost of original-text validation loss rising 1.516 to 1.552 to 1.600.",
+    "Classifier-free guidance on 16x16 shapes: the requested class is drawn 23% of the time at w = 0, 100% at w = 1 and 100% at w = 8, while the judge-feature Frechet distance goes 1.93 to 0.57 to 41.3, so guidance above w = 1 costs fidelity and buys no class match.",
+    "The first DPO table was measured with a bug (evaluate() left dropout on in the reference), which inflated KL (11.1 nats reported vs 1.2 measured) and put best-of-4 at 0.763 instead of 0.918; the table was corrected on 2026-11-23 and the regression is covered by a test."
+  ],
+  "limitations": [
+    "Toy scale on purpose: 0.8M parameters, a 104k-character corpus, a 2-D GAN and CartPole; the mechanics match real systems but the numbers do not transfer to real model sizes.",
+    "Small data causes overfitting: the GPT has a train/validation gap of 0.5 nats, and every fine-tuning method overfits the 14k-character corpus within 50-300 steps, so results use the best validation checkpoint.",
+    "LoRA's speed and memory benefits are not shown here; they appear at billion-parameter scale, and in this repo LoRA was slower in wall time.",
+    "Few seeds: GAN and RL use 3 seeds per setting while GPT and LoRA use one seed, so differences smaller than the seed-to-seed spread should not be read as real.",
+    "Simplified transformer: learned absolute positions, standard multi-head attention and GELU, with no RoPE, GQA, SwiGLU or KV cache in generation.",
+    "Diffusion is at toy scale (2-D points and 16x16 binary-like shapes); the image judge is so accurate that DDPM samples are indistinguishable from real ones by its Frechet distance (0.75 vs 0.80), so it ranks samplers rather than DDPM against real data, and there is no latent diffusion or text conditioning.",
+    "The first DPO results were wrong in KL and best-of-4 (dropout left on; corrected 2026-11-23); other experiments use evaluate() only on models in training mode, which the fix does not change, so they were not re-run.",
+    "Guidance is tested on easy classes: the judge is saturated at w = 1, so the class-match benefit of guidance cannot show, and pixel standard deviation is a coarse stand-in for diversity; one model, one seed.",
+    "DPO's reward ('share of real words') is a measurable proxy, not a human preference; only one run per grid point was done, and MPS is not bit-deterministic (a re-run moved one point by 0.01).",
+    "WGAN-GP gets more compute (5 critic steps per generator step); at the GAN's own budget it performs worse.",
+    "Timings come from a shared laptop running other work and were not repeated; some CPU runs (WGAN-GP, the 20k GAN control, the diffusion ring) overlapped in time, so their wall times are upper bounds."
+  ],
+  "images": [
+    {
+      "src": "/ai-portfolio/images/genai-foundations/hero.png",
+      "alt": "MasterFabric GenAI Foundations: transformer, LoRA, GAN, WGAN-GP, diffusion, DPO and RL from scratch with measured results"
+    },
+    {
+      "src": "/ai-portfolio/images/genai-foundations/images/overview.png",
+      "alt": "The four from-scratch building blocks"
+    },
+    {
+      "src": "/ai-portfolio/images/genai-foundations/images/gpt_loss.png",
+      "alt": "GPT training and validation loss"
+    },
+    {
+      "src": "/ai-portfolio/images/genai-foundations/images/lora.png",
+      "alt": "LoRA vs full fine-tuning: target loss, forgetting, learning curves"
+    },
+    {
+      "src": "/ai-portfolio/images/genai-foundations/images/gan.png",
+      "alt": "GAN samples over training and modes covered"
+    },
+    {
+      "src": "/ai-portfolio/images/genai-foundations/images/rl.png",
+      "alt": "CartPole returns per seed with and without baseline"
+    },
+    {
+      "src": "/ai-portfolio/images/genai-foundations/images/ring_compare.png",
+      "alt": "Samples from GAN, WGAN-GP and diffusion on the 8-Gaussian ring"
+    },
+    {
+      "src": "/ai-portfolio/images/genai-foundations/images/diffusion_shapes.png",
+      "alt": "Real and generated 16x16 shapes for three samplers"
+    },
+    {
+      "src": "/ai-portfolio/images/genai-foundations/images/diffusion_steps.png",
+      "alt": "Quality vs number of sampling steps for DDIM with a clamp"
+    },
+    {
+      "src": "/ai-portfolio/images/genai-foundations/images/dpo.png",
+      "alt": "DPO reward vs KL and change in log-probabilities of chosen and rejected completions"
+    },
+    {
+      "src": "/ai-portfolio/images/genai-foundations/images/cfg.png",
+      "alt": "Left: samples for each requested class at guidance 0, 1, 3 and 8. Right: Frechet distance to real shapes against guidance scale, overall and per class"
+    }
+  ]
+}

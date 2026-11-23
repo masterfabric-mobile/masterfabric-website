@@ -1,0 +1,100 @@
+{
+  "slug": "secure-data-ai",
+  "title": "MasterFabric · Secure Data AI",
+  "tagline": "Data security controls for AI, measured on synthetic Turkish data: PII masking, column policies, secure RAG and OWASP LLM guardrails.",
+  "githubUrl": "https://github.com/masterfabric/masterfabric-secure-data-ai",
+  "sha": "8ef6054",
+  "shaDate": "2026-11-23",
+  "summary": "MasterFabric Secure Data AI is a set of data security controls for AI systems, built and measured on synthetic Turkish customer data. It covers KVKK-compliant PII detection and masking with checksum validation, Ranger-style column masking and row filtering on DuckDB, permission-aware RAG retrieval that masks PII at ingest and applies an ACL filter before ranking, and OWASP Top 10 for LLM Applications guardrails tested with unit tests and attacks against a real local model. A second prompt-injection layer adds a Granite Guardian classifier scored on a held-out set, backed by a tamper-evident SHA-256 hash-chained audit log with a static dashboard, and a KVKK right-to-erasure workflow spanning the CRM, notes, derived copies, marketing export and RAG index. A data-subject request (DSR) workflow handles access, erasure and consent withdrawal under GDPR, CCPA and KVKK with identity verification and per-law deadline tracking.",
+  "keyResults": [
+    "PII detection on 2,000 labelled notes with decoys: precision 0.986, recall 1.0 (pattern-only precision: 0.680)",
+    "Column/row policies, 200,000 customers, 5 roles: 0 of 50 bypass attempts allowed, all 60 attempts audited",
+    "RAG retrieval, 300 queries x 4 principals: unauthorised chunks 99.6% to 0; PII entities in context 4,476 to 0",
+    "PII disclosure attacks on a real model (LLM02): 6/8 to 0/8; system prompt leak (LLM07): 2/8 to 0/8",
+    "Direct prompt injection (LLM01), development set: 7/10 to 4/10 (rules) to 0/10 (rules + classifier)",
+    "Direct prompt injection, held-out set: 7/12 to 7/12 (rules) to 1/12 (rules + classifier)",
+    "Legitimate questions blocked: 0/22 with rules; 3/22 with the classifier (1/10 benign, 2/12 hard benign)",
+    "Clarify instead of block (guard v3), fresh held-out set: legitimate questions blocked 3/12 to 0/12; attacks shown PWNED 3/12 to 3/12 (unchanged)",
+    "Poisoned RAG documents caught by the classifier: 16/16, clean documents 0/2; classifier p50 71 ms",
+    "Audit log, simulated day: 2,404 entries, chain verified, 3/3 tamper drills detected, 26 microseconds per append",
+    "KVKK erasure, 50 of 200,000 subjects: 0 residual rows outside 100 retained invoice rows; other rows unchanged; p50 108 ms",
+    "Data-subject requests, 540 (GDPR, CCPA, KVKK x access, erasure, consent withdrawal) over 200,000 customers: 540/540 completed on time; erasure p50 117 ms; 0 residual rows outside 360 retained invoice rows",
+    "Latency per request, p50 / p95: access 2.1 / 2.7 ms; consent withdrawal 1.5 / 2.1 ms; erasure 117 / 141 ms",
+    "Consent withdrawal, 180 subjects: 0 marketing-list rows left, 0 consent flags still true",
+    "Identity attempts, 820 (280 genuine, 540 impostor): 0 false accepts, 0 false rejects (constructed to the rules)",
+    "Audit log with DSR entries: 2,340 entries, chain verified, 0 raw identifiers",
+    "Deadline sweep over 731 receipt dates (2027-2028): GDPR one month lands 28-31 days after receipt (89-92 extended), with 13 month-end clamps; CCPA 45 days (90 extended); CCPA opt-out 15 business days = 19-21 calendar days; KVKK 30 days. Example, received 2028-01-31: GDPR due 2028-02-29 (extended 2028-04-30); CCPA 2028-03-16 (extended 2028-04-30), opt-out 2028-02-21; KVKK 2028-03-01",
+    "Unit tests: 98 passed (was 49)"
+  ],
+  "limitations": [
+    "Synthetic, template-generated text: recall of 1.0 shows the detectors find well-formed identifiers, which does not predict recall on real, messy notes (typos, split numbers, numbers written out in words).",
+    "Names and addresses in free text are not detected since there is no NER model; names are protected by column policies in tables but stay visible in RAG tickets.",
+    "A wrong IBAN is treated as non-PII and counted as a decoy, even though a mistyped IBAN can still identify someone.",
+    "The injection layers are measured on small sets: rules let 4 of 10 development and 7 of 12 held-out attacks through, versus 0 and 1 with the classifier; with 12 held-out attacks, one prompt is 8 points. The classifier blocks 3 of 22 legitimate questions, all about answer format; guard v3 turns those into clarifications (3/12 to 0/12 on a fresh set) but does nothing for attacks the classifier scores too low, its measurement assumes the user confirms every clarification, and adaptive attacks written against the classifier or the rewrite step were not tried.",
+    "Only one small answering model was tested, one run per prompt; the 1.5B model ignored every indirect injection and never produced document citations, so the LLM09 grounding check would refuse all of its answers.",
+    "The policy engine covers one table on DuckDB only, parsed with DuckDB's own serializer; it models Ranger's behaviour but is not a security boundary for untrusted users, and production enforcement belongs in the real engine (Ranger, Unity Catalog).",
+    "The audit log is tamper-evident, not tamper-proof: someone who can write both the log and the anchor can rebuild the chain, entries are flushed but not fsync'ed, customer ids inside SQL text are not masked, and the dashboard's day uses a simulated clock.",
+    "Erasure covers this estate only: backups, replicas, the model server's KV cache and prompt logs, logs outside this repository, and storage-level residue are not handled (a byte search of a DuckDB file proves nothing either way, since its strings are compressed); shared identifiers go to manual review rather than being resolved, and the audit log keeps the subject's customer id where it appears in SQL.",
+    "The KVKK mapping is technical, not legal advice: consent is represented by the marketing filter and retention by a configured 10-year invoice period, but cross-border transfer rules are not modelled.",
+    "Deadline modelling is simplified: day 0 is the receipt day, a GDPR calendar month is clamped to the month end, weekends and holidays are not rolled, CCPA opt-out is treated as needing no verifiable request (on one reading of CCR tit. 11 s. 7026(d), so one identifying factor), and no KVKK extension is modelled. Not legal advice.",
+    "The 820 identity attempts (280 genuine, 540 impostor) were constructed to the rules, so 0 false accepts and 0 false rejects show the rules behave as written, not how they fare against real impostors or real data-entry mistakes."
+  ],
+  "images": [
+    {
+      "src": "/ai-portfolio/images/secure-data-ai/hero.png",
+      "alt": "MasterFabric Secure Data AI: PII masking, column policies, secure RAG and OWASP LLM tests with measured results"
+    },
+    {
+      "src": "/ai-portfolio/images/secure-data-ai/images/architecture.png",
+      "alt": "Controls on the path from data to model: analysts query DuckDB through policy views; assistants reach data only through masked, ACL-filtered retrieval and two guard layers; the erasure service and every control write to one hash-chained audit log"
+    },
+    {
+      "src": "/ai-portfolio/images/secure-data-ai/images/pii_precision.png",
+      "alt": "PII detection precision with and without checksums, on 2,000 labelled synthetic call-centre notes containing 3,236 PII entities plus decoys"
+    },
+    {
+      "src": "/ai-portfolio/images/secure-data-ai/images/role_views.png",
+      "alt": "The first synthetic customer each role can see: fraud analysts get masked IBANs and NULL contact data, data scientists get keyed hashes and birth year only, marketing sees initials, and the Istanbul desk sees only Istanbul"
+    },
+    {
+      "src": "/ai-portfolio/images/secure-data-ai/images/rag_leakage.png",
+      "alt": "Unauthorised chunks and results returned per filtering mode, across 300 queries per principal, top-5, BM25"
+    },
+    {
+      "src": "/ai-portfolio/images/secure-data-ai/images/owasp_attacks.png",
+      "alt": "Attack success baseline vs guarded, before and after the OWASP LLM guardrails"
+    },
+    {
+      "src": "/ai-portfolio/images/secure-data-ai/images/injection_layers.png",
+      "alt": "Direct injections that succeeded and legitimate questions blocked, per pipeline: the rules catch none of the 12 held-out attacks, the classifier leaves 1, at the cost of 3 of 22 legitimate questions blocked"
+    },
+    {
+      "src": "/ai-portfolio/images/secure-data-ai/images/clarify_eval.png",
+      "alt": "Legitimate questions blocked and attacks that showed PWNED, guard v2 against guard v3, per set"
+    },
+    {
+      "src": "/ai-portfolio/images/secure-data-ai/images/clarify_examples.png",
+      "alt": "Each flagged question, the model's rewrite, and whether it was offered back or blocked"
+    },
+    {
+      "src": "/ai-portfolio/images/secure-data-ai/screenshots/audit_dashboard.png",
+      "alt": "Audit dashboard for the simulated day: entries per hour, denials by reason and role, recent denials, erasures, and the three tamper drills"
+    },
+    {
+      "src": "/ai-portfolio/images/secure-data-ai/images/erasure.png",
+      "alt": "Rows found before and left after erasure, per store, across 50 requests over 200,000 customers, 300,000 notes, 400,000 invoices and 5,000 RAG tickets"
+    },
+    {
+      "src": "/ai-portfolio/images/secure-data-ai/images/dsr_deadlines.png",
+      "alt": "Deadline sweep over 731 receipt dates in 2027-2028: a GDPR calendar month lands 28-31 days after receipt, CCPA 45 days, CCPA opt-out 19-21 calendar days and KVKK 30 days, with extended periods where the law provides them"
+    },
+    {
+      "src": "/ai-portfolio/images/secure-data-ai/images/dsr_latency.png",
+      "alt": "Latency per data-subject request type, p50 and p95: access 2.1 and 2.7 ms, consent withdrawal 1.5 and 2.1 ms, erasure 117 and 141 ms"
+    },
+    {
+      "src": "/ai-portfolio/images/secure-data-ai/images/dsr_verification.png",
+      "alt": "Identity verification over 820 constructed attempts, 280 genuine and 540 impostor: 0 false accepts and 0 false rejects"
+    }
+  ]
+}

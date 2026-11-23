@@ -1,0 +1,70 @@
+{
+  "slug": "spark-rust-bench",
+  "title": "MasterFabric Spark Rust Bench",
+  "tagline": "Benchmarks five SQL engines on identical queries over 10M to 200M synthetic telco records, including Iceberg table reads.",
+  "githubUrl": "https://github.com/masterfabric/masterfabric-spark-rust-bench",
+  "sha": "361bb4a",
+  "shaDate": "2026-11-23",
+  "summary": "This repository runs the same six analytical SQL queries over the same synthetic telco call records, from 10M to 200M rows, using PySpark, Scala Spark, Polars, Apache DataFusion and DuckDB, each alone in a container with the same CPU and memory limits. At 50M and 200M rows the data is also read from an Apache Iceberg table written by Spark, so the benchmark can compare reading a Parquet folder against reading a lakehouse table. Every run's rows are checked against Spark's output before timing counts, and results are recorded even when a run fails to finish rather than being dropped, and DataFusion's memory growth at 200M rows was traced to its bundled allocator and fixed with one environment variable. The goal is to answer practical questions an AI or data architect faces: how much Spark costs versus single-node engines, whether PySpark lags Scala Spark, what UDFs cost, how far one node scales, and whether single-node engines can read Iceberg tables directly.",
+  "keyResults": [
+    "Polars ran the same SQL 3.7x faster than PySpark at 200M rows (5.9x at 10M) using less than half the memory; at 200M rows the sum of six query medians was 4.325 s for Polars, 4.777 s for DuckDB, 5.532 s for DataFusion and 15.975 s for PySpark.",
+    "PySpark SQL is as fast as Scala SQL: 15.975 s vs 15.922 s for the sum of six query medians at 200M rows.",
+    "Python UDFs cost 29x the built-in expression at 200M rows (24.754 s vs 0.846 s); Arrow (pandas) UDFs cut that to 8x (6.835 s); a Scala UDF to 2.4x (2.009 s).",
+    "240 of 240 query results were identical to Spark's across 39 runs; one run did not finish (DataFusion reading the 200M-row Iceberg table, killed at the memory limit in the first round) and it is reported, not dropped.",
+    "At 200M rows peak container memory was 7.6 GiB (PySpark), 7.1 GiB (Scala Spark), 3.6 GiB (Polars), 3.2 GiB (DuckDB) and 2.7 GiB (DataFusion, 2,776 MiB with MIMALLOC_TARGET_SEGMENTS_PER_THREAD=2); DataFusion finishes 200M rows in 5.532 s, the least memory of the five engines.",
+    "DataFusion's memory growth at 200M rows was traced to its bundled mimalloc allocator: with default settings in the first round peak memory was 1,653, 3,575 and 6,652 MiB at 10M, 50M and 100M rows and the run was killed at 8,192 MiB at 200M, while MIMALLOC_TARGET_SEGMENTS_PER_THREAD=2 gave 679, 1,080, 1,841 and 2,776 MiB with the same query times.",
+    "Single-node engines read Iceberg tables at the same cost as Parquet for full scans, and 1.5 to 2.2x faster when the filter matched the day partitioning, e.g. DuckDB Q6 at 200M rows: 0.693 s on Parquet vs 0.314 s on Iceberg.",
+    "From 100M to 200M rows the single-node engines took 2.0 times as long and Spark 1.8 times, so Spark's relative gap narrows slowly as data size grows.",
+    "PyIceberg's plan for Q6 kept only 7 of 30 files at 50M rows and 20 of 92 files at 200M rows, 23% of the bytes, planned in 2.5 to 4.2 ms.",
+    "A 200M-row filter written with a TIMESTAMP_NTZ literal lets Spark prune an Iceberg table: in a 30-file reproduction the portable literal reads 30 files in 188 ms, while a TIMESTAMP_NTZ literal or the session timestampType setting reads 7 files in 44 and 42 ms, with the same 1,400,000 rows returned."
+  ],
+  "limitations": [
+    "One machine, single-node Spark in local[6] mode: the results say nothing about multi-node shuffles, executor failures or terabyte inputs, and the 200M-row trend should not be extrapolated to a cluster.",
+    "DataFusion's memory fix is an allocator setting explained by elimination: eight variants point to mimalloc's per-thread heaps on tokio's I/O threads, but mimalloc itself was not traced; the setting was measured on this workload only (six queries, one process), and DataFusion's 200M-row Iceberg read was not re-run.",
+    "Iceberg tables use a Hadoop catalog and are append-only: no REST or Hive catalog, no delete files, no schema evolution and no compaction; DataFusion reads Iceberg through PyIceberg's file plan rather than a native reader, and refuses tables with delete files.",
+    "Warm cache: the OS page cache holds the Parquet files after the first run, so the medians measure compute, not storage I/O; the first-run column in summary.json is closer to a cold job.",
+    "Polars, DataFusion and DuckDB were driven through their Python bindings rather than as standalone binaries, even though their execution itself is native.",
+    "Only three timed runs per query and one session per configuration were used, enough to see 2x differences but gaps under about 10% should be treated as noise.",
+    "The data is synthetic and skewed (Zipf-distributed subscribers) to be realistic in shape rather than taken from a real network, and rows are in random time order, so plain Parquet statistics cannot skip anything for Q6; data sorted by time would narrow the Parquet vs Iceberg gap.",
+    "Spark got sensible local settings (12 shuffle partitions, 6 GiB driver) rather than per-query tuning, with adaptive query execution on by default in 3.5, and Polars, DataFusion and DuckDB ran with defaults; containers on macOS run inside a Colima Linux VM, adding overhead equally to all engines.",
+    "Comet, Gluten and Ballista are mentioned as options, not measured."
+  ],
+  "images": [
+    {
+      "src": "/ai-portfolio/images/spark-rust-bench/hero.png",
+      "alt": "MasterFabric Spark Rust Bench: PySpark, Scala Spark, Polars and DataFusion on the same SQL and data"
+    },
+    {
+      "src": "/ai-portfolio/images/spark-rust-bench/images/query_times.png",
+      "alt": "Grouped bar charts of median query time per engine and query at 50M and 200M rows, log scale; DataFusion at 200M rows runs with MIMALLOC_TARGET_SEGMENTS_PER_THREAD=2"
+    },
+    {
+      "src": "/ai-portfolio/images/spark-rust-bench/images/scaling.png",
+      "alt": "Line charts: sum of six query medians and peak container memory against rows, 10M to 200M, per engine; the dashed line is the 8 GiB limit"
+    },
+    {
+      "src": "/ai-portfolio/images/spark-rust-bench/images/df_memory.png",
+      "alt": "Left: DataFusion resident memory after each of 24 query runs at 200M rows for eight variants; six are killed at Q3, the mimalloc segment cap and a 12 s pause stay flat. Right: memory added per run next to the compressed size of the column read, for three columns"
+    },
+    {
+      "src": "/ai-portfolio/images/spark-rust-bench/images/iceberg.png",
+      "alt": "The same queries on a folder of Parquet files versus an Iceberg table partitioned by day; Q6 reads one week of 30 days, with the last pair showing Spark's Q6 written with a TIMESTAMP_NTZ literal"
+    },
+    {
+      "src": "/ai-portfolio/images/spark-rust-bench/images/ntz_pruning.png",
+      "alt": "Bar charts: a one-week filter on a 30-file Iceberg table reads 30 files in 188 ms with a TIMESTAMP literal, 7 files in 44 ms with a TIMESTAMP_NTZ literal and 7 files in 42 ms with the session timestampType set to NTZ"
+    },
+    {
+      "src": "/ai-portfolio/images/spark-rust-bench/images/overhead.png",
+      "alt": "Left: host-measured wall time for the whole container run. Right: peak container memory from cgroup memory.peak"
+    },
+    {
+      "src": "/ai-portfolio/images/spark-rust-bench/images/udf.png",
+      "alt": "The same revenue-tier column computed four ways (built-in, Scala UDF, Arrow UDF, Python UDF) and aggregated, in median seconds"
+    },
+    {
+      "src": "/ai-portfolio/images/spark-rust-bench/images/setup.png",
+      "alt": "One dataset as Parquet and as Iceberg, one SQL file, five engines in equally limited containers, one correctness gate"
+    }
+  ]
+}

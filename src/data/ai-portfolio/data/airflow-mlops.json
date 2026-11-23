@@ -1,0 +1,152 @@
+{
+  "slug": "airflow-mlops",
+  "title": "MasterFabric · Airflow MLOps",
+  "tagline": "Replays a year of telco churn modeling on Airflow, MLflow, Evidently and Feast with measured retraining results.",
+  "githubUrl": "https://github.com/masterfabric/masterfabric-airflow-mlops",
+  "sha": "3546e6f",
+  "shaDate": "2026-11-23",
+  "summary": "MasterFabric Airflow MLOps replays a full year of a simulated telco churn pipeline on a single laptop, using Airflow to land monthly subscriber snapshots, gate them on data quality, measure realised performance once labels arrive, check feature drift, and decide whether to retrain. Promotion is implemented as an MLflow registry alias that a FastAPI service follows without a restart, so champion and challenger models can be swapped live. Evidently supplies a second opinion on drift and realised quality each month, Feast serves the same features to training and to the online API, and a new champion is rolled out through a sticky canary with pre-declared guardrails. The project checks its own claims against two references, a model that is never retrained and the data generator's own true churn probabilities, with every number measured on runs on an Apple M4 Pro with Docker through Colima.",
+  "keyResults": [
+    "Backfill: 12 monthly runs (2025-12 to 2026-11), all successful, 60,000 to 66,274 subscribers, 1.2-8.4 s of task time per month",
+    "Realised AUC, 2026-10: auto policy (v4) 0.830 vs never retrained (v1) 0.789, oracle upper bound 0.841",
+    "Top-decile lift, 2026-10: auto 4.98 vs never retrained 4.63",
+    "Drift signal: PSI of plan 0.3151 vs v1's data when postpaid_5g appeared, against a trigger of 0.25",
+    "Online API: p50 2.67 ms, p95 2.93 ms per subscriber; 1,000 rows scored in 11.4 ms; max difference to batch scores 5.0e-6",
+    "Rollback: @champion moved from v4 to v3 served after 3.41 s, and back to v4 after 15.27 s (15 s poll), with no restart",
+    "Evidently vs in-house PSI: default detector flags 3-7 of 16 columns in all 6 monitored months; the PSI > 0.25 trigger agrees in 5 of 6 months; realised AUC identical (delta 0.0)",
+    "Feast point-in-time: 0 of 194,913 training rows differ from the hand-written join, while a naive latest-snapshot join leaves all 11,179 churners without features",
+    "Canary rollout: shuffled-label v6 rolled back at 5% (Spearman -0.088); v5 passed 5/25/50% stages, paired delta AUC -0.0007 [-0.0031, +0.0016], and was promoted",
+    "Root-cause report: v6 re-rolled against champion v5 was rolled back again at 5% (Spearman -0.073), and the report took 2.1 s; of six hypotheses only model signal (holdout AUC 0.4414) and training labels were supported, with the verdict label corruption in the training job",
+    "Root-cause control: retrained from v6's own lineage tags the recipe scores 0.8297 while the registered artefact scores 0.4414 (0.4484 on its own training labels); for v5 all hypotheses were ruled out",
+    "Drift watcher replay over 40,000 served subscribers: a sustained plan breach (PSI 0.266 at 20,000, sustained at 22,500) retrained v10, which was rejected (0.7816 vs v1 0.7819); with 2026-08 traffic and labels up to 2026-07, v11 was promoted (0.819 vs 0.7796) and served 4.1 s later",
+    "Drift watcher reached exactly the models the monthly DAG built (v10 = v2, v11 = v3); a retrain plus registration took 3.5 to 3.7 s and a run without retraining 2.5 s"
+  ],
+  "limitations": [
+    "The subscriber base, drift and broken feed are all generated synthetically, so the generator sets the ceiling for how much retraining can help; the mechanics (gate, triggers, promotion, serving) are what transfer, not the exact AUC numbers",
+    "Results come from a single deterministic run (seed 42); thresholds like PSI 0.25, decay 0.03 and gain 0.002 were set from domain defaults rather than tuned on this run",
+    "The final 2026-11 month was triggered by hand rather than waiting for the real monthly schedule",
+    "Training runs inside the Airflow worker itself, which is fine at this data scale but would need to move to a separate job at operator scale",
+    "The lake uses pandas and parquet rather than Spark and Iceberg, keeping the repo small and readable by design",
+    "The serving API relies on polling (checks aliases every 15 s) rather than events, since open-source MLflow 2.22 has no registry webhooks",
+    "Lab-grade security: services bind to localhost only, credentials are lab placeholders, MLflow and the API have no authentication, and the S3 store is single-node",
+    "The canary rollout replays a single past month's traffic in minutes rather than real traffic arriving over weeks with labels a month later",
+    "Only one rollout was exercised, with one obviously broken candidate and one normal one; a subtler failure such as a single shifted feature was not tested",
+    "No business metric is computed; AUC and top-decile lift stand in for retention value rather than a priced uplift evaluation",
+    "The rollout moved @champion outside the DAG: v5 was promoted by scripts/rollout.py, so the decisions table still ends at v4 and the promotion is recorded in registry tags and docs/results/rollout.json",
+    "The evidently_report and publish_features tasks were run for the 12 existing months with airflow tasks test after the backfill, which records no task state",
+    "Evidently's numeric PSI is not the DAG's PSI: it uses equal-width bins while the in-house PSI uses reference deciles, so they agree on categorical columns and on the trigger in 5 of 6 months, not on every numeric value",
+    "Feast runs on files: the offline store is one parquet file rewritten each month and the registry is a local file, and training still uses the hand-written join that Feast was shown to match",
+    "The root-cause report covers six hypotheses and was tested on one injected incident (shuffled labels) and one healthy control; a segment-only failure or an online/offline feature mismatch is not among its checks, and its deciding check retrains, which is seconds here and can be hours at scale",
+    "The drift watcher was exercised by replay with airflow dags test after every 2,500 subscribers, not by the scheduler, so every 10 minutes was not measured in wall time; it added model versions 7 to 11 to the registry"
+  ],
+  "images": [
+    {
+      "src": "/ai-portfolio/images/airflow-mlops/hero.png",
+      "alt": "MasterFabric Airflow MLOps: Airflow, MLflow, drift monitoring and champion/challenger retraining, with measured results"
+    },
+    {
+      "src": "/ai-portfolio/images/airflow-mlops/images/architecture.png",
+      "alt": "Architecture: monthly feeds into Airflow; Airflow logs and registers to MLflow; MLflow backed by PostgreSQL and S3; FastAPI follows the champion alias"
+    },
+    {
+      "src": "/ai-portfolio/images/airflow-mlops/images/dag_flow.png",
+      "alt": "churn_monthly DAG: land, dq_gate, halt_month, realise_last_month, check_drift, decide, train_and_promote, score"
+    },
+    {
+      "src": "/ai-portfolio/images/airflow-mlops/images/decision_timeline.png",
+      "alt": "Decision per month: keep, halted, promoted, rejected, with task seconds"
+    },
+    {
+      "src": "/ai-portfolio/images/airflow-mlops/images/realised_auc.png",
+      "alt": "Realised AUC per month for the auto policy, the static policy and the oracle"
+    },
+    {
+      "src": "/ai-portfolio/images/airflow-mlops/images/psi_heatmap.png",
+      "alt": "PSI heatmap per feature and month against the champion's training data"
+    },
+    {
+      "src": "/ai-portfolio/images/airflow-mlops/images/registry_versions.png",
+      "alt": "Holdout AUC per registered model version"
+    },
+    {
+      "src": "/ai-portfolio/images/airflow-mlops/images/monitoring_rollout.png",
+      "alt": "Diagram: Airflow publishes features to Feast and writes Evidently reports; the API reads Feast online features, routes a sticky canary and logs predictions to PostgreSQL; the rollout script reads the log"
+    },
+    {
+      "src": "/ai-portfolio/images/airflow-mlops/images/evidently_vs_psi.png",
+      "alt": "Bar chart per month: columns flagged by Evidently's default detector, by Evidently PSI over 0.25, and by the in-house PSI over 0.25"
+    },
+    {
+      "src": "/ai-portfolio/images/airflow-mlops/images/feast_results.png",
+      "alt": "Left: share of training rows with a different value per feature under a naive latest-snapshot join. Right: online fetch latency p50 and p95"
+    },
+    {
+      "src": "/ai-portfolio/images/airflow-mlops/images/canary_rollout.png",
+      "alt": "Left: Spearman rank correlation of each candidate against the shadow champion per stage. Right: AUC of the unpaired arms and the paired comparison at 50 percent"
+    },
+    {
+      "src": "/ai-portfolio/images/airflow-mlops/images/rca_report.png",
+      "alt": "Hypothesis checks for v6 and v5, and the lineage reproduction AUCs"
+    },
+    {
+      "src": "/ai-portfolio/images/airflow-mlops/images/drift_watch.png",
+      "alt": "Max PSI per watcher run with the actions taken"
+    },
+    {
+      "src": "/ai-portfolio/images/airflow-mlops/screenshots/airflow_grid.png",
+      "alt": "Airflow grid of churn_monthly with 12 successful runs"
+    },
+    {
+      "src": "/ai-portfolio/images/airflow-mlops/screenshots/airflow_graph_2026_08.png",
+      "alt": "Airflow graph view of the 2026-08 run that promoted v3"
+    },
+    {
+      "src": "/ai-portfolio/images/airflow-mlops/screenshots/mlflow_registry_churn.png",
+      "alt": "MLflow registry page for churn with versions, tags and aliases"
+    },
+    {
+      "src": "/ai-portfolio/images/airflow-mlops/screenshots/mlflow_experiment_runs.png",
+      "alt": "MLflow experiment churn-training with one run per challenger"
+    },
+    {
+      "src": "/ai-portfolio/images/airflow-mlops/screenshots/api_swagger_model.png",
+      "alt": "Swagger UI of the scoring API showing GET /model answered by version 4"
+    },
+    {
+      "src": "/ai-portfolio/images/airflow-mlops/screenshots/s3_console_scores.png",
+      "alt": "RustFS console with monthly score partitions"
+    },
+    {
+      "src": "/ai-portfolio/images/airflow-mlops/screenshots/evidently_dashboard.png",
+      "alt": "Evidently UI dashboard of the churn-monitoring project with drifted columns per month and realised ROC AUC"
+    },
+    {
+      "src": "/ai-portfolio/images/airflow-mlops/screenshots/evidently_drift_2026_07.png",
+      "alt": "Evidently data drift report for 2026-07 against the v1 reference: 7 of 16 columns drifted"
+    },
+    {
+      "src": "/ai-portfolio/images/airflow-mlops/screenshots/feast_feature_view.png",
+      "alt": "Feast UI showing the subscriber_monthly feature view with 16 features and the churn_model feature service"
+    },
+    {
+      "src": "/ai-portfolio/images/airflow-mlops/screenshots/feast_lineage.png",
+      "alt": "Feast lineage from the snapshot source through the feature view to the churn_model feature service"
+    },
+    {
+      "src": "/ai-portfolio/images/airflow-mlops/screenshots/mlflow_registry_after_rollout.png",
+      "alt": "MLflow registry after the rollout: v5 holds champion, v6 carries a rollback reason, canary_percent is 0"
+    },
+    {
+      "src": "/ai-portfolio/images/airflow-mlops/screenshots/mlflow_v6_rollback_tag.png",
+      "alt": "MLflow version 6 page with the tag rollback_reason: stage 5%: rank_agreement"
+    },
+    {
+      "src": "/ai-portfolio/images/airflow-mlops/screenshots/airflow_graph_monitoring_tasks.png",
+      "alt": "Airflow graph of churn_monthly with the new publish_features and evidently_report tasks"
+    },
+    {
+      "src": "/ai-portfolio/images/airflow-mlops/images/cloudera_mapping.png",
+      "alt": "Mapping of each lab component to Cloudera CDE and CML"
+    }
+  ]
+}

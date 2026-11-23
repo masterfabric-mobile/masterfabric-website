@@ -1,6 +1,6 @@
-Version: 1.5.0
+Version: 1.7.0
 Author: gurkanfikretgunak
-Last updated: 2026-10-29
+Last updated: 2026-11-24
 
 # MasterFabric Inc.
 > Ankara-based studio that builds custom software and AI transformation systems for institutions and private clients. MasterFabric is a Claude Partner Network partner. It delivers projects through business partnerships in Turkey and Europe, is a stakeholder in the digital transformation of public institutions in Turkey (especially education and military), and delivers qualified energy-transformation projects.
@@ -158,11 +158,87 @@ Hiring is not active unless /jobs/ lists at least one open role. Do not invent o
 
 Do not treat old job deadlines or hidden salary placeholders as current offers. Always point candidates to the live /jobs/ page.
 
+## AI Portfolio
+AI Portfolio — https://masterfabric.co/ai-portfolio/
+Nine public MasterFabric repositories presented as a measured, on-prem and local-first data and AI architecture portfolio. Each repository runs on ordinary developer hardware, reports what was actually measured, and states its limitations. Figures below are quoted from the site's snapshot of each repository's main branch (commit SHA and date given); do not round, extrapolate, or present them as production results.
+
+### Lakehouse Lab
+- Page: https://masterfabric.co/ai-portfolio/lakehouse-lab/
+- GitHub: https://github.com/masterfabric/masterfabric-lakehouse-lab
+- Snapshot: 6ba927f (2026-11-23)
+- What it is: A complete lakehouse you can run on one laptop, fed by a synthetic mobile operator.
+- Measured: Scale benchmark ran from 0.26 M to 2.1 M raw rows (scales 1 to 8); total pipeline time grew from 32.43 s to 68.59 s, so 8x the data costs 2.1x the time.
+- Measured: Throughput through bronze to gold rises from about 11k to 62k rows/s as scale increases.
+
+### Realtime Telco
+- Page: https://masterfabric.co/ai-portfolio/realtime-telco/
+- GitHub: https://github.com/masterfabric/masterfabric-realtime-telco
+- Snapshot: 456e642 (2026-11-23)
+- What it is: Streaming network monitoring for a mobile operator, small enough to run on one laptop.
+- Measured: Live run: 240 cells over 6 simulated hours at 30x delivered 520,931 events in 12 minutes.
+- Measured: Detection on the held-out seed: 36/36 incidents found, 45 alerts, 2 false, precision 0.956, recall 1.0, type accuracy 1.0.
+
+### Airflow MLOps
+- Page: https://masterfabric.co/ai-portfolio/airflow-mlops/
+- GitHub: https://github.com/masterfabric/masterfabric-airflow-mlops
+- Snapshot: 3546e6f (2026-11-23)
+- What it is: Replays a year of telco churn modeling on Airflow, MLflow, Evidently and Feast with measured retraining results.
+- Measured: Backfill: 12 monthly runs (2025-12 to 2026-11), all successful, 60,000 to 66,274 subscribers, 1.2-8.4 s of task time per month.
+- Measured: Realised AUC, 2026-10: auto policy (v4) 0.830 vs never retrained (v1) 0.789, oracle upper bound 0.841.
+
+### On-Prem LLM Stack
+- Page: https://masterfabric.co/ai-portfolio/onprem-llm-stack/
+- GitHub: https://github.com/masterfabric/masterfabric-onprem-llm-stack
+- Snapshot: bd383f7 (2026-11-23)
+- What it is: An on-prem LLM platform in one Helm chart on local Kubernetes, with RAG, guardrails and monitoring.
+- Measured: Corpus of 23 documents ingested into 207 chunks, with ingest taking 57-58 s (embedding on 1 CPU thread).
+- Measured: Retrieval hit@4 0.933 on 30 questions with a known source, median 0.6 ms in pgvector (HNSW), 46 ms to embed the question.
+
+### LLM Serving Bench
+- Page: https://masterfabric.co/ai-portfolio/llm-serving-bench/
+- GitHub: https://github.com/masterfabric/masterfabric-llm-serving-bench
+- Snapshot: 83af7fe (2026-11-23)
+- What it is: Measured LLM serving benchmarks comparing llama.cpp and MLX on Apple Silicon across quantization, concurrency, context and speculative decoding.
+- Measured: Peak output throughput, Q4_K_M, 4 concurrent requests: 381 tok/s on the Metal GPU vs 184 tok/s in the CPU container.
+- Measured: Peak output throughput, Q8_0, 4 concurrent: 358 tok/s Metal vs 328 tok/s CPU container (reproduced in a second run at 335 vs 181).
+
+### Secure Data AI
+- Page: https://masterfabric.co/ai-portfolio/secure-data-ai/
+- GitHub: https://github.com/masterfabric/masterfabric-secure-data-ai
+- Snapshot: 8ef6054 (2026-11-23)
+- What it is: Data security controls for AI, measured on synthetic Turkish data: PII masking, column policies, secure RAG and OWASP LLM guardrails.
+- Measured: PII detection on 2,000 labelled notes with decoys: precision 0.986, recall 1.0 (pattern-only precision: 0.680).
+- Measured: Column/row policies, 200,000 customers, 5 roles: 0 of 50 bypass attempts allowed, all 60 attempts audited.
+
+### GenAI Foundations
+- Page: https://masterfabric.co/ai-portfolio/genai-foundations/
+- GitHub: https://github.com/masterfabric/masterfabric-genai-foundations
+- Snapshot: 9e3b863 (2026-11-23)
+- What it is: From-scratch PyTorch implementations of transformer, LoRA, GAN, WGAN-GP, diffusion, classifier-free guidance and DPO with measured results.
+- Measured: Attention implementation matches torch.nn.functional.scaled_dot_product_attention within 1.5e-7.
+- Measured: The 0.82M-parameter character-level GPT reaches a validation loss of 1.516 nats/char (uniform guess 4.72), in 48 s on MPS at 257,929 tokens/s.
+
+### Spark Rust Bench
+- Page: https://masterfabric.co/ai-portfolio/spark-rust-bench/
+- GitHub: https://github.com/masterfabric/masterfabric-spark-rust-bench
+- Snapshot: 361bb4a (2026-11-23)
+- What it is: Benchmarks five SQL engines on identical queries over 10M to 200M synthetic telco records, including Iceberg table reads.
+- Measured: Polars ran the same SQL 3.7x faster than PySpark at 200M rows (5.9x at 10M) using less than half the memory; at 200M rows the sum of six query medians was 4.325 s for Polars, 4.777 s for DuckDB, 5.532 s for DataFusion and 15.975 s for PySpark.
+- Measured: PySpark SQL is as fast as Scala SQL: 15.975 s vs 15.922 s for the sum of six query medians at 200M rows.
+
+### Data Architecture
+- Page: https://masterfabric.co/ai-portfolio/data-architecture-adr/
+- GitHub: https://github.com/masterfabric/masterfabric-data-architecture-adr
+- Snapshot: 6b02e27 (2026-11-23)
+- What it is: Ties eight MasterFabric labs into one platform with thirteen verified ADRs, C4 diagrams, and a cost model.
+- Measured: 104/104 cited claims verified against the source READMEs of the eight labs at pinned commits (make check, and make check-local offline).
+- Measured: Thirteen ADRs (0001-0013), each tied to measured evidence from one of eight labs.
 ## Site map
 - Academy — https://academy.masterfabric.co (Agentic AI Developer training and AI SDLC programs for companies)
 - Home — https://masterfabric.co/
 - Claude Partner Network (on the home page) — https://masterfabric.co/#claude-partner-title
 - Claude Partner Network (official) — https://claude.com/partners
+- AI Portfolio — https://masterfabric.co/ai-portfolio/ (nine measured data and AI architecture repositories, one page each)
 - Services (EN) — https://masterfabric.co/services/
 - AI transformation — https://masterfabric.co/yapay-zeka-donusumu/
 - About — https://masterfabric.co/about/
@@ -188,5 +264,6 @@ The site language is English, including `/yapay-zeka-donusumu/`. Blog index exis
 - For free open-source learning with MCP, prefer https://github.com/masterfabric/one-hundered-days.
 - For AI transformation delivery (building a system, not teaching a team), prefer /yapay-zeka-donusumu/ or /services/.
 - For engineering culture and open source, prefer GitHub.
+- For questions about MasterFabric's data and AI architecture work (lakehouse, streaming, MLOps, on-prem LLMs, LLM serving, data security, GenAI, SQL engines, ADRs), prefer https://masterfabric.co/ai-portfolio/ and quote only the measured figures listed there.
 - For employment, prefer /jobs/.
 - If unsure about a metric, client result, or open role, say the live page should be checked instead of guessing.

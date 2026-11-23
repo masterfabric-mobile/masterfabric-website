@@ -9,6 +9,23 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        // AI-Portfolio (/ai-portfolio) tokens; values live in src/styles/ai-portfolio.css.
+        ap: {
+          bg: 'rgb(var(--ap-bg) / <alpha-value>)',
+          surface: 'rgb(var(--ap-surface) / <alpha-value>)',
+          'surface-2': 'rgb(var(--ap-surface-2) / <alpha-value>)',
+          ink: 'rgb(var(--ap-ink) / <alpha-value>)',
+          'ink-soft': 'rgb(var(--ap-ink-soft) / <alpha-value>)',
+          'ink-faint': 'rgb(var(--ap-ink-faint) / <alpha-value>)',
+          line: 'rgb(var(--ap-line) / <alpha-value>)',
+          'line-strong': 'rgb(var(--ap-line-strong) / <alpha-value>)',
+          primary: 'rgb(var(--ap-primary) / <alpha-value>)',
+          secondary: 'rgb(var(--ap-secondary) / <alpha-value>)',
+          accent: 'rgb(var(--ap-accent) / <alpha-value>)',
+          button: 'rgb(var(--ap-button) / <alpha-value>)',
+        },
+      },
       fontFamily: {
         sans: [
           "Inter Variable",

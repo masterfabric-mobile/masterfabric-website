@@ -1,0 +1,135 @@
+{
+  "slug": "lakehouse-lab",
+  "title": "MasterFabric · Lakehouse Lab",
+  "tagline": "A complete lakehouse you can run on one laptop, fed by a synthetic mobile operator.",
+  "githubUrl": "https://github.com/masterfabric/masterfabric-lakehouse-lab",
+  "sha": "6ba927f",
+  "shaDate": "2026-11-23",
+  "summary": "MasterFabric Lakehouse Lab is a complete lakehouse stack that runs entirely on a single laptop, fed by a synthetic mobile operator's raw switch CDRs, packet-core sessions, a CRM extract and cell inventory. Data is landed, cleaned and turned into business marts through a medallion bronze, silver and gold pipeline on Apache Iceberg tables written by Apache Spark, queried interactively by Trino, and stored in S3-compatible object storage. The lab deliberately builds in the problems real platforms hit, such as duplicate and late-arriving records, timestamp format changes, correction feeds and the small-file problem, and then shows with measured numbers how a 20-rule quality gate, write-audit-publish on Iceberg branches, Great Expectations auditing and OpenLineage-based lineage into Marquez deal with each one.",
+  "keyResults": [
+    "Scale benchmark ran from 0.26 M to 2.1 M raw rows (scales 1 to 8); total pipeline time grew from 32.43 s to 68.59 s, so 8x the data costs 2.1x the time.",
+    "Throughput through bronze to gold rises from about 11k to 62k rows/s as scale increases.",
+    "168 of 19,377 cell-hours (0.87%) are congested at the 0.8 utilization threshold; the Scala ranking job turns that into a backlog of 8 P1 cells, 5 P2 cells and 107 to monitor, in 3.26 s.",
+    "The transparent baseline churn score reaches ROC AUC 0.647 and a 1.90x top-decile lift against the generator's held-out labels.",
+    "Table maintenance reduced data plus position-delete files from 71 + 2 to 14 + 0, cut a one-day query from 67.8 ms to 28.9 ms, and reduced snapshots from 14 to 3, with compaction taking 1.24 s.",
+    "Scheduled maintenance under a stream: after 60 batches of 2,000 rows each, the unmaintained table holds 74 data + 10 position-delete files, 81 manifests and 71 snapshots and answers the one-day query in 156.5 ms, while the table maintained every 20 batches holds 5 + 0 files, 2 manifests and 5 snapshots and answers in 28.1 ms, with the same result (120,000 rows, 145,731.40 TRY) at every checkpoint.",
+    "The unmaintained table slows linearly, from 37 ms at the start to 156.5 ms after 60 batches (about 2 ms per batch); the maintained table is a sawtooth that climbs to about 67 to 70 ms between passes and drops back to 28 to 33 ms after each one, with a maintenance pass taking 1.38 to 1.75 s.",
+    "A catch-up pass on the unmaintained table compacted 70 data files into 1 in 1.45 s and brought the query to 26.8 ms, but the object count rose from 307 to 329 because retain_last => 5 keeps snapshots that still reference the pre-compaction files.",
+    "Orphan cleanup after a simulated crashed writer: 188 objects listed, 183 referenced; the production 1 hour age guard kept all 5 orphans, while a 0 s guard deleted the same 5 files (2.11 MB), a second scan found 0 orphans, and the query result was unchanged.",
+    "Write-audit-publish: a release 2.3 delivery of 14,684 rows passed 11/11 Great Expectations checks and was published via fast_forward in 0.061 s; a buggy release 2.4 delivery passed only 8/11 and was blocked.",
+    "Rollback via rollback_to_snapshot restored main from 123,689 rows back to 138,373 rows in 0.057 s, a metadata-only commit.",
+    "Lineage export from one pipeline run plus the write-audit-publish job recorded 54 jobs and 16 datasets in Marquez, collapsed to 23 dataset edges, with column lineage for 10 datasets.",
+    "The quality gate's 20 rules all passed (20/20) on every benchmark run; the test suite includes 8 unit tests plus 12 Spark/Iceberg tests."
+  ],
+  "limitations": [
+    "Laptop scale only: the largest run is 2.1 M raw rows, showing fixed-cost behaviour rather than cluster throughput, not a claim about production performance.",
+    "MinIO was replaced by RustFS because the MinIO images could not be pulled anonymously on the day of the build; nothing in the code depends on RustFS.",
+    "No Hadoop s3:// connector in the Spark image, so raw files are read from a bind mount and the orphan scan uses Iceberg FileIO instead of the built-in action.",
+    "Catalog and engines are unauthenticated and bound to localhost, with no Kerberos, TLS, Ranger or credential vending; the REST catalog is a reference fixture, not a production server.",
+    "Data is synthetic: behaviour patterns such as hourly profile, churn propensity and under-dimensioned cells are modelled rather than learned from real traffic, and the panel weight (60) is an explicit assumption.",
+    "The Iceberg demo runs once per lake, changing the schema and partition spec of silver.cdr; replay requires resetting and rerunning the pipeline and demos.",
+    "Write-audit-publish is shown on one table only; gold is not rebuilt from the published day, branch retention is not automated, and the learned thresholds come from seven days of synthetic data.",
+    "The lineage run purges and regenerates the lake so its result files go to a separate output folder, meaning the committed pipeline results are from an earlier benchmark run; Marquez runs under emulation on Apple silicon.",
+    "Lineage gaps: column lineage stops at bronze.cdr_raw for the CDR feed, branch writes are recorded as writes to silver.cdr, and Marquez has no authentication in this setup.",
+    "The maintenance experiment is one run on small tables of a few MB: query times are medians of 7 on a laptop, so the ratios matter, not the milliseconds; the orphan cleanup is a FileIO scan rather than Iceberg's remove_orphan_files, and the crash is simulated by copying files, not by killing a writer.",
+    "Spark runs in local mode with one JVM and four cores, with no shuffle service, executors or dynamic allocation to tune."
+  ],
+  "images": [
+    {
+      "src": "/ai-portfolio/images/lakehouse-lab/hero.png",
+      "alt": "MasterFabric Lakehouse Lab: Spark, Apache Iceberg, Trino and S3 object storage on one laptop, with measured results"
+    },
+    {
+      "src": "/ai-portfolio/images/lakehouse-lab/images/architecture.png",
+      "alt": "Five containers: landing zone, Spark with Iceberg, Iceberg REST catalog, S3 object storage, Trino"
+    },
+    {
+      "src": "/ai-portfolio/images/lakehouse-lab/images/medallion_flow.png",
+      "alt": "Medallion flow with real counts: landing, bronze, silver, gold and the quality gate"
+    },
+    {
+      "src": "/ai-portfolio/images/lakehouse-lab/images/congestion_heatmap.png",
+      "alt": "Heatmap of mean utilization by hour of day for the 14 most congested cells"
+    },
+    {
+      "src": "/ai-portfolio/images/lakehouse-lab/images/churn_roc.png",
+      "alt": "ROC curve of the baseline churn score, AUC 0.647"
+    },
+    {
+      "src": "/ai-portfolio/images/lakehouse-lab/images/late_corrections.png",
+      "alt": "Data files and position deletes grow with every MERGE micro-batch"
+    },
+    {
+      "src": "/ai-portfolio/images/lakehouse-lab/images/compaction.png",
+      "alt": "Files, query time and snapshots before and after maintenance"
+    },
+    {
+      "src": "/ai-portfolio/images/lakehouse-lab/images/maintenance_curve.png",
+      "alt": "Files, manifests, query time and metadata bytes over 60 batches for the maintained and unmaintained table"
+    },
+    {
+      "src": "/ai-portfolio/images/lakehouse-lab/images/orphan_cleanup.png",
+      "alt": "Objects listed and referenced, and orphans kept, deleted and remaining"
+    },
+    {
+      "src": "/ai-portfolio/images/lakehouse-lab/images/wap_flow.png",
+      "alt": "Branch, audit, publish and rollback flow with measured row counts and times"
+    },
+    {
+      "src": "/ai-portfolio/images/lakehouse-lab/images/gx_results.png",
+      "alt": "Pass and fail grid for the 11 expectations on both deliveries"
+    },
+    {
+      "src": "/ai-portfolio/images/lakehouse-lab/screenshots/gx_failed_validation.png",
+      "alt": "Great Expectations Data Docs page for the failed validation"
+    },
+    {
+      "src": "/ai-portfolio/images/lakehouse-lab/images/lineage_graph.png",
+      "alt": "Dataset lineage from landing folders through bronze and silver to gold, coloured by job"
+    },
+    {
+      "src": "/ai-portfolio/images/lakehouse-lab/screenshots/marquez_lineage_gold.png",
+      "alt": "Marquez UI showing the lineage graph of gold.daily_subscriber_usage"
+    },
+    {
+      "src": "/ai-portfolio/images/lakehouse-lab/images/pipeline_scaling.png",
+      "alt": "Stacked per-layer wall time for scales 1, 2, 4 and 8"
+    },
+    {
+      "src": "/ai-portfolio/images/lakehouse-lab/screenshots/s3_console_buckets.png",
+      "alt": "RustFS console with the warehouse and landing buckets"
+    },
+    {
+      "src": "/ai-portfolio/images/lakehouse-lab/screenshots/s3_console_iceberg_files.png",
+      "alt": "Parquet data files of one daily partition of silver.cdr"
+    },
+    {
+      "src": "/ai-portfolio/images/lakehouse-lab/screenshots/spark_silver_merge_plan.png",
+      "alt": "Spark SQL plan of the silver MERGE"
+    },
+    {
+      "src": "/ai-portfolio/images/lakehouse-lab/screenshots/spark_silver_sql_queries.png",
+      "alt": "Spark History Server SQL tab of the silver job"
+    },
+    {
+      "src": "/ai-portfolio/images/lakehouse-lab/screenshots/trino_cluster_overview.png",
+      "alt": "Trino cluster overview with finished queries"
+    },
+    {
+      "src": "/ai-portfolio/images/lakehouse-lab/screenshots/trino_query_detail.png",
+      "alt": "Trino query detail"
+    },
+    {
+      "src": "/ai-portfolio/images/lakehouse-lab/screenshots/notebook_time_travel.png",
+      "alt": "Notebook: time travel"
+    },
+    {
+      "src": "/ai-portfolio/images/lakehouse-lab/screenshots/spark_history_apps.png",
+      "alt": "Spark History Server application list"
+    },
+    {
+      "src": "/ai-portfolio/images/lakehouse-lab/images/cloudera_mapping.png",
+      "alt": "Lab components mapped to Cloudera CDP components"
+    }
+  ]
+}

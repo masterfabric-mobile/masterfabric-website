@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { galleryItems, type GalleryItem } from "@/components/ai-portfolio/gallery";
+import { galleryItems, type GalleryItem } from "@/components/ai-portfolio/gallery-items";
 
 function Tile({ item, lazy = true }: { item: GalleryItem; lazy?: boolean }) {
   return (

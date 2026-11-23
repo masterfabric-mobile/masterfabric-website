@@ -46,6 +46,7 @@ export function useSimCanvas(draw: (f: Frame) => void, version = 0) {
     let visible = !document.hidden;
 
     const paint = (dt: number) => {
+      if (w === 0 || h === 0) return;
       ctx.clearRect(0, 0, w, h);
       drawRef.current({ ctx, w, h, t, dt, reduced: rm.matches });
     };
@@ -100,8 +101,14 @@ export function useSimCanvas(draw: (f: Frame) => void, version = 0) {
     document.addEventListener("visibilitychange", onVis);
     rm.addEventListener("change", sync);
     resize();
+    // Repaint still frames once the web font is ready.
+    let alive = true;
+    document.fonts?.ready.then(() => {
+      if (alive && !raf && w > 0) paint(0);
+    });
 
     return () => {
+      alive = false;
       if (raf) cancelAnimationFrame(raf);
       ro.disconnect();
       io.disconnect();

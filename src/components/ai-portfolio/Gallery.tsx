@@ -42,7 +42,7 @@ export function Gallery() {
         ))}
         {galleryItems.map((item) => (
           <div key={`d-${item.src}`} className="marquee-dup" aria-hidden>
-            <div className="pointer-events-none" inert>
+            <div className="pointer-events-none" {...({ inert: "" } as unknown as { inert: boolean })}>
               <Tile item={item} />
             </div>
           </div>

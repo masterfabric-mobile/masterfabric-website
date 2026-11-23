@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
+import { useReducedSafe } from "./useReducedSafe";
 
 export interface BarRow {
   label: string;
@@ -11,7 +12,7 @@ export interface BarRow {
 
 const TONE = {
   accent: "#3b82f6",
-  muted: "rgba(148,163,184,0.55)",
+  muted: "#94a3b8",
   warn: "#d97706",
 } as const;
 
@@ -31,7 +32,7 @@ export function Bars({
   secondsPerUnit?: number;
   replay?: number;
 }) {
-  const reduced = !!useReducedMotion();
+  const reduced = useReducedSafe();
   const top = max ?? Math.max(...rows.map((r) => r.value));
   return (
     <ul className="flex flex-col gap-2.5" key={replay}>
@@ -81,7 +82,7 @@ export function DotRow({
   summary: string;
   badTone?: "warn" | "accent";
 }) {
-  const reduced = !!useReducedMotion();
+  const reduced = useReducedSafe();
   return (
     <div className="flex flex-col gap-1.5">
       <div className="flex flex-wrap items-baseline justify-between gap-x-3 text-[13px]">
@@ -100,7 +101,7 @@ export function DotRow({
                   ? badTone === "warn"
                     ? "#d97706"
                     : "#3b82f6"
-                  : "rgba(148,163,184,0.32)",
+                  : "#cbd5e1",
               }}
               initial={{ opacity: reduced ? 1 : 0, scale: reduced ? 1 : 0.4 }}
               whileInView={{ opacity: 1, scale: 1 }}

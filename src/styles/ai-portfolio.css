@@ -646,3 +646,159 @@
     color: #2563eb;
   }
 }
+
+/* ---- Hero stage animation (hv-*) ---- */
+.ap-root .hv-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(48px);
+  pointer-events: none;
+  will-change: transform;
+}
+.ap-root .hv-orb-a {
+  width: 34rem;
+  height: 34rem;
+  left: calc(50% - 17rem);
+  top: calc(50% - 17rem);
+  background: radial-gradient(circle, rgba(191, 219, 254, 0.9), transparent 65%);
+  animation: ap-hv-drift-a 14s ease-in-out infinite;
+}
+.ap-root .hv-orb-b {
+  width: 22rem;
+  height: 22rem;
+  left: calc(30% - 11rem);
+  top: calc(55% - 11rem);
+  background: radial-gradient(circle, rgba(147, 197, 253, 0.45), transparent 65%);
+  animation: ap-hv-drift-b 18s ease-in-out infinite;
+}
+.ap-root .hv-orb-c {
+  width: 22rem;
+  height: 22rem;
+  left: calc(70% - 11rem);
+  top: calc(55% - 11rem);
+  background: radial-gradient(circle, rgba(165, 243, 252, 0.4), transparent 65%);
+  animation: ap-hv-drift-b 20s ease-in-out infinite reverse;
+}
+@keyframes ap-hv-drift-a {
+  50% {
+    transform: scale(1.08);
+  }
+}
+@keyframes ap-hv-drift-b {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(2.5rem, -1.25rem);
+  }
+}
+
+/* Dot grid, faded at the edges, with a slow light sweep. */
+.ap-root .hv-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(37, 99, 235, 0.16) 1px, transparent 1.6px);
+  background-size: 22px 22px;
+  background-position: center;
+  -webkit-mask-image: radial-gradient(ellipse 60% 70% at 50% 50%, #000 30%, transparent 75%);
+  mask-image: radial-gradient(ellipse 60% 70% at 50% 50%, #000 30%, transparent 75%);
+}
+.ap-root .hv-grid-shine {
+  background-image: radial-gradient(rgba(37, 99, 235, 0.55) 1.1px, transparent 1.8px);
+  -webkit-mask-image: linear-gradient(100deg, transparent 40%, #000 50%, transparent 60%);
+  mask-image: linear-gradient(100deg, transparent 40%, #000 50%, transparent 60%);
+  -webkit-mask-size: 250% 100%;
+  mask-size: 250% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  animation: ap-hv-shine 7s ease-in-out infinite;
+}
+@keyframes ap-hv-shine {
+  0% {
+    -webkit-mask-position: 120% 0;
+    mask-position: 120% 0;
+  }
+  70%,
+  100% {
+    -webkit-mask-position: -20% 0;
+    mask-position: -20% 0;
+  }
+}
+
+/* Light travelling along each orbit. */
+.ap-root .hv-comet {
+  filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.55));
+  animation: ap-hv-comet 16s linear infinite;
+}
+.ap-root .hv-comet-rev {
+  animation-direction: reverse;
+}
+@keyframes ap-hv-comet {
+  to {
+    stroke-dashoffset: -1000;
+  }
+}
+
+/* Soft pulse rings behind the plate. */
+.ap-root .hv-pulse {
+  position: absolute;
+  width: clamp(150px, 20vw, 240px);
+  height: clamp(150px, 20vw, 240px);
+  border-radius: 9999px;
+  border: 1px solid rgba(37, 99, 235, 0.35);
+  opacity: 0;
+  animation: ap-hv-pulse 5s ease-out infinite;
+}
+.ap-root .hv-pulse-2 {
+  animation-delay: 2.5s;
+}
+@keyframes ap-hv-pulse {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+.ap-root .hv-logo {
+  animation: ap-hv-float 6s ease-in-out infinite;
+}
+@keyframes ap-hv-float {
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@media (max-width: 767px), (pointer: coarse) {
+  .ap-root .hv-orb {
+    filter: blur(36px);
+  }
+  .ap-root .hv-orb-b,
+  .ap-root .hv-orb-c {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ap-root .hv-orb,
+  .ap-root .hv-grid-shine,
+  .ap-root .hv-comet,
+  .ap-root .hv-logo {
+    animation: none;
+  }
+  .ap-root .hv-grid-shine {
+    display: none;
+  }
+  .ap-root .hv-pulse {
+    display: none;
+  }
+}
+@media (max-width: 767px) {
+  /* Keep the orbits around the mark on narrow screens. */
+  .ap-root .hv-orbits {
+    transform: scale(0.6);
+  }
+}

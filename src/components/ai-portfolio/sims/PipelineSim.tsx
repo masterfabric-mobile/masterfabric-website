@@ -32,7 +32,7 @@ function box(
   roundRect(ctx, x, y, w, h, 10);
   ctx.fillStyle = "#f8fafc";
   ctx.fill();
-  ctx.strokeStyle = accent ? "rgba(59,130,246,0.7)" : "rgba(148,163,184,0.35)";
+  ctx.strokeStyle = accent ? "rgba(59,130,246,0.7)" : "#cbd5e1";
   ctx.lineWidth = 1;
   ctx.stroke();
   ctx.fillStyle = "#0f172a";
@@ -41,7 +41,7 @@ function box(
   ctx.fillText(label, x + w / 2, y + h / 2 - (sub ? 2 : -4));
   if (sub) {
     ctx.fillStyle = "#64748b";
-    ctx.font = `500 9.5px ${FONT}`;
+    ctx.font = `500 10.5px ${FONT}`;
     ctx.fillText(sub, x + w / 2, y + h / 2 + 11);
   }
 }
@@ -66,7 +66,7 @@ export function PipelineSim() {
     const bStart = xE + engW / 2;
 
     // paths
-    ctx.strokeStyle = "rgba(148,163,184,0.3)";
+    ctx.strokeStyle = "#cbd5e1";
     ctx.lineWidth = 1.5;
     ctx.setLineDash([4, 5]);
     for (const y of laneY) {
@@ -87,8 +87,8 @@ export function PipelineSim() {
 
     ctx.textAlign = "center";
     ctx.fillStyle = "#64748b";
-    ctx.font = `500 9.5px ${FONT}`;
-    ctx.fillText("engine dwell ∝ 3.07 s : 10.54 s drain", w / 2, h - 8);
+    ctx.font = `500 10.5px ${FONT}`;
+    ctx.fillText(`engine dwell ∝ ${pipeline.flinkDrain} s : ${pipeline.sparkDrain} s drain`, w / 2, h - 8);
 
     // events
     const list = dots.current;
@@ -143,6 +143,19 @@ export function PipelineSim() {
       ctx.fill();
     }
     ctx.globalAlpha = 1;
+
+    // engine labels stay readable above the waiting events
+    ctx.textAlign = "center";
+    ctx.font = `600 12px ${FONT}`;
+    (["Flink 2.2", "Spark 3.5"] as const).forEach((label, i) => {
+      const ty = laneY[i] + 4;
+      const tw = ctx.measureText(label).width + 10;
+      ctx.fillStyle = "rgba(248,250,252,0.92)";
+      roundRect(ctx, xE - tw / 2, ty - 12, tw, 16, 4);
+      ctx.fill();
+      ctx.fillStyle = "#0f172a";
+      ctx.fillText(label, xE, ty);
+    });
   };
 
   const canvas = useSimCanvas(draw);
@@ -157,7 +170,7 @@ export function PipelineSim() {
         ref={canvas}
         className="sim-canvas"
         role="img"
-        aria-label="Simulation of events flowing from Kafka through a Flink lane and a Spark lane into Iceberg. The Spark lane dwells longer, in the ratio of the measured drain times."
+        aria-label={`Simulation of events flowing from Kafka through a Flink lane and a Spark lane into Iceberg. The Spark lane dwells longer, in the ratio of the measured drain times (${pipeline.flinkDrain} s and ${pipeline.sparkDrain} s).`}
       />
       <div className="flex flex-col gap-2">
         <p className="label text-ap-ink-faint">Watermark sweep, reports lost</p>

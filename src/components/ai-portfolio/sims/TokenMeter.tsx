@@ -45,7 +45,7 @@ export function TokenMeter() {
 
     ctx.lineCap = "round";
     ctx.lineWidth = 12;
-    ctx.strokeStyle = "rgba(148,163,184,0.16)";
+    ctx.strokeStyle = "#e2e8f0";
     ctx.beginPath();
     ctx.arc(cx, cy, r, a0, Math.PI * 2);
     ctx.stroke();
@@ -60,7 +60,7 @@ export function TokenMeter() {
 
     // minor ticks
     ctx.lineWidth = 1;
-    ctx.strokeStyle = "rgba(148,163,184,0.35)";
+    ctx.strokeStyle = "#94a3b8";
     for (let i = 0; i <= 20; i++) {
       const a = a0 + (Math.PI * i) / 20;
       const r1 = r + 12;
@@ -108,8 +108,8 @@ export function TokenMeter() {
 
     ctx.textAlign = "center";
     ctx.fillStyle = "#64748b";
-    ctx.font = `500 10px ${FONT}`;
-    ctx.fillText(reduced ? "still: needle at measured peak" : "needle animated · dark mark = measured peak", cx, cy - r * 0.35);
+    ctx.font = `500 11px ${FONT}`;
+    ctx.fillText(reduced ? "still: needle at measured peak" : "dark mark = measured peak", cx, Math.min(cy + 20, h - 24));
   };
 
   const canvas = useSimCanvas(draw, peak);
@@ -141,7 +141,7 @@ export function TokenMeter() {
         ref={canvas}
         className="sim-canvas"
         role="img"
-        aria-label={`Animated gauge. Measured peak for ${quant} on ${backend} with 4 concurrent requests: ${peak} tokens per second.`}
+        aria-label={`Gauge. Measured peak for ${quant} on ${backend} with 4 concurrent requests: ${peak} tokens per second.`}
       />
 
       <div className="text-center">
@@ -157,16 +157,16 @@ export function TokenMeter() {
         <caption className="sr-only">Measured peak output tokens per second, 4 concurrent requests</caption>
         <thead>
           <tr className="label text-ap-ink-faint">
-            <th className="py-1 text-left font-medium">4 concurrent</th>
+            <th scope="col" className="py-1 text-left font-medium">4 concurrent</th>
             {BACKENDS.map((b) => (
-              <th key={b} className="py-1 font-medium">{b}</th>
+              <th key={b} scope="col" className="py-1 font-medium">{b}</th>
             ))}
           </tr>
         </thead>
         <tbody>
           {QUANTS.map((q) => (
             <tr key={q} className="border-t border-ap-line">
-              <th className="py-2 text-left font-medium text-ap-ink">{q}</th>
+              <th scope="row" className="py-2 text-left font-medium text-ap-ink">{q}</th>
               {BACKENDS.map((b) => (
                 <td
                   key={b}

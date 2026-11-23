@@ -38,7 +38,7 @@ export function Hero({
           {...item(2)}
           className="label mt-5 text-ap-accent"
         >
-          Nine repositories &middot; one laptop &middot; measured, not marketed
+          Nine repositories &middot; <strong className="font-semibold text-blue-800">one organization</strong> &middot; measured, not marketed
         </motion.p>
         <motion.p
           {...item(3)}

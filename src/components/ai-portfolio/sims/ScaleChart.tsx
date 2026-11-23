@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
+import { useReducedSafe } from "./useReducedSafe";
 import { SimCard, Captions } from "./SimCard";
 import { Bars } from "./Bars";
 import { lakehouseScale as s, maintenance as m, REPO } from "./data";
@@ -36,7 +37,7 @@ const ROWS: Row[] = [
 ];
 
 export function ScaleChart() {
-  const reduced = !!useReducedMotion();
+  const reduced = useReducedSafe();
   const [run, setRun] = useState(0);
   const endpoints = [`Scale ${s.scales[0]}`, `Scale ${s.scales[1]}`] as const;
 
@@ -57,7 +58,7 @@ export function ScaleChart() {
           const y0 = 14 + g * 72;
           return (
             <g key={row.title}>
-              <text x="10" y={y0 + 6} fill="#475569" fontSize="11" fontWeight="600">
+              <text x="10" y={y0 + 6} fill="#475569" fontSize="12" fontWeight="600">
                 {row.title}
               </text>
               {[0, 1].map((e) => {
@@ -65,7 +66,7 @@ export function ScaleChart() {
                 const width = (row.values[e] / Math.max(...row.values)) * BAR_MAX;
                 return (
                   <g key={e}>
-                    <text x="10" y={y + 12} fill="#64748b" fontSize="10">
+                    <text x="10" y={y + 12} fill="#64748b" fontSize="11">
                       {endpoints[e]}
                     </text>
                     <motion.rect
@@ -73,7 +74,7 @@ export function ScaleChart() {
                       y={y}
                       height={ROW_H}
                       rx="4"
-                      fill={e === 0 ? "rgba(148,163,184,0.55)" : "#3b82f6"}
+                      fill={e === 0 ? "#94a3b8" : "#3b82f6"}
                       initial={{ width: reduced ? width : 0 }}
                       animate={{ width }}
                       transition={{
@@ -85,7 +86,7 @@ export function ScaleChart() {
                     <motion.text
                       y={y + 12}
                       fill="#0f172a"
-                      fontSize="10.5"
+                      fontSize="11.5"
                       initial={{ x: BAR_X + (reduced ? width : 0) + 6, opacity: reduced ? 1 : 0 }}
                       animate={{ x: BAR_X + width + 6, opacity: 1 }}
                       transition={{

@@ -1,7 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+
+// Layout effect on the client (reset before paint), plain effect during the static build.
+const useIsoLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 import { dsr, kvkkErasure } from "@/components/ai-portfolio/sims/data";
 
 const DOCS = {
@@ -121,7 +124,7 @@ function useRun(runKey: string, seconds: number) {
   const ref = useRef<HTMLDivElement>(null);
   const [p, setP] = useState(1);
 
-  useEffect(() => {
+  useIsoLayoutEffect(() => {
     const el = ref.current;
     if (!el) return;
     const rm = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -363,7 +366,7 @@ export function Privacy() {
                   )}
                 </div>
                 <div className="flex flex-wrap items-baseline justify-between gap-x-3 text-[13px]">
-                  <span className="text-3xl font-semibold tracking-[-0.03em] text-ap-accent">{l.periodLabel}</span>
+                  <span className="text-xl font-semibold tracking-[-0.03em] text-ap-accent sm:text-2xl lg:text-3xl">{l.periodLabel}</span>
                   <span className="text-ap-ink-faint">day {shown}</span>
                 </div>
                 <p className="text-[12.5px] leading-snug text-ap-ink-soft">

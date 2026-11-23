@@ -14,7 +14,7 @@ import {
   modes,
 } from "./data";
 
-const GREY = "rgba(148,163,184,0.55)";
+const GREY = "#94a3b8";
 
 function Sub({ children }: { children: React.ReactNode }) {
   return <p className="label text-ap-ink-faint">{children}</p>;
@@ -116,7 +116,7 @@ export function GuardV12Card() {
               </div>
             ))}
           </div>
-          <Legend items={[{ color: "rgba(148,163,184,0.32)", text: "correct" }, { color: "#d97706", text: "missed attack / blocked benign" }]} />
+          <Legend items={[{ color: "#cbd5e1", text: "correct" }, { color: "#d97706", text: "missed attack / blocked benign" }]} />
           <Captions items={[f.caption, guardV12.dev.caption]} label="Measured · content/data" />
         </>
       ) : (
@@ -307,15 +307,18 @@ export function CostCard() {
             <div className="sim-fill" style={{ width: `${m.breakEven}%`, background: GREY }} />
           </div>
           <div
-            className="absolute top-6 h-2 rounded-r-full"
+            className="absolute top-6 h-[10px] rounded-r-full"
             style={{ left: `${m.breakEven}%`, right: 0, background: "#3b82f6", opacity: 0.85 }}
           />
+          {/* tick for the quote position on the axis */}
+          <span aria-hidden className="absolute top-[1.2rem] h-[1.1rem] w-0.5 -translate-x-1/2 rounded bg-slate-900" style={{ left: `${m.q8Util}%` }} />
           {[
             { at: m.breakEven, text: `${m.breakEven}% break-even`, top: true },
             { at: m.q8Util, text: `${m.q8Util}% quote`, top: false },
           ].map((k) => (
             <span
               key={k.text}
+              aria-hidden
               className="absolute -translate-x-1/2 whitespace-nowrap text-[12px] font-medium text-ap-ink"
               style={{ left: `${k.at}%`, top: k.top ? 0 : "2.4rem" }}
             >

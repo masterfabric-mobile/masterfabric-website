@@ -5,6 +5,13 @@ All notable changes to masterfabric.co are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.1] - 2026-11-24
+
+### Added
+
+- Privacy policies for Puzzella and Squad Rush ([#27](https://github.com/masterfabric-mobile/masterfabric-website/pull/27)).
+- Puzzella and Squad Rush privacy pages in the sitemap.
+
 ## [1.6.0] - 2026-11-17
 
 ### Added
@@ -57,6 +64,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Unused About timeline and statistics ([#18](https://github.com/masterfabric-mobile/masterfabric-website/pull/18)).
 
+[1.6.1]: https://github.com/masterfabric-mobile/masterfabric-website/compare/v1.6.0...v1.6.1
 [1.6.0]: https://github.com/masterfabric-mobile/masterfabric-website/compare/3f47b02...v1.6.0
 [1.5.0]: https://github.com/masterfabric-mobile/masterfabric-website/commit/3f47b02
 [1.2.0]: https://github.com/masterfabric-mobile/masterfabric-website/pull/18

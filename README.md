@@ -22,6 +22,8 @@
     &nbsp;·&nbsp;
     <a href="https://www.masterfabric.co/changelog">Changelog</a>
     &nbsp;·&nbsp;
+    <a href="https://www.masterfabric.co/ai-portfolio">AI Portfolio</a>
+    &nbsp;·&nbsp;
     <a href="https://www.masterfabric.co/privacy">Privacy</a>
   </p>
 
@@ -35,6 +37,14 @@
 This repository is the public website of [MasterFabric Information Technology Inc.](https://www.masterfabric.co), an Ankara studio that builds custom software and AI transformation systems for institutions and private clients — including iOS, Android, and HarmonyOS apps designed around the brief you send us.
 
 The site is a **Next.js 14** App Router app with a **static export**. Merges to `dev` are production: Vercel auto-deploys them to [www.masterfabric.co](https://www.masterfabric.co).
+
+## AI Portfolio
+
+<div align="center">
+  <img src="docs/assets/ai-portfolio.webp" alt="The AI Portfolio page on masterfabric.co" width="820">
+</div>
+
+[`/ai-portfolio`](https://www.masterfabric.co/ai-portfolio) presents nine public MasterFabric repositories as a measured, on-prem and local-first data and AI architecture portfolio, with simulations built from the measured results and one page per repository at `/ai-portfolio/<slug>/`. The homepage links to it from a bar above the Claude Partner Network section.
 
 ## Tech stack
 
@@ -51,6 +61,7 @@ The site is a **Next.js 14** App Router app with a **static export**. Merges to 
 src/
 ├── app/                 # App Router pages (static routes)
 │   ├── about/
+│   ├── ai-portfolio/    # /ai-portfolio and /ai-portfolio/<slug>/
 │   ├── blog/
 │   ├── changelog/       # Renders CHANGELOG.md at build time
 │   ├── contact/
@@ -61,8 +72,10 @@ src/
 │   ├── terms-of-use/
 │   └── yapay-zeka-donusumu/
 ├── components/          # Layout, forms, pages, SEO, UI
+│   └── ai-portfolio/    # AI Portfolio hero, cards, gallery, simulations
 ├── content/blog/        # Markdown blog posts
 ├── data/                # Apps, policies, navigation, page copy
+│   └── ai-portfolio/    # One JSON file per portfolio repository
 ├── lib/                 # SEO, version, privacy-policy helpers
 ├── styles/
 └── utils/
@@ -101,6 +114,14 @@ Each published app gets a page at `/privacy/<bundleId>/`.
 1. Append an entry to [`src/data/apps.ts`](src/data/apps.ts). Use the real bundle ID; it becomes the URL. Fill the factual fields honestly — they drive the generated policy text. Keep `draft: true` until legal has reviewed it, then set `draft: false`.
 2. Add the reviewed full policy text to [`src/data/app-policies.ts`](src/data/app-policies.ts), keyed by the same bundle ID. When a full text exists, the page renders that instead of the generated template.
 3. Add `/privacy/<bundleId>/` to [`public/sitemap.xml`](public/sitemap.xml).
+
+## Updating the AI Portfolio
+
+Each repository on `/ai-portfolio` is one JSON file in [`src/data/ai-portfolio/data/`](src/data/ai-portfolio/data/) (slug, title, tagline, GitHub URL, snapshot SHA and date, summary, key results, limitations, images).
+
+1. Edit the repository's JSON file, or add a new one and register it in [`src/data/ai-portfolio/repos.ts`](src/data/ai-portfolio/repos.ts) in the order it should appear.
+2. Put its images under `public/ai-portfolio/images/<slug>/` (`hero.png` is the card and page cover) and reference them as `/ai-portfolio/images/<slug>/...` in the JSON.
+3. Only use figures measured in the source repository, and update the snapshot SHA and date with them. The simulations in [`src/components/ai-portfolio/sims/data.ts`](src/components/ai-portfolio/sims/data.ts) quote sentences from the `keyResults` in these files, and the build fails if a quoted sentence no longer matches, so update both together.
 
 ## Contributing
 

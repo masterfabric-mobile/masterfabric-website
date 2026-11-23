@@ -5,6 +5,25 @@ All notable changes to masterfabric.co are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.0] - 2026-11-24
+
+### Added
+
+- AI Portfolio at `/ai-portfolio/`: nine public MasterFabric data and AI architecture repositories with measured results, one page per repository at `/ai-portfolio/<slug>/`, and a gallery of their charts and diagrams.
+- Animated AI Portfolio hero: tilted gradient orbits around the MasterFabric mark, a dot-grid shimmer and pulse rings, still under reduced motion.
+- "Labs in motion" simulations built from the measured results, and a GDPR / CCPA / KVKK data subject request panel.
+- Homepage bar above the Claude Partner Network section linking to the AI Portfolio.
+- AI Portfolio in the sitemap.
+- AI Portfolio section in `llm.txt` and `llms.txt`: the page and each of the nine repositories with its page, GitHub link, snapshot and measured figures quoted from the site data.
+
+### Changed
+
+- Refreshed README with a centered hero, accurate setup and release steps, and an AI Portfolio section.
+
+### Fixed
+
+- Simulations: hydration-safe reduced-motion handling, readable contrast on the light theme, engine labels kept above moving events, gauge caption moved off the needle, larger chart text, a tick for the cost-model quote, and canvas repaint and cleanup fixes.
+
 ## [1.6.2] - 2026-11-24
 
 ### Added
@@ -70,6 +89,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Unused About timeline and statistics ([#18](https://github.com/masterfabric-mobile/masterfabric-website/pull/18)).
 
+[1.7.0]: https://github.com/masterfabric-mobile/masterfabric-website/compare/v1.6.2...v1.7.0
 [1.6.2]: https://github.com/masterfabric-mobile/masterfabric-website/compare/v1.6.1...v1.6.2
 [1.6.1]: https://github.com/masterfabric-mobile/masterfabric-website/compare/v1.6.0...v1.6.1
 [1.6.0]: https://github.com/masterfabric-mobile/masterfabric-website/compare/3f47b02...v1.6.0

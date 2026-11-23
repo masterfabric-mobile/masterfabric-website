@@ -1,6 +1,6 @@
-Version: 1.5.0
+Version: 1.7.0
 Author: gurkanfikretgunak
-Last updated: 2026-10-29
+Last updated: 2026-11-24
 
 # MasterFabric Inc.
 > Ankara-based studio that builds custom software and AI transformation systems for institutions and private clients. MasterFabric is a Claude Partner Network partner. It delivers projects through business partnerships in Turkey and Europe, is a stakeholder in the digital transformation of public institutions in Turkey (especially education and military), and delivers qualified energy-transformation projects.
@@ -26,6 +26,18 @@ Use this index to find the right MasterFabric page. For a single-file company br
 - [GitHub organization](https://github.com/masterfabric): Software, AI, and platform repositories
 - [GitHub mobile](https://github.com/masterfabric-mobile): Public mobile repositories and this website
 - [LinkedIn](https://www.linkedin.com/company/masterfabric): Company profile
+
+## AI Portfolio
+- [AI Portfolio](https://masterfabric.co/ai-portfolio/): Nine public MasterFabric repositories, a measured, on-prem and local-first data and AI architecture portfolio with simulations from the measured results
+- [Lakehouse Lab](https://masterfabric.co/ai-portfolio/lakehouse-lab/): A complete lakehouse you can run on one laptop, fed by a synthetic mobile operator. Measured: Scale benchmark ran from 0.26 M to 2.1 M raw rows (scales 1 to 8); total pipeline time grew from 32.43 s to 68.59 s, so 8x the data costs 2.1x the time. Source: https://github.com/masterfabric/masterfabric-lakehouse-lab
+- [Realtime Telco](https://masterfabric.co/ai-portfolio/realtime-telco/): Streaming network monitoring for a mobile operator, small enough to run on one laptop. Measured: Live run: 240 cells over 6 simulated hours at 30x delivered 520,931 events in 12 minutes. Source: https://github.com/masterfabric/masterfabric-realtime-telco
+- [Airflow MLOps](https://masterfabric.co/ai-portfolio/airflow-mlops/): Replays a year of telco churn modeling on Airflow, MLflow, Evidently and Feast with measured retraining results. Measured: Backfill: 12 monthly runs (2025-12 to 2026-11), all successful, 60,000 to 66,274 subscribers, 1.2-8.4 s of task time per month. Source: https://github.com/masterfabric/masterfabric-airflow-mlops
+- [On-Prem LLM Stack](https://masterfabric.co/ai-portfolio/onprem-llm-stack/): An on-prem LLM platform in one Helm chart on local Kubernetes, with RAG, guardrails and monitoring. Measured: Corpus of 23 documents ingested into 207 chunks, with ingest taking 57-58 s (embedding on 1 CPU thread). Source: https://github.com/masterfabric/masterfabric-onprem-llm-stack
+- [LLM Serving Bench](https://masterfabric.co/ai-portfolio/llm-serving-bench/): Measured LLM serving benchmarks comparing llama.cpp and MLX on Apple Silicon across quantization, concurrency, context and speculative decoding. Measured: Peak output throughput, Q4_K_M, 4 concurrent requests: 381 tok/s on the Metal GPU vs 184 tok/s in the CPU container. Source: https://github.com/masterfabric/masterfabric-llm-serving-bench
+- [Secure Data AI](https://masterfabric.co/ai-portfolio/secure-data-ai/): Data security controls for AI, measured on synthetic Turkish data: PII masking, column policies, secure RAG and OWASP LLM guardrails. Measured: PII detection on 2,000 labelled notes with decoys: precision 0.986, recall 1.0 (pattern-only precision: 0.680). Source: https://github.com/masterfabric/masterfabric-secure-data-ai
+- [GenAI Foundations](https://masterfabric.co/ai-portfolio/genai-foundations/): From-scratch PyTorch implementations of transformer, LoRA, GAN, WGAN-GP, diffusion, classifier-free guidance and DPO with measured results. Measured: Attention implementation matches torch.nn.functional.scaled_dot_product_attention within 1.5e-7. Source: https://github.com/masterfabric/masterfabric-genai-foundations
+- [Spark Rust Bench](https://masterfabric.co/ai-portfolio/spark-rust-bench/): Benchmarks five SQL engines on identical queries over 10M to 200M synthetic telco records, including Iceberg table reads. Measured: Polars ran the same SQL 3.7x faster than PySpark at 200M rows (5.9x at 10M) using less than half the memory; at 200M rows the sum of six query medians was 4.325 s for Polars, 4.777 s for DuckDB, 5.532 s for DataFusion and 15.975 s for PySpark. Source: https://github.com/masterfabric/masterfabric-spark-rust-bench
+- [Data Architecture](https://masterfabric.co/ai-portfolio/data-architecture-adr/): Ties eight MasterFabric labs into one platform with thirteen verified ADRs, C4 diagrams, and a cost model. Measured: 104/104 cited claims verified against the source READMEs of the eight labs at pinned commits (make check, and make check-local offline). Source: https://github.com/masterfabric/masterfabric-data-architecture-adr
 
 ## Optional
 - [Blog](https://masterfabric.co/blog/): Engineering notes

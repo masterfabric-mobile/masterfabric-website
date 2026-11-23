@@ -11,6 +11,7 @@ import HideOnPrivacy from '@/components/wrapper/hide-on-privacy'
 import JsonLd from '@/components/seo/json-ld'
 import { DEFAULT_TITLE, getSiteJsonLd, SEO, SITE_NAME, SITE_URL } from '@/lib/seo'
 import Script from 'next/script'
+import { Analytics } from '@vercel/analytics/next'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -142,6 +143,7 @@ export default function RootLayout({
             <ClaudePartnerPrompt />
           </HideOnPrivacy>
         {/* </ThemeProvider> */}
+        <Analytics />
       </body>
     </html>
   )

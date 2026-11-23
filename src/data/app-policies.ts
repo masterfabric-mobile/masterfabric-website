@@ -1328,5 +1328,195 @@ export const appPolicies: Record<string, PolicySection[]> = {
         "Address: Hacı Bayram Mah. Mahmut Atalay Sk. L Blok No: 6 İç Kapı No: 227, Altındağ / Ankara, Türkiye"
       ]
     }
+  ],
+  "com.masterfabric.puzzella": [
+    {
+      "title": "About this policy",
+      "paragraphs": [
+        "This Privacy Policy explains how MasterFabric Information Technology Inc. (\"we\", \"us\") handles information when you use Puzzella (the \"App\"). By using the App you agree to the practices described here. If you do not agree, please do not use the App."
+      ]
+    },
+    {
+      "title": "Information we collect",
+      "paragraphs": [
+        "Puzzella does not collect personal information and does not send any data to our servers. The App stores only the following on your device:",
+        "The puzzle images are bundled with the App. The App does not access your camera, photo library or files."
+      ],
+      "bullets": [
+        "Game data — Your puzzle progress, stored locally on your device",
+        "Preferences — Settings such as board theme, sound, haptics, timer and piece rotation, stored locally on your device"
+      ]
+    },
+    {
+      "title": "How we use information",
+      "paragraphs": [
+        "The data stored on your device is used only to:"
+      ],
+      "bullets": [
+        "Provide and maintain the features of the App, such as resuming a puzzle and remembering your settings",
+        "Fix bugs, keep the App secure and improve performance",
+        "Respond to your support requests",
+        "Comply with legal obligations"
+      ]
+    },
+    {
+      "title": "Third-party services",
+      "paragraphs": [
+        "Puzzella does not use any third-party SDKs, analytics, advertising or crash reporting services."
+      ]
+    },
+    {
+      "title": "Sharing and disclosure",
+      "paragraphs": [
+        "We do not sell your personal information and do not use it for third-party advertising. Because the App does not send data off your device, we have no data to share. We would disclose information only when required by law or to protect rights and safety, or in a merger or sale of our business (you would be notified)."
+      ]
+    },
+    {
+      "title": "Data retention",
+      "paragraphs": [
+        "Your game data and preferences stay on your device until you delete the App. We hold no server-side copy of your data."
+      ]
+    },
+    {
+      "title": "Your choices and rights",
+      "paragraphs": [
+        "Depending on where you live (including under KVKK, GDPR and CCPA) you may request access, correction, deletion or portability of your data, or withdraw consent. Since all data is stored only on your device, you can remove everything by deleting the App.",
+        "You can also write to privacy@masterfabric.co. We reply within 30 days."
+      ]
+    },
+    {
+      "title": "Security",
+      "paragraphs": [
+        "Your data never leaves your device. We cannot guarantee absolute security, since no method of storage or transmission is completely secure."
+      ]
+    },
+    {
+      "title": "Children's privacy",
+      "paragraphs": [
+        "Puzzella does not knowingly collect personal information from anyone, including children under 13. If you believe a child has provided us information, contact privacy@masterfabric.co and we will delete it."
+      ]
+    },
+    {
+      "title": "Permissions",
+      "paragraphs": [
+        "Vibration (Android): for haptic feedback during play. The App does not ask for camera, photos, location, contacts, microphone or notifications."
+      ]
+    },
+    {
+      "title": "No accounts, no tracking, no ads",
+      "paragraphs": [
+        "Puzzella has no accounts, analytics, crash reporting, advertising or in-app purchases, and does not track you. It declares no tracking and no data collection in its Apple privacy manifest."
+      ]
+    },
+    {
+      "title": "Changes to this policy",
+      "paragraphs": [
+        "We may update this policy. The \"Last updated\" date above shows the latest version, and material changes will be announced in the App or on this page."
+      ]
+    },
+    {
+      "title": "Contact us",
+      "paragraphs": [
+        "MasterFabric Information Technology Inc.",
+        "Email: privacy@masterfabric.co",
+        "Address: Hacı Bayram Mah. Mahmut Atalay Sk. L Blok No: 6 İç Kapı No: 227, Altındağ / Ankara, Türkiye",
+        "See also the [General Privacy Notice](/privacy/) that applies to all MasterFabric apps."
+      ]
+    }
+  ],
+  "com.masterfabric.squadrush": [
+    {
+      "title": "About this policy",
+      "paragraphs": [
+        "This Privacy Policy explains how MasterFabric Information Technology Inc. (\"we\", \"us\") handles information when you use Squad Rush (the \"App\"). By using the App you agree to the practices described here. If you do not agree, please do not use the App."
+      ]
+    },
+    {
+      "title": "Information we collect",
+      "paragraphs": [
+        "Squad Rush keeps your game data on your device. When Firebase sign-in succeeds, selected progress and settings are also synced to Google's servers. The App handles:",
+        "Stars and tutorial-hint completion stay only on your device and are not sent to Firebase. If sign-in fails or the splash load times out (about four seconds), the App continues offline from a local cache or the bundled configuration and does not create an identifier or send progress off your device."
+      ],
+      "bullets": [
+        "Content — Game progress stored on your device: unlocked level, stars, coins, gems, XP, upgrades (starting squad, fire rate, damage), weapons (equipped, owned and ranks), tutorial hints, and mission progress (daily, weekly and achievement progress, claimed rewards, login days and streak, boosters and skins)",
+        "Content — Settings stored on your device: language, sound, music and volume, haptics, graphics quality, a 30 FPS option, aim sensitivity and your chosen app icon",
+        "Device & usage — When Firebase sign-in succeeds: an anonymous user identifier; the settings, language, app icon, level, coins, gems, XP, upgrades, weapons and mission progress needed to sync to `players/{uid}`; and device and network information used by Firebase to deliver game-balance and mission settings (Remote Config) and a public game-config document (`config/game`)"
+      ]
+    },
+    {
+      "title": "How we use information",
+      "paragraphs": [
+        "We use information only to:"
+      ],
+      "bullets": [
+        "Provide and maintain the features of the App",
+        "Sync progress and deliver game-balance and mission settings when Firebase is available",
+        "Fix bugs, keep the App secure and improve performance",
+        "Respond to your support requests",
+        "Comply with legal obligations"
+      ]
+    },
+    {
+      "title": "Third-party services",
+      "paragraphs": [
+        "The App uses the following providers. They process data under their own privacy policies:",
+        "The current version has no advertising or in-app purchases, and no analytics or crash-reporting SDK beyond the Firebase services above."
+      ],
+      "bullets": [
+        "Firebase (Google) — Anonymous authentication, Firestore progress sync (`players/{uid}`), Remote Config for game-balance and mission settings, and a public read-only game config (`config/game`). The App also works fully offline if this connection fails. Privacy policy: https://policies.google.com/privacy"
+      ]
+    },
+    {
+      "title": "Sharing and disclosure",
+      "paragraphs": [
+        "We do not sell your personal information and do not use it for third-party advertising. We share information only with the service providers listed above, when required by law or to protect rights and safety, or in a merger or sale of our business (you would be notified)."
+      ]
+    },
+    {
+      "title": "Data retention",
+      "paragraphs": [
+        "Game progress lives on your device and is removed when you delete the app. Settings → Reset progress also deletes the local save and missions, and deletes the Firestore `players/{uid}` document. The anonymous identifier and any synced data that remain are kept by Google according to its policy until you ask us to delete them."
+      ]
+    },
+    {
+      "title": "Your choices and rights",
+      "paragraphs": [
+        "Depending on where you live (including under KVKK, GDPR and CCPA) you may request access, correction, deletion or portability of your data, or withdraw consent. Delete the app to remove all local data. In Settings, Reset progress deletes your local save, missions and the cloud player record. For any leftover server-side identifier, e-mail privacy@masterfabric.co and we will help.",
+        "You can also write to privacy@masterfabric.co. We reply within 30 days."
+      ]
+    },
+    {
+      "title": "Security",
+      "paragraphs": [
+        "Your game data is kept in the app's protected storage on your device, secured by the operating system. Connections to our service providers use encryption in transit (TLS). We cannot guarantee absolute security, since no method of storage or transmission is completely secure."
+      ]
+    },
+    {
+      "title": "Children's privacy",
+      "paragraphs": [
+        "Squad Rush is not directed to children under 13. We do not knowingly collect their data. If you believe a child has provided us information, contact privacy@masterfabric.co and we will delete it."
+      ]
+    },
+    {
+      "title": "No accounts, no tracking, no ads",
+      "paragraphs": [
+        "Squad Rush does not track you across other apps or websites, does not use advertising identifiers and shows no third-party ads. It declares no tracking in its Apple privacy manifest. There is no account you sign in to with a name or e-mail: if Firebase is available, an anonymous identifier is created only to sync your progress. The current version has no in-app purchases. The App requests no camera, photos, microphone, location, notification or tracking permission."
+      ]
+    },
+    {
+      "title": "Changes to this policy",
+      "paragraphs": [
+        "We may update this policy. The \"Last updated\" date above shows the latest version, and material changes will be announced in the App or on this page."
+      ]
+    },
+    {
+      "title": "Contact us",
+      "paragraphs": [
+        "MasterFabric Information Technology Inc.",
+        "Email: privacy@masterfabric.co",
+        "Address: Hacı Bayram Mah. Mahmut Atalay Sk. L Blok No: 6 İç Kapı No: 227, Altındağ / Ankara, Türkiye",
+        "See also the [General Privacy Notice](/privacy/) that applies to all MasterFabric apps."
+      ]
+    }
   ]
 }

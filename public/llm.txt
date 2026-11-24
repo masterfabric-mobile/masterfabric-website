@@ -1,4 +1,4 @@
-Version: 1.7.0
+Version: 1.7.1
 Author: gurkanfikretgunak
 Last updated: 2026-11-24
 

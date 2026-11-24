@@ -103,7 +103,7 @@ export default function RepoPage({
                 <span className="label pt-1.5 text-ap-accent">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <span className="leading-relaxed">{result}</span>
+                <span className="min-w-0 leading-relaxed [overflow-wrap:anywhere]">{result}</span>
               </Reveal>
             </li>
           ))}
@@ -119,7 +119,7 @@ export default function RepoPage({
             {repo.limitations.map((limitation, i) => (
               <li key={i}>
                 <Reveal y={16} className="flex gap-4 border-l-2 border-ap-primary/50 pl-5 text-ap-ink-soft">
-                  <span className="leading-relaxed">{limitation}</span>
+                  <span className="min-w-0 leading-relaxed [overflow-wrap:anywhere]">{limitation}</span>
                 </Reveal>
               </li>
             ))}

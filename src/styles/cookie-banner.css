@@ -489,3 +489,44 @@
     padding: 0;
   }
 } 
+/* Mobile responsive pass (v1.7.1): readable text and 44px tap targets on phones,
+   and a smaller settings button that sits clear of the content edge. */
+@media (max-width: 640px) {
+  .cookie-banner {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+  }
+  .cookie-banner-content {
+    padding: 12px;
+  }
+  .cookie-description,
+  .cookie-link,
+  .cookie-category-info p,
+  .cookie-modal-description {
+    font-size: 12.5px;
+  }
+  .cookie-actions {
+    flex-wrap: wrap;
+  }
+  .cookie-btn {
+    min-height: 44px;
+    padding: 8px 12px;
+    font-size: 13px;
+    border-radius: 8px;
+    flex: 1 1 auto;
+  }
+  .cookie-close-btn {
+    width: 44px;
+    height: 44px;
+    top: 0;
+    right: 0;
+  }
+  .persistent-cookie-icon {
+    left: 12px;
+  }
+  .persistent-cookie-button {
+    width: 44px;
+    height: 44px;
+  }
+}

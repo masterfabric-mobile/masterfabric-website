@@ -77,8 +77,8 @@ const TAGLINE_PREFIXES = [
 const TAGLINE_SUFFIX = " Development Studio"
 const TAGLINE_INTERVAL_MS = 2800
 
-const wrapperBaseClasses = "flex pt-[0.3rem] md:pt-0 items-center justify-between flex-wrap md:flex-nowrap transition-[height] duration-700 ease-in-out";
-const navBaseClasses = "md:items-center max-h-screen md:max-h-max overflow-hidden flex flex-col md:flex-row gap-2 md:gap-0 md:space-x-4 ml-auto w-full md:w-auto mt-[0.4rem] md:mt-0 order-last md:order-1 border-t border-gray-200 md:border-0";
+const wrapperBaseClasses = "flex pt-[0.3rem] min-[1024px]:pt-0 items-center justify-between flex-wrap min-[1024px]:flex-nowrap transition-[height] duration-700 ease-in-out";
+const navBaseClasses = "min-[1024px]:items-center max-h-[calc(100dvh-6rem)] min-[1024px]:max-h-max overflow-y-auto min-[1024px]:overflow-hidden flex flex-col min-[1024px]:flex-row gap-2 min-[1024px]:gap-0 min-[1024px]:space-x-4 ml-auto w-full min-[1024px]:w-auto mt-[0.4rem] min-[1024px]:mt-0 order-last min-[1024px]:order-1 border-t border-gray-200 min-[1024px]:border-0";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -133,20 +133,20 @@ function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 pt-3 sm:pt-4">
+    <header className="site-header sticky top-0 z-50 pt-3 sm:pt-4">
       <BrandAssetsMenu position={brandMenu} onClose={closeBrandMenu} />
       <Container>
         <div
           className={cn(
             "flex flex-col overflow-hidden border border-gray-200/80 bg-white/85 px-4 shadow-lg shadow-slate-900/5 backdrop-blur-md transition-[border-radius] duration-300 sm:px-6",
-            isMenuOpen ? "rounded-3xl md:rounded-full" : "rounded-full"
+            isMenuOpen ? "rounded-3xl min-[1024px]:rounded-full" : "rounded-full"
           )}
         >
           {/* Top navbar section */}
             <div
                 className={cn(
                   wrapperBaseClasses,
-                  isMenuOpen ? "h-auto md:h-16" : "h-16"
+                  isMenuOpen ? "h-auto min-[1024px]:h-16" : "h-16"
                 )}
               >
                 {/* Logo and Brand */}
@@ -210,7 +210,7 @@ function Navbar() {
                 <nav
                   className={cn(
                     navBaseClasses,
-                    isMenuOpen ? "h-full py-4 md:py-0" : "h-0 md:h-auto"
+                    isMenuOpen ? "h-full py-4 min-[1024px]:py-0" : "h-0 min-[1024px]:h-auto"
                   )}
                 >
                   {sortedMenuItems.map((item) => (
@@ -227,14 +227,14 @@ function Navbar() {
                           href={item.path}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-sm font-medium px-4 md:px-2 py-2 rounded-lg transition-colors focus:outline-none text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+                          className="text-sm font-medium px-4 min-[1024px]:px-2 py-3 min-[1024px]:py-2 rounded-lg transition-colors focus:outline-none text-gray-700 hover:bg-gray-50 hover:text-gray-900"
                         >
                           {item.title}
                         </a>
                       ) : (
                         <Link
                           href={item.path}
-                          className={`text-sm font-medium px-4 md:px-2 py-2 rounded-lg transition-colors focus:outline-none ${
+                          className={`text-sm font-medium px-4 min-[1024px]:px-2 py-3 min-[1024px]:py-2 rounded-lg transition-colors focus:outline-none ${
                             isCurrentPage(item.path)
                               ? "text-blue-600 bg-blue-50"
                               : "text-gray-700 hover:bg-gray-50 hover:text-gray-900"
@@ -247,7 +247,7 @@ function Navbar() {
                   ))}
 
                   {/* Social Links */}
-                  <div className="w-full md:w-auto flex justify-center md:justify-start items-center space-x-px pl-2 border-t md:border-0 md:border-l border-gray-200 md:h-8 self-center mt-2 pt-4 md:mt-0 md:pt-0">
+                  <div className="w-full min-[1024px]:w-auto flex justify-center min-[1024px]:justify-start items-center space-x-px pl-2 border-t min-[1024px]:border-0 min-[1024px]:border-l border-gray-200 min-[1024px]:h-8 self-center mt-2 pt-4 min-[1024px]:mt-0 min-[1024px]:pt-0">
                     {sortedSocialLinks.map((link) => (
                       <a
                         key={link.id}
@@ -283,7 +283,7 @@ function Navbar() {
                 {/* Mobile Menu Button */}
                 <button
                   onClick={toggleMenu}
-                  className="md:hidden p-2 rounded-md text-gray-700 hover:text-blue-600 navbar-menu-toggle focus:outline-none"
+                  className="min-[1024px]:hidden p-2.5 rounded-md text-gray-700 hover:text-blue-600 navbar-menu-toggle focus:outline-none"
                   aria-label={isMenuOpen ? "Close menu" : "Open menu"}
                 >
                   {isMenuOpen ? <X size={24} /> : <Menu size={24} />}

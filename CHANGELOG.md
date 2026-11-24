@@ -5,6 +5,17 @@ All notable changes to masterfabric.co are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.1] - 2026-11-24
+
+### Fixed
+
+- Mobile responsive: no horizontal overflow at 320–768 px on the AI Portfolio, its nine repository pages and the homepage. Long tokens in measured results now wrap inside their cards, and the 320 px AI Portfolio page no longer renders wider than the screen.
+- AI Portfolio simulations on phones: the privacy panel's four steps sit two by two with readable labels, the "With extension" switch has a darker off state and an on/off label, the scale chart falls back to HTML bars, bar labels stack above the bars, and the latency table fits.
+- Navbar: the full menu now starts at 1024 px, so links and social icons are no longer cut off at 768–1023 px. Menu links and the menu button are 44 px tap targets, and an open menu scrolls on short screens.
+- Legacy navbar CSS no longer leaks site-wide. It is scoped to the site header, which stops clipped `min-w-0` text and 9.6 px monospace text on other pages.
+- Homepage: contact benefit tiles no longer clip their titles on narrow phones, the phone mockup is scaled down below 375 px, and the terminal demo grid no longer pushes the page wider at 320 px.
+- Cookie banner on phones: readable text, 44 px buttons and close button, and a smaller settings button.
+
 ## [1.7.0] - 2026-11-24
 
 ### Added
@@ -89,6 +100,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Unused About timeline and statistics ([#18](https://github.com/masterfabric-mobile/masterfabric-website/pull/18)).
 
+[1.7.1]: https://github.com/masterfabric-mobile/masterfabric-website/compare/v1.7.0...v1.7.1
 [1.7.0]: https://github.com/masterfabric-mobile/masterfabric-website/compare/v1.6.2...v1.7.0
 [1.6.2]: https://github.com/masterfabric-mobile/masterfabric-website/compare/v1.6.1...v1.6.2
 [1.6.1]: https://github.com/masterfabric-mobile/masterfabric-website/compare/v1.6.0...v1.6.1

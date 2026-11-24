@@ -14,7 +14,7 @@ export function SimCard({
   children: ReactNode;
 }) {
   return (
-    <article className="card flex h-full flex-col gap-4 p-5 md:p-6">
+    <article className="card flex h-full min-w-0 flex-col gap-4 p-4 sm:p-5 md:p-6">
       <header className="flex flex-col gap-2">
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
           <span className="sim-tag label">Simulation</span>

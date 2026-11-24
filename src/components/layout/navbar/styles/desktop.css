@@ -3,34 +3,34 @@
 /* ========================================================================= */
 
 @media (min-width: 1024px) {
-    header {
+    .site-header {
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
     }
     
     /* Desktop social links gap - increased spacing */
-    .desktop-nav .flex.items-center {
+    .site-header .desktop-nav .flex.items-center {
       gap: 1.5rem; /* Increased from 1rem to 1.5rem */
     }
     
     /* Additional spacing between social buttons */
-    .desktop-nav .flex.items-center > a + a {
+    .site-header .desktop-nav .flex.items-center > a + a {
       margin-left: 1rem; /* Extra margin between buttons */
     }
     
     /* Force desktop navigation to be visible */
-    .desktop-nav,
-    nav.hidden.lg\:flex,
-    nav.desktop-nav {
+    .site-header .desktop-nav,
+.site-header nav.hidden.lg\:flex,
+.site-header nav.desktop-nav {
       display: flex !important;
       visibility: visible !important;
       opacity: 1 !important;
     }
     
     /* Force hide mobile menu on desktop */
-    .lg\:hidden,
-    [nextjs-navbar] .lg\:hidden {
+    .site-header .lg\:hidden,
+[nextjs-navbar] .lg\:hidden {
       display: none !important;
     }
   }
@@ -41,18 +41,18 @@
   
   /* Override any JavaScript hiding */
   @media (min-width: 1024px) {
-    .desktop-nav {
+    .site-header .desktop-nav {
       display: flex !important;
     }
     
     /* Ensure all desktop nav children are visible */
-    .desktop-nav > * {
+    .site-header .desktop-nav > * {
       display: block !important;
       visibility: visible !important;
     }
     
     /* Social links container specific spacing */
-    .desktop-nav .border-l.border-gray-200 {
+    .site-header .desktop-nav .border-l.border-gray-200 {
       gap: 1.5rem !important;
       padding-left: 1.5rem !important;
       margin-left: 1.5rem !important;

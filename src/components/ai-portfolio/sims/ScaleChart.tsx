@@ -50,7 +50,7 @@ export function ScaleChart() {
       <svg
         key={run}
         viewBox="0 0 360 232"
-        className="w-full rounded-xl border border-ap-line bg-[#f8fafc]"
+        className="hidden w-full rounded-xl border border-ap-line bg-[#f8fafc] sm:block"
         role="img"
         aria-label={`Bars for scale ${s.scales[0]} and scale ${s.scales[1]}: rows ${s.rows[0]} M to ${s.rows[1]} M, pipeline time ${s.seconds[0]} s to ${s.seconds[1]} s, throughput about ${s.throughputK[0]}k to ${s.throughputK[1]}k rows per second.`}
       >
@@ -104,6 +104,24 @@ export function ScaleChart() {
           );
         })}
       </svg>
+
+      {/* Phones: the same rows as HTML bars, so labels stay at a readable size. */}
+      <div className="flex flex-col gap-4 rounded-xl border border-ap-line bg-[#f8fafc] p-3 sm:hidden">
+        {ROWS.map((row) => (
+          <div key={row.title}>
+            <p className="mb-1.5 text-[13px] font-semibold text-slate-600">{row.title}</p>
+            <Bars
+              replay={run}
+              rows={[0, 1].map((e) => ({
+                label: endpoints[e],
+                value: row.values[e],
+                text: row.labels[e],
+                tone: e === 0 ? ("muted" as const) : ("accent" as const),
+              }))}
+            />
+          </div>
+        ))}
+      </div>
 
       <div className="flex flex-wrap items-center justify-between gap-3">
         <p className="text-sm text-ap-ink-soft">

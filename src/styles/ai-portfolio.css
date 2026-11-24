@@ -802,3 +802,95 @@
     transform: scale(0.6);
   }
 }
+
+/* ---- Mobile responsive pass (v1.7.1) ---- */
+/* Long tokens (env vars, paths, a/b/c lists) wrap instead of pushing cards wider. */
+.ap-root .card,
+.ap-root .pv,
+.ap-root .pv-lab,
+.ap-root .pv-lane,
+.ap-root .sim-cap {
+  overflow-wrap: anywhere;
+}
+.ap-root .pv-lab {
+  min-width: 0;
+}
+/* Readable off state: darker track, shadowed thumb (WCAG 1.4.11 contrast). */
+.ap-root .pv-switch {
+  width: 36px;
+  height: 20px;
+  background: rgb(100 116 139);
+  flex-shrink: 0;
+}
+.ap-root .pv-switch::after {
+  width: 16px;
+  height: 16px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.35);
+}
+.ap-root .pv-toggle[aria-pressed="true"] .pv-switch::after {
+  transform: translateX(16px);
+}
+.ap-root .pv-state {
+  font-weight: 600;
+  color: rgb(var(--ap-ink));
+}
+.ap-root .pv-lane-head {
+  flex-wrap: wrap;
+}
+.ap-root .pv-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+/* Three lanes side by side only when each lane has room for its four steps. */
+@media (min-width: 900px) and (max-width: 1099px) {
+  .ap-root .pv-lanes {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 767px) {
+  .ap-root .label {
+    font-size: 0.75rem;
+  }
+  .ap-root .pv-cap {
+    color: rgb(var(--ap-ink-soft));
+  }
+  .ap-root .sim-seg {
+    border-radius: 22px;
+  }
+  .ap-root .sim-seg button {
+    padding: 0 0.8rem;
+  }
+}
+@media (max-width: 479px) {
+  .ap-root .wrap {
+    padding-inline: 1.25rem;
+  }
+  .ap-root .pv {
+    padding: 1.1rem;
+  }
+  .ap-root .pv-sim {
+    padding: 0.85rem;
+  }
+  .ap-root .pv-lane {
+    padding: 0.9rem;
+  }
+  .ap-root .pv-lab {
+    padding: 0.95rem 1rem;
+  }
+  /* Four step columns are too tight here: two by two, full-size labels. */
+  .ap-root .pv-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.7rem 0.5rem;
+  }
+  .ap-root .pv-steps li {
+    flex-direction: row;
+    justify-content: flex-start;
+    text-align: left;
+    gap: 0.45rem;
+    font-size: 12.5px;
+  }
+  .ap-root .pv-step-dot {
+    flex-shrink: 0;
+  }
+}

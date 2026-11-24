@@ -207,7 +207,7 @@ export default function RefactorApplication() {
           </div>
           {/* App Showcase Column - Centered */}
           <div className="flex justify-center mt-8 lg:mt-0">
-            <AppPerformanceDemo className="origin-top scale-90 sm:scale-100" />
+            <AppPerformanceDemo className="origin-top scale-[0.82] -mb-20 min-[375px]:scale-90 min-[375px]:-mb-12 sm:mb-0 sm:scale-100" />
           </div>
         </div>
       </div>

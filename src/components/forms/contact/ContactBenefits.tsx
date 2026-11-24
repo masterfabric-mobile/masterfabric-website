@@ -34,7 +34,7 @@ export default function ContactBenefits() {
         return (
           <div
             key={benefit.title}
-            className="group relative flex gap-3 p-3.5 rounded-xl border border-gray-200 bg-white hover:border-blue-100 hover:shadow-sm transition-all duration-200"
+            className="group relative flex flex-col min-[400px]:flex-row gap-2.5 min-[400px]:gap-3 p-3.5 rounded-xl border border-gray-200 bg-white hover:border-blue-100 hover:shadow-sm transition-all duration-200"
           >
             <div className="flex-shrink-0 w-9 h-9 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center ring-1 ring-blue-100 group-hover:bg-blue-50 group-hover:ring-blue-200 transition-colors">
               {d ? (
@@ -45,7 +45,7 @@ export default function ContactBenefits() {
                 <span className="w-2 h-2 rounded-full bg-blue-400" />
               )}
             </div>
-            <div className="min-w-0">
+            <div className="min-w-0 [overflow-wrap:anywhere] hyphens-auto">
               <p className="text-sm font-medium text-gray-800 leading-tight">
                 {benefit.title}
               </p>

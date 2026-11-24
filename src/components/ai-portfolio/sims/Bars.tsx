@@ -40,7 +40,7 @@ export function Bars({
         const pct = top > 0 ? (r.value / top) * 100 : 0;
         const duration = reduced ? 0 : secondsPerUnit ? r.value * secondsPerUnit : 1;
         return (
-          <li key={r.label} className="grid grid-cols-[6.5rem_1fr] items-center gap-x-3 gap-y-1 sm:grid-cols-[7.5rem_1fr]">
+          <li key={r.label} className="grid grid-cols-1 items-center gap-x-3 gap-y-1 min-[400px]:grid-cols-[6.5rem_1fr] sm:grid-cols-[7.5rem_1fr]">
             <span className="text-[13px] text-ap-ink-soft">{r.label}</span>
             <div className="flex items-center gap-2">
               <div className="sim-track">

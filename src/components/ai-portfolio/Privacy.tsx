@@ -221,20 +221,20 @@ function DsrLab() {
         {dsr.retainedInvoiceRows} retained invoice rows.
       </p>
       <div className="mt-3 overflow-x-auto">
-        <table className="w-full min-w-[18rem] text-left text-[13px]">
+        <table className="w-full min-w-[14rem] text-left text-[13px]">
           <caption className="sr-only">Latency per request type in milliseconds, p50 and p95</caption>
           <thead className="text-ap-ink-faint">
             <tr>
-              <th scope="col" className="py-1 pr-4 font-normal">Request</th>
-              <th scope="col" className="py-1 pr-4 font-normal">p50</th>
+              <th scope="col" className="py-1 pr-3 font-normal">Request</th>
+              <th scope="col" className="py-1 pr-3 font-normal">p50</th>
               <th scope="col" className="py-1 font-normal">p95</th>
             </tr>
           </thead>
           <tbody className="text-ap-ink-soft">
             {rows.map((r) => (
               <tr key={r.label}>
-                <th scope="row" className="py-1 pr-4 font-normal">{r.label}</th>
-                <td className="py-1 pr-4">{r.p50} ms</td>
+                <th scope="row" className="py-1 pr-3 font-normal">{r.label}</th>
+                <td className="py-1 pr-3">{r.p50} ms</td>
                 <td className="py-1">{r.p95} ms</td>
               </tr>
             ))}
@@ -321,7 +321,7 @@ export function Privacy() {
           </div>
           <button type="button" className="pv-toggle" aria-pressed={ext} onClick={() => setExt((v) => !v)}>
             <span className="pv-switch" aria-hidden="true" />
-            With extension
+            With extension: <span className="pv-state">{ext ? "on" : "off"}</span>
           </button>
           <button type="button" className="pv-replay" onClick={() => setRun((r) => r + 1)}>
             Replay
@@ -349,7 +349,7 @@ export function Privacy() {
             const isKvkk = l.name === "KVKK";
             return (
               <div key={l.name} className="pv-lane">
-                <div className="flex items-baseline justify-between gap-3">
+                <div className="pv-lane-head flex items-baseline justify-between gap-x-3 gap-y-1">
                   <span className="text-xl font-semibold tracking-tight text-ap-ink">{l.name}</span>
                   <span className="label text-ap-ink-faint">{l.region}</span>
                 </div>
@@ -409,7 +409,7 @@ export function Privacy() {
 
       <DsrLab />
 
-      <p className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-[14px]">
+      <p className="pv-links mt-4 flex flex-wrap items-center gap-x-5 text-[14px]">
         <Ext href={DOCS.comparison}>Read the comparison</Ext>
         <Ext href={DOCS.labAdr}>Lab ADR 0008</Ext>
         <Ext href={DOCS.readme}>README section 8</Ext>

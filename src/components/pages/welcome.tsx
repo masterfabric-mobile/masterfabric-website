@@ -587,7 +587,7 @@ export default function Welcome({ onTimelineDialogRequest }: WelcomeProps) {
         </p>
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-2">
+      <div className="grid grid-cols-[minmax(0,1fr)] gap-4 lg:grid-cols-2">
         <div className="rounded-lg border border-gray-200 bg-white p-4 text-left relative shadow-sm">
           <p className="text-[11px] font-semibold uppercase tracking-wide text-sky-600 mb-1">
             AI-first terminal wizard
